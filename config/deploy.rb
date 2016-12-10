@@ -4,7 +4,7 @@ lock '3.6.1'
 set :application, 'ranq'
 set :repo_url, 'https://github.com/lefedoreichmann/ranqdep.git'
 set :branch, "master"
-set :deploy_to, "/var/www/ranqdeployer"
+set :deploy_to, "/var/www/ranqdep"
 
 set :linked_files, fetch(:linked_files, []).push("config/settings.yml")
 

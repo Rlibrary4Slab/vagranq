@@ -69,15 +69,12 @@ gem 'chartkick'
 gem 'impressionist'
 gem 'jquery-turbolinks'
 gem 'aasm' , '3.3.1'
-gem 'impressionist'
 gem 'ckeditor'
 gem "jquery-selection-rails" 
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-
-gem 'ransack'
 gem 'pace-rails'
 gem "active_attr"
 gem 'jcrop-rails-v2'
