@@ -1,0 +1,73 @@
+<div class='row'>
+  <div class='col-sm-9'>
+      <%= link_to '投稿する' , new_home_article_path,class: 'btn btn-primary btn-lg' %>
+    
+    <h3>
+      公開fog記事
+      <span class='badge'>
+          <%= @articles.published.size %>
+      </span>
+      <% @articles.published.each do |article| ,class: 'list-group-item' do %>
+        <h3 class="list-group-item-heading">
+            <%= article.title %>
+        </h3>  
+        <div class="list-group-item-text">
+            <%= truncate(article.body_text) %>
+        </div>
+        <div class="list-group-item-text　pull-right">
+             <%= safe_date_localize article.published_at %>
+        </div>
+    </h3>
+    <h3>
+      下あｓだ書記事
+      <span class='badge'>
+          <%= @articles.draft.size %>
+          <% @articles.draft.each do |article| %>
+          <div class="list-group">
+              <%= link_to edit_home_article_path(article), class: 'list-group-item' do %>
+              <h3 class="list-group-item-heading">
+                  <%= article.title %>
+              </h3>
+              <div class="list-group-item-text">
+                  <%= truncate(article.body_text) %>
+              </div>
+              <div class="list-group-item-text pull-right">
+                  <%= safe_date_localize article.published_at %>
+              </div>
+          </div>
+      </span>
+    </h3>
+    <h3>
+      コメめｎント
+      <span class='badge'>
+      </span>
+    </h3>
+  </div>
+  <div class='col-sm-3'>
+    <div class='thumbnail'>
+      <div class='text-center'></div>
+      <div class='caption text-center'>
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+    <div class='col-xs-12'></div>
+    <div class='col-xs-12'></div>
+  </div>
+</div>
+
+ <% if user_signed_in? %>
+      <ul class="header-navi is-non-login" id="non_login_user_header_menu">
+        <li class="header-navi-menu"><%= link_to "まとめを作る","#" %></a></li>
+        <li class="header-navi-menu"><%= link_to "プロフィール", "#" %></li>
+        <li class="header-navi-menu"><%= link_to "ユーザー情報変更","#" %></li>
+        <li class="header-navi-menu"><%= link_to "全てのユーザー","#" %></li>
+        <li class="header-navi-menu"><%= link_to "ログアウト","#" %></li>
+      </ul>
+      <% else %>
+       <ul class="header-navi is-non-login" id="non_login_user_header_menu">
+        <li class="header-navi-menu"><%= link_to "まとめを作る", "#" %></a></li>
+        <li class="header-navi-menu"><%= link_to "無料会員登録","#" %></li>
+        <li class="header-navi-menu"><%= link_to "ログイン", "#" %></li>
+      </ul>
+      <%end%>

@@ -1,0 +1,50 @@
+<header class="header">
+<div class="header-inner">
+    <h1 class="header-logo"><%= link_to "RanQ", root_path %></h1>
+<!--
+<form accept-charset="UTF-8" action="/search" class="header-search" id="searchForm" method="get"><div style="margin:0;padding:0;display:inline"><input type="hidden" /></div>
+  <input class="header-search-input" id="q" name="q" placeholder="気になるワードを入力" type="text" />
+  <input class="m-header-search-button" type="submit" value="" />
+  </form>
+  
+
+    <%= form_tag articles_path, :method => 'get' do %> <%#　projects_pathはモデル名で読みかえること %>
+      <p>
+        <%#= text_field_tag :title, params[:title] %>
+        <%#= submit_tag "Search", :title => nil %>
+        <%= text_field_tag :title, params[:title] %>
+        <%= submit_tag "Search", :title => nil %>
+      </p>
+    <% end %>
+-->
+  <%#= Time.current %>
+  <% if logged_in? %>
+   <%# if user_signed_in? %> 
+    <ul class="header-navi is-non-login" id="non_login_user_header_menu"> 
+      <li class="header-navi-menu"><%= link_to "まとめを作る", new_article_path %></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          
+            <%= image_tag current_user.user_image_url(:thumb)%>
+          
+        </a>
+            
+        <ul class="dropdown-menu">
+          <li><span><%= link_to current_user.user_name, current_user %></span></br><p>マイページ</p></li>
+          <li><%= link_to "ユーザー情報変更", edit_settings_profiles_path%></li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to "ログアウト",destroy_user_session_path, method: "delete" %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  <% else %>
+   <ul class="header-navi is-non-login" id="non_login_user_header_menu">
+    <li class="header-navi-menu"><%= link_to "まとめを作る", new_article_path %></a></li>
+    <li class="header-navi-menu"><%= link_to "無料会員登録", new_user_registration_path %></li>
+    <li class="header-navi-menu"><%= link_to "ログイン", new_user_session_path %></li>
+  </ul>
+  <%end%>
+</div><!-- /.hd_in -->
+</header>

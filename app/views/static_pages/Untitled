@@ -1,0 +1,28 @@
+
+          
+          <div class='container'>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <h4>
+                  最新ふ記事
+                  <% Article.published.limit(10).each dp |article| %>
+                    <div class='list-group'>
+                      <%= link_to u_article_path(article.user.screen_name,article), class: 'list-group-item' do %>
+                        <h4 class="list-group-item-heading">
+                          <%= article.title %>
+                        </h4>
+                        <p class="list-group-item-text">
+                          <%= truncate article.body_text %>
+                        </p>
+                        <div>
+                          <div class="pull-right">
+                          <%= image_tag article.user.gravatar_url(length: 20) %>
+                          <%= article.user.screen_name %>
+                          <%= safe_date_localize article.published_at %>
+                          </div>
+                        </div>
+                    </div>
+                </h4>
+              </div>
+            </div>
+          </div>

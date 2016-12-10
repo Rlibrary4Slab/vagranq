@@ -1,0 +1,45 @@
+<!--
+<ul>  
+ 
+  <span class="user-name">
+    <%#= article.user.name %>
+  </span>
+  <span class="content" style="height:75px; width:75px;">
+    <%#= link_to article.eyecatch_img.html_safe, article_path(article.id) %>
+    <%#= link_to article.title.html_safe, article_path(article.id) %>
+    <div>
+      <small>
+        <%#= article.likes.count %>人がいいね！といっています
+      </small>
+    </div>
+
+  </span>
+  <span>
+    <%#= article.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    <%#= article.updated_at.strftime("%Y年%m月%d日　更新") %>
+  </span>
+  <%#= link_to 'Edit', edit_article_path(article) %> |
+  <%#= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+</ul>
+
+-->
+        
+<tr class="shop">
+  <td><%#= article.category %></td>
+  <td><%= link_to article.eyecatch_img.html_safe, article_path(article.id) %></td>
+  <td><%= link_to article.title ,article_path(article.id) %></td>
+  <td><%= article.description %></td>
+  <td><%#= article.content %></td>
+  <td><%= article.user.user_name %></td>
+  <td><%= article.aasm_state %></td>
+  <td><%= article.likes.count %>人がいいね！といっています</td>
+  <td><%= article.updated_at.strftime("%Y年%m月%d日　更新") %></td>
+  
+  
+  <!--
+  <td><%= link_to 'Show', article %></td>
+  <td><%= link_to 'Edit', edit_article_path(article) %></td>
+  <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  -->
+ 
+</tr>

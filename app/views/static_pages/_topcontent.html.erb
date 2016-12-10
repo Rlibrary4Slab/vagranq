@@ -1,0 +1,45 @@
+<section id="topcontent">
+  <div class="topcontent_in clearfix">
+    <div class="topcontent_main">
+      <ul>
+
+        
+
+<% @toprank.each do |article| %>
+  <!-- topcontet_content -->
+  <li class="topcontent_content topcontet_content_3">
+    <a href="content.html">
+      <!--<img alt="記事タイトルが入ります" class="crop_image" height="245" src="image/image-1.jpg" width="350" />-->
+      <%= link_to article.eyecatch_img.html_safe, article , :style =>"height:245px; width:350px;"%>
+      <p class="article_list_title"><span><%= link_to article.title.html_safe, article %></p></span></p>
+    </a>
+    <p class="article_list_lead">
+      <%= article.description.html_safe %>
+    </p>
+    
+    <div class="topcontent_user">
+      <a><%= link_to article.user.user_name, article.user %></a>
+    </div>
+    <span><%= article.impressionist_count %></span>View
+
+  </li>
+  <!-- /.topcontet_content -->
+<% end %>
+
+    <%# @articles.order(updated_at: :desc).each do |article| %>
+    <div>
+          <%# @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(3).pluck(:article_id)) %>
+
+    <%#= page_entries_info(@articles) %>
+
+    </div>
+      </ul>
+      <!--page cache-->
+    </div><!-- /.topcontent_main -->
+
+              </div><!-- /.eyecatch_feature_content -->
+            </div><!-- /.eyecatch_feature_wrapp -->
+        </div><!-- /.eyecatch_feature -->
+
+  </div><!-- /.eyecatch_in -->
+</section>

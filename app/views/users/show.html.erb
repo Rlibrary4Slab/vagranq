@@ -1,0 +1,28 @@
+<% provide(:title, @user.name) %>
+<%= render_breadcrumbs %>
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= image_tag @user.user_image_url(:thumb)%>
+        <%= image_tag @user.header_image_url(:thumb_view)%>
+        <%#= @user.name %>
+            
+      </h1>
+        <%= @user.user_name %>
+        <%= @user.user_description %><br>
+       
+          <%= @title %>
+        <table>
+          <tbody>
+          <%= render @articleus %>
+          </tbody>
+        </table>
+         
+      <%= link_to @user.likes.count, like_articles_user_path(@user.name) %>個の投稿にいいね！しています
+     
+     
+    </section>
+  </aside>
+</div>

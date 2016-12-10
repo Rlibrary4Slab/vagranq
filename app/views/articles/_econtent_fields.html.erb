@@ -1,0 +1,22 @@
+<fieldset class="fields ui-sortable-handle">
+  <h1 id=rankh1></h1>
+  <div class="ckeditors" style="display:none;">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, :class => 'form-control'%><br />
+    <%= f.label :description, "説明" %>
+    <%= f.text_area :description, :class => 'form-control ckeditor' %><br />
+  </div>
+  <div class="afsubmits" style="display:none;">
+    <p class="aft"></p>
+    <div class="afd"></div>
+  </div>
+  <%= link_to "削除", '#', class: "remove_fields"%>
+    <input type="button" class="tdsubmit" value="交換" style="display:none;">
+    <div style="display:none;">
+      <input type="button" id="tsubmit" value="交換">
+      <input type="button" id="dsubmit" value="交換">
+    </div>
+    <input type="button" class="psubmit" id="psubmit" value="プレビュー" style="display:none;">
+    <input type="button" class="esubmit" value="編集">
+    <%= f.hidden_field :position, class: :position %>
+</fieldset>

@@ -1,0 +1,8 @@
+　validates :titleon ,presence: true
+      validates :contento   ,presence: true
+      validates :titletw  ,presence: true
+      validates :contenttw  ,presence: true
+      validates :titleth  ,presence: true
+      validates :contentth  ,presence: true
+      
+      enum category: {"カテゴリを選択してください":0 ,"ファッション": 1, "コスメ": 2, "ヘアスタイル": 3,"ネイル": 4, "美容": 5,"グルメ": 6,"旅行": 7,"恋愛": 8, "ライフスタイル": 9} 

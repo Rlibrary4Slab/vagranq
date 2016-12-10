@@ -1,0 +1,22 @@
+<div class="col-sm-3">
+    <%= render partial: 'settings/shared/menu'%>
+
+    <div class="col-sm-9">
+        <div class="row" >
+            <%= form_for current_user, layout: :horizontal, url: settings_accounts_path, method: :patch do |f| %>
+            
+                <%#= f.alert_message '以下の項目を修正して下さい。' %>
+                
+                
+    
+                <%= f.text_field :email %>
+            
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <%= f.submit '更新する', class: 'btn btn-primary' %>
+                    </div>
+                </div
+            <%end%>
+        </div>
+    </div>
+</div>

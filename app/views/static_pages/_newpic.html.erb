@@ -1,0 +1,64 @@
+    <div class="headline is-border">
+        <h2 class="headline-title">新着のピックアップ</h2>
+    </div>
+    <div class="article_list pickup_list">
+  <!--
+  <thead>
+    <tr>
+      <th>1位</th>
+      <th>内容</th>
+      <th>2位</th>
+      <th>内容</th>
+      <th>3位</th>
+      <th>内容</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+ -->
+
+    <%#= page_entries_info(@articles) %>
+    <% @articles.order(created_at: :desc).each do |article| %>
+
+    <div class="article_list_content clearfix">
+    <!--
+    <div class="article_list_thumb" style="width:85px;">
+    <a href="content.html" data-list-id="">
+    <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" style="display:none;" class="crop_image" height="75" src="image/image-1.jpg" width="75" />
+    <%= image_tag article.eyecatch_img, :style =>"height:75px !important; width:75px !important;"%>
+    </a>
+    </div>
+    -->
+    <div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 75px;
+    height: 75px;
+    display: none;    
+    overflow: hidden;
+    background-color: #888;
+    border: 1px solid #222;
+    index:-1;">
+        <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
+        <%= image_tag article.eyecatch_img ,:style =>" position: relative;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);" ,:id =>"s_eyecatch_img" %>
+      </div>
+    <div class="article_list_text">
+    <p class="article_list_title"><%= link_to article.title.html_safe, article %></p>
+    <p class="article_list_lead"><%= article.description.html_safe %></p>
+
+    <div class="topcontent_user">
+    <!-- <a href="user.html"> -->
+    <a><%= link_to article.user.user_name, article.user %></a>
+    <!-- </a> -->
+    </div>
+    
+    <span><%= article.impressionist_count %></span>View
+    </div>
+    </div>
+<% end %>
+
+    <%= paginate @articles %>
+  </div><!-- /.article_list -->

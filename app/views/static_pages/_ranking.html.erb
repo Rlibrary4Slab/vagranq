@@ -1,0 +1,31 @@
+
+  <div class="title_section">
+    <div class="title_section_in">
+      <h2>アクセスランキング</h2>
+      <p>人気まとめランキング</p>
+    </div>
+  </div>
+<div class="side_article_list">
+
+<% @rank.each do |article| %>
+ 
+  
+  <div class="article_list_content clearfix">
+    <div class="article_list_thumb" style="width:60px;">
+      <a>
+        <!--<img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />-->
+        <%= link_to article.eyecatch_img.html_safe, article  %>
+      </a>
+    </div>
+    <div class="article_list_text">
+    <p class="side_article_title"><%= link_to article.title.html_safe, article %></p>
+    <p class="side_article_user">
+      <a><%= link_to article.user.user_name, article.user %></a>
+    </p>
+  </div>
+</div><!-- /.side_article_content -->
+<% end %>  
+
+</div>
+
+<p class="genre_to_allTags">&raquo;&nbsp;<%= link_to "ランキングを20位までみる",allranking_path %></a></p>

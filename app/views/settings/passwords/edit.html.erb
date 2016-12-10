@@ -1,0 +1,25 @@
+<div class="col-sm-3">
+    <%= render partial: 'settings/shared/menu'%>
+
+    <div class="col-sm-9">
+        <div class="row" >
+                <%= form_for @change_password, layout: :horizontal, url: settings_passwords_path, method: :patch do |f| %>
+                
+                <%#= f.alert_message '以下の項目を修正して下さい。' %>
+                <%= f.label :current_password %>
+                <%= f.password_field :current_password, value: @change_password.current_password %>
+                <%= f.label :new_password %>
+                <%= f.password_field :new_password, value: @change_password.new_password %>
+                <%= f.label :new_password_confirmation %>
+                <%= f.password_field :new_password_confirmation, value: @change_password.new_password_confirmation %>
+    
+            
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <%= f.submit '更新する', class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            <%end%>
+        </div>
+    </div>
+</div>

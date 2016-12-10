@@ -1,0 +1,35 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+ul{
+    list-style: none;
+}
+.levelbox {
+    border: 1px solid #ddd;
+    padding: 1px;
+    border-radius: 3px;
+}
+.levelbox--max4 {
+    width: 76px;
+}
+.levelbox__block {
+    //display: none;
+    background: #ff0200;
+}
+/*
+.levelbox__block:nth-child(2) {
+    opacity: 0.5;
+}
+*/
+.levelbox__block {
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin: 1px;
+    border-radius: 3px;
+    -webkit-animation: badgeLevel 0.8s ease;
+    -moz-animation: badgeLevel 0.8s ease;
+    -ms-animation: badgeLevel 0.8s ease;
+    -o-animation: badgeLevel 0.8s ease;
+    animation: badgeLevel 0.8s ease;
+}

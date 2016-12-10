@@ -1,0 +1,17 @@
+<%= form_for(@user) do |f| %>
+       <%= render 'shared/error_messages' , object: f.object %>
+ 
+      <%= f.label :name, "ユーザーID"%>
+      <%= f.text_field :name , class: 'form-control'%>
+
+      <%= f.label :email,"メールアドレス" %>
+      <%= f.email_field :email , class: 'form-control'%>
+
+      <%= f.label :password,"パスワード【6文字以上】" %>
+      <%= f.password_field :password , class: 'form-control'%>
+
+      <%= f.label :password_confirmation, "パスワード再度入力" %>
+      <%= f.password_field :password_confirmation , class: 'form-control'%>
+
+      <%= f.submit "登録する", class: "btn btn-primary" %>
+    <% end %>

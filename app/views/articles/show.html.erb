@@ -1,0 +1,82 @@
+<!-- コンテンツ -->
+<%= render_breadcrumbs %>
+
+<section id="headcontent">
+<div id="headline">
+  <div class="head_container">
+    <div class="u-clearfix" ng-non-bindable>
+      <div id="s_article_thumbnail" style="    width: 128px;
+      display:none;
+    height: 128px;
+    margin: 16px 0;
+    overflow: hidden;
+    background-color: #888;
+    border: 1px solid #222;">
+        <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
+        <%= image_tag @article.eyecatch_img ,:style =>" position: relative;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);" ,:id =>"s_eyecatch_img" %>
+      </div>
+      <%= @article.updated_at.strftime("%Y年%m月%d日　更新") %>
+      <h1 class="article_title"><%= @article.title %></h1>
+      <p class="article_description"><%= @article.description %></p>
+      
+    </div>
+
+    <div class="head_social">
+      <ul class="social-bottun">
+        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
+        <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
+        <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
+      </ul>
+    </div>
+    <div class="head_like_user">
+      <ul class="user_like">
+        <li class="user"><%= @article.user.name %></li>
+        <li class="like">
+          <%= render 'likes/like_links', article: @article %>
+        </li>
+        
+        <li>
+            <%= link_to @article.likes.count, liking_users_article_path(@article.id), id: "like-count" %>
+        </li>
+        
+        <li>
+          <span><%= number_with_delimiter(@page_views) %></span>View
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<div id="wrapper" class="clearfix">
+<div id="column_content">
+<div class="article_content">
+  <% @article.contents.each do |article| %>
+    
+     
+      <p>
+         タイトル
+        <%= article.title.html_safe%>
+      </p>
+       <p>
+         説明
+        <%= article.description.html_safe%>
+      </p>
+      
+       
+  <% end %>
+</div><!-- /article_content -->
+</div><!-- /#column_content -->
+<div id="column_sidebar">
+ここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなど
+
+</div>
+</div>

@@ -1,0 +1,62 @@
+    <!-- フッター -->
+
+  
+<footer class="footer" onload="">
+  <div class="footer-inner">
+    <ul>
+      <li class="footer-logo"><%= link_to "RanQ", root_path %></li>
+      
+      <!-- カテゴリ -->
+      <li class="footer-column">
+        <p class="footer-column-title">カテゴリ一覧</p>
+      
+        <ul class="footer-column-list">
+          <li><%= link_to "ファッション",cfashion_path(category: 20) %></li>
+          <li><%= link_to "ビューティー",cbeauty_path(category: 30) %></li>
+          <li><%= link_to "ライフスタイル",clifestyle_path(category: 40) %></li>
+          <li><%= link_to "グルメ",cgourmet_path(category: 50) %></li>
+          <li><%= link_to "おでかけ",changout_path(category: 60) %></li>
+        </ul>
+      
+        <ul class="footer-column-list">
+          <li><%= link_to "エンタメ",centertainment_path(category: 70) %></li>
+          <li><%= link_to "学び",cstudy_path(category: 80) %></li>
+          <li><%= link_to "アイテム",citem_path(category: 90) %></li>
+          <li><%= link_to "おもしろ",cfunny_path(category: 100) %></li>
+          <li><%= link_to "その他",cothers_path(category: 110) %></li>
+        </ul>
+      </li>
+    <!-- /カテゴリ -->
+    
+    <!-- RanQについて -->
+      <li class="footer-column">
+        <p class="footer-column-title">RanQについて</p>
+      
+        <ul class="footer-column-list">
+          <li><a href="">まとめ一覧</a></li>
+          <li><a href="">特集一覧</a></li>
+          <li><a href="">キーワード一覧</a></li>
+          <li><!--<a href="">キュレーター一覧</a>--><%= link_to "キュレーター一覧" ,users_path %></li>
+          <li><a href="">お問い合わせ</a></li>
+        </ul>
+      
+        <ul class="footer-column-list">
+          <li><a href="" target="_blank">運営会社</a></li>
+          <li><a href="">よくある質問</a></li>
+          <li><a href="">利用規約</a></li>
+          <li><a href="">プライバシーポリシー</a></li>
+        </ul>
+      
+        <ul class="footer-column-last">
+          <li class="ranq-title"><p>RanQ [ランク]</p></li>
+          <li><p>ランキング形式で知りたいが分かるメディア</p></li>
+          <li><p>Copyright© ForStart, Inc. All Rights Reserved.</p></li>
+        </ul>
+      </li>
+    <!-- /RanQについて -->
+    </ul>
+  </div>
+</footer >
+
+
+<!-- /フッター -->

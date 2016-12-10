@@ -1,0 +1,12 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.article_list_content > div > a > img{
+    height: 75px !important;
+    width: 75px !important;
+}
+.side_article_list>div>div>a>img{
+    height: 50px !important;
+    width: 50px !important;
+}

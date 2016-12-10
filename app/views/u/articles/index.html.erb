@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>
+    <%= @user.screen_name %> さんの記事一覧
+   </h1>
+   
+    <% @articles.each do |article| %>
+    <div>
+        <h2><%= link_to article.title, u_article_path(article.user.user_name, article) %></h2>
+        <div>
+            <%#= truncate(article.body_text) %>
+            <%= truncate(article.description) %>
+
+        </div>
+    </div>
+    <%end%>
+</div>

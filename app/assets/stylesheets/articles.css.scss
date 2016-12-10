@@ -1,0 +1,78 @@
+// Place all the styles related to the Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// Place all the styles related to the Ssquires controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first>div.cke_dialog_ui_vbox>table>tbody>tr>td>table>tbody>tr>.cke_dialog_ui_hbox_first{
+    display: none;
+    background: red;
+    
+}
+table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first>div.cke_dialog_ui_vbox>table>tbody>tr:nth-child(2){
+    background: blue;
+    display: none;
+    
+}
+table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first>div.cke_dialog_ui_vbox>table>tbody>tr:nth-child(1){
+    background: purple;
+    display: none;
+    
+}
+table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first{
+    background: red;
+    display: none;
+}
+div.cke_dialog_ui_html{
+    //margin-left: 40px !important;   
+}
+div.cke_resizer.cke_resizer_ltr{
+    display: none;
+}
+
+/*img{
+    max-height: 100%;
+    max-width: 100%;
+}
+*/
+table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first>div.cke_dialog_ui_vbox>table>tbody>tr>td>table>tbody>tr>.cke_dialog_ui_hbox_first>div>table>tbody>tr:first-child>td>div>div>div>input{
+    background: yellow;
+}
+.ImagePreviewBox{
+    overflow: hidden !important;
+    height: 300px !important;
+    width: 400px !important;
+    border: none !important;
+}
+.cke_dialog_body>table>tbody>tr>td>div>table>tbody>tr:nth-child(2)>td.cke_dialog_ui_vbox_child{
+    display: none;
+}
+.cke_btn_locked{
+    display: none;
+}
+.cke_dialog_body>table>tbody>tr>td>div>table>tbody>tr:first-child>td.cke_dialog_ui_vbox_child>div>table>tbody>tr>td>table>tbody>tr>td:nth-child(2){
+    background: red;
+    display: none;
+}
+
+//javascriptadded
+.cke_dialog_body>table>tbody>tr>td>div>table>tbody>tr:first-child>td.cke_dialog_ui_vbox_child>div>table>tbody>tr>td>table>tbody>tr{
+        
+}
+table>tbody>tr>td>div>table>tbody>tr:first-child>td>div>table>tbody>tr>td>table>tbody>tr>td>div>div>div>input{
+    //background: green;    
+}
+
+table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first>div.cke_dialog_ui_vbox>table>tbody>tr:nth-child(2)>td>div>table>tbody>tr>td>div>div>div>input{
+    background: black;    
+    
+}
+.cke_editable{
+    background: gray !important;
+}
+
+td>img{
+    height: 50px !important;
+    width: 50px !important;
+}

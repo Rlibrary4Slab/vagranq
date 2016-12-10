@@ -1,0 +1,35 @@
+<h1>全てのユーザー</h1>
+<!--
+<%#= will_paginate %>
+
+<ul class="users">
+  <%# @users.each do |user| %>
+    <%#= render user %>
+  <%# end %>
+</ul>
+
+<%#= will_paginate %>
+-->
+
+
+<%= page_entries_info @users%>
+<table id="shops">
+  <thead>
+    <tr>
+      <th>userimage</th>
+      <th>username</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  
+    
+  <tbody class="page">
+    <%= render @users %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Article', new_article_path %>
+<%= paginate @users %>

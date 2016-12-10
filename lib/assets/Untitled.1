@@ -1,0 +1,18 @@
+class CreateArticles < ActiveRecord::Migration
+  def change
+    create_table :articles do |t|
+      t.integer :category
+      t.string :maintitle, null: false
+      t.text :description, null: false
+      t.string :titleon ,null: false
+      t.text :contento   ,null: false
+      t.string :titletw  ,null: false
+      t.text :contenttw  ,null: false
+      t.string :titleth  ,null: false
+      t.text :contentth  ,null: false
+      t.string :username
+      t.datetime :published
+      t.timestamps null: false
+    end
+  end
+end

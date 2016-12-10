@@ -1,0 +1,37 @@
+<% if current_user == @article.user %>
+  <div>
+    <div class="pull-right">
+      <%= link_to '編集', edit_article_path(@article) %>
+    </div>
+  </div>
+<%end%>
+<h1>
+  <%= link_to @article.title, u_article_path(@article.user.name, @article)%>
+</h1>
+<div>
+    <%= raw @article.body %>
+</div>
+
+<div>
+  <div class="pull-right">
+    <%= link_to u_path(@article.user.screen_name) do %>
+      <%#= image_tag @article.user.gravatar_url(length: 20)%>
+      <%= image_tag @article.user.user_image%>
+      <%= @article.user.name %>
+    <%= l @article.published_at %>
+    <%end%>
+  </div>
+</div>
+<!-- comment
+<div class="clearfix">
+
+    <hr>
+    
+    <%= render partial: 'comments', locals: {comments: @article.comments.order(:created_at)}%>
+    
+      <% if current_user%>
+      <%= render partial: 'home/comments/form', locals: {comment: @comment}%>
+      <%end%>
+     </hr>
+</div>
+-->
