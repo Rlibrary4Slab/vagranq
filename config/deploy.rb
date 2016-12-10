@@ -10,7 +10,7 @@ set :linked_files, fetch(:linked_files, []).push("config/settings.yml")
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-set :bundle_env_variables, { nokogiri_use_system_libraries: 1 }
+set :bundle_env_variables, { nokogiri_use_system_libraries: 2 }
 # 保持するバージョンの個数(※後述)
 set :keep_releases, 5
 

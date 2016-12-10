@@ -361,6 +361,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   aasm (= 3.3.1)
