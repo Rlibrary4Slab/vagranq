@@ -2,7 +2,7 @@
 lock '3.6.1'
 
 set :application, 'ranq'
-set :repo_url, 'https://github.com/lefedoreichmann/ranqdeployer.git'
+set :repo_url, 'https://github.com/lefedoreichmann/ranqdep.git'
 set :branch, "master"
 set :deploy_to, "/var/www/ranqdeployer"
 
