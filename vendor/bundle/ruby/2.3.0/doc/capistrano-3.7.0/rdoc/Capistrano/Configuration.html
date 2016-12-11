@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Capistrano::Configuration - capistrano-3.7.0 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    
+  
+    <li><span class="extend">Forwardable</span>
+  
+  
+  </ul>
+</div>
+
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-env">::env</a>
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-reset-21">::reset!</a>
+    
+    <li ><a href="#method-i-add_cmdline_filter">#add_cmdline_filter</a>
+    
+    <li ><a href="#method-i-add_filter">#add_filter</a>
+    
+    <li ><a href="#method-i-any-3F">#any?</a>
+    
+    <li ><a href="#method-i-append">#append</a>
+    
+    <li ><a href="#method-i-ask">#ask</a>
+    
+    <li ><a href="#method-i-backend">#backend</a>
+    
+    <li ><a href="#method-i-cmdline_filters">#cmdline_filters</a>
+    
+    <li ><a href="#method-i-configure_backend">#configure_backend</a>
+    
+    <li ><a href="#method-i-configure_scm">#configure_scm</a>
+    
+    <li ><a href="#method-i-configure_sshkit_output">#configure_sshkit_output</a>
+    
+    <li ><a href="#method-i-dry_run-3F">#dry_run?</a>
+    
+    <li ><a href="#method-i-filter">#filter</a>
+    
+    <li ><a href="#method-i-install_plugin">#install_plugin</a>
+    
+    <li ><a href="#method-i-installer">#installer</a>
+    
+    <li ><a href="#method-i-is_question-3F">#is_question?</a>
+    
+    <li ><a href="#method-i-primary">#primary</a>
+    
+    <li ><a href="#method-i-remove">#remove</a>
+    
+    <li ><a href="#method-i-role">#role</a>
+    
+    <li ><a href="#method-i-role_properties_for">#role_properties_for</a>
+    
+    <li ><a href="#method-i-roles_for">#roles_for</a>
+    
+    <li ><a href="#method-i-scm_plugin_installed-3F">#scm_plugin_installed?</a>
+    
+    <li ><a href="#method-i-server">#server</a>
+    
+    <li ><a href="#method-i-servers">#servers</a>
+    
+    <li ><a href="#method-i-set_if_empty">#set_if_empty</a>
+    
+    <li ><a href="#method-i-setup_filters">#setup_filters</a>
+    
+    <li ><a href="#method-i-timestamp">#timestamp</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Capistrano::Configuration">
+  <h1 id="class-Capistrano::Configuration" class="class">
+    class Capistrano::Configuration
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-backend" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">backend</span><span
+            class="attribute-access-type">[W]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-variables" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">variables</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-env" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">env</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="env-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">env</span>
+  <span class="ruby-ivar">@env</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(values={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">values</span>={})
+  <span class="ruby-ivar">@variables</span> = <span class="ruby-constant">ValidatedVariables</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Variables</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">values</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-reset-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reset!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="reset-21-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset!</span>
+  <span class="ruby-ivar">@env</span> = <span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_cmdline_filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_cmdline_filter</span><span
+            class="method-args">(type, values)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_cmdline_filter-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cmdline_filter</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">cmdline_filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">values</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_filter</span><span
+            class="method-args">(filter=nil, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_filter-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">filter</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Both a block and an object were given&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>
+
+    <span class="ruby-identifier">filter</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">servers</span>)
+      <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">servers</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:filter</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;Provided custom filter &lt;#{filter.inspect}&gt; does &quot;</span>                           <span class="ruby-string">&quot;not have a public &#39;filter&#39; method&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@custom_filters</span> <span class="ruby-operator">||=</span> []
+  <span class="ruby-ivar">@custom_filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filter</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-any-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">any?</span><span
+            class="method-args">(key)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="any-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">any?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:any?</span>)
+    <span class="ruby-identifier">value</span>.<span class="ruby-identifier">any?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-operator">!</span><span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-append" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">append</span><span
+            class="method-args">(key, *values)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="append-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">append</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-constant">Array</span>(<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>)).<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">values</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ask" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ask</span><span
+            class="method-args">(key, default=nil, options={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ask-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-identifier">question</span> = <span class="ruby-constant">Question</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">question</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-backend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">backend</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="backend-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">backend</span>
+  <span class="ruby-ivar">@backend</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">SSHKit</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-configure_backend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">configure_backend</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="configure_backend-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure_backend</span>
+  <span class="ruby-identifier">backend</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sshkit</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">configure_sshkit_output</span>(<span class="ruby-identifier">sshkit</span>)
+    <span class="ruby-identifier">sshkit</span>.<span class="ruby-identifier">output_verbosity</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:log_level</span>)
+    <span class="ruby-identifier">sshkit</span>.<span class="ruby-identifier">default_env</span>      = <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:default_env</span>)
+    <span class="ruby-identifier">sshkit</span>.<span class="ruby-identifier">backend</span>          = <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:sshkit_backend</span>, <span class="ruby-constant">SSHKit</span><span class="ruby-operator">::</span><span class="ruby-constant">Backend</span><span class="ruby-operator">::</span><span class="ruby-constant">Netssh</span>)
+    <span class="ruby-identifier">sshkit</span>.<span class="ruby-identifier">backend</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">backend</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">backend</span>.<span class="ruby-identifier">pty</span>                = <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:pty</span>)
+      <span class="ruby-identifier">backend</span>.<span class="ruby-identifier">connection_timeout</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:connection_timeout</span>)
+      <span class="ruby-identifier">backend</span>.<span class="ruby-identifier">ssh_options</span>        = (<span class="ruby-identifier">backend</span>.<span class="ruby-identifier">ssh_options</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:ssh_options</span>, {}))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-configure_scm" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">configure_scm</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="configure_scm-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure_scm</span>
+  <span class="ruby-constant">Capistrano</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span><span class="ruby-operator">::</span><span class="ruby-constant">SCMResolver</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">resolve</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dry_run-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dry_run?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dry_run-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dry_run?</span>
+  <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:sshkit_backend</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">SSHKit</span><span class="ruby-operator">::</span><span class="ruby-constant">Backend</span><span class="ruby-operator">::</span><span class="ruby-constant">Printer</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter</span><span
+            class="method-args">(list)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">list</span>)
+  <span class="ruby-identifier">setup_filters</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@filters</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@filters</span>.<span class="ruby-identifier">reduce</span>(<span class="ruby-identifier">list</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span>, <span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">filter</span> <span class="ruby-identifier">l</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-install_plugin" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">install_plugin</span><span
+            class="method-args">(plugin, load_hooks: true, load_immediately: false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="install_plugin-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">install_plugin</span>(<span class="ruby-identifier">plugin</span>, <span class="ruby-identifier">load_hooks</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">load_immediately</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">installer</span>.<span class="ruby-identifier">install</span>(<span class="ruby-identifier">plugin</span>,
+                    <span class="ruby-identifier">load_hooks</span><span class="ruby-operator">:</span> <span class="ruby-identifier">load_hooks</span>,
+                    <span class="ruby-identifier">load_immediately</span><span class="ruby-operator">:</span> <span class="ruby-identifier">load_immediately</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-is_question-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_question?</span><span
+            class="method-args">(key)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_question-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_question?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-identifier">fetch_for</span>(<span class="ruby-identifier">key</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Question</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-primary" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">primary</span><span
+            class="method-args">(role)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="primary-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">primary</span>(<span class="ruby-identifier">role</span>)
+  <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">fetch_primary</span>(<span class="ruby-identifier">role</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-remove" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove</span><span
+            class="method-args">(key, *values)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="remove-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-constant">Array</span>(<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>)) <span class="ruby-operator">-</span> <span class="ruby-identifier">values</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-role" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">role</span><span
+            class="method-args">(name, hosts, options={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="role-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">role</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hosts</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value">:all</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;#{name} reserved name for role. Please choose another name&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">add_role</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">hosts</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-role_properties_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">role_properties_for</span><span
+            class="method-args">(names, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="role_properties_for-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">role_properties_for</span>(<span class="ruby-identifier">names</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">role_properties_for</span>(<span class="ruby-identifier">names</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-roles_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">roles_for</span><span
+            class="method-args">(names)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="roles_for-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">roles_for</span>(<span class="ruby-identifier">names</span>)
+  <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">roles_for</span>(<span class="ruby-identifier">names</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-scm_plugin_installed-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">scm_plugin_installed?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="scm_plugin_installed-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scm_plugin_installed?</span>
+  <span class="ruby-identifier">installer</span>.<span class="ruby-identifier">scm_installed?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-server" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">server</span><span
+            class="method-args">(name, properties={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="server-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">server</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">properties</span>={})
+  <span class="ruby-identifier">servers</span>.<span class="ruby-identifier">add_host</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">properties</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-servers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">servers</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="servers-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">servers</span>
+  <span class="ruby-ivar">@servers</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Servers</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_if_empty" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_if_empty</span><span
+            class="method-args">(key, value=nil, &block)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_if_empty-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_if_empty</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setup_filters" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup_filters</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setup_filters-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup_filters</span>
+  <span class="ruby-ivar">@filters</span> = <span class="ruby-identifier">cmdline_filters</span>
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@custom_filters</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@custom_filters</span>
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:role</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;ROLES&quot;</span>]) <span class="ruby-keyword">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;ROLES&quot;</span>]
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:host</span>, <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;HOSTS&quot;</span>]) <span class="ruby-keyword">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;HOSTS&quot;</span>]
+  <span class="ruby-identifier">fh</span> = <span class="ruby-identifier">fetch_for</span>(<span class="ruby-value">:filter</span>, {}) <span class="ruby-operator">||</span> {}
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:host</span>, <span class="ruby-identifier">fh</span>[<span class="ruby-value">:hosts</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">fh</span>[<span class="ruby-value">:hosts</span>]
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:role</span>, <span class="ruby-identifier">fh</span>[<span class="ruby-value">:roles</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">fh</span>[<span class="ruby-value">:roles</span>]
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:host</span>, <span class="ruby-identifier">fh</span>[<span class="ruby-value">:host</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">fh</span>[<span class="ruby-value">:host</span>]
+  <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:role</span>, <span class="ruby-identifier">fh</span>[<span class="ruby-value">:role</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">fh</span>[<span class="ruby-value">:role</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-timestamp" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">timestamp</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="timestamp-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">timestamp</span>
+  <span class="ruby-ivar">@timestamp</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-cmdline_filters" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cmdline_filters</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="cmdline_filters-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cmdline_filters</span>
+  <span class="ruby-ivar">@cmdline_filters</span> <span class="ruby-operator">||=</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-configure_sshkit_output" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">configure_sshkit_output</span><span
+            class="method-args">(sshkit)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="configure_sshkit_output-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure_sshkit_output</span>(<span class="ruby-identifier">sshkit</span>)
+  <span class="ruby-identifier">format_args</span> = [<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:format</span>)]
+  <span class="ruby-identifier">format_args</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:format_options</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">any?</span>(<span class="ruby-value">:format_options</span>)
+
+  <span class="ruby-identifier">sshkit</span>.<span class="ruby-identifier">use_format</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">format_args</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-installer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">installer</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="installer-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">installer</span>
+  <span class="ruby-ivar">@installer</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">PluginInstaller</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

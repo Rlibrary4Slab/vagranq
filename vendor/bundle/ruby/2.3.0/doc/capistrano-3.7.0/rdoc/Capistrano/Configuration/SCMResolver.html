@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Capistrano::Configuration::SCMResolver - capistrano-3.7.0 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="../DSL.html">Capistrano::DSL</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-built_in_scm_name-3F">#built_in_scm_name?</a>
+    
+    <li ><a href="#method-i-built_in_scm_plugin_class_name">#built_in_scm_plugin_class_name</a>
+    
+    <li ><a href="#method-i-load_built_in_scm">#load_built_in_scm</a>
+    
+    <li ><a href="#method-i-load_legacy_scm_by_name">#load_legacy_scm_by_name</a>
+    
+    <li ><a href="#method-i-print_deprecation_warnings_if_applicable">#print_deprecation_warnings_if_applicable</a>
+    
+    <li ><a href="#method-i-register_legacy_scm_hooks">#register_legacy_scm_hooks</a>
+    
+    <li ><a href="#method-i-resolve">#resolve</a>
+    
+    <li ><a href="#method-i-scm_name">#scm_name</a>
+    
+    <li ><a href="#method-i-third_party_scm_name-3F">#third_party_scm_name?</a>
+    
+    <li ><a href="#method-i-using_default_scm-3F">#using_default_scm?</a>
+    
+    <li ><a href="#method-i-warn_add_git_to_capfile">#warn_add_git_to_capfile</a>
+    
+    <li ><a href="#method-i-warn_set_scm_is_deprecated">#warn_set_scm_is_deprecated</a>
+    
+    <li ><a href="#method-i-warn_third_party_scm_must_be_upgraded">#warn_third_party_scm_must_be_upgraded</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Capistrano::Configuration::SCMResolver">
+  <h1 id="class-Capistrano::Configuration::SCMResolver" class="class">
+    class Capistrano::Configuration::SCMResolver
+  </h1>
+
+  <section class="description">
+    
+<p>In earlier versions of <a href="../../Capistrano.html">Capistrano</a>,
+users would specify the desired <a href="../SCM.html">SCM</a>
+implementation using `set :scm, :git`, for example. <a
+href="../../Capistrano.html">Capistrano</a> would then load the matching
+.rb file based on this variable.</p>
+
+<p>Now we expect users to explicitly `require` and call `new` on the desired
+<a href="../SCM.html">SCM</a> implementation in their <a
+href="../../lib/Capfile.html">Capfile</a>. The `set` technique is
+deprecated.</p>
+
+<p>This <a href="SCMResolver.html">SCMResolver</a> class takes care of
+managing the transition from the old to new system. It maintains the legacy
+behavior, but prints deprecation warnings when it is used.</p>
+
+<p>To maintain backwards compatibility, the resolver will load the Git <a
+href="../SCM.html">SCM</a> by if default it determines that no <a
+href="../SCM.html">SCM</a> has been explicitly specified or loaded. To
+force no <a href="../SCM.html">SCM</a> to be used at all, use `set :scm,
+nil`. This hack won&#39;t be necessary once backwards compatibility is
+removed in a future version.</p>
+
+<p>TODO: Remove this class entirely in <a
+href="../../Capistrano.html">Capistrano</a> 4.0.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DEFAULT_GIT">DEFAULT_GIT
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-resolve" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">resolve</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="resolve-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resolve</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">scm_name</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">set</span>(<span class="ruby-value">:scm</span>, <span class="ruby-value">:git</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">using_default_scm?</span>
+
+  <span class="ruby-identifier">print_deprecation_warnings_if_applicable</span>
+  <span class="ruby-comment"># Note that `scm_plugin_installed?` comes from Capistrano::DSL</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">scm_plugin_installed?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">built_in_scm_name?</span>
+    <span class="ruby-identifier">load_built_in_scm</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Compatibility with existing 3.x third-party SCMs</span>
+    <span class="ruby-identifier">register_legacy_scm_hooks</span>
+    <span class="ruby-identifier">load_legacy_scm_by_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-built_in_scm_name-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">built_in_scm_name?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="built_in_scm_name-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">built_in_scm_name?</span>
+  <span class="ruby-node">%w(git hg svn)</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">scm_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-built_in_scm_plugin_class_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">built_in_scm_plugin_class_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="built_in_scm_plugin_class_name-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">built_in_scm_plugin_class_name</span>
+  <span class="ruby-node">&quot;Capistrano::SCM::#{scm_name.to_s.capitalize}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-load_built_in_scm" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">load_built_in_scm</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="load_built_in_scm-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_built_in_scm</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-node">&quot;capistrano/scm/#{scm_name}&quot;</span>
+  <span class="ruby-identifier">scm_class</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">built_in_scm_plugin_class_name</span>)
+  <span class="ruby-comment"># We use :load_immediately because we are initializing the SCM plugin</span>
+  <span class="ruby-comment"># late in the load process and therefore can&#39;t use the standard</span>
+  <span class="ruby-comment"># load:defaults technique.</span>
+  <span class="ruby-identifier">install_plugin</span>(<span class="ruby-identifier">scm_class</span>, <span class="ruby-identifier">load_immediately</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-load_legacy_scm_by_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">load_legacy_scm_by_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="load_legacy_scm_by_name-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_legacy_scm_by_name</span>
+  <span class="ruby-identifier">load</span>(<span class="ruby-node">&quot;capistrano/#{scm_name}.rb&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-print_deprecation_warnings_if_applicable" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">print_deprecation_warnings_if_applicable</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>rubocop:enable Style/GuardClause</p>
+          
+          
+
+          
+          <div class="method-source-code" id="print_deprecation_warnings_if_applicable-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">print_deprecation_warnings_if_applicable</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">using_default_scm?</span>
+    <span class="ruby-identifier">warn_add_git_to_capfile</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">scm_plugin_installed?</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">built_in_scm_name?</span>
+    <span class="ruby-identifier">warn_set_scm_is_deprecated</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">third_party_scm_name?</span>
+    <span class="ruby-identifier">warn_third_party_scm_must_be_upgraded</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-register_legacy_scm_hooks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">register_legacy_scm_hooks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>rubocop:disable Style/GuardClause</p>
+          
+          
+
+          
+          <div class="method-source-code" id="register_legacy_scm_hooks-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">register_legacy_scm_hooks</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Rake</span><span class="ruby-operator">::</span><span class="ruby-constant">Task</span>.<span class="ruby-identifier">task_defined?</span>(<span class="ruby-string">&quot;deploy:new_release_path&quot;</span>)
+    <span class="ruby-identifier">after</span> <span class="ruby-string">&quot;deploy:new_release_path&quot;</span>, <span class="ruby-node">&quot;#{scm_name}:create_release&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Rake</span><span class="ruby-operator">::</span><span class="ruby-constant">Task</span>.<span class="ruby-identifier">task_defined?</span>(<span class="ruby-string">&quot;deploy:check&quot;</span>)
+    <span class="ruby-identifier">before</span> <span class="ruby-string">&quot;deploy:check&quot;</span>, <span class="ruby-node">&quot;#{scm_name}:check&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Rake</span><span class="ruby-operator">::</span><span class="ruby-constant">Task</span>.<span class="ruby-identifier">task_defined?</span>(<span class="ruby-string">&quot;deploy:set_current_revision&quot;</span>)
+    <span class="ruby-identifier">before</span> <span class="ruby-string">&quot;deploy:set_current_revision&quot;</span>,
+           <span class="ruby-node">&quot;#{scm_name}:set_current_revision&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-scm_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">scm_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="scm_name-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">scm_name</span>
+  <span class="ruby-identifier">fetch</span>(<span class="ruby-value">:scm</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-third_party_scm_name-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">third_party_scm_name?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="third_party_scm_name-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">third_party_scm_name?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">built_in_scm_name?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-using_default_scm-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">using_default_scm?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="using_default_scm-3F-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">using_default_scm?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@using_default_scm</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@using_default_scm</span>
+  <span class="ruby-ivar">@using_default_scm</span> = (<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:scm</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">DEFAULT_GIT</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-warn_add_git_to_capfile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">warn_add_git_to_capfile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="warn_add_git_to_capfile-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 119</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn_add_git_to_capfile</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;[Deprecation Notice] Future versions of Capistrano will not load the Git SCM
+plugin by default. To silence this deprecation warning, add the following to
+your Capfile:
+
+    require &quot;capistrano/scm/git&quot;
+    install_plugin Capistrano::SCM::Git
+
+&quot;</span>)
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-warn_set_scm_is_deprecated" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">warn_set_scm_is_deprecated</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="warn_set_scm_is_deprecated-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 107</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn_set_scm_is_deprecated</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;[Deprecation Notice] `set :scm, #{scm_name.inspect}` is deprecated.
+To ensure your project is compatible with future versions of Capistrano,
+remove the :scm setting and instead add these lines to your Capfile:
+
+    require &quot;capistrano/scm/#{scm_name}&quot;
+    install_plugin #{built_in_scm_plugin_class_name}
+
+&quot;</span>)
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-warn_third_party_scm_must_be_upgraded" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">warn_third_party_scm_must_be_upgraded</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="warn_third_party_scm_must_be_upgraded-source">
+            <pre><span class="ruby-comment"># File lib/capistrano/configuration/scm_resolver.rb, line 131</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn_third_party_scm_must_be_upgraded</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-string">&quot;[Deprecation Notice] `set :scm, #{scm_name.inspect}` is deprecated.
+To ensure this custom SCM will work with future versions of Capistrano,
+please upgrade it to a version that uses the new SCM plugin mechanism
+documented here:
+
+http://capistranorb.com/documentation/advanced-features/custom-scm
+
+&quot;</span>)
+      <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

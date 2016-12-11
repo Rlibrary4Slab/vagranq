@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Table of Contents - capistrano-3.7.0 Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" class="table-of-contents">
+<main role="main">
+<h1 class="class">Table of Contents - capistrano-3.7.0 Documentation</h1>
+
+<h2 id="pages">Pages</h2>
+<ul>
+  <li class="file">
+    <a href="lib/Capfile.html">Capfile</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/scm/tasks/git_rake.html">git.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/scm/tasks/hg_rake.html">hg.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/scm/tasks/svn_rake.html">svn.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/tasks/console_rake.html">console.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/tasks/deploy_rake.html">deploy.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/tasks/doctor_rake.html">doctor.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/tasks/framework_rake.html">framework.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/tasks/install_rake.html">install.rake</a>
+  </li>
+    <li class="file">
+    <a href="lib/capistrano/templates/Capfile.html">Capfile</a>
+  </li>
+  
+</ul>
+
+<h2 id="classes">Classes and Modules</h2>
+<ul>
+  <li class="module">
+    <a href="Capistrano.html">Capistrano</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Application.html">Capistrano::Application</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration.html">Capistrano::Configuration</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/EmptyFilter.html">Capistrano::Configuration::EmptyFilter</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/Filter.html">Capistrano::Configuration::Filter</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/HostFilter.html">Capistrano::Configuration::HostFilter</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/NullFilter.html">Capistrano::Configuration::NullFilter</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/PluginInstaller.html">Capistrano::Configuration::PluginInstaller</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/Question.html">Capistrano::Configuration::Question</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/RoleFilter.html">Capistrano::Configuration::RoleFilter</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/SCMResolver.html">Capistrano::Configuration::SCMResolver</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/Server.html">Capistrano::Configuration::Server</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/Server/Properties.html">Capistrano::Configuration::Server::Properties</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/Servers.html">Capistrano::Configuration::Servers</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/ValidatedVariables.html">Capistrano::Configuration::ValidatedVariables</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/ValidatedVariables/ValidatedQuestion.html">Capistrano::Configuration::ValidatedVariables::ValidatedQuestion</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Configuration/Variables.html">Capistrano::Configuration::Variables</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/DSL.html">Capistrano::DSL</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/DSL/Env.html">Capistrano::DSL::Env</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/DSL/Paths.html">Capistrano::DSL::Paths</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/DSL/Stages.html">Capistrano::DSL::Stages</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/Doctor.html">Capistrano::Doctor</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/EnvironmentDoctor.html">Capistrano::Doctor::EnvironmentDoctor</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/GemsDoctor.html">Capistrano::Doctor::GemsDoctor</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/Doctor/OutputHelpers.html">Capistrano::Doctor::OutputHelpers</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/OutputHelpers/Row.html">Capistrano::Doctor::OutputHelpers::Row</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/ServersDoctor.html">Capistrano::Doctor::ServersDoctor</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/ServersDoctor/RoleWhitespaceChecker.html">Capistrano::Doctor::ServersDoctor::RoleWhitespaceChecker</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/ServersDoctor/ServerDecorator.html">Capistrano::Doctor::ServersDoctor::ServerDecorator</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Doctor/VariablesDoctor.html">Capistrano::Doctor::VariablesDoctor</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/ImmutableTask.html">Capistrano::ImmutableTask</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/Plugin.html">Capistrano::Plugin</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/ProcHelpers.html">Capistrano::ProcHelpers</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/SCM.html">Capistrano::SCM</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/SCM/Git.html">Capistrano::SCM::Git</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/SCM/Hg.html">Capistrano::SCM::Hg</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/SCM/Plugin.html">Capistrano::SCM::Plugin</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/SCM/Svn.html">Capistrano::SCM::Svn</a>
+  </li>
+  <li class="module">
+    <a href="Capistrano/TaskEnhancements.html">Capistrano::TaskEnhancements</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/UploadTask.html">Capistrano::UploadTask</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/ValidationError.html">Capistrano::ValidationError</a>
+  </li>
+  <li class="class">
+    <a href="Capistrano/VersionValidator.html">Capistrano::VersionValidator</a>
+  </li>
+  <li class="class">
+    <a href="Object.html">Object</a>
+  </li>
+  <li class="module">
+    <a href="Rake.html">Rake</a>
+  </li>
+</ul>
+
+<h2 id="methods">Methods</h2>
+<ul>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-c-5B-5D">::[]</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-c-env">::env</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/ImmutableTask.html#method-c-extended">::extended</a>
+    &mdash;
+    <span class="container">Capistrano::ImmutableTask</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/HostFilter.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::HostFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/VariablesDoctor.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::VariablesDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/ServerDecorator.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::ServerDecorator</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/RoleWhitespaceChecker.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::RoleWhitespaceChecker</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/RoleFilter.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::RoleFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers/Row.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers::Row</span>
+
+  <li class="method">
+    <a href="Capistrano/VersionValidator.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::VersionValidator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Filter.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Filter</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables/ValidatedQuestion.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables::ValidatedQuestion</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-c-reset-21">::reset!</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers/Row.html#method-i-3C-3C">#&lt;&lt;</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers::Row</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-add_cmdline_filter">#add_cmdline_filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-add_filter">#add_filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-add_host">#add_host</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-add_property">#add_property</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-add_role">#add_role</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-add_role">#add_role</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-add_roles">#add_roles</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-after">#after</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/GemsDoctor.html#method-i-all_gem_names">#all_gem_names</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::GemsDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-any-3F">#any?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/RoleWhitespaceChecker.html#method-i-any_has_whitespace-3F">#any_has_whitespace?</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::RoleWhitespaceChecker</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-append">#append</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-archive_to_release_path">#archive_to_release_path</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-archive_to_release_path">#archive_to_release_path</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-archive_to_release_path">#archive_to_release_path</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-ask">#ask</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-ask_question">#ask_question</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables.html#method-i-assert_valid_later">#assert_valid_later</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables.html#method-i-assert_valid_now">#assert_valid_now</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Stages.html#method-i-assert_valid_stage_names">#assert_valid_stage_names</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Stages</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables.html#method-i-assert_value_or_block_not_both">#assert_value_or_block_not_both</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Env.html#method-i-asset_timestamp">#asset_timestamp</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Env</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-asset_timestamp">#asset_timestamp</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/VersionValidator.html#method-i-available">#available</a>
+    &mdash;
+    <span class="container">Capistrano::VersionValidator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-backend">#backend</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Plugin.html#method-i-backend">#backend</a>
+    &mdash;
+    <span class="container">Capistrano::Plugin</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-backtrace_pattern">#backtrace_pattern</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-before">#before</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-built_in_scm_name-3F">#built_in_scm_name?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-built_in_scm_plugin_class_name">#built_in_scm_plugin_class_name</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-calculate_column_widths">#calculate_column_widths</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/EnvironmentDoctor.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::EnvironmentDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/VariablesDoctor.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::VariablesDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables/ValidatedQuestion.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables::ValidatedQuestion</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/GemsDoctor.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::GemsDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor.html#method-i-call">#call</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/ProcHelpers.html#method-i-callable_without_parameters-3F">#callable_without_parameters?</a>
+    &mdash;
+    <span class="container">Capistrano::ProcHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-capfile">#capfile</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-check">#check</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-check_repo_is_reachable">#check_repo_is_reachable</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-check_repo_is_reachable">#check_repo_is_reachable</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-check_repo_is_reachable">#check_repo_is_reachable</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-clone">#clone</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-clone_repo">#clone_repo</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-clone_repo">#clone_repo</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-clone_repo">#clone_repo</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-cmdline_filters">#cmdline_filters</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-collect_rows">#collect_rows</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-color">#color</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-configure_backend">#configure_backend</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-configure_scm">#configure_scm</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-configure_sshkit_output">#configure_sshkit_output</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/GemsDoctor.html#method-i-core_gem_names">#core_gem_names</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::GemsDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-current_path">#current_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/VersionValidator.html#method-i-current_version">#current_version</a>
+    &mdash;
+    <span class="container">Capistrano::VersionValidator</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-default_tasks">#default_tasks</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-define_remote_file_task">#define_remote_file_task</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-define_tasks">#define_tasks</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-define_tasks">#define_tasks</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/Plugin.html#method-i-define_tasks">#define_tasks</a>
+    &mdash;
+    <span class="container">Capistrano::Plugin</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-define_tasks">#define_tasks</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-delete">#delete</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-deploy_config_path">#deploy_config_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-deploy_path">#deploy_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-deploy_to">#deploy_to</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-deploying-3F">#deploying?</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-display_error_message">#display_error_message</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-dry_run">#dry_run</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-dry_run-3F">#dry_run?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-each">#each</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-echo-3F">#echo?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/ImmutableTask.html#method-i-enhance">#enhance</a>
+    &mdash;
+    <span class="container">Capistrano::ImmutableTask</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-ensure_stage">#ensure_stage</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Env.html#method-i-env">#env</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Env</span>
+
+  <li class="method">
+    <a href="Capistrano/Plugin.html#method-i-eval_rakefile">#eval_rakefile</a>
+    &mdash;
+    <span class="container">Capistrano::Plugin</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-execute">#execute</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-exit_because_of_exception">#exit_because_of_exception</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-exit_deploy_because_of_exception">#exit_deploy_because_of_exception</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-extract_options">#extract_options</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-fetch">#fetch</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-fetch">#fetch</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-fetch">#fetch</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-fetch_for">#fetch_for</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-fetch_primary">#fetch_primary</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-fetch_revision">#fetch_revision</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-fetch_revision">#fetch_revision</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-fetch_revision">#fetch_revision</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-fetch_revision">#fetch_revision</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/EmptyFilter.html#method-i-filter">#filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::EmptyFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Filter.html#method-i-filter">#filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Filter</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/RoleFilter.html#method-i-filter">#filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::RoleFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/NullFilter.html#method-i-filter">#filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::NullFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/HostFilter.html#method-i-filter">#filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::HostFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-filter">#filter</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/RoleWhitespaceChecker.html#method-i-find_whitespace_roles">#find_whitespace_roles</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::RoleWhitespaceChecker</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-gets">#gets</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-git">#git</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-handle_options">#handle_options</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-has_role-3F">#has_role?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-hg">#hg</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-hostfilter">#hostfilter</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/RoleWhitespaceChecker.html#method-i-include_whitespace-3F">#include_whitespace?</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::RoleWhitespaceChecker</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/VariablesDoctor.html#method-i-inspect_all_values">#inspect_all_values</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::VariablesDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/PluginInstaller.html#method-i-install">#install</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::PluginInstaller</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-install_plugin">#install_plugin</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/GemsDoctor.html#method-i-installed_gem_version">#installed_gem_version</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::GemsDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-installer">#installer</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-invoke">#invoke</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-is_question-3F">#is_question?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-join_paths">#join_paths</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-keys">#keys</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-keys">#keys</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-linked_dir_parents">#linked_dir_parents</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-linked_dirs">#linked_dirs</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-linked_file_dirs">#linked_file_dirs</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-linked_files">#linked_files</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-load_built_in_scm">#load_built_in_scm</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-load_imports">#load_imports</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-load_legacy_scm_by_name">#load_legacy_scm_by_name</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-local_user">#local_user</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/VariablesDoctor.html#method-i-location">#location</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::VariablesDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-lock">#lock</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-lvalue">#lvalue</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-map_dirnames">#map_dirnames</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/VersionValidator.html#method-i-match-3F">#match?</a>
+    &mdash;
+    <span class="container">Capistrano::VersionValidator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-matches-3F">#matches?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-method_missing">#method_missing</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-name">#name</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/UploadTask.html#method-i-needed-3F">#needed?</a>
+    &mdash;
+    <span class="container">Capistrano::UploadTask</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-netssh_options">#netssh_options</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-now">#now</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-on">#on</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-peek">#peek</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/GemsDoctor.html#method-i-plugin_gem_names">#plugin_gem_names</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::GemsDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/ServerDecorator.html#method-i-pretty_inspect">#pretty_inspect</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::ServerDecorator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-primary">#primary</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-primary">#primary</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-print_config_variables">#print_config_variables</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-print_deprecation_warnings_if_applicable">#print_deprecation_warnings_if_applicable</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-properties">#properties</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/ServerDecorator.html#method-i-properties">#properties</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::ServerDecorator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/PluginInstaller.html#method-i-provides_scm-3F">#provides_scm?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::PluginInstaller</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-puts">#puts</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-question">#question</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/RoleFilter.html#method-i-regex_matcher">#regex_matcher</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::RoleFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/HostFilter.html#method-i-regex_matcher">#regex_matcher</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::HostFilter</span>
+
+  <li class="method">
+    <a href="Capistrano/Plugin.html#method-i-register_hooks">#register_hooks</a>
+    &mdash;
+    <span class="container">Capistrano::Plugin</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-register_hooks">#register_hooks</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-register_hooks">#register_hooks</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-register_hooks">#register_hooks</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-register_legacy_scm_hooks">#register_legacy_scm_hooks</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-release">#release</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-release_path">#release_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-release_path">#release_path</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Env.html#method-i-release_roles">#release_roles</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Env</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Env.html#method-i-release_timestamp">#release_timestamp</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Env</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-releases_path">#releases_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-remember_location">#remember_location</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-remove">#remove</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-repo_mirror_exists-3F">#repo_mirror_exists?</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-repo_mirror_exists-3F">#repo_mirror_exists?</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-repo_mirror_exists-3F">#repo_mirror_exists?</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-repo_path">#repo_path</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-repo_path">#repo_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-repo_url">#repo_url</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-repo_url">#repo_url</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/VersionValidator.html#method-i-requested">#requested</a>
+    &mdash;
+    <span class="container">Capistrano::VersionValidator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-resolve">#resolve</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-respond_to_missing-3F">#respond_to_missing?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-response">#response</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-revision_log">#revision_log</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-revision_log_message">#revision_log_message</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-role">#role</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Env.html#method-i-role_properties">#role_properties</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Env</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-role_properties_for">#role_properties_for</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-role_properties_for">#role_properties_for</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/ServerDecorator.html#method-i-roles">#roles</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::ServerDecorator</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-roles">#roles</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-roles">#roles</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Env.html#method-i-roles">#roles</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Env</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-roles-3D">#roles=</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-roles_array">#roles_array</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-roles_for">#roles_for</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-roles_for">#roles_for</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-rollback_log_message">#rollback_log_message</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-run">#run</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-run_locally">#run_locally</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-scm">#scm</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Plugin.html#method-i-scm-3F">#scm?</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Plugin</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/PluginInstaller.html#method-i-scm_installed-3F">#scm_installed?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::PluginInstaller</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-scm_name">#scm_name</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-scm_plugin_installed-3F">#scm_plugin_installed?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-select-3F">#select?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-server">#server</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Servers.html#method-i-servers">#servers</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Servers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-servers">#servers</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables.html#method-i-set">#set</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-set">#set</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-set">#set</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Plugin.html#method-i-set_defaults">#set_defaults</a>
+    &mdash;
+    <span class="container">Capistrano::Plugin</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-set_defaults">#set_defaults</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-set_if_empty">#set_if_empty</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-set_release_path">#set_release_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-setup_filters">#setup_filters</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-shared_path">#shared_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-sort_options">#sort_options</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-source_locations">#source_locations</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Paths.html#method-i-stage_config_path">#stage_config_path</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Paths</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Stages.html#method-i-stage_definitions">#stage_definitions</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Stages</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Stages.html#method-i-stage_set-3F">#stage_set?</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Stages</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL/Stages.html#method-i-stages">#stages</a>
+    &mdash;
+    <span class="container">Capistrano::DSL::Stages</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-sudo">#sudo</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/VariablesDoctor.html#method-i-suspicious_keys">#suspicious_keys</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::VariablesDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-svn">#svn</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/DSL.html#method-i-t">#t</a>
+    &mdash;
+    <span class="container">Capistrano::DSL</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-table">#table</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/TaskEnhancements.html#method-i-tasks_without_stage_dependency">#tasks_without_stage_dependency</a>
+    &mdash;
+    <span class="container">Capistrano::TaskEnhancements</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-test">#test</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-test-21">#test!</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-third_party_scm_name-3F">#third_party_scm_name?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration.html#method-i-timestamp">#timestamp</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-title">#title</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server/Properties.html#method-i-to_h">#to_h</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server::Properties</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-top_level_tasks">#top_level_tasks</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-trace_set">#trace_set</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-trusted-3F">#trusted?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-trusted_keys">#trusted_keys</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-untrusted-21">#untrusted!</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-untrusted_keys">#untrusted_keys</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Variables.html#method-i-unused_keys">#unused_keys</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Variables</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM.html#method-i-update">#update</a>
+    &mdash;
+    <span class="container">Capistrano::SCM</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/GemsDoctor.html#method-i-update_available-3F">#update_available?</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::GemsDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Hg.html#method-i-update_mirror">#update_mirror</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Hg</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Svn.html#method-i-update_mirror">#update_mirror</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Svn</span>
+
+  <li class="method">
+    <a href="Capistrano/SCM/Git.html#method-i-update_mirror">#update_mirror</a>
+    &mdash;
+    <span class="container">Capistrano::SCM::Git</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/ServerDecorator.html#method-i-uri_form">#uri_form</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::ServerDecorator</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-using_default_scm-3F">#using_default_scm?</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/ValidatedVariables.html#method-i-validate">#validate</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::ValidatedVariables</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Question.html#method-i-value_or_default">#value_or_default</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Question</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/VariablesDoctor.html#method-i-variables">#variables</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::VariablesDoctor</span>
+
+  <li class="method">
+    <a href="Capistrano/VersionValidator.html#method-i-verify">#verify</a>
+    &mdash;
+    <span class="container">Capistrano::VersionValidator</span>
+
+  <li class="method">
+    <a href="Capistrano/Application.html#method-i-version">#version</a>
+    &mdash;
+    <span class="container">Capistrano::Application</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-warn_add_git_to_capfile">#warn_add_git_to_capfile</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-warn_set_scm_is_deprecated">#warn_set_scm_is_deprecated</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/SCMResolver.html#method-i-warn_third_party_scm_must_be_upgraded">#warn_third_party_scm_must_be_upgraded</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::SCMResolver</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers.html#method-i-warning">#warning</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/ServersDoctor/RoleWhitespaceChecker.html#method-i-whitespace_roles_decorated">#whitespace_roles_decorated</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::ServersDoctor::RoleWhitespaceChecker</span>
+
+  <li class="method">
+    <a href="Capistrano/Configuration/Server.html#method-i-with">#with</a>
+    &mdash;
+    <span class="container">Capistrano::Configuration::Server</span>
+
+  <li class="method">
+    <a href="Capistrano/Doctor/OutputHelpers/Row.html#method-i-yellow">#yellow</a>
+    &mdash;
+    <span class="container">Capistrano::Doctor::OutputHelpers::Row</span>
+</ul>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

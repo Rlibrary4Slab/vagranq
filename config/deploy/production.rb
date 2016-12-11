@@ -12,6 +12,7 @@ server '52.197.133.116', user: 'ec2-user', roles: %w{app db web},password: "ranq
 
 set :ssh_options, {
 	keys:[File.expand_path('C:\.ssh\keypareRanq.pem')]
+	#keys:[File.expand_path('/home/vagrant/.ssh')]
 }
 #set :ssh_options, keys: '~/.ssh/keypareRanq.pem'
 
