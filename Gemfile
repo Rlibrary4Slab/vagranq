@@ -24,7 +24,9 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to', '~> 1.1.1'
+  gem "mysql2"
 end
+
 
 group :test do
   gem 'minitest-reporters', '1.0.5'
@@ -79,4 +81,4 @@ gem 'pace-rails'
 gem "active_attr"
 gem 'jcrop-rails-v2'
 gem 'jquery-ui-rails'
-#
+
