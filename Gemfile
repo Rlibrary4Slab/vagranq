@@ -12,7 +12,7 @@ gem 'jquery-rails', '4.0.3'
 gem 'turbolinks',   '2.3.0'
 gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
-
+gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'twitter-bootstrap-rails'
 group :development, :test do
   #gem 'sqlite3',     '1.3.9'
@@ -24,7 +24,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to', '~> 1.1.1'
-  gem "mysql2", "~>0.3.20"
+  
 end
 
 
