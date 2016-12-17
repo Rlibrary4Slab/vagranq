@@ -19,12 +19,12 @@ group :development, :test do
   #gem 'byebug',      '3.4.0'
   #gem 'web-console', '2.0.0.beta3'
   #gem 'spring',      '1.1.3'
-  gem 'capistrano'
+  gem 'capistrano' , "3.7.0"
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to', '~> 1.1.1'
-  gem "mysql2", "0.3.18"
+  gem "mysql2", "~>0.3.18"
 end
 
 
