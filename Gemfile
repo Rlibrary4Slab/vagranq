@@ -24,7 +24,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to', '~> 1.1.1'
-  gem "mysql2"
+  gem "mysql2", "~>0.3.20"
 end
 
 
