@@ -87,7 +87,7 @@ production:
   encoding: utf8
   pool: 5
   database: ranqdeployer_production
-  host: 52.197.133.116
+  #host: 52.197.133.116
   username: root
   password:
   socket: /var/lib/mysql/mysql.sock
