@@ -40,13 +40,11 @@ group :production do
   gem 'rails_12factor', '0.0.2'
 
 end
-platforms :ruby do
-	group :production,:staging do
-	  gem 'unicorn'
-	  gem "rmagick"
-          gem 'therubyracer'
-          gem 'execjs' 
-	end
+group :production,:staging do
+  gem 'unicorn'
+  gem "rmagick"
+  gem 'therubyracer'
+  gem 'execjs' 
 end
 gem 'ransack'
   gem 'transpose'
