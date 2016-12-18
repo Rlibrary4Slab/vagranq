@@ -24,7 +24,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to', '~> 1.1.1'
-  
+  gem 'capistrano-faster-assets'
 end
 
 
