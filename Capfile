@@ -33,5 +33,6 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets' 
 require 'capistrano/faster_assets'
 require 'capistrano/rails/migrations'
+require 'lib/capistrano/tasks'
 #Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
 Dir.glob("lib/capistrano/tasks/*.cap").each { |r| import r }
