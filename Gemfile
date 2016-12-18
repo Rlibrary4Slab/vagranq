@@ -8,6 +8,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'sass-rails',   '5.0.2'
 gem 'uglifier',     '2.5.3'
 gem 'coffee-rails', '4.1.0'
+gem 'sprockets'
 gem 'jquery-rails', '4.0.3'
 gem 'turbolinks',   '2.3.0'
 gem 'jbuilder',     '2.2.3'
@@ -43,7 +44,8 @@ platforms :ruby do
 	group :production,:staging do
 	  gem 'unicorn'
 	  gem "rmagick"
-      gem 'therubyracer' 
+          gem 'therubyracer'
+          gem 'execjs' 
 	end
 end
 gem 'ransack'
