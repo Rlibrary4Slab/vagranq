@@ -12,12 +12,10 @@
 //
 //= require jquery
 //= require jquery-selection
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require jquery.Jcrop
 //= require twitter/bootstrap
 //= require jquery.infinitescroll
 //= require ckeditor/init
-//= require bootstrap
 //= require_tree .

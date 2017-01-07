@@ -81,4 +81,4 @@ gem 'pace-rails'
 gem "active_attr"
 gem 'jcrop-rails-v2'
 gem 'jquery-ui-rails'
-
+gem 'closure-compiler'
