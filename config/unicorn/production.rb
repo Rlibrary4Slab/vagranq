@@ -10,7 +10,7 @@
   $pid     = File.expand_path 'tmp/pids/unicorn.pid', $app_dir
 #エラーログを吐き出すファイルのディレクトリ
   $std_log = File.expand_path 'log/unicorn.log', $app_dir
-
+  config.assets.compile = true
 # 上記で設定したものが適応されるよう定義
   worker_processes  $worker
   working_directory $app_dir
