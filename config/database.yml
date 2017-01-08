@@ -48,7 +48,7 @@ default: &default
 
 development:
   <<: *default
-  database: ranqdeployer_development
+  database: vagranq_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -86,7 +86,7 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  database: ranqdeployer_production
+  database: vagranq_production
   #host: 52.197.133.116
   username: root
   password:
