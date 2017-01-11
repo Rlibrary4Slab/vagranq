@@ -1,9 +1,10 @@
 class ArticlesController < AuthorizedController
+#class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
   impressionist actions: [:show]
-  before_action :pvranking
+  #before_action :pvranking
   add_breadcrumb "RanQ", :root_path
   
     def pvranking

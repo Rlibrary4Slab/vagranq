@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20161029111111) do
     t.integer  "category",     limit: 4
     t.string   "title",        limit: 255
     t.text     "description",  limit: 65535
-    t.string   "eyecatch_img", limit: 255
+    t.text     "eyecatch_img", limit: 65535
     t.integer  "user_id",      limit: 4
     t.string   "aasm_state",   limit: 255
     t.datetime "created_at",                 null: false

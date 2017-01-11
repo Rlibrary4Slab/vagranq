@@ -12,6 +12,7 @@ regz=new RegExp('^cke_article_contents_attributes_([0-9+])_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+])_title$')
 
 $(window).on "load" , ->
+  console.log("load") 
   $('fieldset div').each ->
     if z=$(this).prop('id').match(regz)
         ##console.log(z[1]+":"+$(this).val()) 
@@ -19,7 +20,8 @@ $(window).on "load" , ->
         #console.log("ロード="+aaaa)
   $("div#s_article_thumbnail").each ->
     arth++
-    if document.getElementById("s_eyecatch_img:nth-child("+arth+")").naturalWidth < document.getElementById("s_eyecatch_img:nth-child("+arth+")").naturalHeight
+    console.log("arth"+arth)
+    if document.getElementById("s_eyecatch_img:nth-child("+arth+")").width() < document.getElementById("s_eyecatch_img:nth-child("+arth+")").height()
       $("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
     $(".s_article_thumbnail").css("display":"")
   console.log($("#article_title").val())  
@@ -52,6 +54,16 @@ $(document).on 'ready page:load', ->
     #console.log(dsds)
   #  $("#user_user_name").val(dsds).change()  
   #  return
+  $("div#s_article_thumbnail").each ->
+    arth++
+    console.log("arth"+arth)
+    if document.getElementById("s_eyecatch_img:nth-child("+arth+")").width() < document.getElementById("s_eyecatch_img:nth-child("+arth+")").height()
+      $("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
+    $(".s_article_thumbnail").css("display":"")
+  console.log($("#article_title").val())
+  #if $("#article_title").val() != null
+  $('#spsubmit').click()
+  
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
 $(document).on 'click', '.remove_fields', (event) ->
