@@ -27,7 +27,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app) do
-      invoke 'nginx:restart'
+      #invoke 'nginx:restart'
       invoke 'unicorn:restart'
     end
   end
