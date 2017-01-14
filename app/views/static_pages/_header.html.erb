@@ -30,12 +30,14 @@
         </a>
             
         <ul class="dropdown-menu">
-          <li><span><%= link_to current_user.user_name, current_user %></span></br><p>マイページ</p></li>
-          <li><%= link_to "ユーザー情報変更", edit_settings_profiles_path%></li>
+          <li>マイページ</li>
+          <li><%= link_to current_user.user_name, current_user %></li>
+          <div id="users_use" ><li><%= link_to "ユーザー情報変更", edit_settings_profiles_path%></li>
           <li class="divider"></li>
           <li>
             <%= link_to "ログアウト",destroy_user_session_path, method: "delete" %>
           </li>
+          </div>
         </ul>
       </li>
     </ul>

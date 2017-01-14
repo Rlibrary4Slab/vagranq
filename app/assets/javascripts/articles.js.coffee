@@ -198,10 +198,10 @@ tsubmit=0
 
     
   
-
+iButtons=0;
 $(document).on 'click' ,->  
-  
-  
+ 
+  document.getElementById("csubmit").click()  
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
   #ample = parseInt(lad.replace("文字数: ",""))
   #ren = ample
@@ -352,9 +352,145 @@ $(document).on "click", ".tdsubmit", ->
    #$(".dsubmit").trigger("click")
    document.getElementById("tsubmit").click()  
    document.getElementById("dsubmit").click()  
-   $("#tsubmit").each ->
-     console.log("each")
+   #$("#tsubmit").each ->
+   #  console.log("each")
+
+
+
+$(document).on "click" , ".pup", ->
+  console.log("pup")
+  inpup=$(this).parents('fieldset').children().eq(1).children().children().attr("id")
+  idNum=0
+  console.log(inpup)
+  rep1 = inpup.replace("_description_arialbl","")
+  rep2 = rep1.replace("cke_article_contents_attributes_","")
+  console.log(rep2+"!!rep2")
+  #console.log("スイッチ="+aaaa)
+  aaaa=0
+  ##console.log(ls1+"/"+ls2)
+  cccc=0
+  dddd=0
+  red=0
+  maxf=0
+  rept11=$("input#article_contents_attributes_"+rep2+"_title").val() #ls0=name0 ls1=name1 ls2=name2 ls3=name3
+  console.log("rept11"+rept11)
+  rept12=$("input#article_contents_attributes_"+(rep2-1)+"_title").val()
+  console.log("rept12"+rept12)
+  $("input#article_contents_attributes_"+rep2+"_title").val(rept12)
+  $("p#article_contents_attributes_"+rep2+"_title").html(rept12)
+     #console.log("jif"+$("#article_contents_attributes_"+j+"_title").val(tmp))
+  $("input#article_contents_attributes_"+(rep2-1)+"_title").val(rept11)
+  $("p#article_contents_attributes_"+(rep2-1)+"_title").html(rept11)
+     #console.log("jif"+$("#article_contents_attributes_"+j+"_title").val(tmp))
+  
+   
+  #description
+  lab1=$("fieldset div#cke_article_contents_attributes_"+rep2+"_description div div iframe").contents().find("html body") #HTML場所取得
+  jam1=lab1.html()
+  tmp1=jam1
+  
+  lab2=$("fieldset div#cke_article_contents_attributes_"+(rep2-1)+"_description div div iframe").contents().find("html body") #HTML場所取得
+  jam2=lab2.html()
+  tmp2=jam2
+  
+  kml1=$("fieldset div#cke_article_contents_attributes_"+rep2+"_description div div iframe").contents().find("html body")
+  kml1.html(tmp2)
+  $("div#article_contents_attributes_"+rep2+"_description").html(tmp2)
+  
+  kml2=$("fieldset div#cke_article_contents_attributes_"+(rep2-1)+"_description div div iframe").contents().find("html body")
+  kml2.html(tmp1)
+  $("div#article_contents_attributes_"+(rep2-1)+"_description").html(tmp1)
+
+$(document).on "click", ".pdown", ->
+  console.log("pdown")
+  inpup=$(this).parents('fieldset').children().eq(1).children().children().attr("id")
+  idNum=0
+  console.log(inpup)
+  rep1 = inpup.replace("_description_arialbl","")
+  rep2 = rep1.replace("cke_article_contents_attributes_","")
+  console.log(rep2+"!!rep2")
+  aaaa=0
+  cccc=0
+  dddd=0
+  red=0
+  maxf=0
+  rept11=$("input#article_contents_attributes_"+rep2+"_title").val() #ls0=name0 ls1=name1 ls2=name2 ls3=name3
+  console.log("rept11"+rept11)
+  console.log("rep2+1="+(Number(rep2)+1)) 
+  rept12=$("input#article_contents_attributes_"+(Number(rep2)+1)+"_title").val()
+  
+  console.log("rept12"+rept12)
+  $("input#article_contents_attributes_"+rep2+"_title").val(rept12)
+  $("p#article_contents_attributes_"+rep2+"_title").html(rept12)
+     #console.log("jif"+$("#article_contents_attributes_"+j+"_title").val(tmp))
+  $("input#article_contents_attributes_"+(Number(rep2)+1)+"_title").val(rept11)
+  $("p#article_contents_attributes_"+(Number(rep2)+1)+"_title").html(rept11)
+     #console.log("jif"+$("#article_contents_attributes_"+j+"_title").val(tmp))
+
+  #description
+  lab1=$("fieldset div#cke_article_contents_attributes_"+rep2+"_description div div iframe").contents().find("html body") #HTML場所取得
+  jam1=lab1.html()
+  tmp1=jam1
+
+  lab2=$("fieldset div#cke_article_contents_attributes_"+(Number(rep2)+1)+"_description div div iframe").contents().find("html body") #HTML場所取得
+  jam2=lab2.html()
+  tmp2=jam2
+
+  kml1=$("fieldset div#cke_article_contents_attributes_"+rep2+"_description div div iframe").contents().find("html body")
+  kml1.html(tmp2)
+  $("div#article_contents_attributes_"+rep2+"_description").html(tmp2)
+
+  kml2=$("fieldset div#cke_article_contents_attributes_"+(Number(rep2)+1)+"_description div div iframe").contents().find("html body")
+  kml2.html(tmp1)
+  $("div#article_contents_attributes_"+(Number(rep2)+1)+"_description").html(tmp1)
+
+$(document).on "click", "#csubmit", ->
+  
+  
+  idNum=0
+  #console.log("スイッチ="+aaaa)
+  aaaa=0
+  ##console.log(ls1+"/"+ls2)
+  cccc=0
+  dddd=0
+  red=0
+  maxf=0
+  titz=0
+  $('fieldset div input').each ->
+     $(".pup").css("display":"initial")
+     $(".pdown").css("display":"initial")
+     $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
+     if z=$(this).prop('id').match(regst)
+      titz=z[1]
+      console.log("titz="+titz)
+      
+       
+      ##console.log(z[1]+":"+$(this).val())
+      $this = $(this)
+      $parentDiv = $this.parents('fieldset')
+      aaaa=z[1]
+      #console.log("aaaa"+z[1])
+      if $parentDiv.css('display') == priorityStyle
+          red++
+          $this.removeAttr("id")
+          #console.log("ret="+red)
+          return true #これで、除外したいやつから抜らけれる
+
+      #cke_article_contents_attributes_idNum_description
+      $this.attr({id: "article_contents_attributes_"+idNum+"_title"})
+      #console.log("dancer"+$this.parents("fieldset").find(".afsubmit").find(".aft"))
+      $parentDiv.find(".afsubmits").find(".aft").attr({id: "article_contents_attributes_"+idNum+"_title"})
+      ##console.log("idNum"+idNum)
+      #dddd++
+      idNum++
+      #console.log("iba")
+      aaaa=z[1]
+      #$(".pup").css("display:none;")
+      #$(".pdown").css("display:none;")
+      #$(".pup").css("display":"none")
+   $("input#article_contents_attributes_"+titz+"_title").parents("fieldset").find(".pdown").css("display":"none")
 $(document).on "click", "#tsubmit", ->
+
   console.log("ts")
   idNum=0
   #console.log("スイッチ="+aaaa)
@@ -380,7 +516,7 @@ $(document).on "click", "#tsubmit", ->
           
       #cke_article_contents_attributes_idNum_description
       $this.attr({id: "article_contents_attributes_"+idNum+"_title"})
-      console.log("dancer"+$this.parents("fieldset").find(".afsubmit").find(".aft"))
+      #console.log("dancer"+$this.parents("fieldset").find(".afsubmit").find(".aft"))
       $parentDiv.find(".afsubmits").find(".aft").attr({id: "article_contents_attributes_"+idNum+"_title"})
       ##console.log("idNum"+idNum)
       #dddd++

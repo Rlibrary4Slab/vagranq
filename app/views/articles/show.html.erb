@@ -39,8 +39,12 @@
       <ul class="user_like">
         <li class="user"><%= @article.user.name %></li>
         <li class="like">
+         <% if logged_in? %>
           <%= render 'likes/like_links', article: @article %>
-        </li>
+         <% elsif %>
+           <%= link_to "いいね",new_user_path %>
+         <% end %>
+         </li>
         
         <li>
             <%= link_to @article.likes.count, liking_users_article_path(@article.id), id: "like-count" %>
