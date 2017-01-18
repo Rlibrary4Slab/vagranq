@@ -13,6 +13,13 @@
    
    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.text_field :eyecatch_img, :style =>"display:none;" ,:id => "eyecatch_img"%>
+    <span class="hiddenButtons" value="隠す">
+     <input type="button" class="tdsubmit" style="margin:20px 40px;"value="交換">
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+     </div>
+    </span>
     <div class="field">
       <%= f.select :category ,Article.categories.keys.to_a%></div>
     <div class="field">
