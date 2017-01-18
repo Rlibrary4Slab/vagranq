@@ -6,7 +6,7 @@
 aaaa=0
 
 arth=0
- 
+arlt=0 
 
 regz=new RegExp('^cke_article_contents_attributes_([0-9+])_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+])_title$')
@@ -18,13 +18,21 @@ $(window).on "load" , ->
         ##console.log(z[1]+":"+$(this).val()) 
         aaaa=z[1]
         #console.log("ロード="+aaaa)
-  $("div#s_article_thumbnail").each ->
+  $("div.s_article_thumbnail").each ->
     arth++
     console.log("arth"+arth)
-    if document.getElementById("s_eyecatch_img:nth-child("+arth+")").width() < document.getElementById("s_eyecatch_img:nth-child("+arth+")").height()
-      $("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
+    #if document.getElementById("s_eyecatch_img:nth-child("+arth+")").width() > document.getElementById("s_eyecatch_img:nth-child("+arth+")").height()
+    thisimg = $(this)
+    #console.log(thisimg.html())
+    thichil = $(this).children().eq(1)
+    console.log("nW"+thichil.naturalheight)
+    if thichil.naturalWidth < thichil.naturalHeight
+       #console.log("ifarth")
+       thichil.css("height":"auto","width":"100%")
+       #$("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
+
     $(".s_article_thumbnail").css("display":"")
-  console.log($("#article_title").val())  
+  #console.log($("#article_title").val())  
   #if $("#article_title").val() != null
   $('#spsubmit').click()
   
@@ -39,9 +47,9 @@ jam=[]
 
   
 $(document).on 'ready page:load', ->
-  #console.log("どくめんｔ")
-  if document.getElementById("s_eyecatch_img").naturalWidth < document.getElementById("s_eyecatch_img").naturalHeight
-    $(".s_eyecatch_img").css("height":"auto","width":"100%")
+  console.log("どくめんｔ"+arth)
+  #if document.getElementById("s_eyecatch_img").naturalWidth() < document.getElementById("s_eyecatch_img").naturalHeight()
+  #  $(".s_eyecatch_img").css("height":"auto","width":"100%")
   $(".s_article_thumbnail").css("display":"")
   $('fieldset div').each ->
     if z=$(this).prop('id').match(regz)
@@ -54,12 +62,12 @@ $(document).on 'ready page:load', ->
     #console.log(dsds)
   #  $("#user_user_name").val(dsds).change()  
   #  return
-  $("div#s_article_thumbnail").each ->
-    arth++
-    console.log("arth"+arth)
-    if document.getElementById("s_eyecatch_img:nth-child("+arth+")").width() < document.getElementById("s_eyecatch_img:nth-child("+arth+")").height()
-      $("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
-    $(".s_article_thumbnail").css("display":"")
+  $("div.s_article_thumbnail").each ->
+    #arth++
+    #console.log("arth"+arth)
+    #if document.getElementById("s_eyecatch_img:nth-child("+arth+")").width < document.getElementById("s_eyecatch_img:nth-child("+arth+")").height
+     # $("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
+    #$(".s_article_thumbnail").css("display":"")
   console.log($("#article_title").val())
   #if $("#article_title").val() != null
   $('#spsubmit').click()
@@ -200,8 +208,11 @@ tsubmit=0
   
 iButtons=0;
 $(document).on 'click' ,->  
+  #console.log($(this).naturalWidth) 
+  if $("#csubmit").length ==1 
+
  
-  document.getElementById("csubmit").click()  
+   document.getElementById("csubmit").click()  
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
   #ample = parseInt(lad.replace("文字数: ",""))
   #ren = ample

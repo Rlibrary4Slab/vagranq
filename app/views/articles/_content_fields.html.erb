@@ -3,6 +3,13 @@
   <div class="ckeditors">
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, :class => 'form-control '%><br />
+    <span class="hiddenButtons" value="隠す">
+     <input type="button" class="tdsubmit" style="margin:0px 50px;"value="交換">
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+     </div>
+    </span>
     <%= f.label :description, "説明" %>
     <%= f.text_area :description, :class => 'form-control ckeditor' %><br />
   </div>
@@ -11,15 +18,19 @@
     <div class="afd"></div>
   </div>
   <%= link_to "削除", '#', class: "remove_fields"%>
-    <input type="button" class="tdsubmit" value="交換">
-    <div style="display:none;">
-      <input type="button" id="tsubmit" value="交換">
-      <input type="button" id="dsubmit" value="交換">
-    </div>
-   <input type="button" class="pup" value="上">
-   <input type="button" class="pdown" value="下">
-   <input type="button" id="csubmit" style="display:none;"> 
-    <input type="button" class="psubmit"  value="プレビュー">
-    <input type="button" style="display:none;" class="esubmit" value="編集">
+    <span class="hiddenButtons" value="隠す">
+     <!--
+     <input type="button" style="display:none;"class="tdsubmit" value="交換">
+     -->
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+     </div>
+     <input type="button" class="pup" value="上">
+     <input type="button" class="pdown" value="下">
+     <input type="button" id="csubmit" style="display:none;"> 
+     <input type="button" class="psubmit"  value="プレビュー">
+     <input type="button" style="display:none;" class="esubmit" value="編集">
+    </span>
     <%= f.hidden_field :position, class: :position %>
 </fieldset>
