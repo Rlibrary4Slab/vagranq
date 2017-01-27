@@ -4,10 +4,10 @@ class Article < ActiveRecord::Base
     has_many :likes, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user
     is_impressionable
-    #validates :title, presence: true
-    #validates :description,presence: true
+    validates :title, presence: true
+    validates :description,presence: true
     validates :user_id, presence: true
-    #validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "カテゴリが選択されていません"} ,presence: true 
+    validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "カテゴリが選択されていません"} ,presence: true 
     
     has_many :contents
     paginates_per 4
@@ -30,12 +30,38 @@ class Article < ActiveRecord::Base
             transitions :from => :published, :to => :draft
         end
     end
-    enum category: {"カテゴリを選択してください":10 ,"ファッション": 20, "ビューティー": 30, "ライフスタイル": 40,"グルメ": 50, "おでかけ": 60,"エンタメ": 70, "学び": 80,"アイテム": 90, "おもしろ": 100, "その他": 110} 
+    enum category: {"カテゴリを選択してください":10 ,"ファッション": 20, "美容健康": 30, "おでかけ": 40,"グルメ": 50, "ライフスタイル": 60,"エンタメ": 70, "インテリア": 80, "ガジェット":90,"学び": 100, "おもしろ": 110} 
     
-    scope :get_by_category, ->(category) {
-        where(category: category)
+    scope :fashion, ->(category) {
+        where(category: 20)
     }
-        
+    scope :beauty, ->(category){
+        where(category: 30)
+    }
+    scope :hangout, ->(category){
+        where(category: 40)
+    }
+    scope :gourmet, ->(category){
+        where(category: 50)
+    }
+    scope :lifestyle, ->(category){
+        where(category: 60)
+    }
+    scope :entertainment, ->(category){
+        where(category: 70)
+    }
+    scope :interior, ->(category){
+        where(category: 80)
+    }
+    scope :gadget, ->(category){
+        where(category: 90)
+    }
+    scope :learn, ->(category){
+        where(category: 100)
+    }
+    scope :funny, ->(category){
+        where(category: 110)
+    }
     scope :get_by_description, ->(description){
         where("description like?","%#{description}%")
     }

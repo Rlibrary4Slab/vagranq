@@ -40,16 +40,16 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   get 'allranking' => "articles#allranking"
   
-  get "cfashion" => "articles#cfashion"
-  get "cbeauty" => "articles#cbeauty"
-  get "clifestyle" => "articles#clifestyle"
-  get "cgourmet" => "articles#cgourmet"
-  get "changout" => "articles#changout"
-  get "centertainment" => "articles#centertainment"
-  get "cstudy" => "articles#cstudy"
-  get "citem" => "articles#citem"
-  get "cfunny" => "articles#cfunny"
-  get "cothers" => "articles#cothers"
+  get "fashion" => "articles#fashion"
+  get "beauty" => "articles#beauty"
+  get "hangout" => "articles#hangout"
+  get "gourmet" => "articles#gourmet"
+  get "lifestyle" => "articles#lifestyle"
+  get "entertainment" =>"articles#entertainment"
+  get "interior" => "articles#interior"
+  get "gadget" => "articles#gadget"
+  get "learn" => "articles#learn"
+  get "funny" => "articles#funny" 
   root 'static_pages#home'
   
   get   'login'   => 'sessions#new'

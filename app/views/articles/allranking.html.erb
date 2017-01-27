@@ -3,7 +3,7 @@
 <% breadcrumbs  %>
 <h1>Listing Articles</h1>
 
-<table>
+<!--<table>
   <thead>
     <tr>
       <th>Category</th>
@@ -17,7 +17,7 @@
 
   <tbody>
     <%  @rank.each do |article| %>
-      <tr>
+      <!--<tr>
         <td><%#= article.category %></td>
         <td><%= article.eyecatch_img.html_safe %></td>
         <td><%= article.title %></td>
@@ -28,10 +28,32 @@
         <td><%= link_to 'Edit', edit_article_path(article) %></td>
         <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-  </tbody>
+      -->
+       <div class="article_list_content clearfix">
+       <div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 75px;
+            height: 75px; overflow: hidden; background-color: #888; border: 1px solid #222; index:-1;">
+    
+          <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative; top: 50%; left: 50%; width: auto; height: auto; 
+                     -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%);" ,
+                     :class =>"s_eyecatch_img") ,article %>
+       </div>
+       <div class="article_list_text">
+      <p class="article_list_title"><%= link_to article.title.html_safe, article %></p>
+      <p class="article_list_lead"><%= article.description.html_safe %></p>
+
+      <div class="topcontent_user">
+       <!-- <a href="user.html"> -->
+        <%= link_to article.user.user_name, article.user %>
+       <!-- </a> -->
+       </div>
+
+       <span><%= article.impressionist_count %></span>View
+    </div>
+   </div> 
+   <% end %>
+<table>
+ <tbody>
+  <% render @rank %>
+ </tbody>
 </table>
-
-<br>
-
 <%#= link_to 'New Article', new_article_path %>

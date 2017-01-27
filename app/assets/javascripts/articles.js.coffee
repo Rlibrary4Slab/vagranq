@@ -47,6 +47,8 @@ jam=[]
 
   
 $(document).on 'ready page:load', ->
+  $("p img").css("height":"","width":"")
+
   console.log("どくめんｔ"+arth)
   #if document.getElementById("s_eyecatch_img").naturalWidth() < document.getElementById("s_eyecatch_img").naturalHeight()
   #  $(".s_eyecatch_img").css("height":"auto","width":"100%")
@@ -71,6 +73,9 @@ $(document).on 'ready page:load', ->
   console.log($("#article_title").val())
   #if $("#article_title").val() != null
   $('#spsubmit').click()
+
+$(".like a").on "click" , ->
+  console.log("like")
   
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
@@ -207,10 +212,13 @@ tsubmit=0
     
   
 iButtons=0;
+#$("img").css("height":"","width":"")
+#if $("#csubmit").length ==1
+#$("p img").css("height":"45px","width":"30px")
 $(document).on 'click' ,->  
   #console.log($(this).naturalWidth) 
   if $("#csubmit").length ==1 
-
+   console.log("csubmit")
  
    document.getElementById("csubmit").click()  
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
@@ -240,7 +248,7 @@ $(document).on 'click' ,->
   #else
   
   
-  #$('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
+  $('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
   #console.log(dsds)
   if $("#user_name").length <1 
     #console.log("log")
@@ -248,16 +256,18 @@ $(document).on 'click' ,->
     dsds=$("#user_name").val()
     $("#user_user_name").val(dsds).change() 
     #console.log("else")
-     
-  $('p img').css({"height":"28.2%","width":"100%"})
-  if $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val() != "" 
+  if $("#csubmit").length==1   
+   $('p img').css({"height":"28.2%","width":"100%"})
+  #if $("#csubmit").length==1
+
+   if $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val() != ""  
     $('p img').css({"height":"28.2%","width":"100%"})
     $('.cke_dialog_ui_button_ok').css("display":"")
     #console.log("textinput")
-  else
+   else
     $('.cke_dialog_ui_button_ok').css("display":"none")
     #console.log("null")
-  $('p img').css({"height":"28.2%","width":"100%"})
+   $('p img').css({"height":"28.2%","width":"100%"})
   $('fieldset div').each ->
     if z=$(this).prop('id').match(regz)
         ##console.log(z[1]+":"+$(this).val()) 
@@ -269,7 +279,7 @@ $(document).on 'click' ,->
   $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:first-child td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:first-child td div div div input').val("100%")
   $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:first-child td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:nth-child(2) td div div div input').val("100%")
   #$('.cke_btn_reset').click()
-  
+   
   eyeimg= $("div div div iframe").contents().find("html body p img")
   ym=eyeimg.first().prop("src")
   ##console.log("ym"+ym)

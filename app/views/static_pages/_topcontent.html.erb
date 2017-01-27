@@ -8,13 +8,31 @@
 <% @toprank.each do |article| %>
   <!-- topcontet_content -->
   <li class="topcontent_content topcontet_content_3">
-    <a href="content.html">
+    <!--<a href="content.html">-->
       <!--<img alt="記事タイトルが入ります" class="crop_image" height="245" src="image/image-1.jpg" width="350" />-->
-      <%= link_to article.eyecatch_img.html_safe, article , :style =>"height:245px; width:350px;"%>
-      <p class="article_list_title"><span><%= link_to article.title.html_safe, article %></p></span></p>
-    </a>
+      <%#= link_to article.eyecatch_img.html_safe, article , :style =>"height:245px; width:350px;"%>
+    <%#= image_tag article.eyecatch_img ,:style =>"height:245px; width:350px;" ,:class =>"crop_image" %>  
+    
+    <div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 350px;
+    height: 245px;
+    overflow: hidden;
+    background-color: #888;
+    border: 1px solid #222;
+    index:-1;">
+        <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
+    <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);                                            transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img") ,article %>  
+    </div> 
+   
+    <p class="article_list_title"><span><%= link_to article.title.truncate(5).html_safe, article %></p></span></p>
+    <!--</a>-->
     <p class="article_list_lead">
-      <%= article.description.html_safe %>
+      <%= article.description.truncate(5).html_safe %>
     </p>
     
     <div class="topcontent_user">

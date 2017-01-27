@@ -1,3 +1,4 @@
-$('#like-link').html('<%= escape_javascript(render("likes/like_links",article: @article  )) %>');
 $('#like-link').html('いいねを取り消しました！');
+$('#like-link').html('<%= escape_javascript(render("likes/like_links",article: @article  )) %>');
+
 $('#like-count').html('<%= @article.likes.count %>');

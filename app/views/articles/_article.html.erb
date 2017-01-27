@@ -37,7 +37,7 @@
     border: 1px solid #222;
     index:-1;">
         <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
-        <%= image_tag article.eyecatch_img ,:style =>" position: relative;
+        <%#= image_tag article.eyecatch_img ,:style =>" position: relative;
     top: 50%;
     left: 50%;
     width: auto;
@@ -45,22 +45,32 @@
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);" ,:id =>"s_eyecatch_img" %>
-      </div>
+      
+    <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);                                            transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img") ,article %>
+    </div></td>
     <div class="article_list_text">
 <td><%= link_to article.title ,article_path(article.id) %></td>
 <!--ここまで修正-->
   <td><%= article.description %></td>
   <td><%#= article.content %></td>
   <td><%= article.user.user_name %></td>
-  <td><%= article.aasm_state %></td>
+  <!--<td><%= article.aasm_state %></td>-->
   <td><%= article.likes.count %>人がいいね！といっています</td>
   <td><%= article.updated_at.strftime("%Y年%m月%d日　更新") %></td>
   
   
   <% if @user == current_user %>
-  <td><%= link_to 'Show', article %></td>
-  <td><%= link_to 'Edit', edit_article_path(article) %></td>
-  <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   <td><%= link_to 'Show', article %></td>
+   <td><%= link_to 'Edit', edit_article_path(article) %></td>
+   <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   <td><%= article.aasm_state %></td>
   <% end %>
+
  
 </tr>

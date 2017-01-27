@@ -24,7 +24,7 @@
     <div class="article_list_thumb" style="width:85px;">
     <a href="content.html" data-list-id="">
     <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" style="display:none;" class="crop_image" height="75" src="image/image-1.jpg" width="75" />
-    <%= image_tag article.eyecatch_img, :style =>"height:75px !important; width:75px !important;"%>
+    <%= link_to image_tag article.eyecatch_img, :style =>"height:75px !important; width:75px !important;"%>
     </a>
     </div>
     -->
@@ -34,29 +34,32 @@
     background-color: #888;
     border: 1px solid #222;
     index:-1;">
-        <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
-        <%= image_tag article.eyecatch_img ,:style =>" position: relative;
+    <!--
+    <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
+    <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
+    -->     
+    <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
     top: 50%;
     left: 50%;
     width: auto;
     height: auto;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img" %>
+    transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img") ,article %>
       </div>
     <div class="article_list_text">
-    <p class="article_list_title"><%= link_to article.title.html_safe, article %></p>
-    <p class="article_list_lead"><%= article.description.html_safe %></p>
+      <p class="article_list_title"><%= link_to article.title.html_safe, article %></p>
+      <p class="article_list_lead"><%= article.description.html_safe %></p>
 
-    <div class="topcontent_user">
-    <!-- <a href="user.html"> -->
-    <a><%= link_to article.user.user_name, article.user %></a>
-    <!-- </a> -->
-    </div>
+      <div class="topcontent_user">
+       <!-- <a href="user.html"> -->
+        <%= link_to article.user.user_name, article.user %>
+       <!-- </a> -->
+       </div>
     
-    <span><%= article.impressionist_count %></span>View
+       <span><%= article.impressionist_count %></span>View
     </div>
-    </div>
+   </div>
 <% end %>
 
     <%= paginate @articles %>

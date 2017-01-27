@@ -17,13 +17,13 @@
                 
                 <%=f.label :user_image,"ユーザー画像" %>
                 <%= image_tag current_user.user_image_url(:thumb)%>
-
+		<!--
                 <%=f.file_field :user_image %>
                 <%=f.label :header_image,"ヘッダー画像" %>
-
+		
                 <%= image_tag current_user.header_image_url(:thumb)%>
                 <%=f.file_field :header_image %>
-
+		-->
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <%= f.submit '更新する', class: 'btn btn-primary' %>

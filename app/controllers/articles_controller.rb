@@ -26,79 +26,79 @@ class ArticlesController < AuthorizedController
   end
   
   def allranking
-    @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id)) 
+    @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
+    #@rank = @rank.fashion params[:category] 
   end
   #categories
-  
-  def cfashion
+  def fashion
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "ファッション一覧", :cfashion_path
-    @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    add_breadcrumb "ファッション一覧", :fashion_path
+    @articles = Article.page(params[:page]).per(3).published
+    @articles = @articles.fashion params[:category] 
     
   end
   
-  def cbeauty
+  def beauty
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "ビューティ一覧", :cbeauty_path
+    add_breadcrumb "美容健康一覧", :beauty_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.beauty params[:category]
     
   end
-  def clifestyle
+  def hangout
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "ライフスタイル一覧", :clifestyle_path
+    add_breadcrumb "おでかけ一覧", :hangout_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.hangout params[:category]
     
   end
-  def cgourmet
+  def gourmet
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "グルメ一覧", :cgourmet_path
+    add_breadcrumb "グルメ一覧", :gourmet_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.gourmet params[:category]
     
   end
-  def changout
+  def lifestyle
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "おでかけ一覧", :changout_path
+    add_breadcrumb "ライフスタイル一覧", :lifestyle_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.lifestyle params[:category]
     
   end
-  def centertainment
+  def entertainment
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "エンタメ一覧", :centertainment_path
+    add_breadcrumb "エンタメ一覧", :entertainment_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.entertainment params[:category]
     
   end
-  def cstudy
+  def interior
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "学び一覧", :cstudy_path
+    add_breadcrumb "インテリア一覧", :interior_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.interior params[:category]
     
   end
-  def cbusiness
+  def gadget
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "アイテム一覧", :citem_path
+    add_breadcrumb "ガジェット一覧", :gadget_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.gadget params[:category]
     
   end
-  def cfunny
+  def learn
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "おもしろ一覧", :cfunny_path
+    add_breadcrumb "学び一覧", :learn_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.learn params[:category]
     
   end
-  def cothers
+  def funny
     add_breadcrumb "記事一覧", :articles_path
-    add_breadcrumb "その他一覧", :cothers_path
+    add_breadcrumb "おもしろ一覧", :funny_path
     @articles = Article.page(params[:page]).per(3).published 
-    @articles = @articles.get_by_category params[:category]
+    @articles = @articles.funny params[:category]
     
   end
   #categoriesend
@@ -115,34 +115,34 @@ class ArticlesController < AuthorizedController
   # GET /articles/1.json
   def show
     if @article.category == "ファッション"
-      add_breadcrumb @article.category, cfashion_path(category: 20)
+      add_breadcrumb @article.category, fashion_path
     end
-    if @article.category == "ビューティー"
-      add_breadcrumb @article.category, cbeauty_path(category: 30)
-    end
-    if @article.category == "ライフスタイル"
-      add_breadcrumb @article.category, clifestyle_path(category: 40)
-    end
-    if @article.category == "グルメ"
-      add_breadcrumb @article.category, cgourmet_path(category: 50)
+    if @article.category == "美容健康"
+      add_breadcrumb @article.category, beauty_path
     end
     if @article.category == "おでかけ"
-      add_breadcrumb @article.category, changout_path(category: 60)
+      add_breadcrumb @article.category, hungout_path
+    end
+    if @article.category == "グルメ"
+      add_breadcrumb @article.category, gourmet_path
+    end
+    if @article.category == "ライフスタイル"
+      add_breadcrumb @article.category, lifestyle_path
     end
     if @article.category == "エンタメ"
-      add_breadcrumb @article.category, centertainment_path(category: 70)
+      add_breadcrumb @article.category, entertainment_path
+    end
+    if @article.category == "インテリア"
+      add_breadcrumb @article.category, interior_path
+    end
+    if @article.category == "ガジェット"
+      add_breadcrumb @article.category, gadget_path
     end
     if @article.category == "学び"
-      add_breadcrumb @article.category, cstudy_path(category: 80)
-    end
-    if @article.category == "アイテム"
-      add_breadcrumb @article.category, citem_path(category: 90)
+      add_breadcrumb @article.category, learn_path
     end
     if @article.category == "おもしろ"
-      add_breadcrumb @article.category, cfunny_path(category: 100)
-    end
-    if @article.category == "その他"
-      add_breadcrumb @article.category, cothers_path(category: 110)
+      add_breadcrumb @article.category, funny_path
     end
     @likes = Like.where(article_id: params[:id])
     #add_breadcrumb @article.category
