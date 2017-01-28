@@ -17,9 +17,10 @@
                 
                 <%=f.label :user_image,"ユーザー画像" %>
                 <%= image_tag current_user.user_image_url(:thumb)%>
-		<!--
+		
                 <%=f.file_field :user_image %>
-                <%=f.label :header_image,"ヘッダー画像" %>
+                <!--
+		<%=f.label :header_image,"ヘッダー画像" %>
 		
                 <%= image_tag current_user.header_image_url(:thumb)%>
                 <%=f.file_field :header_image %>

@@ -265,7 +265,7 @@ $(document).on 'click' ,->
     $('.cke_dialog_ui_button_ok').css("display":"")
     #console.log("textinput")
    else
-    $('.cke_dialog_ui_button_ok').css("display":"none")
+    #$('.cke_dialog_ui_button_ok').css("display":"none")
     #console.log("null")
    $('p img').css({"height":"28.2%","width":"100%"})
   $('fieldset div').each ->

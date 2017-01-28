@@ -11,12 +11,19 @@
     <div class="afd"></div>
   </div>
   <%= link_to "削除", '#', class: "remove_fields"%>
+    <span class="hiddenButtons" value="隠す">
+    <!--
     <input type="button" class="tdsubmit" value="交換" style="display:none;">
+    -->
     <div style="display:none;">
       <input type="button" id="tsubmit" value="交換">
       <input type="button" id="dsubmit" value="交換">
     </div>
-    <input type="button" class="psubmit" id="psubmit" value="プレビュー" style="display:none;">
+    <input type="button" class="pup" value="上">
+    <input type="button" class="pdown" value="下">
+    <input type="button" id="csubmit" style="display:none;>
+    <input type="button" class="psubmit" value="プレビュー" style="display:none;">
     <input type="button" class="esubmit" value="編集">
+    </span>
     <%= f.hidden_field :position, class: :position %>
 </fieldset>
