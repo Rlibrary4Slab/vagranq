@@ -27,7 +27,9 @@ Rails.application.configure do
 }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
-
+  config.assets.precompile += Ckeditor.assets
+  config.assets.precompile += %w( ckeditor/* )
+  config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
