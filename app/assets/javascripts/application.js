@@ -17,7 +17,7 @@
 //= require jquery-ui.min
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
-//  ckeditor/init
+// require ckeditor/init
 //= require ckeditor-jquery
 //= require twitter/bootstrap
 //= require bootstrap
