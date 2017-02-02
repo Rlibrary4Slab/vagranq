@@ -10,7 +10,7 @@ arlt=0
 
 regz=new RegExp('^cke_article_contents_attributes_([0-9+])_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+])_title$')
-
+regtitle=new RegExp()
 $(window).on "load" , ->
   console.log("load") 
   $('fieldset div').each ->
@@ -35,8 +35,10 @@ $(window).on "load" , ->
   #console.log($("#article_title").val())  
   #if $("#article_title").val() != null
   $('#spsubmit').click()
-  
-  
+  if $("#csubmit").length ==1 && iButton==0
+   console.log("csubmit")
+   document.getElementById("csubmit").click() 
+  iButton++  
 red=0
 priorityStyle = 'none'
 idNum = 0
@@ -139,7 +141,7 @@ $(document).on "click" ,".psubmit", ->
   #console.log("salf"+salf)
   $(this).parents("fieldset").find(".afsubmits").css("display","")
   $(this).parents("fieldset").find(".psubmit").css("display","none")
-  $(this).parents("fieldset").find(".tdsubmit").css("display","none")
+  #$(this).parents("fieldset").find(".tdsubmit").css("display","none")
   $(this).parents("fieldset").find(".esubmit").css("display","")
   
   #$(".ckeditors").css("display","none")
@@ -174,12 +176,12 @@ $(document).on "click",".esubmit",->
 
   #$(".afsubmits").css("display","none")
   #$(".ckeditors").css("display","")
-  $(this).parents("fieldset").find(".tdsubmit").css("display","")
+  #$(this).parents("fieldset").find(".tdsubmit").css("display","")
   $(this).parents("fieldset").find(".ckeditors").css("display","")
   $(this).parents("fieldset").find(".afsubmits").css("display","none")
   $(this).parents("fieldset").find(".psubmit").css("display","")
   $(this).parents("fieldset").find(".esubmit").css("display","none")
-
+#0202
 
    #alert(sd)
 
@@ -211,16 +213,13 @@ tsubmit=0
 
     
   
-iButtons=0;
-#$("img").css("height":"","width":"")
-#if $("#csubmit").length ==1
-#$("p img").css("height":"45px","width":"30px")
+iButtons=0
 $(document).on 'click' ,->  
   #console.log($(this).naturalWidth) 
-  if $("#csubmit").length ==1 
-   console.log("csubmit")
- 
-   document.getElementById("csubmit").click()  
+  #if $("#csubmit").length ==1 
+   #console.log("csubmit")
+   #iButton++
+   #document.getElementById("csubmit").click()  
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
   #ample = parseInt(lad.replace("文字数: ",""))
   #ren = ample
@@ -299,13 +298,13 @@ $(document).on 'click', '.cke_btn_reset' ,->
 #').val("340")
     #$("table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input").val("322") 
     
-    if $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val() != "" 
+    #if $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val() != "" 
       
-      $('.cke_dialog_ui_button_ok').css("display":"")
-      #console.log("textinput")
-    else
-      $('.cke_dialog_ui_button_ok').css("display":"none")
-      #console.log("null")
+    #  $('.cke_dialog_ui_button_ok').css("display":"")
+    #  #console.log("textinput")
+    #else
+    #  $('.cke_dialog_ui_button_ok').css("display":"none")
+    #  #console.log("null")
   
     $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:nth-child(2) td div table tbody tr td div div div input').val("")
     
@@ -328,7 +327,7 @@ $(document).on 'click','.cke_button__image',->
   $("body div.cke_reset_all").css("display":"")
   $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
   #$('.cke_dialog_ui_button_ok').css("display":"none")
-  #$('.cke_btn_reset').remove()　こいつがonメソッドを消す
+  #$('.cke_btn_reset').remove()　こいつがonメソッドを消すkor
   if $('.cke_dialog_ui_hbox_first').has("a:nth-child(3)")
     $('.cke_dialog_ui_hbox_first').append('<a href="javascript:void(0)" tabindex="-1" title="サイズをリセット" class="cke_btn_reset" id="cke_213_btnResetSize" style="" role="button"><span class="cke_label">サイズをリセット</span></a>')
   else
@@ -376,9 +375,9 @@ $(document).on "click", ".tdsubmit", ->
    #$("#tsubmit").each ->
    #  console.log("each")
 
+$(document).on "click", ".pup", ->
+  
 
-
-$(document).on "click" , ".pup", ->
   console.log("pup")
   inpup=$(this).parents('fieldset').children().eq(1).children().children().attr("id")
   idNum=0
@@ -403,8 +402,7 @@ $(document).on "click" , ".pup", ->
   $("input#article_contents_attributes_"+(rep2-1)+"_title").val(rept11)
   $("p#article_contents_attributes_"+(rep2-1)+"_title").html(rept11)
      #console.log("jif"+$("#article_contents_attributes_"+j+"_title").val(tmp))
-  
-   
+ 
   #description
   lab1=$("fieldset div#cke_article_contents_attributes_"+rep2+"_description div div iframe").contents().find("html body") #HTML場所取得
   jam1=lab1.html()
@@ -460,7 +458,6 @@ $(document).on "click", ".pdown", ->
   kml1=$("fieldset div#cke_article_contents_attributes_"+rep2+"_description div div iframe").contents().find("html body")
   kml1.html(tmp2)
   $("div#article_contents_attributes_"+rep2+"_description").html(tmp2)
-
   kml2=$("fieldset div#cke_article_contents_attributes_"+(Number(rep2)+1)+"_description div div iframe").contents().find("html body")
   kml2.html(tmp1)
   $("div#article_contents_attributes_"+(Number(rep2)+1)+"_description").html(tmp1)
@@ -501,6 +498,7 @@ $(document).on "click", "#csubmit", ->
       $this.attr({id: "article_contents_attributes_"+idNum+"_title"})
       #console.log("dancer"+$this.parents("fieldset").find(".afsubmit").find(".aft"))
       $parentDiv.find(".afsubmits").find(".aft").attr({id: "article_contents_attributes_"+idNum+"_title"})
+      $parentDiv.find(".afsubmits").find(".afd").attr({id: "article_contents_attributes_"+idNum+"_description"})
       ##console.log("idNum"+idNum)
       #dddd++
       idNum++
