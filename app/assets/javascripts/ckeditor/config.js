@@ -8,13 +8,14 @@ CKEDITOR.editorConfig = function( config ) {
 	 config.language = 'ja';
 	 config.uiColor = '#AADC6E';
 	//config.ignoreEmptyParagraph = true;
-	//config.extraPlugins = 'wordcount';
-	config.extraPlugins = 'youtube';
+	config.extraPlugins = 'wordcount,youtube,notification';
+	//config.extraPlugins = 'youtube';
         config.toolbar = [["Image","Link","Youtube"]];	
+
 	config.wordcount = {
 	
 	    // Whether or not you want to show the Word Count
-	    //showWordCount: true,
+	    //WordCount: true,
 	
 	    // Whether or not you want to show the Char Count
 	    //showCharCount: false,
@@ -25,12 +26,12 @@ CKEDITOR.editorConfig = function( config ) {
 	    // Maximum allowed Char Count
 	    //maxCharCount: 10,
 	    showParagraphs: false,// 段落カウント表示する・しない
-		showWordCount: false, // 単語カウント表示する・しない
+	    showWordCount: false, // 単語カウント表示する・しない
 		showCharCount: true, // 文字数カウント表示する・しない
-		countSpacesAsChars: false,// スペースカウントする・しない
+		//countSpacesAsChars: false,// スペースカウントする・しない
 		countHTML: false, // HTMLタグカウントする・しない
 		maxWordCount: -1, // 最大単語数設定(無制限の場合は-1)
-		maxCharCount: -1// 最大文字数設定(無制限の場合は-1)
+		maxCharCount: -1  // 最大文字数設定(無制限の場合は-1)
 	    
 	};	
 };
