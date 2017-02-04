@@ -105,21 +105,15 @@ $(document).on 'click', '.remove_fields', (event) ->
 $(document).on 'click', '.add_fields', (event) ->
   #$('fieldset input[type=text]').each ->
      
-    #if z=$(this).prop('name').match(regst)
+    #if z=$(this).prop('name').match(regsd)
       
-      #console.log(z[1]+":"+$(this).val()) 
+      ##console.log(z[1]+":"+$(this).val()) 
       #aaaa=z[1]
       
   aaaa++
   console.log("addfielud:"+aaaa) 
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).before($(this).data('fields').replace(regexp, aaaa))
-  #$('fieldset input[type=text]').each ->
-
-    #if z=$(this).prop('id').match(regst)
-
-      #console.log(z[1]+":"+$(this).val())
-      #aaaa=z[1] 
   CKEDITOR.replaceAll()
   #document.getElementById("csubmit").click()
   event.preventDefault()
@@ -213,13 +207,12 @@ $(document).on 'click' ,->
   #if $("#csubmit").length ==1 
    #console.log("csubmit")
    #iButton++
-   #document.getElementById("csubmit").click()  
-  console.log("befaa:"+aaaa)
+  #document.getElementById("csubmit").click()  
   $(".pup").css("display":"initial")
   $(".pdown").css("display":"initial")
   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
   $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
-  
+  console.log("cliker="+aaaa)
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
   #ample = parseInt(lad.replace("文字数: ",""))
   #ren = ample
@@ -259,18 +252,18 @@ $(document).on 'click' ,->
    $('p img').css({"height":"28.2%","width":"100%"})
   #if $("#csubmit").length==1
 
-  if $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val() != ""  
+   if $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val() != ""  
     $('p img').css({"height":"28.2%","width":"100%"})
     $('.cke_dialog_ui_button_ok').css("display":"")
     #console.log("textinput")
-  else
+   else
     #$('.cke_dialog_ui_button_ok').css("display":"none")
     #console.log("null")
-  $('p img').css({"height":"28.2%","width":"100%"})
-  #$('fieldset div').each ->
-    #if z=$(this).prop('id').match(regz)
+   $('p img').css({"height":"28.2%","width":"100%"})
+  $('fieldset div').each ->
+    if z=$(this).prop('id').match(regz)
         ##console.log(z[1]+":"+$(this).val()) 
-        #aaaa=z[1]
+        aaaa=z[1]
         #console.log("ロード="+aaaa)
   $(".pup").css("display":"initial")
   $(".pdown").css("display":"initial")
@@ -390,7 +383,7 @@ $(document).on "click", ".pup", ->
   rep2 = rep1.replace("cke_article_contents_attributes_","")
   console.log(rep2+"!!rep2")
   #console.log("スイッチ="+aaaa)
-  #aaaa=0
+  aaaa=0
   ##console.log(ls1+"/"+ls2)
   cccc=0
   dddd=0
@@ -432,7 +425,7 @@ $(document).on "click", ".pdown", ->
   rep1 = inpup.replace("_description_arialbl","")
   rep2 = rep1.replace("cke_article_contents_attributes_","")
   console.log(rep2+"!!rep2")
-  #aaaa=0
+  aaaa=0
   cccc=0
   dddd=0
   red=0
@@ -764,4 +757,3 @@ class ImageCropper
   
     
  
-
