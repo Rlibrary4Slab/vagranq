@@ -7,7 +7,7 @@ aaaa=0
 
 arth=0
 arlt=0 
-
+#priority = "none"
 regz=new RegExp('^cke_article_contents_attributes_([0-9+])_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+])_title$')
 regtitle=new RegExp()
@@ -17,7 +17,7 @@ $(window).on "load" , ->
     if z=$(this).prop('id').match(regz)
         ##console.log(z[1]+":"+$(this).val()) 
         aaaa=z[1]
-        #console.log("ロード="+aaaa)
+  console.log("ロード="+aaaa)
   $("div.s_article_thumbnail").each ->
     arth++
     console.log("arth"+arth)
@@ -35,10 +35,10 @@ $(window).on "load" , ->
   #console.log($("#article_title").val())  
   #if $("#article_title").val() != null
   $('#spsubmit').click()
-  if $("#csubmit").length ==1 && iButton==0
-   console.log("csubmit")
-   document.getElementById("csubmit").click() 
-  iButton++  
+  #if $("#csubmit").length ==1 && iButton==0
+  console.log("csubmit")
+  document.getElementById("csubmit").click() 
+  #iButton++  
 red=0
 priorityStyle = 'none'
 idNum = 0
@@ -76,8 +76,6 @@ $(document).on 'ready page:load', ->
   #if $("#article_title").val() != null
   $('#spsubmit').click()
 
-$(".like a").on "click" , ->
-  console.log("like")
   
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
@@ -101,6 +99,7 @@ $(document).on 'click', '.remove_fields', (event) ->
               $this.removeAttr("id")
               #console.log("red="+red)
               return true #これで、除外したいやつから抜らけれる
+  #document.getElementById("csubmit").click()
   event.preventDefault()
 
 $(document).on 'click', '.add_fields', (event) ->
@@ -112,10 +111,11 @@ $(document).on 'click', '.add_fields', (event) ->
       #aaaa=z[1]
       
   aaaa++
-  
+  console.log("addfielud:"+aaaa) 
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).before($(this).data('fields').replace(regexp, aaaa))
   CKEDITOR.replaceAll()
+  #document.getElementById("csubmit").click()
   event.preventDefault()
   
   ###################
@@ -192,26 +192,14 @@ tsubmit=0
 ############################################################################################################################
 
   
-#$(document).keypress (e) ->
-#  if e.which == 13 || e.keyCode == 13
-#    #console.log("entddr")
-#    
-#    $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:first-child td div div div input').val("100%")
-#    $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:nth-child(2) td div div div input').val("100%")      
-#    $("body div.cke_dialog_background_cover").remove()
-#    $('.cke_btn_reset').remove()
-#    $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
-#    $('html body div.cke_reset_all').remove()
-#    return true
-    #$('.cke_dialog_ui_button_ok').click()        
-#$(document).on 'keypress','input[type="text"]', (e) ->
-#  if e.which == 13 || e.keyCode == 13
-#    #console.log("enterr")
     
 
     
-
-    
+#$(document).hover(
+  #->
+   #console.log("hovers")
+   #document.getElementById("csubmit").click()
+#)   
   
 iButtons=0
 $(document).on 'click' ,->  
@@ -220,6 +208,10 @@ $(document).on 'click' ,->
    #console.log("csubmit")
    #iButton++
    #document.getElementById("csubmit").click()  
+   $(".pup").css("display":"initial")
+   $(".pdown").css("display":"initial")
+   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
+   $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
   #ample = parseInt(lad.replace("文字数: ",""))
   #ren = ample
@@ -461,7 +453,7 @@ $(document).on "click", ".pdown", ->
   kml2=$("fieldset div#cke_article_contents_attributes_"+(Number(rep2)+1)+"_description div div iframe").contents().find("html body")
   kml2.html(tmp1)
   $("div#article_contents_attributes_"+(Number(rep2)+1)+"_description").html(tmp1)
-
+titz =0
 $(document).on "click", "#csubmit", ->
   
   
@@ -473,11 +465,12 @@ $(document).on "click", "#csubmit", ->
   dddd=0
   red=0
   maxf=0
-  titz=0
+  
   $('fieldset div input').each ->
      $(".pup").css("display":"initial")
      $(".pdown").css("display":"initial")
      $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
+     $("input#article_contents_attributes_"+titz+"_title").parents("fieldset").find(".pdown").css("display":"none")
      if z=$(this).prop('id').match(regst)
       titz=z[1]
       console.log("titz="+titz)
@@ -507,7 +500,7 @@ $(document).on "click", "#csubmit", ->
       #$(".pup").css("display:none;")
       #$(".pdown").css("display:none;")
       #$(".pup").css("display":"none")
-   $("input#article_contents_attributes_"+titz+"_title").parents("fieldset").find(".pdown").css("display":"none")
+   #$("input#article_contents_attributes_"+titz+"_title").parents("fieldset").find(".pdown").css("display":"none")
 $(document).on "click", "#tsubmit", ->
 
   console.log("ts")
