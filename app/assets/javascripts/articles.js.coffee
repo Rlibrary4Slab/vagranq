@@ -207,11 +207,12 @@ $(document).on 'click' ,->
   #if $("#csubmit").length ==1 
    #console.log("csubmit")
    #iButton++
-   #document.getElementById("csubmit").click()  
-   $(".pup").css("display":"initial")
-   $(".pdown").css("display":"initial")
-   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
-   $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
+  #document.getElementById("csubmit").click()  
+  $(".pup").css("display":"initial")
+  $(".pdown").css("display":"initial")
+  $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
+  $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
+  console.log("cliker="+aaaa)
   #lad=$('#cke_wordcount_article_contents_attributes_0_title').text()  
   #ample = parseInt(lad.replace("文字数: ",""))
   #ren = ample
@@ -264,6 +265,10 @@ $(document).on 'click' ,->
         ##console.log(z[1]+":"+$(this).val()) 
         aaaa=z[1]
         #console.log("ロード="+aaaa)
+  $(".pup").css("display":"initial")
+  $(".pdown").css("display":"initial")
+  $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
+  $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
   #$('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:nth-child(2) td div table tbody tr td div div div input').val("")
   #$("body div.cke_dialog_background_cover").remove()
   #何かクリックすれば反映される  
