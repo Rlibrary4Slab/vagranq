@@ -26,7 +26,7 @@ Rails.application.configure do
   #:authentication => 'login',
   #}
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: "ranq-media", port: 3000}
+  config.action_mailer.default_url_options = { host: "ranq-media.com", port: 3000}
   config.action_mailer.smtp_settings = {
    :enable_starttls_auto => true,
    :address => "smtp.gmail.com",
