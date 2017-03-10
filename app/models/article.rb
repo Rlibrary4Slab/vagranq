@@ -4,10 +4,13 @@ class Article < ActiveRecord::Base
     has_many :likes, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user
     is_impressionable
-    validates :title, presence: true
-    validates :description,presence: true
+    validates :title, length: { maximum: 30, message: "が長すぎます30文字以下にしてください"} 
+    validates_presence_of :title,message: "を入力してください"
+    #validates_presence_of :eyecatch_img ,message: "が認識できませんでした"
+    #validates :description,presence: true
     validates :user_id, presence: true
-    validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "カテゴリが選択されていません"} ,presence: true 
+    
+    validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "を入力してください"}
     
     has_many :contents
     paginates_per 4

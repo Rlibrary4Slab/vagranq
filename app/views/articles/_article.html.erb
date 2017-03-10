@@ -1,76 +1,39 @@
-<!--
-<ul>  
- 
-  <span class="user-name">
-    <%#= article.user.name %>
-  </span>
-  <span class="content" style="height:75px; width:75px;">
-    <%#= link_to article.eyecatch_img.html_safe, article_path(article.id) %>
-    <%#= link_to article.title.html_safe, article_path(article.id) %>
-    <div>
-      <small>
-        <%#= article.likes.count %>人がいいね！といっています
-      </small>
-    </div>
 
-  </span>
-  <span>
-    <%#= article.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
-    <%#= article.updated_at.strftime("%Y年%m月%d日　更新") %>
-  </span>
-  <%#= link_to 'Edit', edit_article_path(article) %> |
-  <%#= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
-</ul>
 
--->
-        
-<tr class="shop">
-  <td><%#= article.category %></td>
-<!--  
-<td><%= link_to article.eyecatch_img.html_safe, article_path(article.id) %></td>
--->
-<td><div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 75px;
+    <div class="article_list_content clearfix">
+    <div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 75px;
     height: 75px;
-    display: none;
     overflow: hidden;
     background-color: #888;
     border: 1px solid #222;
-    index:-1;">
-        <img alt="記事タイトルが入ります" style="display:none;" class="crop_image" height="120" src="image/image-1.jpg" width="120" />
-        <%#= image_tag article.eyecatch_img ,:style =>" position: relative;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: 100%;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);" ,:id =>"s_eyecatch_img" %>
-      
+    index:-1;
+    margin-right: 20px;">
+
     <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
     top: 50%;
     left: 50%;
     width: auto;
     height: auto;
     -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);                                            transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img") ,article %>
-    </div></td>
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    " ,:class =>"s_eyecatch_img") ,article %>
+      </div>
     <div class="article_list_text">
-<td><%= link_to article.title ,article_path(article.id) %></td>
-<!--ここまで修正-->
-  <td><%= article.description %></td>
-  <td><%#= article.content %></td>
-  <td><%= article.user.user_name %></td>
-  <!--<td><%= article.aasm_state %></td>-->
-  <td><%= article.likes.count %>人がいいね！といっています</td>
-  <td><%= article.updated_at.strftime("%Y年%m月%d日　更新") %></td>
-  
-  
-  <% if @user == current_user %>
-   <td><%= link_to 'Show', article %></td>
-   <td><%= link_to 'Edit', edit_article_path(article) %></td>
-   <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-   <td><%= article.aasm_state %></td>
-  <% end %>
 
- 
-</tr>
+       <p class="article_list_title">
+          <%= link_to article.title.html_safe, article, style: "font-size:24px;" %></p>
+          <%= article.description.html_safe %>
+          <span><%= article.impressionist_count %>View</span>
+          <% if article.user.name == current_user.name%>
+          <%= link_to "編集する", edit_article_path(article) ,:style => "float:right;"%>
+          <%= link_to "削除する", article_path(article) ,:style => "float:right;", :method =>  :delete, :confirm =>"この記事を削除してよろしいですか？" %>
+         <% else %>
+              
+           <%= link_to article.user.user_name, article.user ,:style => "float:right;"%>
+         <%end%>
+
+     </div>
+   </div>
+
+

@@ -1,0 +1,70 @@
+
+<!--<p id="notice"><%= notice %></p>
+<%= render_breadcrumbs %>-->
+<section id="topcontent" style="background-color: #ffffff;">
+ <div class="topcontent_in clearfix">
+
+
+<p id="notice"></p>
+<a href="/">RanQ</a> &raquo; <a href="/articles">記事一覧</a> &raquo; ファッション一覧
+
+
+ </div><!-- /.eyecatch_in -->
+</section>
+<!--
+<h1>Listing Articles</h1>
+<table id="shops">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Content</th>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+-->
+  
+<!--    
+  <tbody class="page">
+    <%#= render @articles %>
+  </tbody>
+</table>
+-->
+<!-- Swrapper-->
+<div id="wrapper" class="clearfix">
+  <!--Scolumn_content-->
+  <div id="column_content">
+    <!--Scategorymenu-->
+    <div class="categorymenu">
+    <%= render 'static_pages/category' %>
+  </div><!--Ecategorymenu-->
+
+    <!-- Scontent -->
+    <div id="content">
+       <!--Sheadline is-border-->
+      <div class="headline is-border"> 
+        <h2 class="headline-title">記事一覧</h2>
+      </div>
+      <!--Eheadline is-border-->
+       <%= render @articles %>
+      <br>
+    </div>
+    <!-- Econtent -->
+        <%= paginate @articles %>
+  </div><!-- /#column_content -->
+  <div id="column_sidebar">
+    <%= render 'static_pages/sidecontent' %>
+
+  </div>
+</div>
+<!--
+<div class="headline is-border">
+        <h2 class="headline-title">記事一覧</h2>
+    </div>  
+ <%= render @articles %>
+<br>
+
+<%= paginate @articles %>
+-->

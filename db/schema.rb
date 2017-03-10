@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029111111) do
+ActiveRecord::Schema.define(version: 20170304065516) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "category",     limit: 4
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20161029111111) do
     t.datetime "updated_at",                 null: false
     t.integer  "likes_count",  limit: 4
     t.datetime "published_at"
+    t.integer  "corporecom",   limit: 4
+    t.boolean  "checkagree"
   end
 
   create_table "contents", force: :cascade do |t|
@@ -67,6 +69,26 @@ ActiveRecord::Schema.define(version: 20161029111111) do
     t.integer  "article_id", limit: 4
   end
 
+  create_table "social_profiles", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.string   "provider",    limit: 255
+    t.string   "uid",         limit: 255
+    t.string   "name",        limit: 255
+    t.string   "nickname",    limit: 255
+    t.string   "email",       limit: 255
+    t.string   "url",         limit: 255
+    t.string   "image_url",   limit: 255
+    t.string   "description", limit: 255
+    t.text     "other",       limit: 65535
+    t.text     "credentials", limit: 65535
+    t.text     "raw_info",    limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "social_profiles", ["provider", "uid"], name: "index_social_profiles_on_provider_and_uid", unique: true, using: :btree
+  add_index "social_profiles", ["user_id"], name: "index_social_profiles_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -76,6 +98,7 @@ ActiveRecord::Schema.define(version: 20161029111111) do
     t.string   "user_description",       limit: 255
     t.string   "user_image",             limit: 255
     t.string   "header_image",           limit: 255
+    t.boolean  "admin"
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
@@ -90,7 +113,8 @@ ActiveRecord::Schema.define(version: 20161029111111) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email",      limit: 255
-    t.boolean  "admin"
+    t.string   "provider",               limit: 255
+    t.string   "uid",                    limit: 255
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -98,4 +122,5 @@ ActiveRecord::Schema.define(version: 20161029111111) do
   add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "social_profiles", "users"
 end

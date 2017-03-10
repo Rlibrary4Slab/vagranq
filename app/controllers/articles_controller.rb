@@ -20,85 +20,99 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "記事一覧", :articles_path
     #@articles = Atricle.search(params[:search])
     #@articles = Article.all
-    @articles = Article.page(params[:page]).per(3).published.get_by_title params[:title]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
+    #@articles = Article.page(params[:page]).per(3).published.get_by_title params[:title]
+    @articles = Article.page(params[:page]).published
     #@q        = Article.ransack(params[:q])
     #@qarticles = @q.result(distinct: true)
   end
   
   def allranking
-    @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
-    #@rank = @rank.fashion params[:category] 
+    add_breadcrumb "ランキング一覧", :allranking_path
+    #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
+    @articles = Article.order("corporecom").published.page(params[:page])
+    @corporecom = Article.order("corporecom").published.page(params[:page])
   end
   #categories
   def fashion
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
-    @articles = Article.page(params[:page]).per(3).published
+    @articles = Article.page(params[:page]).published
     @articles = @articles.fashion params[:category] 
-    
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
   end
   
   def beauty
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.beauty params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
+
   end
   def hangout
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.hangout params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def gourmet
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     @articles = @articles.gourmet params[:category]
     
   end
   def lifestyle
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.lifestyle params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def entertainment
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.entertainment params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def interior
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.interior params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def gadget
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.gadget params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def learn
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.learn params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def funny
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
-    @articles = Article.page(params[:page]).per(3).published 
+    @articles = Article.page(params[:page]).published 
     @articles = @articles.funny params[:category]
+    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   #categoriesend
@@ -121,7 +135,7 @@ class ArticlesController < AuthorizedController
       add_breadcrumb @article.category, beauty_path
     end
     if @article.category == "おでかけ"
-      add_breadcrumb @article.category, hungout_path
+      add_breadcrumb @article.category, hangout_path
     end
     if @article.category == "グルメ"
       add_breadcrumb @article.category, gourmet_path
@@ -208,9 +222,10 @@ class ArticlesController < AuthorizedController
         flash[:success] = '記事を保存しました。'
       else
         raise
+        #render :new
       end
       #redirect_to [:home, @article]
-      #render :edi
+      #render :new
       redirect_to @article
     else
       render :new
@@ -277,8 +292,7 @@ class ArticlesController < AuthorizedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:category, :title, :description, :user_id,:aasm_state,:eyecatch_img,
-                                      contents_attributes: [:id,:title,:description,:_destroy,:position])
+      params.require(:article).permit(:category, :title, :description, :user_id,:aasm_state,:eyecatch_img,:checkagree,contents_attributes: [:id,:title,:description,:_destroy,:position])
       #params.require(:ssquire).permit(:aasm_state,contents_attributes: [:id,:title,:description,:_destroy])
     end
     

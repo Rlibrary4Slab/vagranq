@@ -1,8 +1,16 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  
+  def build_resource(hash=nil)
+    hash[:uid] = User.create_unique_string
+    super
+  end
 
   def new
     build_resource({})
     respond_with self.resource
+  
+    #@noadmin = User.where('admin = ?', true).empty? 
+ 
   end
 
   def create
@@ -25,6 +33,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+ 
+  def build_resource(hash=nil)
+    hash[:uid] = User.create_unique_string
+    super
+  end
+
   private
 
     def after_sign_in_path_for(resource)
@@ -36,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def sign_up_params
-      params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation,:admin, :pid,:provider)
     end
 
 end

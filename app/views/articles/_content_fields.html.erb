@@ -1,20 +1,8 @@
-<fieldset class="fields ui-sortable-handle">
-  <h1 id=rankh1></h1>
-  <div class="ckeditors">
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title, :class => 'form-control '%><br />
-    <%= f.label :description, "説明" %>
-    <%= f.text_area :description, :class => 'form-control ckeditor' %><br />
-  </div>
-  <div class="afsubmits" style="display:none;">
-    <p class="aft"></p>
-    <div class="afd"></div>
-  </div>
-  <%= link_to "削除", '#', class: "remove_fields"%>
-    <span class="hiddenButtons" value="隠す">
-     <!--
-     <input type="button" style="display:none;"class="tdsubmit" value="交換">
-     -->
+<li>
+  <fieldset class="fields ui-sortable-handle" >
+  <!--<span class="hiddenButtons" value="隠す">
+     
+     <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
      <div style="display:none;">
        <input type="button" id="tsubmit" value="交換">
        <input type="button" id="dsubmit" value="交換">
@@ -23,12 +11,86 @@
        <input type="button" id="dtsubmit" >
        <input type="button" id="ddsubmit" >
      </div>
-     <input type="button" id="pup" class="pup" value="上">
-     <input type="button" id="pdown"class="pdown" value="下">
+     <input type="button" id="pup" class="pup btn btn-default" value="↑">
+     <input type="button" id="pdown"class="pdown btn btn-default" value="↓">
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="psubmit btn btn-default" id="psubmit" value="追加する">
+     <input type="button" style="display:none;" class="btn btn-default esubmit" value="編集">
+    </span>-->
+  <div class="ckeditors">
+    <%#= f.label :title, "タイトル" %>
+    <span class="ranking-icon"></span>
+    <%= f.text_field :title, :class => 'form-control title-form'%><br /><br/>
+    <%= f.label :description, "説明" %>
+    <%= f.text_area :description, :class => 'form-control ckeditor' %><br />
+     <span class="hiddenButtons" value="隠す">
+
+     <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+     </div>
+     <input type="button" id="pup" class="pup btn btn-default" value="↑">
+     <input type="button" id="pdown"class="pdown btn btn-default" value="↓">
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="psubmit btn btn-default" id="psubmit" value="追
+加する">
+     <input type="button" style="display:none;" class="btn btn-default esubmit" value="編集">
+    </span>
+  </div>
+  <div class="afsubmits" style="display:none;">
+   <span class="hiddenButtons" value="隠す">
+
+     <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+     </div>
+     <input type="button" id="pup" class="pup btn btn-default" value="↑">
+     <input type="button" id="pdown"class="pdown btn btn-default" value="↓">
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="psubmit btn btn-default" id="psubmit" value="追
+加する">
+     <input type="button" style="display:none;" class="btn btn-default esubmit" value="編集">
+    </span>
+    <h2 class="aft"><span class="ranking-icon"></span></h2>
+    <div class="afd"></div>
+  </div>
+    <!--
+    <span class="hiddenButtons" value="隠す">
+     <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+     <!-#
+
+     <input type="button" style="display:none;"class="tdsubmit" value="交換">
+     #->
+      
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+     </div>
+     <input type="button" id="pup" class="pup btn btn-default" value="上">
+     <input type="button" id="pdown"class="pdown btn btn-default" value="下">
      
      <input type="button" id="csubmit" style="display:none;"> 
-     <input type="button" class="psubmit" id="psubmit" value="プレビュー">
-     <input type="button" style="display:none;" class="esubmit" value="編集">
+     <input type="button" class="psubmit btn btn-default" id="psubmit" value="プレビュー">
+     <input type="button" style="display:none;" class="btn btn-default esubmit" value="編集">
     </span>
+    -->
     <%= f.hidden_field :position, class: :position %>
 </fieldset>
+</li>

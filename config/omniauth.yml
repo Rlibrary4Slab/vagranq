@@ -1,0 +1,17 @@
+development: &development
+
+ twitter:
+     key: tvy3oyXU5kdIkZFJr6Fjqvycr
+     secret: Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd
+ facebook: 
+     key: '1766599203582835'
+     secret: 'd26d5e061f87dd1394d851770a397148'
+
+production: &production
+
+ twitter:
+     key: tvy3oyXU5kdIkZFJr6Fjqvycr
+     secret: Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd
+ facebook: 
+     key: '1766599203582835'
+     secret: 'd26d5e061f87dd1394d851770a397148'

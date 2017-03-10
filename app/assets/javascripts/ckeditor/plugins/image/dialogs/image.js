@@ -460,7 +460,7 @@
                         lab.html(""); //項目空白
                         editor.insertElement(this.imageElement);
                         var quote = $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val()
-                        $("fieldset div#"+iurtmp+" div div iframe").contents().find("html body").append("<p>"+quote+"</p>");
+                        $("fieldset div#"+iurtmp+" div div iframe").contents().find("html body").append('<div style="background-color:#EEEEEE">'+quote+'</div>');
                         //新画像、url引用挿入後
                         var labimp = $("fieldset div#"+iurtmp+" div div iframe").contents().find("html body"); //の項目を取得
                         var imp= labimp.html();

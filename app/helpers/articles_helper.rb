@@ -1,6 +1,6 @@
 module ArticlesHelper
     def likes_counter(likes)
-        likes.count
+        #likes.count
     end
     
     def daily_article_ranking

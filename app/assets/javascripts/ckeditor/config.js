@@ -5,13 +5,14 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
-	 config.language = 'ja';
+	//config.language = '';
 	 config.uiColor = '#AADC6E';
 	//config.ignoreEmptyParagraph = true;
 	config.extraPlugins = 'wordcount,youtube,notification';
 	//config.extraPlugins = 'youtube';
-        config.toolbar = [["Image","Link","Youtube"]];	
-
+        //config.toolbar = [["Image","Link","Youtube"]];	
+	config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]}];
+        config.allowedContent = true;
 	config.wordcount = {
 	
 	    // Whether or not you want to show the Word Count

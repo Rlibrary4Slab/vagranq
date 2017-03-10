@@ -7,4 +7,5 @@ class AddUsers < ActiveRecord::Migration
     add_column :users, :header_image, :string
     add_index :users, :name, unique: true
   end
+
 end

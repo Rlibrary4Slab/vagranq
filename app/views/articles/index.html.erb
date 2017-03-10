@@ -1,7 +1,8 @@
+<!--
 <p id="notice"><%= notice %></p>
-<%= render_breadcrumbs %>
+<%#= render_breadcrumbs %>
 <h1>Listing Articles</h1>
-<%= page_entries_info @articles%>
+<%#= page_entries_info @articles%>
 <table id="shops">
   <thead>
     <tr>
@@ -17,11 +18,13 @@
   
     
   <tbody class="page">
-    <%= render @articles %>
+    <%#= render @articles %>
   </tbody>
 </table>
 
 <br>
 
 <%#= link_to 'New Article', new_article_path %>
-<%= paginate @articles %>
+<%#= paginate @articles %>
+-->
+<%= render "inarticle" %>

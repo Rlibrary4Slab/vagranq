@@ -1,14 +1,21 @@
 Rails.application.routes.draw do
-  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  #match 'auth/:provider/callback', to: 'sessions#create'
+  #match 'auth/failure', to: redirect('/')
+  #match 'signout', to: 'sessions#destroy', as: 'signout'
+
   
   devise_for :users, :controllers => {
-    :registrations => 'users/registrations'
-    #:sessions => 'users/sessions'   
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions',   
+    :omniauth_callbacks => 'users/omniauth_callbacks',
+    :passwords => 'users/passwords'
   } 
 
   devise_scope :user do
     #get "sign_in", :to => "users/sessions#new"
     #get "sign_out", :to => "users/sessions#destroy" 
+    #delete :sign_out, to: 'devise/sessions#destroy', as: :destroy_user_session
   end  
   #resources :articles, only: [:show,:create,:edit,:destroy,:new]  do
   resources :u, only: [:index, :show] do
@@ -111,4 +118,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  #get '*anything' => 'errors#routing_error'
+  #get '*anything' => 'errors#not_found'
+  get '*path', controller: "application",action: 'render_404' 
 end

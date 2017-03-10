@@ -71,8 +71,63 @@ table>tbody>tr:nth-child(3)>td>table>tbody>tr>td.cke_dialog_ui_hbox_first>div.ck
 .cke_editable{
     background: gray !important;
 }
-
+li {
+  list-style:none;
+}
 td>img{
     height: 50px !important;
     width: 50px !important;
 }
+footer header main{
+ display:initial !important;
+}
+main {
+ margin: 5% 10% 5% !important;
+}
+span .btn{
+ padding: 1px 12px !important;
+}
+
+input.tdsubmit{
+ padding: 1px 12px !important;
+ //margin:21px 40px; 
+ //position: absolute;
+}
+.sortable{
+ margin-top: 50px !important;
+ background-color: #ffffff;
+}
+
+
+ul.ranking-content li {
+ //counter-increment: number -1;
+}
+
+ul.ranking-content li {
+ //counter-increment: number2 number;
+}
+
+ul.ranking-content li fieldset div.ckeditors .ranking-icon{
+// content: counter(number);
+ padding: 3px 5px;
+ margin-right:10px;
+ background-color: #eeeeee ;
+ border: 1px solid #dddddd ;
+}
+
+ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
+ padding: 3px 5px;
+ //content: counter(number2);
+ background-color: #eeeeee ;
+ border: 1px solid #dddddd ;
+}
+
+.title-form {
+ width:50% !important;
+ display:initial !important;
+}
+
+.remove_fields {
+ margin-right: 30px;
+}
+

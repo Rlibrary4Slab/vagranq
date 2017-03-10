@@ -23,11 +23,11 @@
     transform: translate(-50%,-50%);" ,:id =>"s_eyecatch_img" %>
       </div>
       <%= @article.updated_at.strftime("%Y年%m月%d日　更新") %>
-      <h1 class="article_title"><%= @article.title %></h1>
-      <p class="article_description"><%= @article.description %></p>
-      
+      <h2 class="article_title"><%= @article.title %></h2>
+      <!--<p class="article_description">--><%= @article.description %>
+      <div style="display:none;" id="checkAgree"><%= @article.checkagree %></div>
     </div>
-
+    <input type="button" id="showsubmit" style="display:none;"/>
     <div class="head_social">
       <ul class="social-bottun">
         <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
@@ -46,8 +46,9 @@
          <% end %>
          </li>
         
-        <li>
-            <%= link_to @article.likes.count, liking_users_article_path(@article.id), id: "like-count" %>
+        <li id="like-count">
+          <!--  <%= link_to @article.likes.count, liking_users_article_path(@article.id), id: "like-count" %> -->
+          <%=  @article.likes.count id: "like-count" %>
         </li>
         
         <li>
@@ -66,14 +67,18 @@
   <% @article.contents.each do |article| %>
     
      
-      <p>
-         タイトル
+      <h2>
+      <span class="ranking-icon" style="padding: 3px 5px;
+                   margin-right:10px;
+                   background-color: #eeeeee ;
+                   border: 1px solid #dddddd ;"></span>
+         <!--タイトル-->
         <%= article.title.html_safe%>
-      </p>
-       <p>
-         説明
+      </h2>
+       
+         <!--説明-->
         <%= article.description.html_safe%>
-      </p>
+      
       
        
   <% end %>

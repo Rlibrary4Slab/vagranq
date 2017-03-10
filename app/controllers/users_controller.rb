@@ -12,10 +12,10 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by(name: params[:name])
-    @articleus = @user.articles
+    @articleus = @user.articles.page(params[:page])
     @title = "自身の投稿"
     @larticles = @user.like_articles
-    @articles= Article.all
+    #@articles= Article.all
     
   end
 
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
   
   def like_articles
-    @articles = @user.like_articles
+    @articleus = @user.like_articles.page(params[:page])
     @title = "いいね！一覧"
     render :show
   end
