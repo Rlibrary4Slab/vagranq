@@ -1,7 +1,8 @@
 <li>
   <fieldset class="fields ui-sortable-handle" >
+     <a class="toplinkmove" href="#"></a>
   <!--<span class="hiddenButtons" value="隠す">
-     
+     <a class="linkmove" href="#"></a>
      <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
      <div style="display:none;">
        <input type="button" id="tsubmit" value="交換">
@@ -20,8 +21,8 @@
     </span>-->
   <div class="ckeditors">
     <%#= f.label :title, "タイトル" %>
-    <span class="ranking-icon"></span>
-    <%= f.text_field :title, :class => 'form-control title-form'%><br /><br/>
+    <h2><span class="ranking-icon"></span>
+    <%= f.text_field :title, :class => 'form-control title-form'%></h2><br /><br/>
     <%= f.label :description, "説明" %>
     <%= f.text_area :description, :class => 'form-control ckeditor' %><br />
      <span class="hiddenButtons" value="隠す">
@@ -92,5 +93,7 @@
     </span>
     -->
     <%= f.hidden_field :position, class: :position %>
+   
+     <a class="bottomlinkmove" href="#"></a>
 </fieldset>
 </li>

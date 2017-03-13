@@ -1,6 +1,15 @@
 <!-- コンテンツ -->
+<%#= render_breadcrumbs %>
+<section id="topcontent" style="background-color: #ffffff;">
+ <div class="topcontent_in clearfix">
+
+
+<p id="notice"><%= notice %></p>
+
 <%= render_breadcrumbs %>
 
+ </div><!-- /.eyecatch_in -->
+</section>
 <section id="headcontent">
 <div id="headline">
   <div class="head_container">
@@ -28,7 +37,7 @@
       <div style="display:none;" id="checkAgree"><%= @article.checkagree %></div>
     </div>
     <input type="button" id="showsubmit" style="display:none;"/>
-    <div class="head_social">
+    <div class="head_social" style="float:right;">
       <ul class="social-bottun">
         <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
         <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
@@ -37,12 +46,12 @@
     </div>
     <div class="head_like_user">
       <ul class="user_like">
-        <li class="user"><%= @article.user.name %></li>
+        <li class="user"><%= link_to image_tag(@article.user.user_image_url(:thumb)), @article.user %></li>
         <li class="like">
          <% if logged_in? %>
           <%= render 'likes/like_links', article: @article %>
          <% elsif %>
-           <%= link_to "いいね",new_user_path %>
+           <%= link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}),new_user_path %>
          <% end %>
          </li>
         
@@ -51,7 +60,7 @@
           <%=  @article.likes.count id: "like-count" %>
         </li>
         
-        <li>
+        <li style="margin-left: 20px;">
           <span><%= number_with_delimiter(@page_views) %></span>View
         </li>
       </ul>
@@ -68,10 +77,7 @@
     
      
       <h2>
-      <span class="ranking-icon" style="padding: 3px 5px;
-                   margin-right:10px;
-                   background-color: #eeeeee ;
-                   border: 1px solid #dddddd ;"></span>
+      <span class="ranking-icon"></span>
          <!--タイトル-->
         <%= article.title.html_safe%>
       </h2>
@@ -85,7 +91,6 @@
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 <div id="column_sidebar">
-ここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなどここはランキングなど
-
+ <%= render "static_pages/sidecontent" %>
 </div>
 </div>

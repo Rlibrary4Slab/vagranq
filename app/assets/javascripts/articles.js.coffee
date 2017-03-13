@@ -122,7 +122,9 @@ $(document).on 'click', '.add_fields', (event) ->
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("tansubmit").click()
+  $(this).parents("ul").find("li").last().find("fieldset").find(".toplinkmove").click()
   #CKEDITOR.replaceAll("ckeditor")
+  
   event.preventDefault()
   
   ###################
@@ -139,7 +141,6 @@ $(document).on 'click', '.add_fields', (event) ->
 
 
 $(document).on "click" ,".psubmit", ->   
-  #タブ内に新しくボタンを組み立てる？か始めの所だけ反映させればいいか・・・？
   console.log("ckssd")
   divs = $(this).parents("fieldset").find(".ckeditors")
   sall = $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val()
@@ -151,7 +152,7 @@ $(document).on "click" ,".psubmit", ->
   cabt=$(this).parents("fieldset").find(".ckeditors").find(".form-control").first().val()
   
   cabd=$(this).parents("fieldset").find(".ckeditors").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
-  
+   
   iii=cabt
   jjj=cabd.html()
   $(this).parents("fieldset").find(".afsubmits").find(".aft").html('<span class="ranking-icon"></span>'+iii)
@@ -160,6 +161,20 @@ $(document).on "click" ,".psubmit", ->
     $(this).parents("fieldset").find(".afsubmits").find(".afd").html(sall)
   else  
     $(this).parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
+ # document.getElementById("csubmit").click()
+  $(this).parents("fieldset").find(".toplinkmove").click()
+$(document).on "click","a[href^=#].toplinkmove", ->
+    target = $(this)
+    if !target.length
+     return 
+    # 移動先となる値
+    targetY = target.offset().top
+    # スクロールアニメーション
+    $('html,body').animate({scrollTop: targetY}, 300, 'swing')
+    # ハッシュ書き換えとく
+    #window.history.pushState(null, null, this.hash)
+    # デフォルトの処理はキャンセル
+    false
 
 $(document).on "click",".esubmit",->
   $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val("")
@@ -173,6 +188,7 @@ $(document).on "click",".esubmit",->
   $(this).parents("fieldset").find(".esubmit").css("display","none")
 #0202
 
+  $(this).parents("fieldset").find(".toplinkmove").click()
    #alert(sd)
 
 tsubmit=0  
@@ -241,7 +257,7 @@ $(document).on 'click' ,-> #clicked
     $("#eyecatch_img").val(ym)
     #ここで画像をな切り取る
     #$("#eyecatch_img").val('<img src="'+ym+'" style="height: 75px; width: 75px;" />')#切り撮った画像を圧縮
-    
+      
 $(document).on 'click', '.cke_btn_reset' ,->
   #$('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:first-child td div div div input
 #').val("300")

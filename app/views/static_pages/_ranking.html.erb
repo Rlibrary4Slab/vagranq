@@ -7,7 +7,7 @@
   </div>
 <div class="side_article_list"
  >
-<% @corporecom.each do |article| %>
+<% @rank.each do |article| %>
 <%# daily_article_ranking.each do |article| %>
  
   
@@ -19,8 +19,7 @@
     height: 60px;
     overflow: hidden;
     background-color: #888;
-    border: 1px solid #222;
-    index:-1;"> 
+    border: 1px solid #222; margin-right: 20px; index:-1;"> 
      <!--<img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />-->
     <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
     top: 50%;

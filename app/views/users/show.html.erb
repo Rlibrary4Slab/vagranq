@@ -1,8 +1,8 @@
 <% provide(:title, @user.name) %>
 <%= render_breadcrumbs %>
 
-<div class="row">
-  <aside class="col-md-4">
+<div class="row" >
+  <div class="" style="width: 1200px; margin: 0 auto;">
     <section class="user_info">
       <h1>
         <%= image_tag @user.user_image_url(:thumb)%>
@@ -24,5 +24,5 @@
     <%= paginate @articleus %>     
      
     </section>
-  </aside>
+  </div>
 </div>

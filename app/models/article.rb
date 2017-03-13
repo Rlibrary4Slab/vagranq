@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
     is_impressionable
     validates :title, length: { maximum: 30, message: "が長すぎます30文字以下にしてください"} 
     validates_presence_of :title,message: "を入力してください"
-    #validates_presence_of :eyecatch_img ,message: "が認識できませんでした"
+    validates_presence_of :eyecatch_img ,message: "が認識できませんでした"
     #validates :description,presence: true
     validates :user_id, presence: true
     

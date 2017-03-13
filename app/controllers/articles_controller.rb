@@ -4,9 +4,17 @@ class ArticlesController < AuthorizedController
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
   impressionist actions: [:show]
-  #before_action :pvranking
+  before_action :all
   add_breadcrumb "RanQ", :root_path
-  
+    def all
+      @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
+
+      #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
+      @toprank = Article.where(:corporecom => [1..3]).published.page(params[:page]).limit(3)
+
+      @corporecom = Article.where(:corporecom => [100..300]).published.page(params[:page]).limit(10)
+    end
+    
     def pvranking
       require 'google_api'
       api = GoogleApi.new
@@ -20,18 +28,29 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "記事一覧", :articles_path
     #@articles = Atricle.search(params[:search])
     #@articles = Article.all
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
+    #@corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     #@articles = Article.page(params[:page]).per(3).published.get_by_title params[:title]
-    @articles = Article.page(params[:page]).published
+    @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
+
+    #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
+    @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
+
+    @articles = Article.order('updated_at desc').page(params[:page]).published
     #@q        = Article.ransack(params[:q])
     #@qarticles = @q.result(distinct: true)
   end
   
+  def corporecom
+    add_breadcrumb "おすすめ一覧", :allranking_path
+    #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
+    @articles = Article.order("corporecom").order('updated_at >=? desc').published.page(params[:page])
+  end
+
   def allranking
     add_breadcrumb "ランキング一覧", :allranking_path
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
     @articles = Article.order("corporecom").published.page(params[:page])
-    @corporecom = Article.order("corporecom").published.page(params[:page])
+    #@articles = 
   end
   #categories
   def fashion
@@ -39,7 +58,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "ファッション一覧", :fashion_path
     @articles = Article.page(params[:page]).published
     @articles = @articles.fashion params[:category] 
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
   end
   
   def beauty
@@ -47,7 +65,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "美容健康一覧", :beauty_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.beauty params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
 
   end
@@ -56,14 +73,12 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "おでかけ一覧", :hangout_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.hangout params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def gourmet
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
     @articles = Article.page(params[:page]).published 
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     @articles = @articles.gourmet params[:category]
     
   end
@@ -72,7 +87,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.lifestyle params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def entertainment
@@ -80,7 +94,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "エンタメ一覧", :entertainment_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.entertainment params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def interior
@@ -88,7 +101,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "インテリア一覧", :interior_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.interior params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def gadget
@@ -96,7 +108,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "ガジェット一覧", :gadget_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.gadget params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def learn
@@ -104,7 +115,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "学び一覧", :learn_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.learn params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   def funny
@@ -112,7 +122,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "おもしろ一覧", :funny_path
     @articles = Article.page(params[:page]).published 
     @articles = @articles.funny params[:category]
-    @corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
     
   end
   #categoriesend
@@ -163,7 +172,6 @@ class ArticlesController < AuthorizedController
     add_breadcrumb @article.title
     
     impressionist(@article, nil) #1時間起きに増やす
-  
     @page_views = @article.impressionist_count
   end
 

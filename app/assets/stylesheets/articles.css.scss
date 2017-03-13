@@ -88,16 +88,15 @@ span .btn{
  padding: 1px 12px !important;
 }
 
-input.tdsubmit{
- padding: 1px 12px !important;
- //margin:21px 40px; 
- //position: absolute;
-}
 .sortable{
  margin-top: 50px !important;
  background-color: #ffffff;
 }
 
+
+ul.ranking-content  {
+ padding-left: 0;
+}
 
 ul.ranking-content li {
  //counter-increment: number -1;
@@ -106,14 +105,19 @@ ul.ranking-content li {
 ul.ranking-content li {
  //counter-increment: number2 number;
 }
-
+/*
 ul.ranking-content li fieldset div.ckeditors .ranking-icon{
 // content: counter(number);
- padding: 3px 5px;
- margin-right:10px;
+ padding: 0;
+ display: inline-block;
+ width: 34px;
+ height: 34px;
+ text-align: center;
+ line-height: 34px;
  background-color: #eeeeee ;
  border: 1px solid #dddddd ;
 }
+
 
 ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
  padding: 3px 5px;
@@ -121,13 +125,36 @@ ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
  background-color: #eeeeee ;
  border: 1px solid #dddddd ;
 }
+*/
 
+.ranking-icon{
+// content: counter(number);
+ padding: 0;
+ display: inline-block;
+ width: 34px;
+ height: 34px;
+ text-align: center;
+ line-height: 34px;
+ background-color: #eeeeee ;
+ border: 1px solid #dddddd ;
+}
 .title-form {
+ height: 60px !important;
  width:50% !important;
  display:initial !important;
+ font-size: 30px !important;
 }
-
+#user_article_editable{
+ float:right;
+}
 .remove_fields {
  margin-right: 30px;
 }
+#form_template {
+ width: 1200px;
+ margin: 0 auto;
+}
 
+#posting_buttons{
+ float: right;
+}

@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 20170304065516) do
     t.text     "eyecatch_img", limit: 65535
     t.integer  "user_id",      limit: 4
     t.string   "aasm_state",   limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "likes_count",  limit: 4
     t.datetime "published_at"
     t.integer  "corporecom",   limit: 4
-    t.boolean  "checkagree"
+    t.boolean  "checkagree",                 default: false, null: false
   end
 
   create_table "contents", force: :cascade do |t|

@@ -29,7 +29,7 @@
     -ms-transform: translate(-50%,-50%);                                            transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img") ,article %>  
     </div> 
    
-    <p class="article_list_title"><span><%= link_to article.title.truncate(5).html_safe, article %></p></span></p>
+    <p class="article_list_title"><span><%= link_to article.title.truncate(30).html_safe, article %></p></span></p>
     <!--</a>-->
     <p class="article_list_lead">
       <%= article.description.truncate(5).html_safe %>

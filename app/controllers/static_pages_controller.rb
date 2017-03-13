@@ -10,9 +10,14 @@ class StaticPagesController < ApplicationController
     #@micropost = current_user.microposts.build if logged_in?
     @articles = Article.page(params[:page]).published
     @user = User.find_by(name: params[:name])
+
     @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
-    @toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 1.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
-    @corporecom = Article.order("corporecom desc").published.limit(10)
+    
+    #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
+    @toprank = Article.where(:corporecom => [1..3]).published.limit(3) 
+    
+    @corporecom = Article.where(:corporecom => [100..300]).published.limit(10)
+     
     @topcon = Article.topconed.order("count(corporecom) desc")
      #require 'google_api'
       #api = GoogleApi.new

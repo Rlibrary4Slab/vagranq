@@ -73,8 +73,8 @@ body a:visited {
 
 .header {
   color: #000000;
-  background: -moz-linear-gradient(top, rgba(204,0,51,0.7), rgba(204,0,255,0.7));
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(204,0,51,0.7)), to(rgba(204,0,255,0.7)));
+  //background: -moz-linear-gradient(top, rgba(204,0,51,0.7), rgba(204,0,255,0.7));
+  //background: -webkit-gradient(linear, left top, left bottom, from(rgba(204,0,51,0.7)), to(rgba(204,0,255,0.7)));
   background: -o-linear-gradient(top, rgba(204,0,51,0.7), rgba(204,0,255,0.7));
   background: linear-gradient(top, rgba(204,0,51,0.7), rgba(204,0,255,0.7));
   height: 110px;
@@ -89,8 +89,9 @@ body a:visited {
   margin: 0 auto;
 }
 h1.header-logo {
-  font-size: 50px;
-  width: 96px;
+  font-size: 50px; 
+  //width: 96px;
+  text-align: center;
   margin: 20px auto 0;
   text-decoration: none;
   color: #ffffff;
@@ -124,7 +125,7 @@ ul.header-navi li {
   margin-left: 24px;
 }
 ul.header-navi li a {
-  color: #ffffff;
+  color: #000000;
   font-size: 14px;
 }
 ul.header-navi li a:hover {
@@ -463,8 +464,12 @@ ul.social-bottun li {
   margin-right: 5px;
 }
 .head_like_user {
-  float: right;
-  margin-top: -48px;
+  float: left;
+}
+
+.head_social {
+ float: right;
+ margin-top: 10px;
 }
 ul.user_like {
   list-style-type: none;
@@ -474,7 +479,14 @@ ul.user_like li {
   display: inline-block;
   margin-right: 5px;
 }
+#like-count {
+ color : #ED4B4B;
+}
 
+.user_info {
+ width: 1200px;
+ margin: 0 auto;
+}
 /* headline-bottom */
 
 /* article-top */
@@ -483,7 +495,7 @@ ul.user_like li {
   font-size: 24px;
   line-height: 1.4em;
   padding-bottom: 3px;
-  border-bottom: 2px solid #eaecee !important;
+  //border-bottom: 2px solid #eaecee !important;
 }
 .article_content h3 {
   font-size: 20px;
@@ -517,7 +529,8 @@ input {
 }
 
 li fieldset .ckeditors{
-  background-color: #eeeeee ;
+  background-color: #f5f5f5 ;
+  padding: 10px;
 }
 li fieldset {
   margin-bottom: 50px;
@@ -529,7 +542,7 @@ li fieldset {
 
 
 li fieldset .afsubmits:hover{
-  background-color: #eeeeee;
+  background-color: #f5f5f5;
 }
 
 li fieldset:hover{ 
@@ -546,7 +559,7 @@ li fieldset:hover{
   }
 
   .afsubmits{
-    background-color: #eeeeee;
+    background-color: #f5f5f5;
   }
 }
 
@@ -679,11 +692,14 @@ margin: 0 auto;
 /* social button*/
 .share-buttons{
       list-style: none;
-    }
+}
 
-    .share-buttons li{
+div.stBubble {
+ display: none !important;
+}
+.share-buttons li{
       display: inline;
-    }
+}
 .dropdown-menu {
     left: -125px !important;
     margin: 0px !important;

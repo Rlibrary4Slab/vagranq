@@ -25,13 +25,19 @@
           <%= link_to article.title.html_safe, article, style: "font-size:24px;" %></p>
           <%= article.description.html_safe %>
           <span><%= article.impressionist_count %>View</span>
-          <% if article.user.name == current_user.name%>
-          <%= link_to "編集する", edit_article_path(article) ,:style => "float:right;"%>
-          <%= link_to "削除する", article_path(article) ,:style => "float:right;", :method =>  :delete, :confirm =>"この記事を削除してよろしいですか？" %>
-         <% else %>
+          <% if logged_in? %>
+           <% if article.user.name == current_user.name%>
+            <div id="user_article_editable">
+            <%= link_to "編集する", edit_article_path(article) %>|
+            <%= link_to "削除する", article_path(article) , :method =>  :delete, data: {confirm: "この記事を削除してよろしいですか？"} %>
+          </div>
+           <% else %>
               
            <%= link_to article.user.user_name, article.user ,:style => "float:right;"%>
-         <%end%>
+           <% end %>
+          <% else %>
+            <%= link_to article.user.user_name, article.user ,:style => "float:right;"%>   
+          <% end %>
 
      </div>
    </div>

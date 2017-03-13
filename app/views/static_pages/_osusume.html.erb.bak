@@ -1,0 +1,108 @@
+<div class="title_section">
+  <div class="title_section_in">
+    <h2>おすすめのまとめ</h2>
+    <p>いまRanQで注目のまとめ</p>
+  </div>
+</div>
+  <div class="side_article_list">
+    <div class="article_list_content clearfix">
+      <div class="article_list_thumb" style="width:60px;">
+        <a href="content.html">
+          <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />
+        </a>
+      </div>
+      <div class="article_list_text">
+        <p class="side_article_title"><a href="content.html">記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります</a></p>
+        <p class="side_article_user">
+
+
+<a href="user.html">
+ユーザー名
+</a>
+
+
+        </p>
+      </div>
+    </div><!-- /.side_article_content -->
+
+    <div class="article_list_content clearfix">
+      <div class="article_list_thumb" style="width:60px;">
+        <a href="content.html">
+          <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />
+        </a>
+      </div>
+      <div class="article_list_text">
+        <p class="side_article_title"><a href="content.html">記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります</a></p>
+        <p class="side_article_user">
+
+
+<a href="user.html">
+ユーザー名
+</a>
+
+
+        </p>
+      </div>
+    </div><!-- /.side_article_content -->
+
+    <div class="article_list_content clearfix">
+      <div class="article_list_thumb" style="width:60px;">
+        <a href="content.html">
+          <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />
+        </a>
+      </div>
+      <div class="article_list_text">
+        <p class="side_article_title"><a href="content.html">記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります</a></p>
+        <p class="side_article_user">
+
+
+<a href="user.html">
+ユーザー名
+</a>
+
+
+        </p>
+      </div>
+    </div><!-- /.side_article_content -->
+
+    <div class="article_list_content clearfix">
+      <div class="article_list_thumb" style="width:60px;">
+        <a href="content.html">
+          <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />
+        </a>
+      </div>
+      <div class="article_list_text">
+        <p class="side_article_title"><a href="content.html">記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります</a></p>
+        <p class="side_article_user">
+
+
+<a href="user.html">
+ユーザー名
+</a>
+
+
+        </p>
+      </div>
+    </div><!-- /.side_article_content -->
+
+    <div class="article_list_content clearfix">
+      <div class="article_list_thumb" style="width:60px;">
+        <a href="content.html">
+          <img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />
+        </a>
+      </div>
+      <div class="article_list_text">
+        <p class="side_article_title"><a href="content.html">記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります</a></p>
+        <p class="side_article_user">
+
+
+<a href="user.html">
+ユーザー名
+</a>
+
+
+        </p>
+      </div>
+    </div><!-- /.side_article_content -->
+
+</div>
