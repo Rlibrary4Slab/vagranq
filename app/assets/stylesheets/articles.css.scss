@@ -119,6 +119,9 @@ ul.ranking-content li fieldset div.ckeditors .ranking-icon{
 }
 
 
+.afsubmits{
+ padding:10px;
+}
 ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
  padding: 3px 5px;
  //content: counter(number2);
@@ -157,4 +160,30 @@ ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
 
 #posting_buttons{
  float: right;
+}
+
+.cke_editable img {
+ position: relative !important;
+}
+.img-url {
+ position: absolute !important;
+ bottom: 0 !important;
+ left: 0 !important;
+ display: none !important;
+}
+.cke_editable img:hover .img-url {
+ display: initial !important;
+}
+
+.s_eyecatch_img{
+ width:70px;
+ height:70px;
+ object-fit: cover;
+ padding-right: 10px;
+}
+
+.top_s_eyecatch_img{
+ width:350px;
+ height:245px;
+ object-fit: cover;
 }

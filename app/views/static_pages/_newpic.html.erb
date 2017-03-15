@@ -7,15 +7,15 @@
     <% @articles.order(created_at: :desc).each do |article| %>
 
     <div class="article_list_content clearfix">
-    <div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 75px;
+    <!--<div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 75px;
     height: 75px;
     overflow: hidden;
     background-color: #888;
     border: 1px solid #222;
     index:-1;
-    margin-right: 20px;">
+    margin-right: 20px;">-->
 
-    <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
+    <%#= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
     top: 50%;
     left: 50%;
     width: auto;
@@ -24,12 +24,13 @@
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     " ,:class =>"s_eyecatch_img") ,article %>
-      </div>
+    <%= link_to image_tag(article.eyecatch_img,:class =>"s_eyecatch_img s_article_thumbnail", :id => "s_article_thumbnail article_list_thumb") ,article %>
+     <!-- </div>-->
     <div class="article_list_text">
       
        <p class="article_list_title">
           <%= link_to article.title.html_safe, article, style: "font-size:24px;" %></p>
-          <%= article.description.html_safe %>
+          <%#= article.description.html_safe %>
           <span><%= article.impressionist_count %>View</span>
           <%= link_to article.user.user_name, article.user ,:style => "float:right;"%> 
       
@@ -40,5 +41,5 @@
    </div>
 <% end %>
 
-    <%= paginate @articles %>
+    <%= paginate @articles ,params: {:controller => "articles" ,:action => "index"} %>
   </div><!-- /.article_list -->

@@ -5,8 +5,7 @@
       <p>人気まとめランキング</p>
     </div>
   </div>
-<div class="side_article_list"
- >
+<div class="side_article_list" >
 <% @rank.each do |article| %>
 <%# daily_article_ranking.each do |article| %>
  
@@ -15,21 +14,13 @@
     <!--
      <div class="article_list_thumb" style="width:60px;">
     -->
-    <div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 60px;
+    <!--<div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 60px;
     height: 60px;
     overflow: hidden;
     background-color: #888;
-    border: 1px solid #222; margin-right: 20px; index:-1;"> 
-     <!--<img alt="記事タイトルが入ります記事タイトルが入ります記事タイトルが入ります" class="crop_image" height="50" src="image/image-1.jpg" width="50" />-->
-    <%= link_to image_tag(article.eyecatch_img, :style =>" position: relative;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);" ,:class =>"s_eyecatch_img") ,article %>
-    </div>
+    border: 1px solid #222; margin-right: 20px; index:-1;"> -->
+    <%= link_to image_tag(article.eyecatch_img, :class =>"s_eyecatch_img s_article_thumbnail" ,:id => "s_article_thumbnail article_list_thumb" ) ,article %>
+    
     <div class="article_list_text">
     <p class="side_article_title"><%= link_to article.title.html_safe, article %></p>
     <p class="side_article_user">
@@ -40,4 +31,4 @@
 <%end %> 
 </div>
 
-<p class="genre_to_allTags">&raquo;&nbsp;<%= link_to "ランキングを20位までみる",allranking_path %></a></p>
+<!--<p class="genre_to_allTags">&raquo;&nbsp;<%#= link_to "ランキングを20位までみる",allranking_path %></a></p>-->

@@ -175,14 +175,14 @@ p.article_list_lead {
   line-height: 1.4em;
   color: #999999;
 }
-.topcontent_user a {
+.topcontent_user a, .side_article_user a ,.article_list_text a:nth-child(2){
   color: #999999 !important;
   font-size: 12px;
 }
-.topcontent_user a:link {
+.topcontent_user a:link ,.side_article_user a:link, .article_list_text a:link:nth-child(2){
   color: #999999 !important;
 }
-.topcontent_user a:hover {
+.topcontent_user a:hover , .side_article_user a:hover, .article_list_text a:hover:nth-child(2){
   text-decoration: underline;
 }
 
@@ -528,9 +528,10 @@ input {
   height: auto !important;
 }
 
-li fieldset .ckeditors{
+li fieldset .ckeditors ,.description_field .field{
   background-color: #f5f5f5 ;
   padding: 10px;
+  margin-top: 30px;
 }
 li fieldset {
   margin-bottom: 50px;
@@ -541,12 +542,12 @@ li fieldset {
 
 
 
-li fieldset .afsubmits:hover{
+li fieldset .afsubmits:hover , .description_field .afsubmits:hover{
   background-color: #f5f5f5;
 }
 
-li fieldset:hover{ 
-  .ckeditors .hiddenButtons {
+li fieldset:hover, .description_field:hover{ 
+  .ckeditors .hiddenButtons , .field .hiddenButtons{
     display: initial;
 
     //opacity:1;
@@ -563,8 +564,8 @@ li fieldset:hover{
   }
 }
 
-li fieldset {
-  .ckeditors .hiddenButtons  {
+li fieldset , .description_field{
+  .ckeditors .hiddenButtons , .field .hiddenButtons{
    //opacity:0;
    float: none;
    //position: absolute;

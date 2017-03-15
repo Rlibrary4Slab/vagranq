@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:twitter,:facebook]
     has_many :social_profiles, dependent: :destroy
+    has_many :authentication, dependent: :destroy
     def social_profile(provider)
      social_profiles.select{ |sp| sp.provider == provider.to_s }.first
     end 
@@ -69,6 +70,10 @@ class User < ActiveRecord::Base
     def self.from_omniauth(auth)
       #where(auth.slice(:provider, :uid)).first_or_create do |user|
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        #user = User.where('email =?', auth.info.email).first
+        #if user.blank?
+        #  user = User.new
+        #end
         user.provider = auth.provider
         user.uid = auth.uid
         if auth.provider == "twitter"
@@ -80,6 +85,7 @@ class User < ActiveRecord::Base
          user.name = auth.extra.raw_info.id
         end
         user.email = User.dummy_email(auth)
+        user    
       end
 
     end

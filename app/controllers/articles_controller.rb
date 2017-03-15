@@ -10,9 +10,9 @@ class ArticlesController < AuthorizedController
       @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
-      @toprank = Article.where(:corporecom => [1..3]).published.page(params[:page]).limit(3)
+      @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
 
-      @corporecom = Article.where(:corporecom => [100..300]).published.page(params[:page]).limit(10)
+      @corporecom = Article.where(:corporecom => [100..300]).published.limit(10)
     end
     
     def pvranking
@@ -35,7 +35,8 @@ class ArticlesController < AuthorizedController
     #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
     @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
 
-    @articles = Article.order('updated_at desc').page(params[:page]).published
+    #@articles = Article.order('updated_at desc').page(params[:page]).published
+    @articles = Article.page(params[:page]).published.order('updated_at desc')
     #@q        = Article.ransack(params[:q])
     #@qarticles = @q.result(distinct: true)
   end

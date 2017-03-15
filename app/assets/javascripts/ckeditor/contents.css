@@ -22,9 +22,27 @@ body
 {
 	font-size: 13px;
 	line-height: 1.6;
-
+        position: absolote;
 	/* Fix for missing scrollbars with RTL texts. (#10488) */
 	word-wrap: break-word;
+}
+
+.cke_editable p img {
+ position: relative !important;
+}
+div.img_url {
+ position: absolute !important;
+ bottom: 0 !important;
+ left: 0 !important;
+ display: none ;
+}
+
+body.cke_editable p img:hover{
+
+  div.img_url {
+    display: initial !important;
+  }
+
 }
 
 blockquote

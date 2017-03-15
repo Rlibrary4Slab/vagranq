@@ -49,9 +49,9 @@
       <!--Eheadline is-border-->
        <%= render @articles %>
       <br>
+    <%= paginate @articles ,:action => :index %>
     </div>
     <!-- Econtent -->
-        <%= paginate @articles %>
   </div><!-- /#column_content -->
   <div id="column_sidebar">
     <%= render 'static_pages/sidecontent' %>
@@ -62,8 +62,8 @@
 <div class="headline is-border">
         <h2 class="headline-title">記事一覧</h2>
     </div>  
- <%= render @articles %>
+ <%#= render @articles %>
 <br>
 
-<%= paginate @articles %>
+<%#= paginate @articles %>
 -->

@@ -38,7 +38,6 @@ namespace :deploy do
     invoke 'deploy:check:linked_dirs'
     invoke 'deploy:check:make_linked_dirs'
     invoke 'deploy:check:linked_files'
-    :backup
   end
   
   desc 'Create database'
@@ -67,23 +66,27 @@ namespace :deploy do
 
   desc "Backup the remote production database"
   task :backup do
+   application ="ranq"
    filename = "#{application}.dump.#{Time.now.to_i}.sql.bz2"
    file = "/tmp/#{filename}"
-   on_rollback { delete file }
+   #execute :orback , on_rollback { delete file }
    db = YAML::load(ERB.new(IO.read(File.join(File.dirname(__FILE__), 'database.yml'))).result)['production']
-   run "mysqldump -u #{db['username']} --password=#{db['password']} #{db['database']} | bzip2 -c > #{file}"  do |ch, stream, data|
-    puts data
+   on roles :all do
+  
+    execute :mysqldump, "-u #{db['username']} --password=#{db['password']} #{db['database']} | bzip2 -c > #{file}"  do |ch, stream, data|
+     puts data
+    end
    end
    backup_dir = File.dirname(__FILE__) + "/../backups/"
    `mkdir -p #{backup_dir}` unless File.exists?(backup_dir)
-   get file, "#{backup_dir}/#{filename}"
-   run "rm #{file}"
+   gets file, "#{backup_dir}/#{filename}"
+   on roles :all do
+    execute :rm, "#{file}"
+   end
   end
 
   desc "Backup the database before running migrations"
-  #before :db_create ,:backup
- 
- 
+  #after :check, :backup 
   after :publishing, :restart
 
   after :restart, :clear_cache do

@@ -14,6 +14,7 @@ regz=new RegExp('^cke_article_contents_attributes_([0-9+]+)_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+]+)_title$')
 regz2=new RegExp('^article_contents_attributes_([0-9+]+)_description$')
 $(window).on "load" , ->
+  CKEDITOR.replaceAll("ckeditor")
   console.log("load") 
   $('fieldset div').each ->
     if z=$(this).prop('id').match(regz)
@@ -83,6 +84,7 @@ $(document).on 'ready page:load', ->
   #if $("#article_title").val() != null
   $('#spsubmit').click()
 
+#$('')
   
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
@@ -139,22 +141,33 @@ $(document).on 'click', '.add_fields', (event) ->
 #  $('.cke_editable').css("background","green")
 #  $(".t1").html(sand) 
 
-
+#新しく所説明専用のクラスを作る
 $(document).on "click" ,".psubmit", ->   
-  console.log("ckssd")
+  #console.log("ckssd")
   divs = $(this).parents("fieldset").find(".ckeditors")
   sall = $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val()
+  divf = $(this).parents(".description_field").find(".field")
   divs.css("display","none")
+  divf.css("display","none")
   $(this).parents("fieldset").find(".afsubmits").css("display","")
   $(this).parents("fieldset").find(".psubmit").css("display","none")
   $(this).parents("fieldset").find(".esubmit").css("display","")
   
+  $(this).parents(".description_field").find(".afsubmits").css("display","")
+  $(this).parents(".description_field").find(".psubmit").css("display","none")
+  $(this).parents(".description_field").find(".esubmit").css("display","")
+
   cabt=$(this).parents("fieldset").find(".ckeditors").find(".form-control").first().val()
   
   cabd=$(this).parents("fieldset").find(".ckeditors").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
+
+  cabf=$(this).parents(".description_field").find(".field").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
    
   iii=cabt
   jjj=cabd.html()
+  jjjf=cabf.html()
+
+  $(this).parents("fieldset").find(".toplinkmove").click()
   $(this).parents("fieldset").find(".afsubmits").find(".aft").html('<span class="ranking-icon"></span>'+iii)
   $(this).parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
   if sall != ""
@@ -162,7 +175,16 @@ $(document).on "click" ,".psubmit", ->
   else  
     $(this).parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
  # document.getElementById("csubmit").click()
+  #$(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
+  #if salf != ""
+  #  $(this).parents(".description_field").find(".afsubmits").find(".afd").html(salf)
+  #else  
+  #  $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
+
+
   $(this).parents("fieldset").find(".toplinkmove").click()
+
+
 $(document).on "click","a[href^=#].toplinkmove", ->
     target = $(this)
     if !target.length
@@ -178,6 +200,7 @@ $(document).on "click","a[href^=#].toplinkmove", ->
 
 $(document).on "click",".esubmit",->
   $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val("")
+  $(this).parents(".description_field").find(".field").find(".form-control").val()
 
   #$(".afsubmits").css("display","none")
   #$(".ckeditors").css("display","")
@@ -186,6 +209,10 @@ $(document).on "click",".esubmit",->
   $(this).parents("fieldset").find(".afsubmits").css("display","none")
   $(this).parents("fieldset").find(".psubmit").css("display","")
   $(this).parents("fieldset").find(".esubmit").css("display","none")
+  $(this).parents(".description_field").find(".field").css("display","")
+  $(this).parents(".description_field").find(".afsubmits").css("display","none")
+  $(this).parents(".description_field").find(".psubmit").css("display","")
+  $(this).parents(".description_field").find(".esubmit").css("display","none")
 #0202
 
   $(this).parents("fieldset").find(".toplinkmove").click()

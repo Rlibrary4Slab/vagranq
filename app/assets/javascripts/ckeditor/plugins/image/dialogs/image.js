@@ -412,7 +412,9 @@
                     //$('fieldset div#cke_ssquire_contents_attributes_0_title div div iframe').contents().find("html body").append("<p>"+quote+"<p>");
                     
                     //console.log("ALTCREATENEWIMAGE");
-                    this.imageElement.setAttribute('alt', '');
+                    //this.imageElement.setAttribute('alt', '');
+                    var alten = $(".cke_dialog_ui_input_text").val()
+                    this.imageElement.setAttribute('alt', alten);
                 }
                 // Create a new link.
                 if (!this.linkEditMode) this.linkElement = editor.document.createElement('a');
@@ -459,8 +461,8 @@
                         var jam=lab.html();
                         lab.html(""); //項目空白
                         editor.insertElement(this.imageElement);
-                        var quote = $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val()
-                        $("fieldset div#"+iurtmp+" div div iframe").contents().find("html body").append('<div style="background-color:#EEEEEE">'+quote+'</div>');
+                        //var quote = $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val()
+                        //$("fieldset div#"+iurtmp+" div div iframe").contents().find("html body").append('<div class="img_url" style="background-color:#EEEEEE">'+quote+'</div>');
                         //新画像、url引用挿入後
                         var labimp = $("fieldset div#"+iurtmp+" div div iframe").contents().find("html body"); //の項目を取得
                         var imp= labimp.html();
@@ -609,6 +611,7 @@
                                     ////alert("commIF")
                                     element.data('cke-saved-src', this.getValue());
                                     element.setAttribute('src', this.getValue());
+                                    element.setAttribute('title', this.getValue());
                                 } else if (type == CLEANUP) {
                                     ////alert("commELS")
                                     //console.log("commEL")
