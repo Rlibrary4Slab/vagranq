@@ -141,31 +141,40 @@ $(document).on 'click', '.add_fields', (event) ->
 #  $('.cke_editable').css("background","green")
 #  $(".t1").html(sand) 
 
+$(document).on "click" ,".pdsubmit", -> 
+   divf = $(this).parents(".description_field").find(".field")
+   divf.css("display","none")
+
+   $(this).parents(".description_field").find(".afsubmits").css("display","")
+   $(this).parents(".description_field").find(".pdsubmit").css("display","none")
+   $(this).parents(".description_field").find(".esubmit").css("display","")
+
+   cabf=$(this).parents(".description_field").find(".field").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
+   jjjf=cabf.html()
+   $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
+   if salf != ""
+    $(this).parents(".description_field").find(".afsubmits").find(".afd").html(salf)
+   else
+    $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
+   
 #新しく所説明専用のクラスを作る
 $(document).on "click" ,".psubmit", ->   
   #console.log("ckssd")
   divs = $(this).parents("fieldset").find(".ckeditors")
   sall = $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val()
-  divf = $(this).parents(".description_field").find(".field")
   divs.css("display","none")
-  divf.css("display","none")
   $(this).parents("fieldset").find(".afsubmits").css("display","")
   $(this).parents("fieldset").find(".psubmit").css("display","none")
   $(this).parents("fieldset").find(".esubmit").css("display","")
   
-  $(this).parents(".description_field").find(".afsubmits").css("display","")
-  $(this).parents(".description_field").find(".psubmit").css("display","none")
-  $(this).parents(".description_field").find(".esubmit").css("display","")
 
   cabt=$(this).parents("fieldset").find(".ckeditors").find(".form-control").first().val()
   
   cabd=$(this).parents("fieldset").find(".ckeditors").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
 
-  cabf=$(this).parents(".description_field").find(".field").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
    
   iii=cabt
   jjj=cabd.html()
-  jjjf=cabf.html()
 
   $(this).parents("fieldset").find(".toplinkmove").click()
   $(this).parents("fieldset").find(".afsubmits").find(".aft").html('<span class="ranking-icon"></span>'+iii)
@@ -202,6 +211,7 @@ $(document).on "click",".esubmit",->
   $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val("")
   $(this).parents(".description_field").find(".field").find(".form-control").val()
 
+  $(this).parents(".description_field").find(".pdsubmit").css("display","")
   #$(".afsubmits").css("display","none")
   #$(".ckeditors").css("display","")
   #$(this).parents("fieldset").find(".tdsubmit").css("display","")
@@ -239,8 +249,8 @@ $(document).on 'click' ,-> #clicked
   $(".pdown").css("display":"initial")
   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
   $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
-  
-  
+
+
   
   $('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
   if $("#user_name").length <1 
@@ -276,15 +286,17 @@ $(document).on 'click' ,-> #clicked
    
   eyeimg= $("div div div iframe").contents().find("html body p img")
   ym=eyeimg.first().prop("src")
-  ##console.log("ym"+ym)
+  #console.log("ym"+ym)
   #yms=$(yal+" p img").prop("src")
   ##console.log("yms"+yms)
-  if ym != "undefined"
+  if ym != undefined
     #$("#eyecatch_img").val('<img src="'+ym+'"/>')
-    $("#eyecatch_img").val(ym)
+    $("#eyecatch_img").val(ym) 
     #ここで画像をな切り取る
     #$("#eyecatch_img").val('<img src="'+ym+'" style="height: 75px; width: 75px;" />')#切り撮った画像を圧縮
-      
+  else
+    
+    $("#eyecatch_img").val('l_e_others_500.png')
 $(document).on 'click', '.cke_btn_reset' ,->
   #$('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:first-child td div div div input
 #').val("300")

@@ -120,7 +120,7 @@ ul.ranking-content li fieldset div.ckeditors .ranking-icon{
 
 
 .afsubmits{
- padding:10px;
+  padding:10px;
 }
 ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
  padding: 3px 5px;
@@ -179,11 +179,18 @@ ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
  width:70px;
  height:70px;
  object-fit: cover;
- padding-right: 10px;
+ margin-right: 10px;
 }
 
 .top_s_eyecatch_img{
  width:350px;
  height:245px;
  object-fit: cover;
+}
+
+.article_content {
+ overflow: hidden;
+}
+.article_content img {
+ max-width: 100%;
 }

@@ -6,14 +6,14 @@ class Article < ActiveRecord::Base
     is_impressionable
     validates :title, length: { maximum: 30, message: "が長すぎます30文字以下にしてください"} 
     validates_presence_of :title,message: "を入力してください"
-    validates_presence_of :eyecatch_img ,message: "が認識できませんでした"
+    #validates_presence_of :eyecatch_img ,message: "が認識できませんでした"
     #validates :description,presence: true
     validates :user_id, presence: true
     
     validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "を入力してください"}
     
     has_many :contents
-    paginates_per 4
+    paginates_per 20 
     accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
     aasm do
         state :draft, :initial => true
