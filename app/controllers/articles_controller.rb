@@ -7,7 +7,7 @@ class ArticlesController < AuthorizedController
   before_action :all
   add_breadcrumb "RanQ", :root_path
     def all
-      @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
+      @rank = Article.published.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
@@ -28,15 +28,15 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "記事一覧", :articles_path
     #@articles = Atricle.search(params[:search])
     #@articles = Article.all
-    #@corporecom = Article.order("corporecom desc").published.page(params[:page]).limit(10)
+    #@corporecom = Article.order("corporecom desc").published.per_page_kaminari(params[:page]).limit(10)
     #@articles = Article.page(params[:page]).per(3).published.get_by_title params[:title]
-    @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
+    #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
 
     #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
-    @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
+    #@toprank = Article.where(:corporecom => [1..3]).published.limit(3)
 
     #@articles = Article.order('updated_at desc').page(params[:page]).published
-    @articles = Article.page(params[:page]).published.order('updated_at desc')
+    @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc')
     #@q        = Article.ransack(params[:q])
     #@qarticles = @q.result(distinct: true)
   end
@@ -57,14 +57,14 @@ class ArticlesController < AuthorizedController
   def fashion
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
-    @articles = Article.page(params[:page]).published
+    @articles = Article.per_page_kaminari(params[:page]).published
     @articles = @articles.fashion params[:category] 
   end
   
   def beauty
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.beauty params[:category]
     
 
@@ -72,56 +72,56 @@ class ArticlesController < AuthorizedController
   def hangout
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.hangout params[:category]
     
   end
   def gourmet
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.gourmet params[:category]
     
   end
   def lifestyle
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.lifestyle params[:category]
     
   end
   def entertainment
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.entertainment params[:category]
     
   end
   def interior
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.interior params[:category]
     
   end
   def gadget
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.gadget params[:category]
     
   end
   def learn
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.learn params[:category]
     
   end
   def funny
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
-    @articles = Article.page(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published 
     @articles = @articles.funny params[:category]
     
   end

@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
     #@article_form = ArticleForm.new params[:article_form]
     #@search=@article_form.search
     #@micropost = current_user.microposts.build if logged_in?
-    @articles = Article.page(params[:page]).published
+    @articles = Article.per_page_kaminari(params[:page]).published
     #@articles = Article.paginate(:page =>  params[:page]).published
     @user = User.find_by(name: params[:name])
 
