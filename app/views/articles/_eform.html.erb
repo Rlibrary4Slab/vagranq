@@ -40,10 +40,52 @@
       <%= f.label :title %><!--<input type = "button" class="tdsubmit btn btn-default"  value="交換">--><br>
       <%= f.text_field :title %>
     </div>
-    <div class="field" style="display:none;>
-      <%= f.label :description %><br>
-      <%= f.text_field :description %>
-    </div>
+    <div class="description_field">
+     <div class="field" style="display:none;>
+       <%= f.label :description %><br>
+       <%= f.text_area :description, :class =>  "form-control ckeditor" %>
+
+         <span class="hiddenButtons" value="隠す">
+
+      <%#= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+      <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+      </div>
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="pdsubmit btn btn-default" id="psubmit" style="display:none;"value="追加する">
+     <input type="button" style="" class="btn btn-default esubmit" value="編集">
+    </span>
+
+       
+     </div>
+       <div class="afsubmits" style="">
+   <span class="hiddenButtons" value="隠す">
+
+     <%#= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+     </div>
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="pdsubmit btn btn-default" id="psubmit" value="追加する" style="display:none;">
+     <input type="button" style="" class="btn btn-default esubmit" value="編集">
+    </span>
+    <div class="afd"></div>
+  </div>
+
+
+     </div>
     
   <input type="text" style="display:none;" id="iurtmp" />
        <input type="button" id="spsubmit" value="sssssdsd" style="display:none;">
@@ -58,7 +100,7 @@
     <%= link_to_add_fields "+", f, :contents %>
     </ul>
   </div>
-  <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓↓"/>
+  <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
   <%#= f.button '下書き保存', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default'%>
   <%= f.button @article.new_record? ? '下書き保存' : '変更する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
 

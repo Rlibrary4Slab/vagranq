@@ -88,6 +88,8 @@ $(document).on 'ready page:load', ->
   
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
+  $(".pdsubmit").click()
+  
 
 $(document).on 'click', '.remove_fields', (event) ->
   $(this).prev('input[type=hidden]').val('1')
@@ -144,7 +146,7 @@ $(document).on 'click', '.add_fields', (event) ->
 $(document).on "click" ,".pdsubmit", -> 
    divf = $(this).parents(".description_field").find(".field")
    divf.css("display","none")
-
+   salf = $(this).parents(".description_field").find(".field").find(".form-control").val()
    $(this).parents(".description_field").find(".afsubmits").css("display","")
    $(this).parents(".description_field").find(".pdsubmit").css("display","none")
    $(this).parents(".description_field").find(".esubmit").css("display","")
