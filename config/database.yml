@@ -88,8 +88,8 @@ production:
   pool: 5
   database: vagranq_production
   #host: 52.197.133.116
-  username: root
-  password:
+  username: forstart 
+  password: forstart
   socket: /var/lib/mysql/mysql.sock
 
 

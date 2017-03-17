@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     after_update :crop_image
     
     #is_impressionable
-    paginates_per 5
+    paginates_per 20 
     def to_param
      name
    
