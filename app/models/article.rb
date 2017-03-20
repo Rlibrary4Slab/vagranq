@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
     has_many :likes, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user
     is_impressionable
-    validates :title, length: { maximum: 30, message: "が長すぎます30文字以下にしてください"} 
+    validates :title, length: { maximum: 40, message: "が長すぎます40文字以下にしてください"} 
     validates_presence_of :title,message: "を入力してください"
     #validates_presence_of :eyecatch_img ,message: "が認識できませんでした"
     #validates :description,presence: true

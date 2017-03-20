@@ -538,6 +538,7 @@ ul.user_like li {
   line-height: 1.4em;
   padding-bottom: 3px;
   //border-bottom: 2px solid #eaecee !important;
+  margin-top: 50px;
 }
 .article_content h3 {
   font-size: 20px;
@@ -579,9 +580,11 @@ li fieldset, .description_field {
   margin-bottom: 50px;
   position: relative;
   padding: 10px;
-  padding-bottom: 50px;
 }
 
+.description_field {
+  margin-top: 50px;
+}
 li fieldset .afsubmits , .description_field .afsubmits{
   overflow: hidden;
   padding: 10px;

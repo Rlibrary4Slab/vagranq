@@ -1,4 +1,8 @@
-<% provide(:title, @user.name) %>
+<%# provide(:title, @user.name) %>
+<% content_for :title do %>
+
+<%= @user.name %>の記事一覧
+<%end%>
 <%= render_breadcrumbs %>
 
 <div class="row" >

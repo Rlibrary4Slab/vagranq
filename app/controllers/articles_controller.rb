@@ -55,6 +55,7 @@ class ArticlesController < AuthorizedController
   end
   #categories
   def fashion
+    @title = "ファッション一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
     @articles = Article.per_page_kaminari(params[:page]).published
@@ -62,6 +63,7 @@ class ArticlesController < AuthorizedController
   end
   
   def beauty
+    @title = "美容健康一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -70,6 +72,7 @@ class ArticlesController < AuthorizedController
 
   end
   def hangout
+    @title = "おでかけ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -77,6 +80,7 @@ class ArticlesController < AuthorizedController
     
   end
   def gourmet
+    @title = "グルメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -84,6 +88,7 @@ class ArticlesController < AuthorizedController
     
   end
   def lifestyle
+    @title = "ライフスタイル一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -91,6 +96,7 @@ class ArticlesController < AuthorizedController
     
   end
   def entertainment
+    @title = "エンタメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -98,6 +104,7 @@ class ArticlesController < AuthorizedController
     
   end
   def interior
+    @title = "インテリア一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -105,6 +112,7 @@ class ArticlesController < AuthorizedController
     
   end
   def gadget
+    @title = "ガジェット一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -112,6 +120,7 @@ class ArticlesController < AuthorizedController
     
   end
   def learn
+    @title = "学び一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
     @articles = Article.per_page_kaminari(params[:page]).published 
@@ -119,6 +128,7 @@ class ArticlesController < AuthorizedController
     
   end
   def funny
+    @title = "おもしろ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
     @articles = Article.per_page_kaminari(params[:page]).published 

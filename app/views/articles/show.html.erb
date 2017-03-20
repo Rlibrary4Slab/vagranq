@@ -1,3 +1,9 @@
+<%# provide(:title) %>
+
+<% content_for :title do %>
+
+<%= @article.title %>
+<%end%>
 <!-- コンテンツ -->
 <%#= render_breadcrumbs %>
 <section id="topcontent" style="background-color: #ffffff;">
@@ -25,7 +31,7 @@
         <%= image_tag @article.eyecatch_img,:class =>"s_eyecatch_img" %>
       </div>
       <%= @article.updated_at.strftime("%Y年%m月%d日　更新") %>
-      <h2 class="article_title"><%= @article.title %></h2>
+      <h1 class="article_title"><%= @article.title %></h1>
       <!--<p class="article_description">--><%#= @article.description.html_safe %>
       <div style="display:none;" id="checkAgree"><%= @article.checkagree %></div>
     </div>

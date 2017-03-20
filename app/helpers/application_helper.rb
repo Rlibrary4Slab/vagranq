@@ -7,4 +7,14 @@ module ApplicationHelper
     end
     link_to(name, '#'   ,class: "add_fields btn btn-lg btn-default", data: {id: id, fields: fields.gsub("\n", "")})
   end
+  
+   def full_title(page_title)
+     base_title = "RanQ [ランク]｜あなたの知りたいがランキングで分かる。" # 自分のアプリ名を設定する
+     if page_title.empty?
+      base_title
+     else
+      # "#{page_title} | #{base_title}"
+      "#{page_title}"
+     end
+   end
 end

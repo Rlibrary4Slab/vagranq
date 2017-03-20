@@ -145,6 +145,10 @@ ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
  display:initial !important;
  font-size: 30px !important;
 }
+
+#article_title{
+ width: 600px;
+}
 #user_article_editable{
  float:right;
 }
@@ -188,6 +192,7 @@ ul.ranking-content li fieldset div.afsubmits h2 .ranking-icon{
 
 .article_content {
  overflow: hidden;
+ margin-bottom: 50px;
 }
 .article_content img {
  max-width: 100%;
