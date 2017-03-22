@@ -1,4 +1,3 @@
-
 CarrierWave.configure do |config|
   config.fog_provider = 'fog/aws'
   config.fog_credentials = {
@@ -36,4 +35,4 @@ CarrierWave.configure do |config|
 end
 
 # 日本語ファイル名の設定
-CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+#CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
