@@ -4,9 +4,18 @@
 
 
 /* sumahoS */
-@media screen and (max-width: 980px)   {
+@media screen and (max-width: 1069px)   {
+  .topcontent_content a img {
+   width:100% !important;
+   height: 600px !important;
+  }
+
   header {
    width: 100% !important;
+   height: 147px !important;
+   div h1{
+    font-size: 75px !important;
+   }
   }
   #non_login_user_header_menu {
    display: none !important;
@@ -20,6 +29,21 @@
   }
   .topcontent_main {
     width: 100% !important;
+    ul {
+      display: table-caption !important;
+      margin-left: -12px !important;
+      width: 100% !important;
+      li{
+       width:100% !important;
+       span{
+         font-size: 50px !important;
+       }
+      }
+    }
+     
+    ul li a:link{
+     font-size:60px !important;
+    }
   }
   #wrapper {
    width: 100% !important;
@@ -31,9 +55,36 @@
   .categorymenu {
    display: none !important;
   }
-  #content {
+  #content, #column_sidebar,.osusume {
    width: 100% !important;
    margin-left: 0 !important;
+   .pickup_list,.side_article_list {
+    display: table-caption !important;
+    width: 100% !important;
+
+    margin-left: -10px !important;
+    margin-right: 45px !important;
+    .article_list_content {
+     width: 50% !important;
+     float: left !important; 
+     height: 600px !important;
+     a .s_eyecatch_img {
+      width: 490px !important;
+      height: 240px !important;
+     }
+     .article_list_text {
+      padding-left: 4% !important;
+      padding-right: 7% !important;
+       .article_list_title a,.side_article_title a{
+        font-size: 60px !important;
+
+       }
+       .side_article_user a {
+        font-size: 45px !important;
+       }
+     }
+    }
+   }
   }
   #column_sidebar {
    width: 100% !important;
