@@ -24,9 +24,9 @@ CarrierWave.configure do |config|
       config.fog_directory = 'ranq-media-image-store'
       config.asset_host = 'https://ranq-media-image-store.s3-ap-northeast-1.amazonaws.com'
 
-    #when 'development'
-      #config.fog_directory = 'dev-ranq-media-image-store'
-      #config.asset_host = 'https://dev-ranq-media-image-store.s3-ap-northeast-1.amazonaws.com'
+    when 'development'
+      config.fog_directory = 'dev-ranq-media-image-store'
+      config.asset_host = 'https://dev-ranq-media-image-store.s3-ap-northeast-1.amazonaws.com'
 
     when 'test'
       config.fog_directory = 'dev-ranq-media-image-store'

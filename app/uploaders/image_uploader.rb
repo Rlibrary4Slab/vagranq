@@ -7,9 +7,9 @@ class ImageUploader < CarrierWave::Uploader::Base
    #include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-   if Rails.env == "development" || "test"
+   if Rails.env == "development" 
     storage :file
-   elsif Rails.env == "production" || "staging"
+   elsif Rails.env == "production"
     storage :fog
    end
   # Override the directory where uploaded files will be stored.
@@ -66,6 +66,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    #process :resize_to_fit => [40, 40]
   end
   version :thumb_view do
+   process :crop
    resize_to_fill(50,50)
    #process :resize_to_fill => [50, 50, gravity = ::Magick::CenterGravity]
    #process :resize_to_fit => [40, 40]
