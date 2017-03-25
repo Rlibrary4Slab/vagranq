@@ -3,9 +3,9 @@ CarrierWave.configure do |config|
   config.fog_credentials = {
     provider:              'AWS',
     # アクセスキー
-    aws_access_key_id:     ,
+    aws_access_key_id:     ENV["AWS_ACCESS_KEY_ID"],
     # シークレットキー
-    aws_secret_access_key: ,
+    aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
     # Tokyo
     region:                'ap-northeast-1',
   }
@@ -24,9 +24,9 @@ CarrierWave.configure do |config|
       config.fog_directory = 'ranq-media-image-store'
       config.asset_host = 'https://ranq-media-image-store.s3-ap-northeast-1.amazonaws.com'
 
-    when 'development'
-      config.fog_directory = 'dev-ranq-media-image-store'
-      config.asset_host = 'https://dev-ranq-media-image-store.s3-ap-northeast-1.amazonaws.com'
+    #when 'development'
+    #  config.fog_directory = 'dev-ranq-media-image-store'
+    #  config.asset_host = 'https://dev-ranq-media-image-store.s3-ap-northeast-1.amazonaws.com'
 
     when 'test'
       config.fog_directory = 'dev-ranq-media-image-store'
