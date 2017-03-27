@@ -12,7 +12,8 @@ class StaticPagesController < ApplicationController
     #@articles = Article.paginate(:page =>  params[:page]).published
     @user = User.find_by(name: params[:name])
 
-    @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
+    #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
+    @rank = Article.published.where(:id => Like.group(:article_id).order('count(article_id) desc').limit(8).pluck(:article_id))
     
     #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
     @toprank = Article.where(:corporecom => [1..3]).published.limit(3) 

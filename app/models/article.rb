@@ -72,4 +72,12 @@ class Article < ActiveRecord::Base
         where("title like?","%#{title}%")
     }
    
+    def self.findn(arg)
+     begin
+      self.find(arg)
+     rescue => e
+      return nil
+     end
+     
+    end
 end
