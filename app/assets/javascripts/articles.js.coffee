@@ -94,7 +94,8 @@ $(document).on "click", '#spsubmit',->
 $(document).on 'click', '.remove_fields', (event) ->
   $(this).prev('input[type=hidden]').val('1')
   #$(this).closest('fieldset').hide()
-  $(this).closest('li').remove()
+  #$(this).closest('li').remove()
+  $(this).closest('li').hide()
   $(".add_fields").css("display","");
   document.getElementById("tansubmit").click()
   console.log("removed="+aaaa)
