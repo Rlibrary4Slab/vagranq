@@ -7,15 +7,26 @@ class ImageUploader < CarrierWave::Uploader::Base
    #include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-   if Rails.env == "development" 
-    storage :file
-   elsif Rails.env == "production"
+   #if Rails.env == "development" 
+    #storage :file
+   #elsif Rails.env == "production"
     storage :fog
-   end
+   #end
+  
+  #def fog_attributes
+  #  {
+      #'Content-Type' =>  'image/jpg',
+      #'Cache-Control' => "max-age=#{1.week.to_i}"
+  #  }
+  #end
+
   # Override the directory where uploaded files will be stored.
+
+
+  
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "s1/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     #"/sample-image/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
@@ -76,13 +87,18 @@ class ImageUploader < CarrierWave::Uploader::Base
   
   # jpg,jpeg,gif,pngしか受け付けない
   def extension_white_list
-    %w(jpg jpeg gif png)
+    #%w(jpg jpeg gif png)
+    %w(jpg jpeg png)
   end
 
  # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
   def filename
     super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
+    #if original_filename.present?
+    #  "#{model.id}_#{secure_token}.#{file.extension}"
+    #end
   end
+
   
   def default_url
       #ActionController::Base.helpers.asset_path(["image-1.jpg"].compact.join('_'))
@@ -104,5 +120,11 @@ class ImageUploader < CarrierWave::Uploader::Base
        end
      end
   end
-  
+  protected
+
+
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+  end
 end
