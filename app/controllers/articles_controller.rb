@@ -3,6 +3,7 @@ class ArticlesController < AuthorizedController
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_draft,   only: [:show]
   impressionist actions: [:show]
   before_action :all
   add_breadcrumb "RanQ", :root_path
@@ -322,6 +323,13 @@ class ArticlesController < AuthorizedController
     #  redirect_to(root_url) unless @user == current_user
       @article = current_user.articles.find_by(id: params[:id])
       redirect_to root_url if @article.nil?
+    end
+    
+    def correct_draft
+      @articlep = Article.published.find_by(id: params[:id])
+      @article = Article.find_by(id: params[:id])
+      @user = current_user.articles.published.find_by(id: params[:id])
+      redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
     end
     
 end
