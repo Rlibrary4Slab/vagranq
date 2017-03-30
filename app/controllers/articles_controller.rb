@@ -328,7 +328,6 @@ class ArticlesController < AuthorizedController
     def correct_draft
       @articlep = Article.published.find_by(id: params[:id])
       @article = Article.find_by(id: params[:id])
-      @user = current_user.articles.published.find_by(id: params[:id])
       redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
     end
     
