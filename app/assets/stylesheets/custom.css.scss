@@ -82,7 +82,7 @@
    width: 100% !important;
    margin-left: 0 !important;
    .pickup_list,.side_article_list {
-    width: 1rtant;
+    width: 100% !important;
 
     margin-left: -10px !important;
     //margin-right: 45px !important;
@@ -97,10 +97,10 @@
       padding-left: 4% !important;
       padding-right: 7% !important;
        .article_list_title a,.side_article_title a{
-        font-size: 60px !important;
+        font-size: 30px !important;
 
        }
-       .side_article_user a {
+       .article_user a ,.side_article_user a {
         font-size: 45px !important;
        }
      }
@@ -125,7 +125,7 @@
 
 /* font-sizeS */
 
-  .column_content .article_content p {
+  #column_content .article_content p {
   
    font-size : 18px;
   }

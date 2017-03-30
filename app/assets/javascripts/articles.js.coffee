@@ -92,12 +92,13 @@ $(document).on "click", '#spsubmit',->
   
 
 $(document).on 'click', '.remove_fields', (event) ->
-  $(this).prev('input[type=hidden]').val('1')
+  $(this).parents("fieldset").find('._destroy').val('1')
   #$(this).closest('fieldset').hide()
   #$(this).closest('li').remove()
   $(this).closest('li').hide()
   $(".add_fields").css("display","");
   document.getElementById("tansubmit").click()
+  document.getElementById("dansubmit").click()
   console.log("removed="+aaaa)
   console.log("twice="+aaaa)
   event.preventDefault()
@@ -135,14 +136,6 @@ $(document).on 'click', '.add_fields', (event) ->
   ###################
     #テキストエディタ閉じ内容を移設
   ####################
-#$("#titem").click ->
-#  #console.log("ttiwt")
-#  #$('fieldset div#cke_article_contents_attributes_0_description div div iframe').contents().find("html body").css("background":"gray")
-#  sand=$('fieldset div#cke_article_contents_attributes_0_description div div iframe').contents().find("html body").html()
-#  #$("iframe").contents().find("html body").css("background":"gray")
-#  #$("iframe #document html").contents().css("background":"gray")
-#  $('.cke_editable').css("background","green")
-#  $(".t1").html(sand) 
 
 $(document).on "click" ,".pdsubmit", -> 
    divf = $(this).parents(".description_field").find(".field")
@@ -386,6 +379,7 @@ $(document).on "click", ".tdsubmit", ->
    document.getElementById("dsubmit").click()  
    document.getElementById("tansubmit").click()  
    document.getElementById("dansubmit").click()  
+
 $(document).on "click","#tansubmit", ->    
    idNum=0
    #console.log("スイッチ="+aaaa)
@@ -395,19 +389,20 @@ $(document).on "click","#tansubmit", ->
    dddd=0
    red=0
    maxf=0
-   $('fieldset div input').each ->
+   $('li fieldset div input').each ->
         if z=$(this).prop('id').match(regst)
           console.log("titz="+z[1])
           ##console.log(z[1]+":"+$(this).val())
           $this = $(this)
-          $parentDiv = $this.parents('fieldset')
+          #$parentDiv = $this.parents('fieldset')
+          $parentDiv = $this.parents('li')
           aaaa=z[1]
           #console.log("aaaa"+z[1])
-          #if $parentDiv.css('display') == priorityStyle
-          #     red++
-          #     $this.removeAttr("id")
-          #     #console.log("ret="+red)
-          #     return true #これで、除外したいやつから抜らけれる
+          if $parentDiv.css('display') == priorityStyle
+               red++
+               $this.removeAttr("id")
+               console.log("Tanret="+red)
+               return true #これで、除外したいやつから抜らけれる
     
           #cke_article_contents_attributes_idNum_description
           $this.attr({id: "article_contents_attributes_"+idNum+"_title"})
@@ -439,19 +434,19 @@ $(document).on "click","#dansubmit", ->
   dddd=0
   red=0
   maxf=0
-  $('fieldset div').each ->
+  $('li fieldset div').each ->
     if z=$(this).prop('id').match(regz)
       #console.log("z="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
       #console.log("aaaa"+z[1])
-      #if $parentDiv.css('display') == priorityStyle
-      #    red++
-      #    $this.removeAttr("id")
+      if $parentDiv.css('display') == priorityStyle
+          red++
+          $this.removeAttr("id")
           #console.log("ret="+red)
-      #    return true #これで、除外したいやつから抜らけれる
+          return true #これで、除外したいやつから抜らけれる
 
       #cke_article_contents_attributes_idNum_description
       $this.attr({id: "cke_article_contents_attributes_"+idNum+"_description"})
@@ -461,30 +456,30 @@ $(document).on "click","#dansubmit", ->
       idNum++
 
       aaaa=z[1]
-      #console.log("last="+aaaa)
-      #console.log("lastid="+idNum)
+      console.log("danlast="+aaaa)
+      console.log("lastid="+idNum)
 
-  $('fieldset div').each ->
+  $('li fieldset div').each ->
     if z=$(this).prop('id').match(regz)
       #console.log("z="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
   idNum=0
-  $('fieldset div textarea').each ->
+  $('li fieldset div textarea').each ->
     if z=$(this).prop('id').match(regz2)
       #console.log("z="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
       #console.log("aaaa"+z[1])
-      #if $parentDiv.css('display') == priorityStyle
-      #    red++
-      #    $this.removeAttr("id")
+      if $parentDiv.css('display') == priorityStyle
+          red++
+          $this.removeAttr("id")
           #console.log("ret="+red)
-      #    return true #これで、除外したいやつから抜らけれる
+          return true #これで、除外したいやつから抜らけれる
 
       #cke_article_contents_attributes_idNum_description
       $this.attr({id: "article_contents_attributes_"+idNum+"_description"})
@@ -497,12 +492,12 @@ $(document).on "click","#dansubmit", ->
       #console.log("last="+aaaa)
       #console.log("lastid="+idNum)
 
-  $('fieldset div textarea').each ->
+  $('li fieldset div textarea').each ->
     if z=$(this).prop('id').match(regz2)
       #console.log("z="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
 $(document).on "click", ".pup", ->
   
@@ -677,12 +672,12 @@ $(document).on "click", "#tsubmit", ->
   dddd=0
   red=0
   maxf=0
-  $('fieldset div input').each ->
+  $('li fieldset div input').each ->
     if z=$(this).prop('id').match(regst)
       console.log("titz="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
       #console.log("aaaa"+z[1])
       if $parentDiv.css('display') == priorityStyle
@@ -703,10 +698,10 @@ $(document).on "click", "#tsubmit", ->
       #console.log("last="+aaaa)
       #console.log("lastid="+idNum)
       
-  $('fieldset div').each ->
+  $('li fieldset div').each ->
     if z=$(this).prop('id').match(regst)
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
       #console.log("aaaa"+z[1])
       if $parentDiv.css('display') == priorityStyle
@@ -747,12 +742,12 @@ $(document).on "click", "#dsubmit", ->
   dddd=0
   red=0
   maxf=0
-  $('fieldset div').each ->
+  $('li fieldset div').each ->
     if z=$(this).prop('id').match(regz)
       #console.log("z="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
       #console.log("aaaa"+z[1])
       if $parentDiv.css('display') == priorityStyle
@@ -772,12 +767,12 @@ $(document).on "click", "#dsubmit", ->
       #console.log("last="+aaaa)
       #console.log("lastid="+idNum)
       
-  $('fieldset div').each ->
+  $('li fieldset div').each ->
     if z=$(this).prop('id').match(regz)
       #console.log("z="+z[1])
       ##console.log(z[1]+":"+$(this).val())
       $this = $(this)
-      $parentDiv = $this.parents('fieldset')
+      $parentDiv = $this.parents('li')
       aaaa=z[1]
       #console.log("aaaa"+z[1])
       if $parentDiv.css('display') == priorityStyle
