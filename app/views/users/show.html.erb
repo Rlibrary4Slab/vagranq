@@ -20,7 +20,11 @@
           <%#= @title %>
         <table>
           <tbody>
+          <% if current_user.name == @user.name %>
           <%= render @articleus %>
+          <% else %>
+          <%= render @nuarticleus %>
+          <%end%>
           </tbody>
         </table>
          

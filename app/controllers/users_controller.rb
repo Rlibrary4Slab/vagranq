@@ -7,12 +7,13 @@ class UsersController < ApplicationController
 
   def index
     #@users = User.all
-    @users = User.page(params[:page])
+    @users = User.per_page_kaminari(params[:page])
   end
   
   def show
     @user = User.find_by(name: params[:name])
     @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
+    @nuarticleus = @user.articles.published.order("created_at desc").per_page_kaminari(params[:page])
     @title = "自身の投稿"
     @larticles = @user.like_articles
     #@articles= Article.all
