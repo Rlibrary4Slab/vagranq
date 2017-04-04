@@ -26,6 +26,9 @@
        <p class="article_list_title">
           <%= link_to article.title.html_safe, article, style: "font-size:24px;" %></p>
           <%#= article.description.html_safe %>
+          <% if article.aasm_state == "draft" %>
+  		下書き
+          <% end %>
           <span><%= article.impressionist_count %>View</span>
           <% if logged_in? %>
            <% if article.user.name == current_user.name%>
