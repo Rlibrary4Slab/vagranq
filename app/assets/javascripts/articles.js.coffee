@@ -13,6 +13,11 @@ regz=new RegExp('^cke_article_contents_attributes_([0-9+]+)_description$')
 #regst=new RegExp('^article_contents_attributes_([0-9+])_title$')
 regst=new RegExp('^article_contents_attributes_([0-9+]+)_title$')
 regz2=new RegExp('^article_contents_attributes_([0-9+]+)_description$')
+$(window).on "beforeunload", ->
+  if $("#csubmit").length ==1
+   return "このページから離れると入力が無効になります"
+$(document).on 'submit', ->
+   $(window).off 'beforeunload'
 $(window).on "load" , ->
   CKEDITOR.replaceAll("ckeditor")
   console.log("load") 
