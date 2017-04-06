@@ -54,7 +54,10 @@ class UsersController < ApplicationController
   end
   
   def like_articles
-    @articleus = @user.like_articles.page(params[:page])
+    #@articleus = @user.like_articles.page(params[:page])
+    @articleus = @user.like_articles.order("created_at desc").per_page_kaminari(params[:page])
+    @nuarticleus = @user.like_articles.published.order("created_at desc").per_page_kaminari(params[:page])
+
     @title = "いいね！一覧"
     render :show
   end
