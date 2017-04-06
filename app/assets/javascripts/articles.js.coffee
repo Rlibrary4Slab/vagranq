@@ -410,15 +410,18 @@ $(document).on "click","#tansubmit", ->
           #console.log("last="+aaaa)
           #console.log("lastid="+idNum)
     
-   $('fieldset div input').each ->
+   $('li fieldset div input').each ->
          if z=$(this).prop('id').match(regst)
            $this = $(this)
            $parentDiv = $this.parents('fieldset')
            aaaa=z[1]
            console.log("dos"+aaaa)
+           $(".add_fieldsf").css("display","")
+           if aaaa == "0"
+            $(".add_fieldsf").css("display","none")
            if aaaa == "99"
             console.log("disadd")
-            $(".add_fields").css("display","none");
+            $(".add_fields").css("display","none")
 $(document).on "click","#dansubmit", ->
   idNum=0
   #console.log("スイッチ="+aaaa)
@@ -621,6 +624,9 @@ $(document).on "click", "#csubmit", ->
       idNum++
       #aaaa=z[1]
   console.log("endp"+red)
+  $(".add_fieldsf").css("display","")
+  if red == 0
+   $(".add_fieldsf").css("display","none")
   if $("#checkAgree").prop("checked") == true
     console.log("teee")
     #$("#checkAgree").prop("checked",false)
