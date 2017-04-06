@@ -108,25 +108,10 @@ $(document).on 'click', '.remove_fields', (event) ->
   console.log("twice="+aaaa)
   event.preventDefault()
 
-$(document).on 'click', '.add_fields', (event) ->
+$(document).on 'click', '.add_fieldsl', (event) ->
  
   time = new Date().getTime()
-  #document.getElementById("tansubmit").click()
-  #document.getElementById("dansubmit").click()
-  #document.getElementById("dansubmit").click()
-  #document.getElementById("tansubmit").click()
-  #$('fieldset div input').each ->
-  #('fieldset input[type=text]').each ->
-    #console.log("field")   
-    #if z=$(this).prop('name').match(regst)
-    #if z=$(this).prop('id').match(regst)
-    #  console.log("2name"+z[1]+":"+$(this).val()) 
-      #aaaa=z[1]
-  #console.log("aaaa=z[1]"+aaaa)
-  #aaaa++ 
-  console.log("addfielud:"+aaaa) 
   regexp = new RegExp($(this).data('id'), 'g')
-  #$(this).before($(this).data('fields').replace(regexp, parseInt(aaaa)+1))
   $(this).before($(this).data('fields').replace(regexp, time))
   CKEDITOR.replaceAll("ckeditor")
   document.getElementById("tansubmit").click()
@@ -138,6 +123,22 @@ $(document).on 'click', '.add_fields', (event) ->
   
   event.preventDefault()
   
+$(document).on 'click', '.add_fieldsf', (event) ->
+ 
+  time = new Date().getTime()
+  regexp = new RegExp($(this).data('id'), 'g')
+  $(this).after($(this).data('fields').replace(regexp, time))
+  CKEDITOR.replaceAll("ckeditor")
+  document.getElementById("tansubmit").click()
+  document.getElementById("dansubmit").click()
+  document.getElementById("dansubmit").click()
+  document.getElementById("tansubmit").click()
+  $(this).parents("ul").find("li").first().find("fieldset").find(".toplinkmove").click()
+  #CKEDITOR.replaceAll("ckeditor")
+
+    
+  event.preventDefault()
+
   ###################
     #テキストエディタ閉じ内容を移設
   ####################

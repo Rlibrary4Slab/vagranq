@@ -92,11 +92,12 @@
 
    <div class="field sortable">
     <ul class="ranking-content">
+    <%= link_to_add_fieldsf "+", f, :contents %>
         <%= f.fields_for :contents do |builder| %>
              <%= render "econtent_fields", f: builder  %>
         <% end %>
    
-    <%= link_to_add_fields "+", f, :contents %>
+    <%= link_to_add_fieldsl "+", f, :contents %>
     </ul>
   </div>
   <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
