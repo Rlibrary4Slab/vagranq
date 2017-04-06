@@ -520,13 +520,17 @@
                     
                     $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:nth-child(2) td div div div input').val("100%");
                     
-                    $("body div.cke_dialog_background_cover").remove();
+                    //$("body div.cke_dialog_background_cover").remove();
+                    $("body div.cke_dialog_background_cover").hide();
                     
-                    $('.cke_btn_reset').remove();
+                    //$('.cke_btn_reset').remove();
+                    $('.cke_btn_reset').hide();
                     
-                    $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove();
+                    //$('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove();
+                    $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').hide();
                     
-                    $('html body div.cke_reset_all').remove();
+                    //$('html body div.cke_reset_all').remove();
+                    $('html body div.cke_reset_all').hide();
                     this.originalElement = false; // Dialog is closed.
                 }
                 ////alert("OH")

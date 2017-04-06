@@ -278,8 +278,6 @@ $(document).on 'click' ,-> #clicked
   $(".pdown").css("display":"initial")
   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
   $("input#article_contents_attributes_"+titz+"_title").parents("fieldset").find(".pdown").css("display":"none")
-  #$('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:nth-child(2) td div table tbody tr td div div div input').val("")
-  #$("body div.cke_dialog_background_cover").remove()
   #何かクリックすれば反映される  
   $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:first-child td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:first-child td div div div input').val("100%")
   $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr:first-child td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:nth-child(2) td div div div input').val("100%")
@@ -327,46 +325,36 @@ $(document).on 'click','.cke_button__image',->
   iurtmp =$(this).parents('div').children().eq(3).attr('id')
   
   $("#iurtmp").val(iurtmp.replace("_arialbl",""))
-  #0 span]cke_top1 div]cke_content span]cke_bottom 3 span[contents_arialbl 4
-  #cke_article_contents_attributes_1_title_arialbl
   $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val("")
-  $("html body").append('<div tabindex="-1" style="position: fixed; z-index: 5000; top: 0px; left: 0px; background-color: white; opacity: 0.5; width: 100%; height: 100%;" class="cke_dialog_background_cover"></div>')
+  #$("html body").append('<div tabindex="-1" style="position: fixed; z-index: 5000; top: 0px; left: 0px; background-color: white; opacity: 0.5; width: 100%; height: 100%;" class="cke_dialog_background_cover"></div>')
   $("body div.cke_reset_all").css("display":"")
-  $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
+  #$('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
   #$('.cke_dialog_ui_button_ok').css("display":"none")
   #$('.cke_btn_reset').remove()　こいつがonメソッドを消すkor
-  if $('.cke_dialog_ui_hbox_first').has("a:nth-child(3)")
-    $('.cke_dialog_ui_hbox_first').append('<a href="javascript:void(0)" tabindex="-1" title="サイズをリセット" class="cke_btn_reset" id="cke_213_btnResetSize" style="" role="button"><span class="cke_label">サイズをリセット</span></a>')
-  else
-    ##console.log("a:first-chilid2")              
-  $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
-  #$('fieldset div#cke_article_contents_attributes_0_title div div iframe').contents().find("html body").append("<p>"+quote+"<p>"+"<br />")
+  #if $('.cke_dialog_ui_hbox_first').has("a:nth-child(3)")
+    #$('.cke_dialog_ui_hbox_first').append('<a href="javascript:void(0)" tabindex="-1" title="サイズをリセット" class="cke_btn_reset" id="cke_213_btnResetSize" style="" role="button"><span class="cke_label">サイズをリセット</span></a>')
+  #else
+  #$('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
   
-  #lab.value += "adsadsad" 
-$(document).on 'click','.cke_dialog_ui_button_cancel',->
-  $('.cke_btn_reset').remove()
+#$(document).on 'click','.cke_dialog_ui_button_cancel',->
+ # $('.cke_btn_reset').remove()
 
-  $('html body div.cke_reset_all').remove()
-  $("body div.cke_dialog_background_cover").remove()
+ # $('html body div.cke_reset_all').remove()
   
-  #$('.cke_dialog_ui_hbox_first').append('<a href="javascript:void(0)" tabindex="-1" title="サイズをリセット" class="cke_btn_reset" id="cke_213_btnResetSize" style="" role="button"><span class="cke_label">サイズをリセット</span></a>')      
-  $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
+ # $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
   
-$(document).on 'click','.cke_dialog_close_button',->
-  $('a.cke_btn_reset').remove()
-  $('body div.cke_reset_all').remove()
-  
-  #$('.cke_dialog_ui_hbox_first').append('<a href="javascript:void(0)" tabindex="-1" title="サイズをリセット" class="cke_btn_reset" id="cke_213_btnResetSize" style="" role="button"><span class="cke_label">サイズをリセット</span></a>')      
-  $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
-  $("body div.cke_dialog_background_cover").remove()
+#$(document).on 'click','.cke_dialog_close_button',->
+ # $('a.cke_btn_reset').remove()
+ # $('body div.cke_reset_all').remove()
+ # console.log("close") 
+ # $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
   
 $(document).on 'click','.cke_dialog_ui_button_ok',->
   $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:first-child td div div div input').val("100%")
   $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:nth-child(2) td div div div input').val("100%")      
-  $("body div.cke_dialog_background_cover").remove()
   $('.cke_btn_reset').remove()
-  $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
-  $('html body div.cke_reset_all').remove()
+  #$('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove()
+  #$('html body div.cke_reset_all').remove()
   
 
 ############################################################################################################################
