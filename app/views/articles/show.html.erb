@@ -2,7 +2,7 @@
 
 <% content_for :title do %>
 
-<%= @article.title %>
+<%= @article.title.html_safe %>
 <%end%>
 <!-- コンテンツ -->
 <meta property="og:image" content="<%= @article.eyecatch_img %>">
@@ -33,7 +33,6 @@
       </div>
       <%= @article.updated_at.strftime("%Y年%m月%d日　更新") %>
       <h1 class="article_title"><%= @article.title %></h1>
-      <!--<p class="article_description">--><%#= @article.description.html_safe %>
       <div style="display:none;" id="checkAgree"><%= @article.checkagree %></div>
     </div>
     <input type="button" id="showsubmit" style="display:none;"/>
@@ -89,6 +88,13 @@
       
        
   <% end %>
+ <div class="head_social" style="float:right;">
+      <ul class="social-bottun">
+        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
+        <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
+        <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
+      </ul>
+    </div>
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 <div id="column_sidebar">
