@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   get "gadget" => "articles#gadget"
   get "learn" => "articles#learn"
   get "funny" => "articles#funny" 
+  get "search" => "articles#search"
   root 'static_pages#home'
   
   get   'login'   => 'sessions#new'
@@ -120,5 +121,6 @@ Rails.application.routes.draw do
   #   end
   #get '*anything' => 'errors#routing_error'
   #get '*anything' => 'errors#not_found'
-  get '*path', controller: "application",action: 'render_404' 
+  #get '*path', controller: "application",action: 'render_404' 
+
 end

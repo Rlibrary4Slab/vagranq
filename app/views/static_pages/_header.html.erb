@@ -17,6 +17,14 @@
       </p>
     <% end %>
 -->
+
+
+  <% if Rails.env == "development" %>
+   <%= form_tag search_path,enforce_utf8: false, :method => :get do %>
+     <%= text_field_tag :q, params[:q] %>
+     <%= submit_tag 'Search', :name => nil %>
+   <% end %>
+  <% end %>
   <%#= Time.current %>
   <% if logged_in? %>
    <%# if user_signed_in? %> 

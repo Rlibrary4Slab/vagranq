@@ -28,8 +28,6 @@ class ArticlesController < AuthorizedController
   # GET /articles.json
   def index
     add_breadcrumb "記事一覧", :articles_path
-    #@articles = Atricle.search(params[:search])
-    #@articles = Article.all
     #@corporecom = Article.order("corporecom desc").published.per_page_kaminari(params[:page]).limit(10)
     #@articles = Article.page(params[:page]).per(3).published.get_by_title params[:title]
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
@@ -39,8 +37,6 @@ class ArticlesController < AuthorizedController
 
     #@articles = Article.order('updated_at desc').page(params[:page]).published
     @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc')
-    #@q        = Article.ransack(params[:q])
-    #@qarticles = @q.result(distinct: true)
   end
   
   def corporecom
@@ -55,6 +51,19 @@ class ArticlesController < AuthorizedController
     @articles = Article.order("corporecom").published.page(params[:page])
     #@articles = 
   end
+
+  def search
+    @title = "検索結果一覧"
+    add_breadcrumb "記事一覧", :articles_path
+    add_breadcrumb "検索結果一覧", :search_path
+    @articles = if params[:q] != ""
+		  #Article.search(params[:q]).records.published.per_page_kaminari(params[:page])
+		  Article.search(params).records
+		else
+		  Article.per_page_kaminari(params[:page]).published.order("updated_at desc")
+		end
+  end
+  
   #categories
   def fashion
     @title = "ファッション一覧"

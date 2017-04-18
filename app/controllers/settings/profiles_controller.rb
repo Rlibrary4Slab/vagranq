@@ -20,6 +20,7 @@ class Settings::ProfilesController < Settings::BaseController
         redirect_to action: :edit
       end
     else
+      flash[:error] = "おかしい"
       render :edit
     end
   end

@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
     include AASM
+    include ArticleSearchable 
     belongs_to :user
     has_many :likes, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user
@@ -15,6 +16,8 @@ class Article < ActiveRecord::Base
     has_many :contents
     paginates_per 20 
     accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
+    
+  
     aasm do
         state :draft, :initial => true
         state :published 

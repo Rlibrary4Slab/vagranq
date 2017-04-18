@@ -4,18 +4,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:twitter,:facebook]
-    has_many :social_profiles, dependent: :destroy
+    #has_many :social_profiles, dependent: :destroy
     has_many :authentication, dependent: :destroy
-    def social_profile(provider)
-     social_profiles.select{ |sp| sp.provider == provider.to_s }.first
-    end 
+    #def social_profile(provider)
+    # social_profiles.select{ |sp| sp.provider == provider.to_s }.first
+    #end 
     attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username
-    #has_many :microposts, dependent: :destroy
     has_many :articles, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_many :like_articles, through: :likes, source: :article
-    #validates_uniqueness_of :name
-    #validates_presence_of :name
     attr_accessor :remember_token
     before_save {self.email =email.downcase}
     #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" } 
@@ -23,7 +20,7 @@ class User < ActiveRecord::Base
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+.[a-z]+\z/i
     validates :email, presence: true, length: {maximum:255},uniqueness: {case_sensitive:false},format: {with: VALID_EMAIL_REGEX, message: "メールアドレスを入力してください"}
     #has_secure_password
-    validates :password, presence: true, length: {minimum:6,message: "6桁以上入力してください"}
+    #validates :password, presence: true, length: {minimum:6,message: "6桁以上入力してください"}
     mount_uploader :user_image,ImageUploader
     mount_uploader :header_image,ImageUploader
     after_update :crop_image

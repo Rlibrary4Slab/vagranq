@@ -24,12 +24,28 @@
     <div class="article_list_text">
 
        <p class="article_list_title">
-          <%= link_to article.title.html_safe, article, style: "font-size:24px;" %></p>
-          <%#= article.description.html_safe %>
           <% if article.aasm_state == "draft" %>
-  		下書き
+          <span style="color:#AAAAAA;"><%= link_to article.title.html_safe, article, style: "font-size:24px; color:#AAAAAA;" %><下書き></p>
+          <% else %>
+          <%= link_to article.title.html_safe, article, style: "font-size:24px;" %>
           <% end %>
-          <span><%= article.impressionist_count %>View</span>
+　　　　</p>
+          <%#= article.description.html_safe %>
+           <span style="display:inline-block; vertical-align:bottom; width:4em">
+              <span style="float:right"><%= article.impressionist_count.to_i %></span>
+          </span>
+          <span>View</span>
+          <% if logged_in?%>
+          <% if @user != nil%>
+          <span style="margin-left:1em">|</span>
+                  
+          <span style="display:inline-block; vertical-align:bottom; width:3em">
+              <span style="float:right"><%= article.likes_count.to_i %></span>
+          </span>
+          <span>いいね！</span>
+          <% end %>
+          <% end %>
+
           <% if logged_in? %>
            <% if article.user.name == current_user.name%>
             <div id="user_article_editable">

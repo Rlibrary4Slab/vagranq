@@ -20,6 +20,18 @@
           <%#= @title %>
         <table>
           <tbody>
+
+          <% sum_of_views = 0 %>
+         <% sum_of_likes = 0 %> 
+         <% @articleus.each do |article| %>
+           <% sum_of_views += article.impressionist_count.to_i %>
+           <% sum_of_likes += article.likes_count.to_i %>
+         <% end %>
+         
+         <span style="letter-spacing:4.4px">総獲得View数</span>：<%= sum_of_views %></br>
+         <span style="letter-spacing:0px">総獲得いいね！数：</span><%= sum_of_likes %>
+
+
           <% if logged_in? %>
            <% if current_user.name == @user.name %>
             <%= render @articleus %>
@@ -32,7 +44,7 @@
           </tbody>
         </table>
          
-      あなたは<%= link_to @user.likes.count, like_articles_user_path(@user.name) %>個の投稿にいいね！しています
+      <%= "#{@user.user_name}さんは"%><%= link_to @user.likes.count, like_articles_user_path(@user.name) %>個の投稿にいいね！しています
     <%= paginate @articleus %>     
      
     </section>
