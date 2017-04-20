@@ -8,10 +8,10 @@
 #  adapter: sqlite3
 #  pool: 5
 #  timeout: 5000
-default : &default
-   adapter: mysql2
-   pool: 5
-   timeout: 5000
+#default : &default
+#   adapter: mysql2
+#   pool: 5
+#   timeout: 5000
 #development:
 #  <<: *default
 #  database: db/development.sqlite3
@@ -31,7 +31,10 @@ default : &default
 
 default: &default
   adapter: mysql2
-  encoding: utf8
+  charset: utf8mb4
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+  reconnect: false
   pool: 5
   username: root
   password:
@@ -75,7 +78,7 @@ test:
 
 production:
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
   pool: 5
   database: vagranq_production
   #host: 52.197.133.116

@@ -34,8 +34,13 @@
   h1.article_title{
     font-size: 40px;
   }
-  article_content h2{
-    font-size: 30px;
+  
+  .article_content {
+    margin: 5px ;
+  }
+
+  .article_content h2{
+    font-size: 30px !important;
   }
   header {
    width: 100% !important;
@@ -91,7 +96,7 @@
         color: blue;	   
      }
      p{
-        font-size: 24px !important;
+        font-size: 15px !important;
      }
 
   }
@@ -130,7 +135,7 @@
   }
   
   .side_article_list {
-    margin-left: 0;
+    margin-left: 0 !important;
   } 
 
   #column_sidebar {
@@ -937,4 +942,40 @@ ul.dropdown-menu li p {
   border: 1px solid #d0d5d8;
   border-radius: 5px;
 }
+.pagination {
+   padding-bottom: 30px;
+   margin-top: 20px;
+   text-align: center;
+}
 
+
+.pagination .page {
+
+   display: inline-block;
+   width: 36px;
+   margin: 0 6px;
+   border: 1px solid #eeeeee ;
+   border-radius: 2px;
+   font-size: 14px;
+   text-align: center;
+   vertical-align: middle;
+
+   padding: 10px 0 8px;
+   background: #ffffff ;
+   border-bottom: 2px solid #eeeeee ;
+
+}
+
+.pagination .current {
+   padding: 11px 0 9px;
+ 
+   background: #eeeeee ;
+   border-bottom: 0;
+
+}
+
+.pagination .page:hover {
+   padding: 11px 0 9px;
+   background: #eeeeee ;
+   border-bottom: 0;
+}

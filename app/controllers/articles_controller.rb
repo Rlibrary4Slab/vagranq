@@ -57,8 +57,8 @@ class ArticlesController < AuthorizedController
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "検索結果一覧", :search_path
     @articles = if params[:q] != ""
-		  #Article.search(params[:q]).records.published.per_page_kaminari(params[:page])
-		  Article.search(params).records
+		  Article.search(params[:q]).records.published.per_page_kaminari(params[:page])
+		  #Article.search(params).records
 		else
 		  Article.per_page_kaminari(params[:page]).published.order("updated_at desc")
 		end

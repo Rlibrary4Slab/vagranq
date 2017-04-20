@@ -35,11 +35,18 @@ module ArticleSearchable
       #    contents:  {only: [:description ,:title] }
       #	}
       #)
-      attributes
-       .symbolize_keys
-       .slice(:title,:description,content: {only: [:description, :title] })
+     # attributes
+     #  .symbolize_keys
+     #  .slice(:title,:description,content: {only: [:description, :title] })
        #.merge(contents: { title: contents.title})
-
+     {
+       title: title,
+       description: description,
+       include: {
+       
+	content: {only: [:description ,:title]}
+       }
+     }
 
     end
   end
@@ -56,7 +63,7 @@ module ArticleSearchable
             multi_match {
 	      operator 'and'
               #query 'keyword'
-              fields %w{contents.description contents.title}
+              #fields %w{contents.description contents.title}
             }
           else
             match_all
