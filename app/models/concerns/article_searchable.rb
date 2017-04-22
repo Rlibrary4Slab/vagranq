@@ -29,7 +29,7 @@ module ArticleSearchable
     end
     # インデックスするデータを生成
     # @return [Hash]
-    def as_indexed_json(option = {})
+    #def as_indexed_json(option = {})
       #self.as_json.select { |k, _| INDEX_FIELDS.include?(k) }
       #self.as_json(include: {
       #    contents:  {only: [:description ,:title] }
@@ -39,60 +39,60 @@ module ArticleSearchable
      #  .symbolize_keys
      #  .slice(:title,:description,content: {only: [:description, :title] })
        #.merge(contents: { title: contents.title})
-     {
-       title: title,
-       description: description,
-       include: {
-       
-	content: {only: [:description ,:title]}
-       }
-     }
+     #{
+     #  title: title,
+     #  description: description,
+     #  include: {
+     #  
+     #	content: {only: [:description ,:title]}
+     #  }
+     #}
 
-    end
+    #end
   end
 
   #def self.search(params = {})
-  def self.search(params)
+  #def self.search(params)
     # 検索パラメータを取得
     #keyword = params[:q]
 
-    search_definition = Elasticsearch::DSL::Search.search {
-      filtered{
-        query {
-          if keyword.present?
-            multi_match {
-	      operator 'and'
-              #query 'keyword'
-              #fields %w{contents.description contents.title}
-            }
-          else
-            match_all
-          end
-        }
-      }
-    }
+  #  search_definition = Elasticsearch::DSL::Search.search {
+  #    filtered{
+  #      query {
+  #        if keyword.present?
+  #          multi_match {
+  #	      operator 'and'
+  #            #query 'keyword'
+  #            #fields %w{contents.description contents.title}
+  #          }
+  #        else
+  #          match_all
+  #        end
+  #      }
+  #    }
+  #  }
 
     # 検索クエリをなげて結果を表示
     # __elasticsearch__にElasticsearchを操作するたくさんのメソッドが定義されている
     #__elasticsearch__.search(search_definition)
-  end
+  #end
 
 
   
 
-  #class << self
-  #  def search(query)
-  #    __elasticsearch__.search({
-  #      query: {
-  #        multi_match: {
-  #          fields: %w(contents.description),
-  #          fuzziness: 'AUTO',
-  #          query: query
-  #        }
-  #      }
-  #    })
-  #  end
-  #end
+  class << self
+    def search(query)
+      __elasticsearch__.search({
+        query: {
+          multi_match: {
+            fields: %w(title description contents.description),
+            fuzziness: AUTO,
+            query: query
+          }
+        }
+      })
+    end
+  end
 
   module ClassMethods
     # indexの作成メソッド

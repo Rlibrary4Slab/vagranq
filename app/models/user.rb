@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
     #end 
     attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username
     has_many :articles, dependent: :destroy
-    has_many :likes, dependent: :destroy
+    has_many :likes
+    #has_many :likes, dependent: :destroy
     has_many :like_articles, through: :likes, source: :article
     attr_accessor :remember_token
     before_save {self.email =email.downcase}

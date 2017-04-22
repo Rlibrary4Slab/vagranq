@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
     #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
     @toprank = Article.where(:corporecom => [1..3]).published.limit(3) 
     
-    @corporecom = Article.where(:corporecom => [100..300]).page(params[:page]).published.limit(10)
+    @corporecom = Article.where(:corporecom => [100..300]).per_page_kaminari(params[:page]).published.limit(10)
      
     @topcon = Article.topconed.order("count(corporecom) desc")
      #require 'google_api'

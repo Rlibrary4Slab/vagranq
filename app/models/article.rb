@@ -2,6 +2,7 @@ class Article < ActiveRecord::Base
     include AASM
     include ArticleSearchable 
     belongs_to :user
+    #has_many :likes
     has_many :likes, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user
     is_impressionable
