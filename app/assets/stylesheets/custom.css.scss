@@ -17,7 +17,9 @@
 
 /* font-sizeE */
 
-
+span.markedColor {
+ background: rgba(255,100,100,0.3) !important;
+}
 
 
 
@@ -793,7 +795,7 @@ ul.dropdown-menu li p {
    text-align: center;
    vertical-align: middle;
    position:relative;
-   padding: 10px 0 8px;
+   //padding: 10px 0 8px;
    background: #ffffff ;
    border-bottom: 2px solid #eeeeee ;
    a {
@@ -806,19 +808,21 @@ ul.dropdown-menu li p {
    }
 }
 
-.pagination .current {
-   padding: 11px 0 9px;
- 
-   background: #eeeeee ;
-   border-bottom: 0;
-
-}
 
 .pagination .page a:hover {
    //padding: 11px 0 9px;
    background: #eeeeee ;
    border-bottom: 0;
    text-decoration: none;
+}
+
+.pagination .current {
+   //padding: 11px 0 9px;
+ 
+   background: #eeeeee ;
+   border-bottom: 0;
+   line-height: 36px ;
+   padding: 0 ;
 }
 
 iframe {

@@ -9,8 +9,6 @@
     var imageDialog = function(editor, dialogType) {
         // Load image preview.
         al++;
-        //alert("ini="+al);
-        //console.log("Initialize");
         var IMAGE = 1,
             LINK = 2,
             PREVIEW = 4,
@@ -50,7 +48,6 @@
 
         var updatePreview = function(dialog) {
             //Don't load before onShow.
-            //console.log("UPDATEPRE");
             if (!dialog.originalElement || !dialog.preview) return 1;
 
             // Read attributes and update imagePreview;
@@ -63,25 +60,19 @@
         // by other fields.
         
         function commitContent() {
-            //console.log("COMMCONTE");
             var rep =0;
             var args = arguments;
-            //console.log("1");
 
 
             var inlineStyleField = this.getContentElement('advanced', 'txtdlgGenStyle');
-            //console.log("2");
             inlineStyleField && inlineStyleField.commit.apply(inlineStyleField, args);
 
-            //console.log("3");
             this.foreach(function(widget) {
-                //console.log("4");
                 if (widget.commit && widget.id != 'txtdlgGenStyle') widget.commit.apply(widget, args);
                 rep++
                 //console.log("rep"+rep);
                 //console.log("5");
             });
-            ////alert("追加されました？")
         }
 
         // Avoid recursions.
@@ -243,10 +234,8 @@
 
         var onImgLoadErrorEvent = function() {
             // Error. Image is not loaded.
-            //console.log("LOADERROR");
             var original = this.originalElement,
                 loader = CKEDITOR.document.getById(imagePreviewLoaderId);
-
             original.removeListener('load', onImgLoadEvent);
             original.removeListener('error', onImgLoadErrorEvent);
             original.removeListener('abort', onImgLoadErrorEvent);
@@ -370,7 +359,6 @@
                     // Image dialog and Input element.
                     if (dialogType == 'image' && imgTagName == 'input' && confirm(editor.lang.image.button2Img)) { // jshint ignore:line
                         // Replace INPUT-> IMG
-                        //alert("IFONOK")
                         imgTagName = 'img';
                         this.imageElement = editor.document.createElement('img');
                         this.imageElement.setAttribute('alt', '');
@@ -379,7 +367,6 @@
                     // ImageButton dialog and Image element.
                     else if (dialogType != 'image' && imgTagName == 'img' && confirm(editor.lang.image.img2Button)) { // jshint ignore:line
                         // Replace IMG -> INPUT
-                        //alert("ELSIFOK")
                         imgTagName = 'input';
                         this.imageElement = editor.document.createElement('input');
                         this.imageElement.setAttributes({
@@ -388,7 +375,6 @@
                         });
                         editor.insertElement(this.imageElement);
                     } else {
-                        //alert("ELOK")
                         // Restore the original element before all commits.
                         this.imageElement = this.cleanImageElement;
                         delete this.cleanImageElement;
@@ -397,22 +383,13 @@
                 // Create a new image.
                 else {
                     // Image dialog -> create IMG element.
-                    //console.log("CREATENEWIMAGE");
                     if (dialogType == 'image'){
                         this.imageElement = editor.document.createElement('img');
                     
-                        //console.log("CREIMA?");
                     }else {
-                        //console.log("ELSECREATENEWIMAGE");    
                         this.imageElement = editor.document.createElement('input');
                         this.imageElement.setAttribute('type', 'image');
                     }
-                    //console.log("CREATEIMA?");
-                    //var quote = $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val()
-                    //$('fieldset div#cke_ssquire_contents_attributes_0_title div div iframe').contents().find("html body").append("<p>"+quote+"<p>");
-                    
-                    //console.log("ALTCREATENEWIMAGE");
-                    //this.imageElement.setAttribute('alt', '');
                     var alten = $(".cke_dialog_ui_input_text").val()
                     this.imageElement.setAttribute('alt', alten);
                 }
@@ -428,70 +405,51 @@
 
                 // Insert a new Image.
                 if (!this.imageEditMode) {
-                    //console.log("NEWIMA")
-                    //alert("NEWIMA?")
                     if (this.addLink) {
-                        //alert("IMAIF")
                         if (!this.linkEditMode) {
-                            //alert("IMAIF2")// Insert a new link.
                             editor.insertElement(this.linkElement);
                             this.linkElement.append(this.imageElement, false);
                         } else {
-                            //alert("IMAELS")
                             // We already have a link in editor.
                             if (this.linkElement.equals(editor.getSelection().getSelectedElement())) {
-                                //alert("IMAIF3")
                                     // If the link is selected outside, replace it's content rather than the link itself. ([<a>foo</a>])
                                 this.linkElement.setHtml('');
                                 this.linkElement.append(this.imageElement, false);
                             } else {
-                                //alert("IMAELS2")
                                 // Only inside of the link is selected, so replace it with image. (<a>[foo]</a>, <a>[f]oo</a>)
                                 editor.insertElement(this.imageElement);
                             }
                         }
                     } else {
-                        //alert("IMALES3")
                         //cke_ssquire_contents_attributes_1_title_arialbl
                         var iurtmp = $("#iurtmp").val();
                         
-                        //var lab=$('fieldset div#cke_ssquire_contents_attributes_0_title div div iframe').contents().find("html body");
                         var lab=$("fieldset div#"+iurtmp+" div div iframe").contents().find("html body");
-                        ////alert(lab.html()) 
                         var jam=lab.html();
                         lab.html(""); //項目空白
                         editor.insertElement(this.imageElement);
-                        //var quote = $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val()
-                        //$("fieldset div#"+iurtmp+" div div iframe").contents().find("html body").append('<div class="img_url" style="background-color:#EEEEEE">'+quote+'</div>');
                         //新画像、url引用挿入後
                         var labimp = $("fieldset div#"+iurtmp+" div div iframe").contents().find("html body"); //の項目を取得
                         var imp= labimp.html();
                         lab.html(jam);
                         lab.append(imp);
-                        //alert("IMALES3END")
                         
                         
                     }
-                    //console.log("ENIMA")
-                    //alert("ENIMA?")
                 }
                 // Image already exists.
                 else {
-                    //alert("ENELS")
                     // Add a new link element.
                     if (!this.linkEditMode && this.addLink) {
-                        //alert("ENELSIF")
                         editor.insertElement(this.linkElement);
                         this.imageElement.appendTo(this.linkElement);
                     }
                     // Remove Link, Image exists.
                     else if (this.linkEditMode && !this.addLink) {
-                       //alert("ENELSELS")
                         editor.getSelection().selectElement(this.linkElement);
                         editor.insertElement(this.imageElement);
                     }
                 }
-                //alert("ENDIF")
             },
             onLoad: function() {
                 
@@ -507,10 +465,7 @@
             },
             onHide: function() {
                 if (this.preview) this.commitContent(CLEANUP, this.preview);
-                ////alert("OH")
-                //console.log("ONHIDE");
                 if (this.originalElement) {
-                //console.log("ONHIDEREMOVE");
                     
                     this.originalElement.removeListener('load', onImgLoadEvent);
                     this.originalElement.removeListener('error', onImgLoadErrorEvent);
@@ -520,25 +475,17 @@
                     
                     $('table tbody tr:nth-child(3) td table tbody tr td.cke_dialog_ui_hbox_first div.cke_dialog_ui_vbox table tbody tr td table tbody tr .cke_dialog_ui_hbox_first div table tbody tr:nth-child(2) td div div div input').val("100%");
                     
-                    //$("body div.cke_dialog_background_cover").remove();
                     $("body div.cke_dialog_background_cover").hide();
                     
-                    //$('.cke_btn_reset').remove();
                     $('.cke_btn_reset').hide();
                     
-                    //$('.cke_dialog_footer table tbody tr td a.cke_btn_reset').remove();
                     $('.cke_dialog_footer table tbody tr td a.cke_btn_reset').hide();
                     
-                    //$('html body div.cke_reset_all').remove();
                     $('html body div.cke_reset_all').hide();
                     this.originalElement = false; // Dialog is closed.
                 }
-                ////alert("OH")
-                //console.log("OH")
                 delete this.imageElement;
                 
-                //console.log("HS")
-                ////alert("HS")
             },
             //propertystart
             
@@ -561,7 +508,6 @@
                             onChange: function() {
                                 var dialog = this.getDialog(),
                                     newUrl = this.getValue();
-                                //console.log("ONCHANGE");
                                 // Update original image.
                                 // Prevent from load before onShow.
                                 if (newUrl.length > 0) {
@@ -577,7 +523,6 @@
                                     var loader = CKEDITOR.document.getById(imagePreviewLoaderId);
                                     if (loader) loader.setStyle('display', '');
 
-                                    //console.log("ONCHANGEON");
                                     original.on('load', onImgLoadEvent, dialog);
                                     original.on('error', onImgLoadErrorEvent, dialog);
                                     original.on('abort', onImgLoadErrorEvent, dialog);
@@ -597,11 +542,9 @@
                                 }
                             },
                             setup: function(type, element) {
-                                //alert("SU")
                                 if (type == IMAGE) {
                                     var url = element.data('cke-saved-src') || element.getAttribute('src');
                                     var field = this;
-
                                     this.getDialog().dontResetSize = true;
 
                                     field.setValue(url); // And call this.onChange()
@@ -610,20 +553,18 @@
                                 }
                             },
                             commit: function(type, element) {
-                                //alert("comm")
                                 if (type == IMAGE && (this.getValue() || this.isChanged())) {
-                                    ////alert("commIF")
                                     element.data('cke-saved-src', this.getValue());
                                     element.setAttribute('src', this.getValue());
                                     element.setAttribute('title', this.getValue());
+                                    console.log(this.getValue());
                                 } else if (type == CLEANUP) {
-                                    ////alert("commELS")
-                                    //console.log("commEL")
                                     element.setAttribute('src', ''); // If removeAttribute doesn't work.
                                     element.removeAttribute('src');
                                 }
                             },
                             validate: CKEDITOR.dialog.validate.notEmpty(editor.lang.image.urlMissing)
+                            //validate: CKEDITOR.dialog.validate.notEmpty("幹事長")
                         }, {
                             type: 'button',
                             id: 'browse',

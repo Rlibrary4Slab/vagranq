@@ -9,21 +9,28 @@
   <div class="" style="width: 1200px; margin: 0 auto;">
     <section class="user_info">
       <h1>
-        <%= image_tag @user.user_image_url(:thumb)%>
-        <%#= image_tag @user.header_image_url(:thumb_view)%>
-        <%#= @user.name %>
-            
+        <% if @user.certificated == true %>
+		くろぶち<%= image_tag @user.user_image_url(:thumb)%>
+        <%else%>
+	　<%= image_tag @user.user_image_url(:thumb)%>
+     
+        <% end %>    
       </h1>
         <%= @user.user_name %>
-        <p><%= @user.user_description.html_safe %><p>
-       
-          <%#= @title %>
+       <% if @user.user_description !=nil%>
+                <p><%= @user.user_description.html_safe %><p>
+
+        <% else %>
+                <p><%= @user.user_description %><p>
+        <% end %> 
+
         <table>
           <tbody>
 
           <% sum_of_views = 0 %>
          <% sum_of_likes = 0 %> 
-         <% @articleus.each do |article| %>
+         <%# @articleus.each do |article| %>
+         <% @user.articles.each do |article| %>
            <% sum_of_views += article.impressionist_count.to_i %>
            <% sum_of_likes += article.likes_count.to_i %>
          <% end %>

@@ -86,15 +86,30 @@ module ArticleSearchable
         query: {
           multi_match: {
             fields: %w(title description contents.description),
-            fuzziness: AUTO,
+            fuzziness: "AUTO",
             query: query
           }
         }
       })
     end
-  end
 
-  module ClassMethods
+  end
+ 
+  def more_like_this
+   self.class.__elasticsearch__.search({
+    query: {
+      more_like_this: {
+        fields: %w(title),
+        ids: [id],
+        min_doc_freq: 0,
+        min_term_freq: 0
+      }
+     }
+   })   
+ 
+  end   
+ 
+ module  ClassMethods
     # indexの作成メソッド
     def create_index!
       client = __elasticsearch__.client

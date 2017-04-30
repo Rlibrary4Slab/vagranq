@@ -4,15 +4,17 @@
 
   
 aaaa=0
-
+linkman=0
 arth=0
-arlt=0 
+arlt=0
+jihi="" 
 #priority = "none"
 #regz=new RegExp('^cke_article_contents_attributes_([0-9+])_description$')
 regz=new RegExp('^cke_article_contents_attributes_([0-9+]+)_description$')
 #regst=new RegExp('^article_contents_attributes_([0-9+])_title$')
 regst=new RegExp('^article_contents_attributes_([0-9+]+)_title$')
 regz2=new RegExp('^article_contents_attributes_([0-9+]+)_description$')
+reglink=new RegExp('^http:\/\/192.168.33.10:3000\/articles\/([0-9+]+)$')
 $(window).on "beforeunload", ->
   if $("#csubmit").length ==1
    return "このページから離れると入力が無効になります"
@@ -21,6 +23,28 @@ $(document).on 'submit', ->
 $(window).on "load" , ->
   CKEDITOR.replaceAll("ckeditor")
   console.log("load") 
+  $('div p a[class="jihi"]').each ->
+    $(this).html("ork")
+    #jihi = $(this).parent("p").find(".jihi")
+    $(this).hide()
+    attrlink = $(this).attr("href")
+    $("#getattrlink").val(attrlink)
+
+    #$.ajax
+    #      url: "http://192.168.1.138:3000/articles/33/" 
+    #      type: 'GET'
+    #      cache: false
+          #dataType: "html"
+          #success: (d) ->
+          # console.log("Avidation")
+          # r = $( "<div>" + d.responseText + "</div>" )
+          # console.log("avidation="+res.find("title").html())
+    #      success: (res) ->
+    #        linkman++
+    #        console.log("limads"+linkman) 
+          
+        
+
   $('fieldset div').each ->
     if z=$(this).prop('id').match(regz)
         ##console.log(z[1]+":"+$(this).val()) 
@@ -52,6 +76,7 @@ $(window).on "load" , ->
   if $("#showsubmit").length ==1
    console.log("showsub")
    document.getElementById("showsubmit").click() 
+  
 red=0
 priorityStyle = 'none'
 idNum = 0
@@ -61,8 +86,17 @@ jam=[]
 #regsd=new RegExp('^user_addresses_attributes_([0-9]+)_zipcode$')
 
   
+
+
 $(document).on 'ready page:load', ->
   $("p img").css("height":"","width":"")
+
+  $('div p a[class="jihi"]').each ->
+    $(this).html("ork")
+    #jihi = $(this).parent("p").find(".jihi")
+    $(this).hide()
+    attrlink = $(this).attr("href")
+    $("#getattrlink").val(attrlink)
 
   console.log("どくめんｔ"+arth)
   #if document.getElementById("s_eyecatch_img").naturalWidth() < document.getElementById("s_eyecatch_img").naturalHeight()
@@ -89,7 +123,6 @@ $(document).on 'ready page:load', ->
   #if $("#article_title").val() != null
   $('#spsubmit').click()
 
-#$('')
   
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
@@ -119,7 +152,6 @@ $(document).on 'click', '.add_fieldsl', (event) ->
   document.getElementById("dansubmit").click()
   document.getElementById("tansubmit").click()
   $(this).parents("ul").find("li").last().find("fieldset").find(".toplinkmove").click()
-  #CKEDITOR.replaceAll("ckeditor")
   
   event.preventDefault()
   
@@ -134,7 +166,6 @@ $(document).on 'click', '.add_fieldsf', (event) ->
   document.getElementById("dansubmit").click()
   document.getElementById("tansubmit").click()
   $(this).parents("ul").find("li").first().find("fieldset").find(".toplinkmove").click()
-  #CKEDITOR.replaceAll("ckeditor")
 
     
   event.preventDefault()
@@ -147,28 +178,29 @@ $(document).on "click" ,".pdsubmit", ->
    divf = $(this).parents(".description_field").find(".field")
    divf.css("display","none")
    salf = $(this).parents(".description_field").find(".field").find(".form-control").val()
+   console.log("salve="+salf)
    $(this).parents(".description_field").find(".afsubmits").css("display","")
    $(this).parents(".description_field").find(".pdsubmit").css("display","none")
    $(this).parents(".description_field").find(".esubmit").css("display","")
 
    cabf=$(this).parents(".description_field").find(".field").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
    jjjf=cabf.html()
-   $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
+   console.log("jjjf="+jjjf)
+   #$(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
    if salf != ""
     $(this).parents(".description_field").find(".afsubmits").find(".afd").html(salf)
+    $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
    else
     $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
-   
+
 #新しく所説明専用のクラスを作る
 $(document).on "click" ,".psubmit", ->   
-  #console.log("ckssd")
   divs = $(this).parents("fieldset").find(".ckeditors")
   sall = $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val()
   divs.css("display","none")
   $(this).parents("fieldset").find(".afsubmits").css("display","")
   $(this).parents("fieldset").find(".psubmit").css("display","none")
   $(this).parents("fieldset").find(".esubmit").css("display","")
-  
 
   cabt=$(this).parents("fieldset").find(".ckeditors").find(".form-control").first().val()
   
@@ -186,11 +218,6 @@ $(document).on "click" ,".psubmit", ->
   else  
     $(this).parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
  # document.getElementById("csubmit").click()
-  #$(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
-  #if salf != ""
-  #  $(this).parents(".description_field").find(".afsubmits").find(".afd").html(salf)
-  #else  
-  #  $(this).parents(".description_field").find(".afsubmits").find(".afd").html(jjjf)
 
 
   $(this).parents("fieldset").find(".toplinkmove").click()
@@ -238,11 +265,7 @@ tsubmit=0
 
   
     
-
-    
-
 $(document).on 'click' ,-> #clicked
-  #document.getElementsByClassName("tdsubmit")[0].click() 
   if $("#csubmit").length ==1 
    console.log("csubmit")
    document.getElementById("csubmit").click()  
@@ -251,9 +274,27 @@ $(document).on 'click' ,-> #clicked
   $(".pdown").css("display":"initial")
   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
   $("input#article_contents_attributes_"+aaaa+"_title").parents("fieldset").find(".pdown").css("display":"none")
+  if $("#csubmit").length !=1
+   $('div p a[class="jihi"]').each ->
+    athis = $(this)
+    $(this).hide()
+    attrlink = $(this).attr("href")
+    $("#getattrlink").val(attrlink)
+    #$(this).after('<a href='+attrlink+' value="link">ああああ</a>')
+     
+      
+    #$.ajax 
+    #      url: $("#getattrlink").val() 
+    #      type: 'GET'
+    #      cache: false
+    #      dataType: "text"
+    #      complete: (res) ->
+    #        r = $( "<div>" + res.responseText + "</div>" )
+    #        athis.after('<a href="">'+r.find( "title" ).html()+'</a>')
+    #        athis.after('<img src="'+r.find( "meta[property="+'"og:image"'+"]" ).attr("content")+'" />')
 
-
-  
+            #console.log("lads"+ r.find( "meta[property='og:image']" ).attr("content") )
+   
   $('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
   if $("#user_name").length <1 
   else
@@ -839,6 +880,15 @@ $ ->
       navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
       nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
       itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
+  
+  replace_tag_inner = (tag,str) ->
+    result = tag
+    selected_str = editor.getSelection
+    # エディタ内で選択中の文字列が存在する場合
+    if selected_str && selected_str.getNative != '' 
+      result = result.replace(str, selected_str.getNative)
+    
+    return result
   
   #$(".sortable").sortable
   #  axis: 'y',

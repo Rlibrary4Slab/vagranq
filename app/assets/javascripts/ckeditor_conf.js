@@ -10,5 +10,5 @@ CKEDITOR.on( 'dialogDefinition', function( ev ){
   dialogDefinition.removeContents( 'Link' );
   // ダイアログコンテンツから、target(ターゲット)を削除する
   dialogDefinition.removeContents( 'target' );
- 
+  
 });

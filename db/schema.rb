@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313084931) do
+ActiveRecord::Schema.define(version: 20170430041625) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "category",     limit: 4
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20170313084931) do
     t.string   "unconfirmed_email",      limit: 255
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
+    t.boolean  "certificated"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

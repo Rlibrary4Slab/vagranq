@@ -65,8 +65,8 @@
 </div>
 </section>
 
-
 <div id="wrapper" class="clearfix">
+<hidden type="text" id="getattrlink" />
 <div id="column_content">
 <div class="article_content"> 
   <%= @article.description.html_safe %>
@@ -93,6 +93,13 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
+ <% if Rails.env == "development" %>
+ <% @more_like_this.each do |article| %>
+   <%= link_to article.title, article %> | 
+   <%= link_to article.created_at.strftime("%Y年%m月%d日"), article %></br>
+   
+ <% end %>
+<% end %>
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 <div id="column_sidebar">

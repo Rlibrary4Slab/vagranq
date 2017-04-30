@@ -13,7 +13,7 @@ class ArticlesController < AuthorizedController
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
-
+      
       @corporecom = Article.where(:corporecom => [100..300]).published.limit(10)
     end
     
@@ -192,7 +192,8 @@ class ArticlesController < AuthorizedController
     @likes = Like.where(article_id: params[:id])
     #add_breadcrumb @article.category
     add_breadcrumb @article.title
-    
+    @more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
+    #@more_like_this = Article.where(@article.more_like_this.results.map(&:id)) 
     impressionist(@article, nil) #1時間起きに増やす
     @page_views = @article.impressionist_count
   end

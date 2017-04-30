@@ -1,14 +1,15 @@
-<!--<li style="list-style: none;">
-      <%#= gravatar_for @user, size: 50 %>
-      <%#= image_tag user.user_image_url(:thumb_view)%>
-      <%#= link_to @user.name, @user %>
-      <%#= link_to user.user_name, user %>
-</li>-->
 
 <tr class="shop">
    
-  <td><%= image_tag user.user_image_url(:thumb)%></td>
-      <%#= link_to @user.name, @user %>
+  <td>
+   <% if user.certificated == true && Rails.env != "production" %>
+                <%= image_tag user.user_image_url(:thumb)%> 認証ユーザー
+   <%else%>
+        　<%= image_tag user.user_image_url(:thumb)%>
+
+   <% end %>
+
+  </td>
   <td><%= link_to user.user_name, user %></td>
   
   <!--
