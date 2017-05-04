@@ -872,6 +872,7 @@ $(document).on "click", "#dsubmit", ->
   
   
 $ ->
+
   $("#shops .page").infinitescroll
       loading: {
         img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"

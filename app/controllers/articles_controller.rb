@@ -192,8 +192,10 @@ class ArticlesController < AuthorizedController
     @likes = Like.where(article_id: params[:id])
     #add_breadcrumb @article.category
     add_breadcrumb @article.title
-    @more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
-    #@more_like_this = Article.where(@article.more_like_this.results.map(&:id)) 
+    if Rails.env == "development"
+     #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
+     @more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
+    end
     impressionist(@article, nil) #1時間起きに増やす
     @page_views = @article.impressionist_count
   end

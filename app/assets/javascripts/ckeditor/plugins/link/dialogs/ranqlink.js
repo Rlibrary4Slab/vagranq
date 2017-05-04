@@ -1,5 +1,5 @@
 (function() {
-    CKEDITOR.dialog.add("link", function(e) {
+    CKEDITOR.dialog.add("ranqlink", function(e) {
         var m = CKEDITOR.plugins.link,
             p, q = function() {
                 var a = this.getDialog(),

@@ -12,14 +12,11 @@
     <div class="article_list_text">
       
        <p class="article_list_title">
-          <%= link_to article.title.html_safe, article, style: "font-size:24px;" %></p>
-          <%#= article.description.html_safe %>
+          <%= link_to article.title.html_safe, article, style: "" %></p>
           <span><%= article.impressionist_count %>View</span>
-          <%= link_to article.user.user_name, article.user ,:style => "float:right;"%> 
+          <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%> 
       
       
-       <%#= link_to article.title.html_safe, article, style: "font-size:24px;" %>
-       <%#= article.description.html_safe %>
      </div>
    </div>
 <% end %>

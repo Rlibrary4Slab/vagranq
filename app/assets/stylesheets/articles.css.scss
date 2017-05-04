@@ -207,3 +207,17 @@ a,p,h1,h2,h3,h4,h5,h6,h7,h8,h9{
 .head_user_articles{
  clear: both;
 }
+
+
+code {
+ padding: 2px 4px;
+    color: #d14;
+    white-space: nowrap;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    font-size: 1em;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}

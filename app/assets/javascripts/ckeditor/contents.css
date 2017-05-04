@@ -17,7 +17,12 @@ body
 
 	margin: 20px;
 }
-
+.markedColor {
+ background: rgba(255,100,100,0.3);
+}
+code {
+ background: rgba(255,100,100,0.3);
+}
 .cke_editable
 {
 	font-size: 13px;

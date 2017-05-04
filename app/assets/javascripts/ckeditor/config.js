@@ -8,18 +8,18 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'ja';
 	config.uiColor = '#f5f5f5';
 	//config.ignoreEmptyParagraph = true;
-	config.extraPlugins = 'wordcount,youtube,notification,autogrow';
+	config.extraPlugins = 'code,wordcount,youtube,notification,autogrow';
 	//config.extraPlugins = 'youtube';
         //config.toolbar = [["Image","Link","Youtube"]];	
-	config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold"]}];
+	config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","code"]},];
         config.allowedContent = true;
         config.resize_enabled = false;
         config.resize_dir = 'vertical';
         //config.colorButton_colors = '00923E,F8C100,28166F';
         config.coreStyles_bold = {
           element: 'span',
-          attributes: {'class':"markedColor"},
-          styles : {"background": "rgba(255,100,100,0.3)"} 
+          attributes: {'class':"markedColor"}
+          //styles : {"background": "rgba(255,100,100,0.3)"} 
          
         };
         config.on = {

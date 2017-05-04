@@ -1,7 +1,0 @@
-module JQuery
-  module Selection
-    module Rails
-      VERSION = "0.0.1"
-    end
-  end
-end

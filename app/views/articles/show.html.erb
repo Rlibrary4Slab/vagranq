@@ -95,11 +95,15 @@
  </div>
  <% if Rails.env == "development" %>
  <% @more_like_this.each do |article| %>
+   <div style="height: 500px;"></div>
    <%= link_to article.title, article %> | 
    <%= link_to article.created_at.strftime("%Y年%m月%d日"), article %></br>
-   
+   <div style="height: 500px;"></div>
  <% end %>
 <% end %>
+<%#= paginate @more_like_this %>
+<%#= link_to_next_page @more_like_this, 'もっと見る', id: 'read_mores', remote: true %>
+   <div style="height: 1500px;"></div>
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 <div id="column_sidebar">

@@ -25,9 +25,9 @@
 
        <p class="article_list_title">
           <% if article.aasm_state == "draft" %>
-          <span style="color:#AAAAAA;"><%= link_to article.title.html_safe, article, style: "font-size:24px; color:#AAAAAA;" %><下書き></p>
+          <span style="color:#AAAAAA;"><%= link_to article.title.html_safe, article, style: "color:#AAAAAA;" %><下書き></p>
           <% else %>
-          <%= link_to article.title.html_safe, article, style: "font-size:24px;" %>
+          <%= link_to article.title.html_safe, article  %>
           <% end %>
 　　　　</p>
           <%#= article.description.html_safe %>
@@ -58,10 +58,10 @@
           </div>
            <% else %>
               
-           <%= link_to article.user.user_name, article.user ,:style => "float:right;"%>
+           <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%>
            <% end %>
           <% else %>
-            <%= link_to article.user.user_name, article.user ,:style => "float:right;"%>   
+            <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%>   
           <% end %>
 
      </div>
