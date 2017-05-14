@@ -1,28 +1,43 @@
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
   <meta charset="UTF-8">
 
   <meta name="viewport" content="width=device-width" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
-
   <!-- OGP -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@">
+  <meta name="twitter:site" content="@RanQ">
 
   <meta property="fb:app_id" content="">
 
   <meta property="og:locale" content="ja_JP">
- <meta property="og:type" content="website">
+  <meta property="og:type" content="website">
   <meta property="og:site_name" content="RanQ [ランク]">
+  <meta property="og:url" content="http://ranq-media.com/">
+   <% if @article != nil && @article.title != nil%>
+     <% content_for :title do %>
+
+      <%= @article.title.html_safe %> | RanQ [ランク]
+     <%end%>
+    <!- コンテンツ ->
+    <meta property="og:title" content="<%= @article.title.html_safe %> | RanQ [ランク]">
+    <meta property="og:image" content="<%= @article.eyecatch_img %>">
+    <meta property="og:url" content="http://ranq-media.com/articles/<%= @article.id%>">
+    <% if @article.description != "" %>
+     <meta property="og:description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>">
+     <meta name="description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>">
+    <% else %>
+     <meta property="og:description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>">
+     <meta name="description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>">
+
+    <% end %>
+  <% end %>
   <!-- /OGP -->
 
-  <meta name="p:domain_verify" content="6ae5c3b79f2be421e8e68b1471007762"/>
-
+  <!--<meta name="p:domain_verify" content="6ae5c3b79f2be421e8e68b1471007762"/>
+-->
+<!--
 
   <meta content="authenticity_token" name="csrf-param" />
 <meta content="Xu+ulyEs8A0cSehLiH+RzmWTJJq71ZUWqt9lsc8fQuM=" name="csrf-token" />
-<!--
     <link rel="canonical" href="http://ranq-media.com/">
 
       <link rel="next" href="http://ranq-media/?page=2">
@@ -49,5 +64,3 @@
 
   <!-- Faceobook Custom Audiences -->
   <!-- /Faceobook Custom Audiences -->
-
-</head>

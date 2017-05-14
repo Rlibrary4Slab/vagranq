@@ -1,16 +1,16 @@
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
-/home/vagrant/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20170216-5142-ksu72i.rb extconf.rb
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
+/home/vagrant/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20170514-11772-yuwlui.rb extconf.rb
 checking for main() in -lpthread... yes
 creating Makefile
 
 To see why this extension failed to compile, please check the mkmf.log which can be found here:
 
-  /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/extensions/x86_64-linux/2.3.0-static/therubyracer-0.12.3/mkmf.log
+  /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/extensions/x86_64-linux/2.3.0-static/therubyracer-0.12.3/mkmf.log
 
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
 make "DESTDIR=" clean
 
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
 make "DESTDIR="
 compiling primitive.cc
 compiling trycatch.cc
@@ -42,6 +42,6 @@ compiling script.cc
 compiling init.cc
 linking shared-object v8/init.so
 
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/therubyracer-0.12.3/ext/v8
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 init.so ./.gem.20170216-5142-1mia1gw/v8
+/usr/bin/install -c -m 0755 init.so ./.gem.20170514-11772-1b600yi/v8

@@ -1,21 +1,14 @@
 <%# provide(:title) %>
 
-<% content_for :title do %>
-
-<%= @article.title.html_safe %>
-<%end%>
 <!-- コンテンツ -->
-<meta property="og:image" content="<%= @article.eyecatch_img %>">
-<meta property="og:url" content="http://ranq-media.com/articles/<%= @article.id%>">
 
-<%#= render_breadcrumbs %>
 <section id="topcontent" style="background-color: #ffffff;">
  <div class="topcontent_in clearfix">
 
 
 <p id="notice"><%= notice %></p>
 
-<%= render_breadcrumbs %>
+<ul class="breadcrumbs_lists" ><%= render_breadcrumbs builder: CustomBreadcrumbsBuilder %></ul>
 
  </div><!-- /.eyecatch_in -->
 </section>

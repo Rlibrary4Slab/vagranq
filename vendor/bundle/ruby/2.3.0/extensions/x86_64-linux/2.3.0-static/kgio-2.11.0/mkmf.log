@@ -91,9 +91,9 @@ checked program was:
 /* end */
 
 "gcc -o conftest -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/x86_64-linux -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/ruby/backward -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0 -I. -I/home/vagrant/.rbenv/versions/2.3.0/include    -D_GNU_SOURCE -DPOSIX_C_SOURCE=1-D_POSIX_C_SOURCE=200112L  -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib  -fstack-protector -rdynamic -Wl,-export-dynamic    -lrt  -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L/home/vagrant/.rbenv/versions/2.3.0/lib -lruby-static -lnsl -lrt  -lpthread -lrt -ldl -lcrypt -lm   -lc"
-/tmp/cci4NcRU.o: In function `t':
-/home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/kgio-2.11.0/ext/kgio/conftest.c:14: undefined reference to `t_open'
-collect2: ld returned 1 exit status
+/tmp/ccQijEs4.o: In function `t':
+/home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/kgio-2.11.0/ext/kgio/conftest.c:14: undefined reference to `t_open'
+collect2: ld はステータス 1 で終了しました
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -140,7 +140,7 @@ checked program was:
 
 "gcc -o conftest -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/x86_64-linux -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/ruby/backward -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0 -I. -I/home/vagrant/.rbenv/versions/2.3.0/include    -D_GNU_SOURCE -DPOSIX_C_SOURCE=1-D_POSIX_C_SOURCE=200112L  -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib  -fstack-protector -rdynamic -Wl,-export-dynamic    -lrt  -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L/home/vagrant/.rbenv/versions/2.3.0/lib -lruby-static -lsocket -lrt  -lpthread -lrt -ldl -lcrypt -lm   -lc"
 /usr/bin/ld: cannot find -lsocket
-collect2: ld returned 1 exit status
+collect2: ld はステータス 1 で終了しました
 checked program was:
 /* begin */
  1: #include "ruby.h"
@@ -693,9 +693,9 @@ checked program was:
 /* end */
 
 "gcc -o conftest -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/x86_64-linux -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/ruby/backward -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0 -I. -I/home/vagrant/.rbenv/versions/2.3.0/include    -D_GNU_SOURCE -DPOSIX_C_SOURCE=1-D_POSIX_C_SOURCE=200112L  -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib  -fstack-protector -rdynamic -Wl,-export-dynamic    -lrt  -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L/home/vagrant/.rbenv/versions/2.3.0/lib -lruby-static -lrt  -lpthread -lrt -ldl -lcrypt -lm   -lc"
-/tmp/ccDqzMhq.o: In function `t':
-/home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/kgio-2.11.0/ext/kgio/conftest.c:14: undefined reference to `rb_thread_blocking_region'
-collect2: ld returned 1 exit status
+/tmp/cchDs8KJ.o: In function `t':
+/home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/kgio-2.11.0/ext/kgio/conftest.c:14: undefined reference to `rb_thread_blocking_region'
+collect2: ld はステータス 1 で終了しました
 checked program was:
 /* begin */
  1: #include "ruby.h"

@@ -1617,7 +1617,7 @@ checked program was:
 /* end */
 
 "gcc -o conftest -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/x86_64-linux -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0/ruby/backward -I/home/vagrant/.rbenv/versions/2.3.0/include/ruby-2.3.0 -I. -I/home/vagrant/.rbenv/versions/2.3.0/include    -D_GNU_SOURCE  -D_BSD_SOURCE   -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L. -L/home/vagrant/.rbenv/versions/2.3.0/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/vagrant/.rbenv/versions/2.3.0/lib -L/home/vagrant/.rbenv/versions/2.3.0/lib -lruby-static  -lpthread -lrt -ldl -lcrypt -lm   -lc"
-/tmp/ccpDxe8f.o: In function `t':
+/tmp/ccCWmZ4D.o: In function `t':
 /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/raindrops-0.18.0/ext/raindrops/conftest.c:14: undefined reference to `rb_thread_blocking_region'
 collect2: ld はステータス 1 で終了しました
 checked program was:

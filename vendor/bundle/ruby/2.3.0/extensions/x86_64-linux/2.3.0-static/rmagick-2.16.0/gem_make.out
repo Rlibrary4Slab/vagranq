@@ -1,5 +1,5 @@
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
-/home/vagrant/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20170105-3517-aqt8hb.rb extconf.rb
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
+/home/vagrant/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20170514-11772-161in7w.rb extconf.rb
 checking for gcc... yes
 checking for Magick-config... yes
 checking for outdated ImageMagick version (<= 6.4.9)... no
@@ -129,7 +129,7 @@ creating Makefile
 
 
 ======================================================================
-Thu 05Jan17 12:31:38
+Sun 14May17 18:33:24
 This installation of RMagick 2.16.0 is configured for
 Ruby 2.3.0 (x86_64-linux) and ImageMagick 6.7.2
 ======================================================================
@@ -139,21 +139,21 @@ Configured compile options: {:magick_config=>true, :with_magick_wand=>false, :pk
 
 To see why this extension failed to compile, please check the mkmf.log which can be found here:
 
-  /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/extensions/x86_64-linux/2.3.0-static/rmagick-2.16.0/mkmf.log
+  /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/extensions/x86_64-linux/2.3.0-static/rmagick-2.16.0/mkmf.log
 
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
 make "DESTDIR=" clean
 
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
 make "DESTDIR="
 compiling rmstruct.c
 compiling rmutil.c
 compiling rminfo.c
 compiling rmimage.c
 rmimage.c: In function ‘Image_recolor’:
-rmimage.c:10828: warning: return makes integer from pointer without a cast
+rmimage.c:10828: 警告: return makes integer from pointer without a cast
 rmimage.c: In function ‘Image_sparse_color’:
-rmimage.c:12690: warning: initialization from incompatible pointer type
+rmimage.c:12690: 警告: initialization from incompatible pointer type
 compiling rmagick.c
 compiling rmdraw.c
 compiling rmpixel.c
@@ -164,6 +164,6 @@ compiling rmmain.c
 compiling rmilist.c
 linking shared-object RMagick2.so
 
-current directory: /home/vagrant/ranq/ranqdep/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
+current directory: /home/vagrant/ranq/vagranq/vendor/bundle/ruby/2.3.0/gems/rmagick-2.16.0/ext/RMagick
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 RMagick2.so ./.gem.20170105-3517-1u32jic
+/usr/bin/install -c -m 0755 RMagick2.so ./.gem.20170514-11772-1tmjpon

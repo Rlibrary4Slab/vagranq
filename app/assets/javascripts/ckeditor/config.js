@@ -8,10 +8,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'ja';
 	config.uiColor = '#f5f5f5';
 	//config.ignoreEmptyParagraph = true;
-	config.extraPlugins = 'code,wordcount,youtube,notification,autogrow';
-	//config.extraPlugins = 'youtube';
+	//config.extraPlugins = 'dropler,SimpleLink,wordcount,youtube,notification,autogrow';
+	config.extraPlugins = 'wordcount,youtube,notification,autogrow';
         //config.toolbar = [["Image","Link","Youtube"]];	
-	config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","code"]},];
+	//config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]}];
+	config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold"]}];
         config.allowedContent = true;
         config.resize_enabled = false;
         config.resize_dir = 'vertical';
@@ -22,26 +23,6 @@ CKEDITOR.editorConfig = function( config ) {
           //styles : {"background": "rgba(255,100,100,0.3)"} 
          
         };
-        config.on = {
-           pluginsLoaded: function() {
-            this.ui.addButton('Recommend', {
-	      label: 'recommend', command: 'recommend', icon: 'images/recommend.png'
-	    });
-	    this.ui.addButton('code', {
-	      label: 'code', command: 'code', icon: 'images/code.png'
-	    });
-	    this.addCommand('recommend', {
-	      exec: function(editor) {
-		editor.insertHtml(recommend);
-	      }
-	    });
-	    this.addCommand('code', {
-	      exec: function(editor) {
-		editor.insertHtml(replace_tag_inner(code, "強調"));
-	      }
-	     });
-            }
-        };        
 	config.wordcount = {
 	
 	    // Whether or not you want to show the Word Count
@@ -63,7 +44,18 @@ CKEDITOR.editorConfig = function( config ) {
 		maxWordCount: -1, // 最大単語数設定(無制限の場合は-1)
 		maxCharCount: -1  // 最大文字数設定(無制限の場合は-1)
 	    
-	};	
+	};
+	
+        config.droplerConfig = {
+         backend: 'imgur',
+         settings: {
+          //clientId: '97130997890afe1'
+          //clientId: 'bf3f565552854fa'
+          clientId: 'efac5e8b88240c9'
+          //clientId: 'efac5e8b88240c9'
+
+         }
+        };
 
 
 };

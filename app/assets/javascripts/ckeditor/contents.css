@@ -156,3 +156,58 @@ a > img {
 	border: none;
 	outline: 1px solid #0782C1;
 }
+
+.s_eyecatch_img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.article_list_content {
+      display: table;
+      table-layout: fixed;
+      //width: 100%;
+      padding: 10px 0px;
+      border-bottom: solid 1px #eeeeee;
+      vertical-align: top;
+      overflow: hidden;
+}
+.article_list_thumb {
+	display: table-cell;
+	vertical-align: top;
+}
+.article_list_text {
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle;
+}
+.link_card {
+   border: 1px solid #e5e5e5 ;
+   padding-left: 10px;
+   max-width: 680px;
+}
+.out_embed {
+     border: 1px solid #e5e5e5 ;
+     padding: 20px;
+     margin: 5px;
+      
+}
+.out_embed_image_box {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     padding: 60% 0 0;
+     margin: 20px;
+      
+}
+.out_embed_image {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+
+}  
