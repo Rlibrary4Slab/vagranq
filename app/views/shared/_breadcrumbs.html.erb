@@ -1,18 +1,24 @@
 <% if elements.present? and elements.length > 1 %>
     <ul class="breadcrumbs_lists" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+    <% count = 1 %> 
     <% elements[0..-2].each do |element| %>
         <li>
-        <% if element.path.present? %>
+        <%# if element.path.present? %>
             <a itemprop="url" href="<%= element.path %>"><span itemprop="title"><%= element.name %></span></a>
-        <% else %>
-            <span itemprop="title"><%= element.name %></span>
-        <% end %>
-        
+        <%# else %>
+            <!-- <span itemprop="title"><%= element.name %></span> -->
+        <%# end %>
+	<meta itemprop="position" content="<%= count %>">
+        <% count+=1 %> 
         </li>
         >>
     <% end %>
- 
-        <li><span itemprop="title"><%= elements.last.name %></span></li>
+        <!-- 
+        <li>
+          <a itemprop="url" href="http://ranq-media.com/articles/<%= @article.id%>"><span itemprop="title"><%= elements.last.name %></span></a>
+	   <meta itemprop="position" content="<%= count %>">
+        <li>-->
+        <li><span><%= elements.last.name %></span></li>
     </ul>
 <% end %>
 
