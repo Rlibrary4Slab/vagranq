@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   
   get 'signup' => 'users#new'
   get 'allranking' => "articles#allranking"
-  
+  get "home" => "static_pages#home" 
   get "fashion" => "articles#fashion"
   get "beauty" => "articles#beauty"
   get "hangout" => "articles#hangout"

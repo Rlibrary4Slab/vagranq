@@ -6,8 +6,9 @@ class ArticlesController < AuthorizedController
   before_action :correct_draft,   only: [:show]
   impressionist actions: [:show]
   before_action :all
-  add_breadcrumb "RanQ", :root_path
     def all
+      @sitename = "RanQ"
+      add_breadcrumb @sitename, root_path
       ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id)
       @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})") 
 
@@ -159,6 +160,7 @@ class ArticlesController < AuthorizedController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    
     if @article.category == "ファッション"
       add_breadcrumb @article.category, fashion_path
     end
@@ -190,7 +192,6 @@ class ArticlesController < AuthorizedController
       add_breadcrumb @article.category, funny_path
     end
     @likes = Like.where(article_id: params[:id])
-    #add_breadcrumb @article.category
     add_breadcrumb @article.title
     if Rails.env == "development"
      #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 

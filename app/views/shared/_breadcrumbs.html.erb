@@ -1,0 +1,18 @@
+<% if elements.present? and elements.length > 1 %>
+    <ul class="breadcrumbs_lists" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+    <% elements[0..-2].each do |element| %>
+        <li>
+        <% if element.path.present? %>
+            <a itemprop="url" href="<%= element.path %>"><span itemprop="title"><%= element.name %></span></a>
+        <% else %>
+            <span itemprop="title"><%= element.name %></span>
+        <% end %>
+        
+        </li>
+        >>
+    <% end %>
+ 
+        <li><span itemprop="title"><%= elements.last.name %></span></li>
+    </ul>
+<% end %>
+
