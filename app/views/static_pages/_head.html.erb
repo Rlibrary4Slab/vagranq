@@ -4,14 +4,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- OGP -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@RanQ">
-
-  <meta property="fb:app_id" content="">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  <meta property="fb:app_id" content="274024569635379">
 
   <meta property="og:locale" content="ja_JP">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RanQ [ランク]">
-  <meta property="og:url" content="http://ranq-media.com/">
    <% if @article != nil && @article.title != nil%>
      <% content_for :title do %>
 
@@ -24,11 +23,24 @@
     <% if @article.description != "" %>
      <meta property="og:description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>">
      <meta name="description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>">
-    <% else %>
+     <meta name="twitter:url" content="http://ranq-media.com/articles/<%= @article.id%>" />
+     <meta name="twitter:title" content="<%= @article.title.html_safe %> | RanQ [ランク]" />
+     <meta name="twitter:description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>" />
+     <meta name="twitter:image" content="<%= @article.eyecatch_img %>" />
+    <% else  %>
      <meta property="og:description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>">
      <meta name="description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>">
+     <meta name="twitter:url" content="http://ranq-media.com/articles/<%= @article.id%>" />
+     <meta name="twitter:title" content="<%= @article.title.html_safe %> | RanQ [ランク]" />
+     <meta name="twitter:description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>" />
+     <meta name="twitter:image" content="<%= @article.eyecatch_img %>" />
 
     <% end %>
+  <% else %>
+     <meta property="og:title" content="RanQ [ランク] | ランキング形式で知りたいが分かるメディア">
+     <meta property="og:url" content="http://ranq-media.com/">
+     <meta property="og:description" content="RanQはランキング形式で知りたい情報が分かるメディアです">
+     <meta name="description" content="RanQはランキング形式で知りたい情報が分かるメディアです">
   <% end %>
   <!-- /OGP -->
 
