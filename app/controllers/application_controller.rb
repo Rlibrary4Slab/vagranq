@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     #rescue_from ActiveRecord::RecordNotFound, with: :render_404
     #rescue_from ActionController::RoutingError, with: :render_404
     #rescue_from Exception, with: :render_500
+    Fluent::Logger::FluentLogger.open(nil, :host=>'localhost', :port=>24224)
+    before_action :fluentpost
+    def fluentpost
+     Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
+    end
     
     private
      def render_404
