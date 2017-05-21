@@ -271,6 +271,7 @@ p.article_list_lead {
       font-size: 16px;
       font-weight: 700;
     }
+    
     .article_list_content {
       display: table;
       table-layout: fixed; 
@@ -330,6 +331,16 @@ p.article_list_lead {
     }
     #paginate a:visited {
       text-decoration: none;
+    }
+
+    .relation_list {
+     clear: both;
+      .article_list .article_list_content .article_list_text .article_list_title{ 
+       a:link,a:visited {
+
+        color: #000000 !important;
+       }
+      }
     }
     /* main-content-bottom */
 

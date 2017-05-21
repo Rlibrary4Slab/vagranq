@@ -197,7 +197,9 @@ class ArticlesController < AuthorizedController
     if Rails.env == "development"
      #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
      #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
-     @more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
+     #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
+     ids = @article.more_like_this.results.map(&:id)
+     @more_like_this = Article.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
     end
     impressionist(@article, nil) #1時間起きに増やす
     @page_views = @article.impressionist_count
