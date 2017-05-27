@@ -126,5 +126,7 @@ Rails.application.routes.draw do
   #get '*anything' => 'errors#routing_error'
   #get '*anything' => 'errors#not_found'
   #get '*path', controller: "application",action: 'render_404' 
-
+  
+  match '' => "notifications#paginate" ,:via => :get      #任意のページでpagination
+ 
 end

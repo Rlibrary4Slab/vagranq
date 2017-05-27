@@ -1,10 +1,7 @@
 <script>					
 
-  var dispatcher = new WebSocketRails("ranq-local-edit-lefedoreichmann.c9users.io:8080/websocket");			//  ソケット通信開始
+  var dispatcher = new WebSocketRails("vagranq-cn47.c9users.io:8080/websocket");			//  ソケット通信開始
   dispatcher.bind("notification_event", function(data){
-  // var channel = dispatcher.subscribe('like_channel');                      // subscribe to the like_channel
-  // channel.bind('like_event', function(data) {                              // bind to a channel event
-  // if(data['user_id'] == '<%#= current_user.id %>'){         	              // 個別配信の為にif文制御
 
     toaster = function(info, msg) {									        //  トースター通知
       console.log(info);
@@ -61,8 +58,6 @@
       
   	note_center(center_msg);										       //  通知センターに追加
     toaster(info, toaster_msg);                                            //  トースター動作
-      
-    // }
      
   });
   
@@ -72,12 +67,6 @@
   		$.ajax({											        		//いいね！されたカウント数をリセット
             url: "../notifications/flag_off",
             type: "GET",
-            // success: function() {
-            //     alert("success");
-            // },
-            // error: function() {
-            //     alert("errror");
-            // }
         });
         $(this).data("click", ++num); 							//通知センターを偶数回押したら新着通知がホワイトアウト
         var click = $(this).data("click");
@@ -100,10 +89,7 @@
 	  	if (!$(e.target).closest('#notificationContainer').length) {
 	  		$("#notificationContainer").hide();
 	  	}
-	});
-  	// $(document).click(function(e){						//通知域以外をクリックしたら通知領域が隠れる
-  	// 	$("#notificationContainer").hide();
-  	// });
+	  });
   });
   
 </script>

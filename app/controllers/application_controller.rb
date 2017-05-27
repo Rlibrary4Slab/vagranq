@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    
     private
      def render_404
       render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
