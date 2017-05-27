@@ -1,0 +1,4 @@
+<div id="notifications">
+  <%= render 'notifications/_notifications' %>
+</div>
+<%= link_to_next_page @notifications, 'もっと見る', :params => {:action => 'paginate', :controller => 'notifications'}, remote: true, id: 'more_link' %>

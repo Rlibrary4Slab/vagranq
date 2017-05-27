@@ -1,0 +1,27 @@
+<% @notifications.each do |notification| %>
+    <% case notification.category %>
+        <% when 1 %>
+            <div class='notification-<%= notification.flag %> notification-content'>
+                <div><%= "あなたの記事がいいね！されました" %></div>
+                <div><%= "『#{notification.article.title}』" %></div>
+            </div>
+        <% when 2 %>
+            <div class='notification-<%= notification.flag %> notification-content'>
+                <div><%= "あなたの記事が#{notification.content}回いいね！されました" %></div>
+                <div><%= "『#{notification.article.title}』" %></div>
+            </div>
+        <% when 3 %>
+            <div class='notification-<%= notification.flag %> notification-content'>
+                <div><%= "総獲得いいね！数 #{notification.content}回を達成しました！" %></div>
+            </div>
+        <% when 4 %>
+            <div class='notification-<%= notification.flag %> notification-content'>
+                <div><%= "あなたの記事が#{notification.content}回閲覧されました" %></div>
+                <div><%= "『#{notification.article.title}』" %></div>
+            </div>
+        <% when 5 %>
+            <div class='notification-<%= notification.flag %> notification-content'>
+                <div><%= "総閲覧数#{notification.content}回を達成しました！" %></div>
+            </div>
+    <% end %>    
+<% end %>

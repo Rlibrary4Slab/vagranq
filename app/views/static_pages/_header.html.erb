@@ -47,6 +47,17 @@
           </li>
           </div>
         </ul>
+        <a href="#" id="notificationLink">
+        	<%= image_tag('notification_bell.png', { :size => "25" , :alt => '通知'}) %>
+        </a>
+        <% @notification_counts = current_user.notifications.where(flag:false).count %>
+        <span id="notification_count"><%= @notification_counts %></span>
+        <div id="notificationContainer">
+          <div id="notificationTitle">通知領域</div>
+          <div id="notificationsBody" class="notifications">
+            <div><%= render 'notifications/notifications', notifications: @notifications %></div>					<!--既存通知が入る-->
+          </div>
+        </div>
       </li>
     </ul>
   <% else %>
@@ -57,4 +68,5 @@
   </ul>
   <%end%>
 </div><!-- /.hd_in -->
+<%= render 'notifications/script', notification_count: @notification_counts %>                           <!--通知スクリプト-->
 </header>

@@ -1,0 +1,109 @@
+<script>					
+
+  var dispatcher = new WebSocketRails("ranq-local-edit-lefedoreichmann.c9users.io:8080/websocket");			//  ソケット通信開始
+  dispatcher.bind("notification_event", function(data){
+  // var channel = dispatcher.subscribe('like_channel');                      // subscribe to the like_channel
+  // channel.bind('like_event', function(data) {                              // bind to a channel event
+  // if(data['user_id'] == '<%#= current_user.id %>'){         	              // 個別配信の為にif文制御
+
+    toaster = function(info, msg) {									        //  トースター通知
+      console.log(info);
+      if($('toaster-box').length==0)
+      var item1 = $('<toaster-box position="top-right"><toaster-start class="like-info" ></toaster-start></toaster-box>');
+      $('body').append(item1);
+      var item2 = '<toaster class='+info+'><button type="button" class="close" data-dismiss="like_comment">×</button>'+msg+'</toaster>';
+      var toaster = $(item2).insertAfter('toaster-box > toaster-start').hide().fadeIn(800).delay(3000).fadeOut(1000);
+      $('.close').click(function() {
+        $(this).fadeOut(500, function() {
+          $(this).parent().remove();
+        });
+      });
+    };
+    
+	note_center = function(msg) {									        //  通知センターに追加
+	    $('#notification_count').text(data['notification_counts']);		    //  新着いいね数が入る
+		$("#notifications").prepend(msg);   				        		//  id="notification_status"の後ろに要素追加
+		$("#notification_count").fadeIn("slow");				        	//  通知バッヂ表示
+	};
+   	
+  switch (data['note_category']) {			                            	//新着の種類によってトースター&通知センターを変える
+  	case 1:
+    // 	console.log("新着いいね");
+    	var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>いいね！</strong>されました';
+    	var center_msg = "<div class='notification-false notification-content'>あなたの記事がいいね！されました </br>"+"『"+data['article_title']+"』<div>";
+    	var info = "like-info"
+    break;
+    case 2:
+    // 	console.log("記事いいね数更新");
+    	var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が'+data['liked_count']+'<strong>いいね！</strong>獲得しました';
+    	var center_msg = "<div class='notification-false notification-content'>あなたの記事が"+data['liked_count']+'回いいね！されました </br>『'+data['article_title']+"』<div>";
+    	var info = "like-info"
+    break;
+    case 3:
+    // 	console.log("総いいね数更新");
+    	var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %><strong>総いいね！</strong>数！'+data['liked_count']+'回を達成しました';
+    	var center_msg = "<div class='notification-false notification-content'>総獲得いいね！数"+data['liked_count']+"回を達成しました！";
+    	var info = "like-info"
+    break;
+    case 4:
+    // 	console.log("記事閲覧数更新");
+    	var toaster_msg = '<%= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %>あなたの記事が'+data['imps']+'回<strong>閲覧</strong>されました';
+    	var center_msg = "<div class='notification-false notification-content'>あなたの記事が"+data['imps']+'回閲覧されました </br>『'+data['article_title']+"』<div>";
+    	var info = "view-info"
+    break;
+    case 5:
+    // 	console.log("総閲覧数更新");
+    	var toaster_msg = '<%= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %>総View数'+data['sum_of_imp']+'回を達成しました';
+    	var center_msg = "<div class='notification-false notification-content'>総閲覧数"+data['sum_of_imp']+"回を達成しました！<div>";
+    	var info = "view-info"
+    break;
+  }
+      
+  	note_center(center_msg);										       //  通知センターに追加
+    toaster(info, toaster_msg);                                            //  トースター動作
+      
+    // }
+     
+  });
+  
+  $(function(){
+  	var num = 0;
+  	$('#notificationLink').on('click', function(){
+  		$.ajax({											        		//いいね！されたカウント数をリセット
+            url: "../notifications/flag_off",
+            type: "GET",
+            // success: function() {
+            //     alert("success");
+            // },
+            // error: function() {
+            //     alert("errror");
+            // }
+        });
+        $(this).data("click", ++num); 							//通知センターを偶数回押したら新着通知がホワイトアウト
+        var click = $(this).data("click");
+        if(click%2==0){
+        	$(".notification-false").removeClass("notification-false").addClass("notification-true");
+        }
+    });
+  });
+  
+  $(document).ready(function(){
+  	$("#notificationLink").click(function(){
+  		$("#notificationContainer").fadeToggle(300);
+  		$("#notification_count").fadeOut("slow");
+  		return false;
+  	});
+  	<% if @notification_counts == 0 %>
+  		$("#notification_count").hide();
+  	<% end %>
+  	$(document).on('click touchend', function(e) {			//クリックしたら通知領域が隠れる
+	  	if (!$(e.target).closest('#notificationContainer').length) {
+	  		$("#notificationContainer").hide();
+	  	}
+	});
+  	// $(document).click(function(e){						//通知域以外をクリックしたら通知領域が隠れる
+  	// 	$("#notificationContainer").hide();
+  	// });
+  });
+  
+</script>

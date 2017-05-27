@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'notifications/flag_off'
+
+  get 'notifications/paginate'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #match 'auth/:provider/callback', to: 'sessions#create'
   #match 'auth/failure', to: redirect('/')
