@@ -5,5 +5,4 @@ class Like < ActiveRecord::Base
     has_many :notifications, foreign_key: "content"
     paginates_per 5
     validates :article_id, uniqueness:{ scope: [:user_id] }
-    
 end

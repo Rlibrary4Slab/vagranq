@@ -1,4 +1,3 @@
-
 class LikesController < ApplicationController
     def like
         @article = Article.find(params[:article_id])
@@ -38,16 +37,23 @@ class LikesController < ApplicationController
         like = current_user.likes.find_by(article_id: @article.id)
         like.destroy
         notification = @article.notifications.where(category:1).find_by(content: like.id)
-        notification.destroy
+        if notification.present?
+            notification.destroy
+        end
+            if @article.user.liked.count % 5 == 4                                                        #記事総合いいね数
+                notification = @article.notifications.where(category:3).last
+                if notification.present?
+                    notification.destroy
+                end
+            end
+            if @article.liked.count % 30 == 29                                                        #記事総合いいね数
+                notification = @article.notifications.where(category:2).last
+                if notification.present?
+                    notification.destroy
+                end
+            end
         
-        if @article.user.liked.count % 5 == 4                                                        #記事総合いいね数
-            notification = @article.notifications.where(category:3).last
-            notification.destroy
-        end
-        if @article.liked.count % 30 == 29                                                        #記事総合いいね数
-            notification = @article.notifications.where(category:2).last
-            notification.destroy
-        end
+        
     end
     
 end
