@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'notifications/flag_off'
-
-  get 'notifications/paginate'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #match 'auth/:provider/callback', to: 'sessions#create'
@@ -126,7 +123,9 @@ Rails.application.routes.draw do
   #get '*anything' => 'errors#routing_error'
   #get '*anything' => 'errors#not_found'
   #get '*path', controller: "application",action: 'render_404' 
-  
-  match '' => "notifications#paginate" ,:via => :get      #任意のページでpagination
+
+  get 'notifications/flag_off'
+  match '' => "notifications#paginate" ,via: :get      #任意のページでpaginationするためのルーティング
+    
  
 end

@@ -15,7 +15,7 @@ class LikesController < ApplicationController
         liked_notification = WebsocketRails.users[@article.user_id]
         liked_notification.send_message(:notification_event, send)
 
-        if liked_article_counts % 2 == 0                                                    #記事単体いいね数
+        if liked_article_counts % 5 == 0                                                    #記事単体いいね数
             notification = @article.user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: liked_article_counts ,category:2 , flag: false )
             notification.save
             
@@ -23,7 +23,7 @@ class LikesController < ApplicationController
             liked_notification = WebsocketRails.users[@article.user_id]
             liked_notification.send_message(:notification_event, send)
         end    
-        if total_liked_counts % 3 == 0                                                        #記事総合いいね数
+        if total_liked_counts % 30 == 0                                                        #記事総合いいね数
             notification = @article.user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: total_liked_counts ,category:3 , flag: false )
             notification.save
         
@@ -40,11 +40,11 @@ class LikesController < ApplicationController
         notification = @article.notifications.where(category:1).find_by(content: like.id)
         notification.destroy
         
-        if @article.user.liked.count % 3 == 2                                                        #記事総合いいね数
+        if @article.user.liked.count % 5 == 4                                                        #記事総合いいね数
             notification = @article.notifications.where(category:3).last
             notification.destroy
         end
-        if @article.liked.count % 2 == 1                                                        #記事総合いいね数
+        if @article.liked.count % 30 == 29                                                        #記事総合いいね数
             notification = @article.notifications.where(category:2).last
             notification.destroy
         end

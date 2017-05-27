@@ -209,16 +209,28 @@ class ArticlesController < AuthorizedController
       sum_of_imp += article.impressionist_count
     end
 
-    if @page_views % 2 == 0                #記事ユーザーの獲得閲覧数
-      notification = article_user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: @page_views, category: 4, flag: false)
-      notification.save
+    if @page_views <= 1000              #記事ユーザーの獲得閲覧数
+      if @page_views % 100 == 0                #記事ユーザーの獲得閲覧数
+        notification = article_user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: @page_views, category: 4, flag: false)
+        notification.save
       
-      notification_counts = article_user.notifications.where(flag: false).count
-      send = {note_category: 4, article_title: @article.title, imps: @page_views, notification_counts: notification_counts, flag: false}
-      imp_notification = WebsocketRails.users[@article.user_id]
-      imp_notification.send_message(:notification_event, send)
+        notification_counts = article_user.notifications.where(flag: false).count
+        send = {note_category: 4, article_title: @article.title, imps: @page_views, notification_counts: notification_counts, flag: false}
+        imp_notification = WebsocketRails.users[@article.user_id]
+        imp_notification.send_message(:notification_event, send)
+      end
+    else
+      if @page_views % 2000 == 0
+        notification = article_user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: @page_views, category: 4, flag: false)
+        notification.save
+      
+        notification_counts = article_user.notifications.where(flag: false).count
+        send = {note_category: 4, article_title: @article.title, imps: @page_views, notification_counts: notification_counts, flag: false}
+        imp_notification = WebsocketRails.users[@article.user_id]
+        imp_notification.send_message(:notification_event, send)
+      end
     end
-    if sum_of_imp % 5 == 0                #記事ユーザーの獲得総閲覧数
+    if sum_of_imp % 1000 == 0                #記事ユーザーの獲得総閲覧数
       notification = article_user.notifications.build( user_id: @article.user_id, content: sum_of_imp, category: 5, flag: false)
       notification.save
       
