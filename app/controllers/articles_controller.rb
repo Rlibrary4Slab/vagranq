@@ -1,5 +1,6 @@
 class ArticlesController < AuthorizedController
 #class ArticlesController < ApplicationController
+  include NotificationsHelper
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
@@ -204,40 +205,21 @@ class ArticlesController < AuthorizedController
     @page_views = @article.impressionist_count
 
     sum_of_imp = 0
-    article_user = @article.user
-    article_user.articles.each do |article|
+    @article.user.articles.each do |article|
       sum_of_imp += article.impressionist_count
     end
 
-    if @page_views <= 1000              #記事ユーザーの獲得閲覧数
+    if @page_views <= 1000              #記事単体view数
       if @page_views % 100 == 0
-        notification = article_user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: @page_views, category: 4, flag: false)
-        notification.save
-      
-        notification_counts = article_user.notifications.where(flag: false).count
-        send = {note_category: 4, article_title: @article.title, imps: @page_views, notification_counts: notification_counts, flag: false}
-        imp_notification = WebsocketRails.users[@article.user_id]
-        imp_notification.send_message(:notification_event, send)
+        notification_savesend(@article, @page_views, 4)
       end
     else
       if @page_views % 2000 == 0
-        notification = article_user.notifications.build( user_id: @article.user_id, article_id: @article.id, content: @page_views, category: 4, flag: false)
-        notification.save
-      
-        notification_counts = article_user.notifications.where(flag: false).count
-        send = {note_category: 4, article_title: @article.title, imps: @page_views, notification_counts: notification_counts, flag: false}
-        imp_notification = WebsocketRails.users[@article.user_id]
-        imp_notification.send_message(:notification_event, send)
+        notification_savesend(@article, @page_views, 4)
       end
     end
-    if sum_of_imp % 1000 == 0                #記事ユーザーの獲得総閲覧数
-      notification = article_user.notifications.build( user_id: @article.user_id, content: sum_of_imp, category: 5, flag: false)
-      notification.save
-      
-      notification_counts = article_user.notifications.where(flag: false).count
-      send = {note_category: 5, article_title: @article.title, sum_of_imp: sum_of_imp, notification_counts: notification_counts, flag: false}
-      imp_notification = WebsocketRails.users[@article.user_id]
-      imp_notification.send_message(:notification_event, send)
+    if sum_of_imp % 1000 == 0            #総view数
+    notification_savesend(@article, sum_of_imp, 5)
     end
     
   end
