@@ -25,31 +25,26 @@
    	
   switch (data['note_category']) {			                            	//新着の種類によってトースター&通知センターを変える
   	case 1:
-    // 	console.log("新着いいね");
     	var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>いいね！</strong>されました';
     	var center_msg = "<div class='notification-false notification-content'>あなたの記事がいいね！されました </br>"+"『"+data['article_title']+"』<div>";
     	var info = "like-info"
     break;
     case 2:
-    // 	console.log("記事いいね数更新");
     	var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>'+data['liked_count']+'いいね！</strong>獲得しました';
     	var center_msg = "<div class='notification-false notification-content'>あなたの記事が"+data['liked_count']+'回いいね！されました </br>『'+data['article_title']+"』<div>";
     	var info = "like-info"
     break;
     case 3:
-    // 	console.log("総いいね数更新");
     	var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %><strong>総いいね！数'+data['liked_count']+'回</strong>を達成しました';
     	var center_msg = "<div class='notification-false notification-content'>総獲得いいね！数"+data['liked_count']+"回を達成しました！";
     	var info = "like-info"
     break;
     case 4:
-    // 	console.log("記事閲覧数更新");
     	var toaster_msg = '<%= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %>あなたの記事が'+data['imps']+'回<strong>閲覧</strong>されました';
     	var center_msg = "<div class='notification-false notification-content'>あなたの記事が"+data['imps']+'回閲覧されました </br>『'+data['article_title']+"』<div>";
     	var info = "view-info"
     break;
     case 5:
-    // 	console.log("総閲覧数更新");
     	var toaster_msg = '<%= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %><strong>総View数</strong>'+data['sum_of_imp']+'回を達成しました';
     	var center_msg = "<div class='notification-false notification-content'>総閲覧数"+data['sum_of_imp']+"回を達成しました！<div>";
     	var info = "view-info"
@@ -57,39 +52,35 @@
   }
       
   	note_center(center_msg);										       //  通知センターに追加
-    toaster(info, toaster_msg);                                            //  トースター動作
+    toaster(info, toaster_msg);                        //  トースター動作
      
   });
   
   $(function(){
-  	var num = 0;
-  	$('#notificationLink').on('click', function(){
-  		$.ajax({											        		//いいね！されたカウント数をリセット
-            url: "../notifications/flag_off",
-            type: "GET",
-        });
-        $(this).data("click", ++num); 							//通知センターを偶数回押したら新着通知がホワイトアウト
-        var click = $(this).data("click");
-        if(click%2==0){
-        	$(".notification-false").removeClass("notification-false").addClass("notification-true");
-        }
-    });
-  });
-  
-  $(document).ready(function(){
-  	$("#notificationLink").click(function(){
-  		$("#notificationContainer").fadeToggle(300);
-  		$("#notification_count").fadeOut("slow");
-  		return false;
-  	});
-  	<% if @notification_counts == 0 %>
-  		$("#notification_count").hide();
+    <% if @notification_counts == 0 %>
+      $("#notification_count").hide();
   	<% end %>
   	$(document).on('click touchend', function(e) {			//クリックしたら通知領域が隠れる
 	  	if (!$(e.target).closest('#notificationContainer').length) {
 	  		$("#notificationContainer").hide();
 	  	}
 	  });
+
+  	var num = 0;
+  	$('#notificationLink').on('click', function(){
+  		$.ajax({											        		//いいね！されたカウント数をリセット
+            url: "../notifications/flag_off",
+            type: "GET",
+        });
+      $("#notificationContainer").fadeToggle(300);
+  		$("#notification_count").fadeOut("slow");
+        $(this).data("click", ++num); 							//通知センターを偶数回押したら新着通知がホワイトアウト
+        var click = $(this).data("click");
+        if(click%2==0){
+        	$(".notification-false").removeClass("notification-false").addClass("notification-true");
+        }
+  		return false;
+    });
   });
   
 </script>

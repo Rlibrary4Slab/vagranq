@@ -4,6 +4,6 @@ class Notification < ActiveRecord::Base
     belongs_to :article
     paginates_per 5
     
-    # validates :user_id, :uniqueness => { :scope => [:article_id, :category] }
+    validates :article_id, :uniqueness => { :scope => [:content, :category] }
 
 end
