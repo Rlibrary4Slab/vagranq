@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
     before_filter :configure_permitted_parameters, if: :devise_controller?
     protect_from_forgery with: :exception
+    before_action :notification
     #protect_from_forgery with: :null_session
     include SessionsHelper
     # before_action :pvranking
@@ -23,6 +24,13 @@ class ApplicationController < ActionController::Base
      Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
     end
     
+    def notification
+        if logged_in?
+            # @likeds = current_user.liked.per_page_kaminari(params[:page]).order('created_at DESC')
+            @notifications = current_user.notifications.per_page_kaminari(params[:page]).order('created_at DESC')
+        end
+    end
+
     private
      def render_404
       render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'

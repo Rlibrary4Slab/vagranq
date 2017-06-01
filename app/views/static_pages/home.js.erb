@@ -1,0 +1,2 @@
+$('#notifications').append("<%= escape_javascript(render 'notifications/_notifications', object: @notifications) %>");
+$("#more_link").replaceWith("<%= escape_javascript(link_to_next_page(@notifications, 'もっと見る', remote: true, id: 'more_link')) %>");

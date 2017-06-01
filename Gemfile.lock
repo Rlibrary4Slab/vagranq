@@ -109,6 +109,7 @@ GEM
     commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     cool.io (1.5.0)
+    daemons (1.2.4)
     devise (4.2.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -132,12 +133,18 @@ GEM
     elasticsearch-transport (5.0.4)
       faraday
       multi_json
+    em-synchrony (1.0.6)
+      eventmachine (>= 1.0.0.beta.1)
     erubis (2.7.0)
+    eventmachine (1.2.3)
     excon (0.55.0)
     execjs (2.7.0)
     extlib (0.9.16)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
+    faye-websocket (0.10.0)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.9.18)
     fluent-logger (0.7.1)
       msgpack (>= 1.0.0, < 2)
@@ -204,6 +211,7 @@ GEM
       tilt
     hashie (3.5.5)
     hashr (0.0.22)
+    hiredis (0.6.1)
     http_parser.rb (0.6.0)
     httpclient (2.8.3)
     i18n (0.8.1)
@@ -365,6 +373,9 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     rdoc (4.3.0)
+    redis (3.3.3)
+    redis-objects (1.3.0)
+      redis (~> 3.3)
     ref (2.0.0)
     remotipart (1.3.1)
     responders (2.3.0)
@@ -412,6 +423,10 @@ GEM
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
+    thin (1.7.0)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (1.4.1)
@@ -437,6 +452,18 @@ GEM
     uuidtools (2.1.5)
     warden (1.2.7)
       rack (>= 1.0)
+    websocket-driver (0.6.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
+    websocket-rails (0.7.0)
+      em-synchrony
+      faye-websocket
+      hiredis
+      rack
+      rails
+      redis
+      redis-objects
+      thin
     yajl-ruby (1.3.0)
 
 PLATFORMS
@@ -509,6 +536,7 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (= 2.5.3)
   unicorn
+  websocket-rails
 
 BUNDLED WITH
-   1.12.5
+   1.14.4

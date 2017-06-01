@@ -21,3 +21,5 @@
 //= require twitter/bootstrap
 //= require bootstrap
 //= require_tree .
+//= require websocket_rails/main
+

@@ -1,5 +1,6 @@
 class ArticlesController < AuthorizedController
 #class ArticlesController < ApplicationController
+  include NotificationsHelper
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
@@ -10,7 +11,8 @@ class ArticlesController < AuthorizedController
       @sitename = "RanQ"
       add_breadcrumb @sitename, root_path
       ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id)
-      @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})") 
+      # @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})") 
+      @rank = Article.all
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
@@ -201,6 +203,25 @@ class ArticlesController < AuthorizedController
     end
     impressionist(@article, nil) #1時間起きに増やす
     @page_views = @article.impressionist_count
+
+    sum_of_imp = 0
+    @article.user.articles.each do |article|
+      sum_of_imp += article.impressionist_count
+    end
+
+    if @page_views <= 1000              #記事単体view数
+      if @page_views % 100 == 0
+        notification_savesend(@article, @page_views, 4)
+      end
+    else
+      if @page_views % 2000 == 0
+        notification_savesend(@article, @page_views, 4)
+      end
+    end
+    if sum_of_imp % 1000 == 0            #総view数
+    notification_savesend(@article, sum_of_imp, 5)
+    end
+    
   end
 
   # GET /articles/new
