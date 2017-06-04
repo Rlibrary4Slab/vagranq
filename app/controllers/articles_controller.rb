@@ -11,13 +11,13 @@ class ArticlesController < AuthorizedController
       @sitename = "RanQ"
       add_breadcrumb @sitename, root_path
       ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id)
-      # @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})") 
-      @rank = Article.all
+       @rank = Article.published.where(id: ids).limit(10).order("field(id,#{ids.join(',')})").includes(:user) 
+      # @rank = Article.all
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
       
-      @corporecom = Article.where(:corporecom => [100..300]).published.limit(10)
+      @corporecom = Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)
     end
     
     def pvranking
@@ -195,7 +195,6 @@ class ArticlesController < AuthorizedController
     end
     @likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
-    @content = @content
     if Rails.env == "development"
      #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
      #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 

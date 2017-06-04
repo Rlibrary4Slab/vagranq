@@ -320,6 +320,8 @@ GEM
       slop (~> 3.4)
     public_suffix (2.0.5)
     rack (1.6.5)
+    rack-mini-profiler (0.10.5)
+      rack (>= 1.2.0)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -390,7 +392,7 @@ GEM
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
     sass (3.4.23)
-    sass-rails (5.0.2)
+    sass-rails (5.0.6)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -520,12 +522,13 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-twitter
   pace-rails
+  rack-mini-profiler
   rails (= 4.2.6)
   rails_12factor (= 0.0.2)
   rails_admin
   retriable
   rmagick
-  sass-rails (= 5.0.2)
+  sass-rails (= 5.0.6)
   sdoc (= 0.4.0)
   signet
   sprockets
@@ -539,4 +542,4 @@ DEPENDENCIES
   websocket-rails
 
 BUNDLED WITH
-   1.14.4
+   1.15.1
