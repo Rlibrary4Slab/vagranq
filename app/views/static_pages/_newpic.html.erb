@@ -13,7 +13,8 @@
       
        <p class="article_list_title">
           <%= link_to article.title.html_safe, article, style: "" %></p>
-          <span><%= article.impressionist_count %>View</span>
+          <!--  <span><%#= article.impressionist_count %>View</span> -->
+          <span><%= article.view_count %>View</span>
           <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%> 
       
       
