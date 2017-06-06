@@ -4,8 +4,8 @@ development: &development
      key: tvy3oyXU5kdIkZFJr6Fjqvycr
      secret: Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd
  facebook: 
-     key: '274024569635379'
-     secret: 'e32756e993a65d63024bd82d6dd87051'
+     key: '1766599203582835'
+     secret: 'd26d5e061f87dd1394d851770a397148'
 
 production: &production
 
@@ -13,5 +13,5 @@ production: &production
      key: tvy3oyXU5kdIkZFJr6Fjqvycr
      secret: Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd
  facebook: 
-     key: '274024569635379'
-     secret: 'e32756e993a65d63024bd82d6dd87051'
+     key: '1766599203582835'
+     secret: 'd26d5e061f87dd1394d851770a397148'
