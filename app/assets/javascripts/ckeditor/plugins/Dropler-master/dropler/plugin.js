@@ -75,7 +75,6 @@ CKEDITOR.plugins.add( 'dropler', {
 
         function insertImage(href) {
 	    editor = editors[$("#mouseOverSum").val()];
-	    //editor = editors[$("#mouseOverSumOff").val()];
             /*var elem = editor.document.createElement('img', {
                 attributes: {
                     src: href
