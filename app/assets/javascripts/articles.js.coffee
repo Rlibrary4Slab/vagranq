@@ -15,6 +15,28 @@ regz=new RegExp('^cke_article_contents_attributes_([0-9+]+)_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+]+)_title$')
 regz2=new RegExp('^article_contents_attributes_([0-9+]+)_description$')
 reglink=new RegExp('^http:\/\/192.168.33.10:3000\/articles\/([0-9+]+)$')
+
+$(document).on(
+  "mouseenter" : -> 
+   document.getElementById("tansubmit").click()
+   document.getElementById("dansubmit").click()
+   console.log("hover")
+   console.log($(this).parents(".ckeditors").find("textarea").attr("id"))
+   if $(this).parents(".ckeditors").find("textarea").attr("id") != undefined
+    console.log("aap")
+    imgidbe = $(this).parents(".ckeditors").find("textarea").attr("id") 
+    imgidaf = imgidbe.replace("article_contents_attributes_","").replace("_description","")
+    console.log(imgidaf)
+    $("#mouseOverSum").val(Number(imgidaf)+1)
+   else
+    console.log("pi")
+    $("#mouseOverSum").val("0")
+  ,"mouseleave" : ->
+   console.log("off")
+  ,"div.cke_ltr"
+)
+  
+
 $(window).on "beforeunload", ->
   if $("#csubmit").length ==1
    return "このページから離れると入力が無効になります"
@@ -22,7 +44,6 @@ $(document).on 'submit', ->
    $(window).off 'beforeunload'
 $(window).on "load" , ->
   CKEDITOR.replaceAll("ckeditor")
-  console.log("load") 
   $('div p a[class="jihi"]').each ->
     $(this).html("ork")
     #jihi = $(this).parent("p").find(".jihi")

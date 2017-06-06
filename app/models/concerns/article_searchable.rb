@@ -29,12 +29,12 @@ module ArticleSearchable
     end
     # インデックスするデータを生成
     # @return [Hash]
-    #def as_indexed_json(option = {})
+    def as_indexed_json(option = {})
       #self.as_json.select { |k, _| INDEX_FIELDS.include?(k) }
-      #self.as_json(include: {
-      #    contents:  {only: [:description ,:title] }
-      #	}
-      #)
+      self.as_json(include: {
+          contents:  {only: [:description ,:title] }
+      	}
+      )
      # attributes
      #  .symbolize_keys
      #  .slice(:title,:description,content: {only: [:description, :title] })
@@ -48,7 +48,7 @@ module ArticleSearchable
      #  }
      #}
 
-    #end
+    end
   end
 
   #def self.search(params = {})
@@ -85,7 +85,7 @@ module ArticleSearchable
       __elasticsearch__.search({
         query: {
           multi_match: {
-            fields: %w(title description contents.description),
+            fields: %w(title description contents.title contents.description),
             fuzziness: "AUTO",
             query: query
           }
@@ -99,7 +99,7 @@ module ArticleSearchable
    self.class.__elasticsearch__.search({
     query: {
       more_like_this: {
-        fields: %w(title),
+        fields: %w(title description contents.title contents.description),
         ids: [id],
         min_doc_freq: 0,
         min_term_freq: 0

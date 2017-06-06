@@ -15,8 +15,8 @@ class Article < ActiveRecord::Base
     validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "を入力してください"}
     
     has_many :contents
-    paginates_per 20 
     accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
+    paginates_per 20 
     
   
     aasm do
