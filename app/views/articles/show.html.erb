@@ -86,7 +86,7 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
- <% if Rails.env == "production" %>
+ <% if Rails.env != "production" %>
   <div class="relation_list">
  <% @more_like_this.each do |article| %>
    <div class="article_list pickup_list">
