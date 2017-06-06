@@ -1,11 +1,41 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def facebook; basic_action; end
-  def github; basic_action; end
-  def google; basic_action; end
-  def hatena; basic_action; end
-  def linkedin; basic_action; end
-  def mixi; basic_action; end
-  def hatena; basic_action; end
+
+  # いくつプロバイダーを利用しようが処理は共通しているので本メソッドをエイリアスとして流用。
+  def callback_for_all_providers
+    unless env["omniauth.auth"].present?
+      flash[:danger] = "Authentication data was not provided"
+      redirect_to root_url and return
+    end
+    provider = __callee__.to_s
+    if logged_in?
+     user = OAuthService::GetOAuthUser.logcall(env["omniauth.auth"],current_user)
+
+    else
+     user = OAuthService::GetOAuthUser.call(env["omniauth.auth"])
+     puts "orange"
+    end
+    # ユーザーがデータベースに保存されており、且つemailを確認済みであれば、ユーザーをログインする。
+    #if user.persisted? && user.email_verified?
+    puts "database"
+    puts user
+    if user.persisted? 
+      puts "heln"
+      if logged_in?
+       redirect_to user, event: :authentication
+      else
+       sign_in_and_redirect user, event: :authentication
+      end
+      set_flash_message(:notice, :success, kind: provider.capitalize) if is_navigational_format?
+    else
+      user.reset_confirmation!
+      flash[:warning] = "We need your email address before proceeding."
+      redirect_to finish_signup_path(user)
+    end
+  end
+  alias_method :facebook, :callback_for_all_providers
+  alias_method :twitter,  :callback_for_all_providers
+  #def twitter; basic_action; end
+  #def facebook; basic_action; end
 
   private
   def basic_action
@@ -26,4 +56,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
     render :close, layout: false
   end
+
 end

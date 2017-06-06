@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   #match 'auth/:provider/callback', to: 'sessions#create'
   #match 'auth/failure', to: redirect('/')
   #match 'signout', to: 'sessions#destroy', as: 'signout'
-
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',   
-    :omniauth_callbacks => 'users/omniauth_callbacks',
+    :omniauth_callbacks => 'omniauth_callbacks',
     :passwords => 'users/passwords'
   } 
 
@@ -34,6 +34,11 @@ Rails.application.routes.draw do
   resources :users,param: :name ,except: :edit do
     member do
       get :like_articles
+      get :share_twitter
+      get :share_facebook
+      get :inshare_twitter
+      get :inshare_facebook
+      get :edit_articles
     end
   end
   namespace :settings do
@@ -41,9 +46,10 @@ Rails.application.routes.draw do
     resource :accounts
     resource :passwords
   end
+
   post '/like/:article_id' => 'likes#like', as: 'like'
   delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'
-  
+  get "edit_articles" => "users#edit_articles"
   get 'signup' => 'users#new'
   get 'allranking' => "articles#allranking"
   get "home" => "static_pages#home" 
@@ -59,10 +65,13 @@ Rails.application.routes.draw do
   get "funny" => "articles#funny" 
   get "search" => "articles#search"
   root 'static_pages#home'
-  
-  get   'login'   => 'sessions#new'
-  post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+
+  get  '/auth/:provider/callback' => 'sessions#callback'
+  post '/auth/:provider/callback'  => 'sessions#callback'
+  get  '/auth/failure' => 'sessions#failure'  
+  #get   'login'   => 'sessions#new'
+  #post   'login'   => 'sessions#create'
+  #delete 'logout'  => 'sessions#destroy'
   #resources :microposts,          only: [:create, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -8,7 +8,6 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '032a05ffcf3e785038a89ff125875c171fbe8c0abe18874c358eb84cd84f93761596c1365931e860d125a40c682471abe80c075624a068a9e95ac68fa00389b0'
-
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -250,15 +249,15 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-   #config.omniauth :facebook, '1766599203582835', 'd26d5e061f87dd1394d851770a397148'
-  #config.omniauth :twitter, 'tvy3oyXU5kdIkZFJr6Fjqvycr','Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd' 
-   #config.omniauth :twitter, Rails.application.secrets.twitter_api_key,Rails.application.secrets.twitter_api_secret
-  #config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], display: 'popup'
   require "omniauth-twitter"
   require "omniauth-facebook"
   config.omniauth :twitter, OAUTH_CONFIG[:twitter]['key'], OAUTH_CONFIG[:twitter]['secret']
-  config.omniauth :facebook, OAUTH_CONFIG[:facebook]['key'], OAUTH_CONFIG[:facebook]['secret']
-  
+  config.omniauth :facebook, OAUTH_CONFIG[:facebook]['key'], OAUTH_CONFIG[:facebook]['secret'],
+			client_options: {
+		      site: 'https://graph.facebook.com/v2.7',
+		      authorize_url: "https://www.facebook.com/v2.7/dialog/oauth"
+                      },
+	          info_fields: "name,link" 
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 

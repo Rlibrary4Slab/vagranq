@@ -4,6 +4,8 @@ class ArticlesController < AuthorizedController
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
+  before_action :twitter_share, only: [:create,:update]
+  before_action :facebook_share, only: [:create,:update]
   impressionist actions: [:show]
   before_action :all
     def all
@@ -193,8 +195,7 @@ class ArticlesController < AuthorizedController
     end
     @likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
-    @content = @content
-    if Rails.env == "development"
+    if Rails.env != "production" 
      #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
      #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
      #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
@@ -248,22 +249,39 @@ class ArticlesController < AuthorizedController
   
   def create
     @article = current_user.articles.build(article_params)
-    #@article.body = RedcarpetCompiler.compile(@article.body_source)
-
+    
+    if @article.description != "" 
+      drion = ActionController::Base.helpers.strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '')
+    else
+      drion = ActionController::Base.helpers.strip_tags(@article.description.to_s).truncate(124, omission: '')
+    end
+    
     if @article.valid?
+      
       @article.save!
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
         flash[:success] = '記事を公開しました。'
+        if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").nil? != true
+          twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
+        end
+        if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").nil? != true
+          facebook_share.feed!(
+           :message => "『#{@article.title}』をRanQで書きました\n",
+           #:picture => 'https://graph.facebook.com/matake/picture',
+           :link => "ranq-media.com/articles/#{@article.id}",
+           #:link => "ranq-media.com/articles/351",
+           :name => "#{@article.title}",
+           :description => "#{drion}"
+          )
+        end 
       when 'save'
         flash[:success] = '記事を保存しました。'
       else
         raise
-        #render :new
       end
       #redirect_to [:home, @article]
-      #render :new
       redirect_to @article
     else
       render :new
@@ -284,18 +302,40 @@ class ArticlesController < AuthorizedController
     redirect_to @article
   end
 
+
   # PATCH/PUT /articles/1
   def update
 
     @article.assign_attributes(article_params)
+    if @article.description != "" 
+      drion = ActionController::Base.helpers.strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '')
+    else
+      drion = ActionController::Base.helpers.strip_tags(@article.description.to_s).truncate(124, omission: '')
+    end
+    
 
     if @article.valid?
-      #@article.body = RedcarpetCompiler.compile(@article.body_source)
       @article.save!
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
         flash[:success] = '記事を公開しました。'
+        if @article.published_at.nil? != true 
+         if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").nil? != true
+          twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
+         end
+  
+         if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").nil? != true
+          facebook_share.feed!(
+           :message => "『#{@article.title}』をRanQで書きました\n",
+           #:picture => 'https://graph.facebook.com/matake/picture',
+           :link => "ranq-media.com/articles/#{@article.id}",
+           #:link => "ranq-media.com/articles/351",
+           :name => "#{@article.title}",
+           :description => "#{drion}"
+          )
+         end
+        end 
       when 'draft'
         @article.draft!
         flash[:success] = '記事を下書きにしました。'
@@ -332,13 +372,9 @@ class ArticlesController < AuthorizedController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:category, :title, :description, :user_id,:aasm_state,:eyecatch_img,:checkagree,contents_attributes: [:id,:title,:description,:_destroy,:position])
-      #params.require(:ssquire).permit(:aasm_state,contents_attributes: [:id,:title,:description,:_destroy])
     end
     
     def correct_user
-      #@user = User.find(params[:id])
-    #  @user = User.find_by(name: params[:name])
-    #  redirect_to(root_url) unless @user == current_user
       @article = current_user.articles.find_by(id: params[:id])
       redirect_to root_url if @article.nil?
     end
@@ -348,5 +384,24 @@ class ArticlesController < AuthorizedController
       @article = Article.find_by(id: params[:id])
       redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
     end
-    
+   
+    def twitter_share
+     result = JSON.parse(current_user.social_profiles.where(provider: "twitter").map(&:credentials).first)  
+     client = Twitter::REST::Client.new do |config|
+      # developer
+      config.consumer_key         = OAUTH_CONFIG[:twitter]['key'] 
+      config.consumer_secret      = OAUTH_CONFIG[:twitter]['secret']
+      # user
+      config.access_token         = result["token"].to_s
+      config.access_token_secret  = result["secret"].to_s
+     end
+     return client
+    end
+
+    def facebook_share
+     result = JSON.parse(current_user.social_profiles.where(provider: "facebook").map(&:credentials).first)
+     #graph = Koala::Facebook::API.new(result["token"].to_s)
+     graph = FbGraph::User.me(result["token"].to_s)
+     return graph
+    end
 end

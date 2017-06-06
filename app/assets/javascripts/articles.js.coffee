@@ -21,18 +21,18 @@ $(document).on(
    document.getElementById("tansubmit").click()
    document.getElementById("dansubmit").click()
    console.log("hover")
-   console.log($(this).parents(".ckeditors").find("textarea").attr("id"))
    if $(this).parents(".ckeditors").find("textarea").attr("id") != undefined
-    console.log("aap")
     imgidbe = $(this).parents(".ckeditors").find("textarea").attr("id") 
     imgidaf = imgidbe.replace("article_contents_attributes_","").replace("_description","")
-    console.log(imgidaf)
     $("#mouseOverSum").val(Number(imgidaf)+1)
+    console.log($("#mouseOverSum").val())
    else
     console.log("pi")
     $("#mouseOverSum").val("0")
   ,"mouseleave" : ->
    console.log("off")
+   $("#mouseOverSumOff").val($("#mouseOverSum").val())
+   console.log($("#mouseOverSumOff").val())
   ,"div.cke_ltr"
 )
   

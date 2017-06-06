@@ -192,7 +192,7 @@ a > img {
      border: 1px solid #e5e5e5 ;
      padding: 20px;
      margin: 5px;
-     max-width: 680px;
+     max-width: 480px;
       
 }
 .out_embed_image_box {
@@ -204,7 +204,7 @@ a > img {
       
 }
 .out_embed_image_box a img.out_embed_image{
-     position: absolute;
+     position: absolute !important;
      top: 0;
      left: 0;
      width: 100%;
