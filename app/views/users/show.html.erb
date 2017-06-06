@@ -3,8 +3,6 @@
 
 <%= @user.name %>の記事一覧
 <%end%>
-<%= render_breadcrumbs %>
-
 <div class="row" >
   <div class="" style="width: 1200px; margin: 0 auto;">
     <section class="user_info">
@@ -35,19 +33,36 @@
            <% sum_of_likes += article.likes_count.to_i %>
          <% end %>
          
+         <% if logged_in? && @user == current_user %>
+          <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
+            <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
+          <%else%>
+            <%= link_to "twitter認証済み", @user.social_profiles.where(provider: "twitter").map(&:url).first %>
+             <%= link_to current_user.twitter_s == true ? '通知解除' : '通知する', current_user.twitter_s == true ? inshare_twitter_user_path : share_twitter_user_path , class: 'btn btn-lg btn-default' %> 
+ 
+          <%end%>
+
+          <% if current_user.social_profiles.where(provider: "facebook").empty? != false %>
+            <%= link_to "facebook認証", user_facebook_omniauth_authorize_path %>
+          <%else%>
+            <%= link_to "facebook認証済み", @user.social_profiles.where(provider: "facebook").map(&:url).first %>
+             <%= link_to current_user.facebook_s == true ? '通知解除' : '通知する', current_user.facebook_s == true ? inshare_facebook_user_path : share_facebook_user_path , class: 'btn btn-lg btn-default' %> 
+          <%end%>
+
+         <%else%>
+           <% if @user.social_profiles.where(provider: "twitter").empty? != true %>
+            <%= link_to "twitter認証済み", @user.social_profiles.where(provider: "twitter").map(&:url).first %>
+           <%end%>
+           <% if @user.social_profiles.where(provider: "facebook").empty? != true %>
+            <%= link_to "facebook認証済み", @user.social_profiles.where(provider: "facebook").map(&:url).first %>
+           <%end%>
+         
+         <%end%>
          <span style="letter-spacing:4.4px">総獲得View数</span>：<%= sum_of_views %></br>
          <span style="letter-spacing:0px">総獲得いいね！数：</span><%= sum_of_likes %>
 
 
-          <% if logged_in? %>
-           <% if current_user.name == @user.name %>
-            <%= render @articleus %>
-            <% else %>
-            <%= render @nuarticleus %>
-           <%end%>
-          <% else %>
-            <%= render @nuarticleus %>
-          <% end %>    
+            <%= render :partial => "articles/uarticle" %>
           </tbody>
         </table>
          

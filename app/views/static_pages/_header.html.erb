@@ -25,7 +25,6 @@
      <%= submit_tag 'Search', :name => nil %>
    <% end %>
   <% end %>
-  <%#= Time.current %>
   <% if logged_in? %>
    <%# if user_signed_in? %> 
     <ul class="header-navi is-non-login" id="non_login_user_header_menu"> 
@@ -40,11 +39,13 @@
         <ul class="dropdown-menu">
           <li>マイページ</li>
           <li><%= link_to current_user.user_name, current_user %></li>
-          <div id="users_use" ><li><%= link_to "ユーザー情報変更", edit_settings_profiles_path%></li>
-          <li class="divider"></li>
-          <li>
-            <%= link_to "ログアウト",destroy_user_session_path, method: "delete" %>
-          </li>
+          <div id="users_use" >
+           <li><%= link_to "ユーザー情報変更", edit_settings_profiles_path %></li>
+           <li><%= link_to "投稿記事編集", edit_articles_user_path(current_user) %></li>
+           <li class="divider"></li>
+           <li>
+             <%= link_to "ログアウト",destroy_user_session_path, method: "delete" %>
+           </li>
           </div>
         </ul>
       </li>

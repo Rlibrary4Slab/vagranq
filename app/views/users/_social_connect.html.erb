@@ -1,0 +1,14 @@
+<% connected = current_user.try(:social_profile, provider) %>
+<div class="social-block cf">
+  <div class="title">
+    <i class="<%= icon %> <%= provider %>"></i>
+    <h3>
+      <%= display_name %>
+    </h3>
+  </div>
+  <div class="body">
+    <%= t("auth.#{provider}") %>
+  </div>
+  <%= button_tag (connected ? t('auth.connected') : t('auth.connect')), id: "#{provider}-auth", class: "social-connect", disabled: (connected ? 'disabled' : nil) %>
+</div>
+

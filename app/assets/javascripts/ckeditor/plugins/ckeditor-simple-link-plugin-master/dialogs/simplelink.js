@@ -32,6 +32,10 @@
 	        $("body").before('<div id="loadingajax" style="opacity:0.5; height:999999px; width:999999px; background-color: #FFFFFF; z-index: 10000; position:absolute;"></div>');
 	        $("#loadingajax").append('<img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif" style="position: fixed; bottom: 0; top: 0; left: 0; right: 0; margin: auto; z-index: 10000;"></div>');
                 var ajaxend  = function(){
+                      if(title == undefined){
+		       console.log("koreha");
+	               title = "ページを取得できませんでした";
+		      }
                       if(urlReg.test(href)){ 
                         var loglog = title.replace(" | RanQ [ランク]","")
 			console.log("true")
@@ -48,7 +52,9 @@
   			 element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+outimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
 			}else{
 			console.log("nonimage")
-  			 element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+assets/l_e_others_500.png+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
+	                var nonimage = "/assets/l_e_others_500.png"
+  			 //element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+assets/l_e_others_500.png+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
+  			 element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+nonimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
 		        }
                       }
 		      $("#loadingajax").remove()
@@ -67,14 +73,19 @@
          	     type: 'GET',
          	     cache: false,
          	     dataType: "text",
-         	     complete: function(res){ 
+         	     success: function(res){ 
                       r = $( "<div>" + res.responseText + "</div>" );
 		      title = r.find("title").html()
                       oimage = r.find("meta[property="+'"og:image"'+"]").attr("content")
                       outimage = r.find('img').attr("src")
 	              console.log(title+oimage+outimage)
  	              ajaxend();
-		     }
+		     },
+                     error: function(){
+		      console.log("ひどい")
+		      $("#loadingajax").remove()
+		       
+ 	             }
 	 	    });
 
 

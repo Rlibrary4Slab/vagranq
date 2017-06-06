@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
 
   before_action :logged_in_user, only: [:index,:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :set_user, only: [:show, :edit, :update, :like_articles]
+  before_action :set_user, only: [:show, :edit, :update, :like_articles,:edit_articles]
 
   def home
     #@article_form = ArticleForm.new params[:article_form]
