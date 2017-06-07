@@ -11,15 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-// require jquery-selection
+//= require jquery-selection
 //= require jquery.turbolinks
 //= require jquery_ujs
-// require jquery-ui.min
-// require jquery.Jcrop
+//= require jquery-ui.min
+//= require jquery.Jcrop
 //= require jquery.infinitescroll
-// require ckeditor-jquery
+//= require ckeditor-jquery
 //= require twitter/bootstrap
-// require bootstrap
+//= require bootstrap
 //= require websocket_rails/main
-// require_tree .
-
+//= require_tree .

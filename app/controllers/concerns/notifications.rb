@@ -1,4 +1,4 @@
-module NotificationsHelper
+module Notifications
     
     def notification_savesend( articled, content, category)                   #いいね/閲覧の通知履歴を残して新着を飛ばす。
         notification = articled.user.notifications.build( user_id: articled.user_id, article_id: articled.id, content: content ,category: category, flag: false )

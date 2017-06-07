@@ -1,6 +1,6 @@
 class ArticlesController < AuthorizedController
 #class ArticlesController < ApplicationController
-  include NotificationsHelper
+  include Notifications
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
@@ -230,6 +230,7 @@ class ArticlesController < AuthorizedController
   def new
     @article = Article.new
     2.times {@article.contents.build}
+    render layout: 'article_new'
   end
 
   # GET /articles/1/edit

@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-    include NotificationsHelper
+    include Notifications
     def like
         @article = Article.find(params[:article_id])
         like = current_user.likes.build(article_id: @article.id, liked_user_id: @article.user_id)

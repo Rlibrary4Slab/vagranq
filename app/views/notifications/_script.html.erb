@@ -5,7 +5,6 @@
   dispatcher.bind("notification_event", function(data){
 
     var toaster = function(info, msg) {									                              //  トースター通知
-      console.log(info);
       if($('toaster-box').length==0)
       var item1 = $('<toaster-box position="top-right"><toaster-start class="like-info" ></toaster-start></toaster-box>');
       $('body').append(item1);
