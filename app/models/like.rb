@@ -1,5 +1,9 @@
 class Like < ActiveRecord::Base
-    belongs_to :article, counter_cache: :likes_count
+    belongs_to :article
+    
+    counter_culture :article, column_name: 'likes_count'
+
+
     belongs_to :user, class_name: "User"
     belongs_to :liked_user, class_name: "User"
     has_many :notifications

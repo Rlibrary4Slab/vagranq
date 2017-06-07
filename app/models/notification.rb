@@ -5,5 +5,5 @@ class Notification < ActiveRecord::Base
     paginates_per 5
     
     validates :article_id, :uniqueness => { :scope => [:content, :category] }
-
+    validates :article_id, uniqueness: {:scope => :user_id}, if: "category == 1"
 end

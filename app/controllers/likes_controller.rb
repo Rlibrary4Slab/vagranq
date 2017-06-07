@@ -2,11 +2,11 @@ class LikesController < ApplicationController
     include Notifications
     def like
         @article = Article.find(params[:article_id])
-        like = current_user.likes.build(article_id: @article.id, liked_user_id: @article.user_id)
+        like = current_user.likes.build(article_id: @article.id)
         like.save
-        
-        liked_article_counts = @article.liked.count
-        total_liked_counts = @article.user.liked.count
+       
+        liked_article_counts = @article.likes_count.to_i + 1
+        total_liked_counts = Article.where(user_id: @article.user_id).sum(:likes_count)
 
         notification_savesend(@article, like.id, 1)                                         #新着いいね
         if liked_article_counts % 5 == 0                                                    #記事単体いいね数
@@ -24,12 +24,12 @@ class LikesController < ApplicationController
         
         notification = @article.notifications.where(category:1).find_by(content: like.id)
         notification_destroy(notification)
-        if @article.user.liked.count % 5 == 4                                            #記事総合いいね数
-            notification = @article.notifications.where(category:3).last
+        if @article.likes_count % 5 == 4                                            #記事単体いいね数
+            notification = @article.notifications.where(category:2).last
             notification_destroy(notification)
         end
-        if @article.liked.count % 30 == 29                                               #記事総合いいね数
-            notification = @article.notifications.where(category:2).last
+        if Article.where(user_id: @article.user_id).sum(:likes_count) % 30 == 29        #記事総合いいね数
+            notification = @article.notifications.where(category:3).last
             notification_destroy(notification)
         end
     end
