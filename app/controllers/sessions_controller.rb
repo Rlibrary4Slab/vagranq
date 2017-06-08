@@ -3,29 +3,6 @@ class SessionsController < ApplicationController
  
   end
 
-  def callback
-    puts request.env['omniauth.auth']
-    #if omniauth.present?
-      # 認証が成功したときの処理
-    #  omniauth = request.env['omniauth.auth']
-    #  if omniauth.present?
-    #    profile = SocialProfile.find_or_initialize_by(provider: omniauth['provider'], uid: omniauth['uid'])
-    #    profile.set_values(omniauth)
-        # ...（ユーザ登録、ログイン等をしておく）
-    #  end
-    #else
-      # 認証情報がないときの処理
-      # ...（エラーレンダリングとかしておく）
-    #end
-  end
-
-  def failure
-    # 認証が失敗したときの処理（キャンセルを押された時とか）
-    # ...（エラーレンダリングとかしておく）
-    puts "失敗"
-  end
-
-  
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])

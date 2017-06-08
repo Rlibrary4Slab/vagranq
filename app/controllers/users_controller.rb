@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:edit, :update,:edit_articles]
+  before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
   before_action :set_user, only: [ :edit, :update, :like_articles]
 
@@ -9,50 +9,14 @@ class UsersController < ApplicationController
     #@users = User.all
     @users = User.per_page_kaminari(params[:page])
   end
-
-
-
-
+  
   def show
     @user = User.find_by(name: params[:name])
     @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
     @nuarticleus = @user.articles.published.order("created_at desc").per_page_kaminari(params[:page])
     @title = "自身の投稿"
     @larticles = @user.like_articles
-    
-  end
-
-  def edit_articles
-    @user = User.find_by(name: params[:name])
-    @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
-    @title = "投稿編集"
-  end
-
-  def share_twitter
-    
-    current_user.update_attributes(:twitter_s => true)
-    flash[:success] = "投稿時Twitterにてシェアされます"
-    redirect_to current_user
-  end
-
-  def inshare_twitter
-    
-    current_user.update_attributes(:twitter_s => false)
-    flash[:success] = "投稿時Twitterにてシェアされなくなります"
-    redirect_to current_user
-  end
-
-  def share_facebook
-    current_user.update_attributes(:facebook_s => true)
-    flash[:success] = "投稿時Facebookにてシェアされます"
-    redirect_to current_user
-    
-  end
-
-  def inshare_facebook
-    current_user.update_attributes(:facebook_s => false)
-    flash[:success] = "投稿時Facebookにてシェアされなくなります"
-    redirect_to current_user
+    #@articles= Article.all
     
   end
 
@@ -71,16 +35,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def finish_signup
-    @user = User.find(params[:id])
-    if request.patch? && @user.update(user_params)
-      @user.send_confirmation_instructions unless @user.confirmed?
-      flash[:info] = 'We sent you a confirmation email. Please find a confirmation link.'
-      redirect_to root_url
-    end
-  end
- 
-
   def edit
     #@user = User.find(params[:id])
     @user = User.find_by(name: params[:name])
@@ -116,7 +70,7 @@ class UsersController < ApplicationController
     
     def user_params
       params.require(:user).permit(:name, :email, :password,:user_image,:header_image,
-                                   :password_confirmation,:twitter_s,:facebook_s)
+                                   :password_confirmation)
     end
     
     def logged_in_user
