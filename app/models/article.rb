@@ -16,8 +16,7 @@ class Article < ActiveRecord::Base
     
     has_many :contents
     accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
-    attr_accessor :twi,:face
-    paginates_per 21 
+    paginates_per 20 
     
   
     aasm do

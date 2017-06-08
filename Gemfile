@@ -81,8 +81,12 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'elasticsearch'
 gem 'elasticsearch-dsl'
+gem "tire", :git => "https://github.com/karmi/tire.git"
 gem "fluent-plugin-mysql-replicator"
 gem "fluent-logger"
+
 gem "twitter"
 gem "fb_graph"
 gem "unicorn-worker-killer"
+
+
