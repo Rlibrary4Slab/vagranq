@@ -8,12 +8,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     build_resource({})
     respond_with self.resource
-     
-     
+  
+    #@noadmin = User.where('admin = ?', true).empty? 
+ 
   end
 
   def create
     build_resource(sign_up_params)
+
     if resource.save
       yield resource if block_given?
       if resource.active_for_authentication?
@@ -32,10 +34,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
  
-  #def build_resource(hash=nil)
-  #  hash[:uid] = User.create_unique_string
-  #  super
-  #end
+  def build_resource(hash=nil)
+    hash[:uid] = User.create_unique_string
+    super
+  end
 
   private
 
@@ -50,11 +52,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def sign_up_params
       params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation,:admin, :pid,:provider)
     end
-
-  protected
-   def update_resource(resource, params)
-    resource.update_without_password(params)
-   end   
  
     
 end
