@@ -80,10 +80,11 @@ production:
   adapter: mysql2
   encoding: utf8mb4
   pool: 5
-  database: vagranq_production
-  #host: 52.197.133.116
-  username: root
-  password: 
+  database: ranq_mysql 
+  host: ranq-mysql.cm185bqkijjo.ap-northeast-1.rds.amazonaws.com 
+  username: forstart 
+  password: <%= ENV["MYSQL_DATABASE_PASS"] %>
+
   socket: /var/lib/mysql/mysql.sock
 
 
