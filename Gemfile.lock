@@ -170,6 +170,7 @@ GEM
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
     formatador (0.2.5)
+    get_process_mem (0.2.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     google-analytics-rails (1.1.0)
@@ -459,6 +460,9 @@ GEM
     unicorn (5.3.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    unicorn-worker-killer (0.4.4)
+      get_process_mem (~> 0)
+      unicorn (>= 4, < 6)
     uuidtools (2.1.5)
     warden (1.2.7)
       rack (>= 1.0)
@@ -535,6 +539,7 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (= 2.5.3)
   unicorn
+  unicorn-worker-killer
 
 BUNDLED WITH
    1.12.5
