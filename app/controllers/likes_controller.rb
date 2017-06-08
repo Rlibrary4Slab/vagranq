@@ -24,7 +24,7 @@ class LikesController < ApplicationController
         
         notification = @article.notifications.where(category:1).find_by(content: like.id)
         notification_destroy(notification)
-        if @article.likes_count % 5 == 4                                            #記事単体いいね数
+        if @article.likes_count.to_i % 5 == 0                                            #記事単体いいね数
             notification = @article.notifications.where(category:2).last
             notification_destroy(notification)
         end

@@ -68,5 +68,9 @@
   </ul>
   <%end%>
 </div><!-- /.hd_in -->
-<%= render 'notifications/script', notification_count: @notification_counts %>                           <!--通知スクリプト-->
+
+<% if @notification_counts == 0 %>
+  <script> $("#notification_count").hide(); </script>
+<% end %>
+
 </header>

@@ -288,7 +288,7 @@ class ArticlesController < AuthorizedController
       #render :new
       redirect_to @article
     else
-      render :new
+      render :new, layout: 'article_new'
     end
   end
 
@@ -330,7 +330,7 @@ class ArticlesController < AuthorizedController
       #redirect_to [:home, @article]
       redirect_to @article
     else
-      render :edit
+     render :edit
     end
   end
   # DELETE /articles/1
