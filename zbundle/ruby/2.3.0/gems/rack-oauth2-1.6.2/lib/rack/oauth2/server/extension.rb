@@ -1,1 +1,0 @@
-require 'rack/oauth2/server/extension/pkce'

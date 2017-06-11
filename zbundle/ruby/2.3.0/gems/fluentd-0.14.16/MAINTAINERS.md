@@ -1,5 +1,0 @@
-- Sadayuki Furuhashi <frsyuki@gmail.com>
-- Masahiro Nakagawa <repeatedly@gmail.com>
-- Kiyoto Tamura <me@ktamura.com>
-- Kazuki Ohta <kazuki.ohta@gmail.com>
-- Satoshi "Moris" Tagomori <tagomoris@gmail.com>
