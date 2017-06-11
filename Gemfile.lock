@@ -1,16 +1,3 @@
-GIT
-  remote: https://github.com/karmi/tire.git
-  revision: 1016449cd5bcfd52853f1728452e26962c18790e
-  specs:
-    tire (0.6.2)
-      activemodel (>= 3.0)
-      activesupport
-      ansi
-      hashr (~> 0.0.19)
-      multi_json (~> 1.3)
-      rake
-      rest-client (~> 1.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -62,6 +49,7 @@ GEM
       sshkit (>= 1.6.1, != 1.7.0)
     ansi (1.5.0)
     arel (6.0.4)
+    attr_required (1.0.1)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
@@ -72,6 +60,7 @@ GEM
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
     breadcrumbs_on_rails (3.0.1)
+    buftok (0.2.0)
     builder (3.2.3)
     capistrano (3.7.0)
       airbrussh (>= 1.0.0)
@@ -126,6 +115,8 @@ GEM
     devise-bootstrap-views (0.0.11)
     devise-i18n (1.1.2)
     devise-i18n-views (0.3.7)
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
     elasticsearch (5.0.4)
       elasticsearch-api (= 5.0.4)
       elasticsearch-transport (= 5.0.4)
@@ -142,6 +133,7 @@ GEM
       multi_json
     em-synchrony (1.0.6)
       eventmachine (>= 1.0.0.beta.1)
+    equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.2.3)
     excon (0.55.0)
@@ -152,6 +144,11 @@ GEM
     faye-websocket (0.10.0)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
+    fb_graph (2.7.17)
+      httpclient (>= 2.4)
+      multi_json (>= 1.3)
+      rack-oauth2 (>= 0.14.4)
+      tzinfo
     ffi (1.9.18)
     fluent-logger (0.7.1)
       msgpack (>= 1.0.0, < 2)
@@ -217,11 +214,18 @@ GEM
     haml (4.0.7)
       tilt
     hashie (3.5.5)
-    hashr (0.0.22)
     hiredis (0.6.1)
+    http (2.2.2)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 1.0.1)
+      http_parser.rb (~> 0.6.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    http-form_data (1.0.3)
     http_parser.rb (0.6.0)
     httpclient (2.8.3)
-    i18n (0.8.1)
+    i18n (0.8.4)
     impressionist (1.5.1)
       httpclient (~> 2.2)
       nokogiri (~> 1.5)
@@ -267,6 +271,8 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -275,8 +281,8 @@ GEM
       minitest (> 1.2.0)
       rails (>= 2.3.3)
     mini_magick (4.7.0)
-    mini_portile2 (2.1.0)
-    minitest (5.10.1)
+    mini_portile2 (2.2.0)
+    minitest (5.10.2)
     minitest-reporters (1.0.5)
       ansi
       builder
@@ -287,13 +293,14 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.3.21)
+    naught (1.1.0)
     nenv (0.3.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
-    nokogiri (1.7.1)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -326,9 +333,14 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
-    rack (1.6.5)
+    rack (1.6.8)
     rack-mini-profiler (0.10.5)
       rack (>= 1.2.0)
+    rack-oauth2 (1.6.2)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      httpclient (>= 2.4)
+      multi_json (>= 1.3.6)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -389,8 +401,6 @@ GEM
     remotipart (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     retriable (3.0.1)
     rmagick (2.16.0)
     rsolr (2.0.2)
@@ -398,13 +408,13 @@ GEM
       faraday
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
-    sass (3.4.23)
+    sass (3.4.24)
     sass-rails (5.0.6)
-      railties (>= 4.0.0, < 5.0)
+      railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-      tilt (~> 1.1)
+      tilt (>= 1.1, < 3)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
@@ -417,6 +427,7 @@ GEM
       faraday (~> 0.9)
       jwt (~> 1.5)
       multi_json (~> 1.10)
+    simple_oauth (0.3.1)
     slop (3.6.0)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
@@ -438,11 +449,21 @@ GEM
       rack (>= 1, < 3)
     thor (0.19.4)
     thread_safe (0.3.6)
-    tilt (1.4.1)
+    tilt (2.0.7)
     transpose (0.0.1)
       activesupport
     turbolinks (2.3.0)
       coffee-rails
+    twitter (6.1.0)
+      addressable (~> 2.5)
+      buftok (~> 0.2.0)
+      equalizer (= 0.0.11)
+      faraday (~> 0.11.0)
+      http (~> 2.1)
+      http_parser.rb (~> 0.6.0)
+      memoizable (~> 0.4.2)
+      naught (~> 1.1)
+      simple_oauth (~> 0.3.1)
     twitter-bootstrap-rails (3.2.2)
       actionpack (>= 3.1)
       execjs (>= 2.2.2, >= 2.2)
@@ -455,6 +476,9 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.4)
     unicorn (5.3.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -506,6 +530,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   execjs
+  fb_graph
   fluent-logger
   fluent-plugin-mysql-replicator
   fog-aws
@@ -541,9 +566,9 @@ DEPENDENCIES
   signet
   sprockets
   therubyracer
-  tire!
   transpose
   turbolinks (= 2.3.0)
+  twitter
   twitter-bootstrap-rails
   uglifier (= 2.5.3)
   unicorn

@@ -75,6 +75,7 @@ CKEDITOR.plugins.add( 'dropler', {
 
         function insertImage(href) {
 	    editor = editors[$("#mouseOverSum").val()];
+	    //editor = editors[$("#mouseOverSumOff").val()];
             /*var elem = editor.document.createElement('img', {
                 attributes: {
                     src: href
@@ -171,7 +172,7 @@ CKEDITOR.plugins.add( 'dropler', {
              iframeBaseB[i].contentDocument.querySelector("html").ondragover = doNothing;
              iframeBaseB[i].contentDocument.querySelector("html").ondrop = dropHandler;
 	    }
-            
+            console.log("aaaa")          
             //paddingToCenterBody = ((iframeBase.offsetWidth - iframeBody.offsetWidth) / 2) + 'px';
             //iframeBase.style.height = '100%';
             //iframeBase.style.width = '100%';

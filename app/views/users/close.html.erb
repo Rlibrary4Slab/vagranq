@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <%= render 'head_meta' %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'header' %>
+  </head>
+  <body>
+    <h1>
+      <% if @omniauth %>
+        Authorized
+      <% else %>
+        Authorization Failed
+      <% end %>
+    </h1>
+    <%= javascript_include_tag 'footer' %>
+    <script>
+      
+      success = #{@omniauth.present?};
+
+      function reflectOAuthResult() {
+        var $linkElement, linkElementId, provider;
+        provider = window.name;
+        linkElementId = "#" + provider + "-auth";
+        $linkElement = window.opener.$(linkElementId);
+        App.Utils.Auth.afterCallback($linkElement, success);
+        window.opener.authWaiting[provider] = false
+      };
+
+      $(window).on("beforeunload", reflectOAuthResult());
+
+      setTimeout(window.close, 1000);
+
+
+    </script>
+  </body>
+</html>
+

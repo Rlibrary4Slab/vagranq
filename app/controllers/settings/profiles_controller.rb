@@ -12,6 +12,21 @@ class Settings::ProfilesController < Settings::BaseController
     current_user.assign_attributes(user_params)
 
     if current_user.valid?
+   
+      case params[:ope][:twi]
+      when "1" 
+        current_user.twitter_s = true
+      when "0"
+        current_user.twitter_s = false 
+      end  
+
+      case params[:ope][:fac]
+      when "1" 
+        current_user.facebook_s = true
+      when "0"
+        current_user.facebook_s = false 
+      end  
+
       current_user.save!
       if params[:user][:user_image].present?
         render :crop
@@ -30,7 +45,9 @@ class Settings::ProfilesController < Settings::BaseController
   private
 
     def user_params
-      params.require(:user).permit(:user_name, :user_description,:user_image,:header_image,
+      params.require(:user).permit(:name,:email,:user_name, :user_description,:user_image,:header_image,
                                   :crop_x,:crop_y,:crop_w,:crop_h)
     end
+
+
 end

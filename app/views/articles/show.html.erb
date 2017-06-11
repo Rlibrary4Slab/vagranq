@@ -86,13 +86,21 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
- <% if Rails.env == "development" %>
+ <% if Rails.env != "production" && @idsemptybool != true %>
+  <div class="relation_list">
  <% @more_like_this.each do |article| %>
-   <div style="height: 500px;"></div>
-   <%= link_to article.title, article %> | 
-   <%= link_to article.created_at.strftime("%Y年%m月%d日"), article %></br>
-   <div style="height: 500px;"></div>
+   <div class="article_list pickup_list">
+    <div class="article_list_content clearfix">
+    <%= link_to image_tag(article.eyecatch_img,:class =>"s_eyecatch_img s_article_thumbnail", :id => "s_article_thumbnail article_list_thumb") ,article %>
+     <!-- </div>-->
+    <div class="article_list_text">
+       <p class="article_list_title">
+          <%= link_to article.title.html_safe, article, style: "" %></p>
+     </div>
+   </div>
+  </div>
  <% end %>
+  </div>
 <% end %>
 <%#= paginate @more_like_this %>
 <%#= link_to_next_page @more_like_this, 'もっと見る', id: 'read_mores', remote: true %>
