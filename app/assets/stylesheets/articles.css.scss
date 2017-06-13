@@ -266,7 +266,7 @@ code {
 }
  
 .breadcrumbs_lists{
- padding-left:15px;
+ padding-left:0px;
  li{
    display: inline-block;
    font-size: 18px;
@@ -275,3 +275,6 @@ code {
 
 }
 
+.article_content p img {
+  max-width: 100%; 
+}

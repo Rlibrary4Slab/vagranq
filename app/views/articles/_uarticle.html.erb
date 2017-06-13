@@ -1,7 +1,7 @@
 
-<% logged_in? && current_user.name != @user.name ?  val = @nuarticleus  : val= @articleus %>
+<%# logged_in? && current_user.name != @user.name ?  val = @nuarticleus  : val= @articleus %>
     <ul class="user_page_entry_list">
-<% val.each do |article| %>
+<% @nuarticleus.each do |article| %>
  
 
 

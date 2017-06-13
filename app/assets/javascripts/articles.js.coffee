@@ -132,8 +132,6 @@ $(document).on 'ready page:load', ->
   #$('form').on "click", ->
   #  dsds=$("#user_name").val()
     #console.log(dsds)
-  #  $("#user_user_name").val(dsds).change()  
-  #  return
   $("div.s_article_thumbnail").each ->
     #arth++
     #console.log("arth"+arth)
@@ -319,8 +317,11 @@ $(document).on 'click' ,-> #clicked
   $('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
   if $("#user_name").length <1 
   else
+   if $("#user_user_image").length <1 
+    console.log("ando")
     dsds=$("#user_name").val()
     $("#user_user_name").val(dsds).change() 
+   
   if $("#csubmit").length==1   
    $('p img').css({"height":"28.2%","width":"100%"})
 

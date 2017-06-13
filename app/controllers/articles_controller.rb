@@ -4,15 +4,15 @@ class ArticlesController < AuthorizedController
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
-  before_action :twitter_share, only: [:create,:update]
-  before_action :facebook_share, only: [:create,:update]
+  #before_action :twitter_share, only: [:create,:update]
+  #before_action :facebook_share, only: [:create,:update]
   impressionist actions: [:show]
   before_action :all
     def all
       @sitename = "RanQ"
       add_breadcrumb @sitename, root_path
       ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id)
-      @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})") 
+      @rank = Article.limit(10).published.where(id: ids).order("field(id,#{ids.join(',')})") 
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
@@ -200,7 +200,8 @@ class ArticlesController < AuthorizedController
      #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
      #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
      ids = @article.more_like_this.results.map(&:id)
-     @more_like_this = Article.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
+     @idsemptybool = ids.empty?
+     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
     end
     impressionist(@article, nil) #1時間起きに増やす
     @page_views = @article.impressionist_count
@@ -263,10 +264,10 @@ class ArticlesController < AuthorizedController
       when 'publish'
         @article.publish!
         flash[:success] = '記事を公開しました。'
-        if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").nil? != true
+        if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
         end
-        if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").nil? != true
+        if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").empty? != true
           facebook_share.feed!(
            :message => "『#{@article.title}』をRanQで書きました\n",
            #:picture => 'https://graph.facebook.com/matake/picture',
@@ -321,11 +322,11 @@ class ArticlesController < AuthorizedController
         @article.publish!
         flash[:success] = '記事を公開しました。'
         if @article.published_at.nil? != true 
-         if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").nil? != true
+         if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true 
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
          end
   
-         if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").nil? != true
+         if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").empty? != true
           facebook_share.feed!(
            :message => "『#{@article.title}』をRanQで書きました\n",
            #:picture => 'https://graph.facebook.com/matake/picture',

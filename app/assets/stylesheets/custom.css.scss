@@ -848,6 +848,9 @@ iframe {
 
 /* sumahoS */
 @media screen and (max-device-width: 1069px)   {
+  #searchBar{
+    display:none;
+  }
   .topcontent_content a img {
      width:100% ;
      height: 180px ;
@@ -941,6 +944,8 @@ iframe {
      }
      p{
         font-size: 15px ;
+        line-height: 25px;
+        margin-top: 20px;
      }
 
   }
@@ -990,6 +995,20 @@ iframe {
    width: 100% ;
    display: none ;
   }
+  section.user_info {
+    max-width: 100%; 
+  }
+
+  .row {
+    margin-left: 0;
+    margin-right: 0; 
+  }
+
+  li.user_page_entry {
+    width: 100% !important;
+    padding: 10px !important; 
+  }
+
 }
 
 /* sumahoE */

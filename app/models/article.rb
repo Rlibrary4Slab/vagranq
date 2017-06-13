@@ -18,6 +18,17 @@ class Article < ActiveRecord::Base
     accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
     attr_accessor :twi,:face
     paginates_per 21 
+    after_commit on: [:create] do
+      __elasticsearch__.index_document 
+    end
+
+    after_commit on: [:update] do
+       __elasticsearch__.update_document 
+    end
+
+    after_commit on: [:destroy] do
+      __elasticsearch__.delete_document 
+    end
     
   
     aasm do

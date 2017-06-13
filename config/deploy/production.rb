@@ -2,6 +2,7 @@
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
+#set :branch, 'userpaging'
 set :branch, 'master'
 set :stage, :production
 set :rails_env, 'production'

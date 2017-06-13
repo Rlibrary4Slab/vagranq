@@ -21,9 +21,6 @@ set :bundle_env_variables, { nokogiri_use_system_libraries: 2 }
 # ()
 set :keep_releases, 5
 
-#set :rbenv_custom_path, 'C:\Users\C0113339_2\.rbenv-win\versions\2.3.0'
-#set :rbenv_path, '/home/ec2-user/.rbenv/versions/2.3.0'
-#set :rbenv_path, '/home/vagrant/.rbenv/version'
 # ruby
 set :rbenv_ruby, '2.3.0'
 #

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:edit, :update,:edit_articles]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update,:edit_articles]
   before_action :set_user, only: [ :edit, :update, :like_articles]
 
 

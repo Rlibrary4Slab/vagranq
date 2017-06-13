@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
     has_many :likes
     has_many :like_articles, through: :likes, source: :article
     before_save {self.email =email.downcase}
-    #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" } 
-    validates :name, presence: true,length: {maximum: 50},uniqueness: {case_sensitive:false},on: :create
+    #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" },on: :create 
+    #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[A-Za-z]\w*\z/, message: "英数字入力してください" },on: :create 
+    validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,20}+\z/i, message: "少なくともそれぞれ1種類の半角英数字を6文字以上20以下で入力してください" },on: :create 
+    #validates :name, presence: true,length: {maximum: 50},uniqueness: {case_sensitive:false},on: :create
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+.[a-z]+\z/i
     validates :email, presence: true,  length: {maximum:255},uniqueness: {case_sensitive:false},on: :create,format: {with: VALID_EMAIL_REGEX, message: "メールアドレスを入力してください"}
     validates :password, presence: true, on: :create,length: {minimum:6,message: "6桁以上入力してください"}

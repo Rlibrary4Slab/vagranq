@@ -10,13 +10,13 @@ class StaticPagesController < ApplicationController
     #@micropost = current_user.microposts.build if logged_in?
     @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc")
     #@articles = Article.paginate(:page =>  params[:page]).published
-    @user = User.find_by(name: params[:name])
+    #@user = User.find_by(name: params[:name])
 
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
     
     #@rank = Article.published.where(:id => Like.group(:article_id).order('count(article_id) desc').pluck(:article_id))
     ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id)
-    @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})")
+    @rank = Article.published.limit(10).where(id: ids).order("field(id,#{ids.join(',')})")
 
     #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
     @toprank = Article.where(:corporecom => [1..3]).published.limit(3) 

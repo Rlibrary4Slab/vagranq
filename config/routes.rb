@@ -23,36 +23,10 @@ Rails.application.routes.draw do
       resources :articles, only: [:index, :show]
     end
   end
-  resources :articles, only: [:index,:show,:create,:edit,:update,:destroy,:new]  do
-    member do
-      get :liking_users
-      post :publish
-      post :draft
-    end
+  scope "/search" do
+    get "/" => "articles#search", as: "search"
   end
-
-  resources :users,param: :name ,except: :edit do
-    member do
-      get :like_articles
-      get :share_twitter
-      get :share_facebook
-      get :inshare_twitter
-      get :inshare_facebook
-      get :edit_articles
-    end
-  end
-  namespace :settings do
-    resource :profiles
-    resource :accounts
-    resource :passwords
-  end
-
-  post '/like/:article_id' => 'likes#like', as: 'like'
-  delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'
-  get "edit_articles" => "users#edit_articles"
-  get 'signup' => 'users#new'
   get 'allranking' => "articles#allranking"
-  get "home" => "static_pages#home" 
   get "fashion" => "articles#fashion"
   get "beauty" => "articles#beauty"
   get "hangout" => "articles#hangout"
@@ -63,9 +37,48 @@ Rails.application.routes.draw do
   get "gadget" => "articles#gadget"
   get "learn" => "articles#learn"
   get "funny" => "articles#funny" 
-  get "search" => "articles#search"
-  root 'static_pages#home'
+  #resources :articles, only: [:index,:show,:create,:edit,:update,:destroy,:new]  do
+  resources :articles do
+    member do
+      get :liking_users
+      post :publish
+      post :draft
+    end
+  end
 
+  #resources :users,param: :name ,except: [:edit ,:show] do
+  resources :users,param: :name ,only: [:index] do
+    member do
+      get :like_articles
+      get :share_twitter
+      get :share_facebook
+      get :inshare_twitter
+      get :inshare_facebook
+      get :edit_articles
+    end
+  end
+  scope "/:name", controller: :users do  
+   get "/" => "users#show" ,as: "user" 
+   get :like_articles
+   get :share_twitter
+   get :share_facebook
+   get :inshare_twitter
+   get :inshare_facebook
+   get :edit_articles
+  end
+  
+  
+  namespace :settings do
+    resource :profiles
+    resource :accounts
+    resource :passwords
+  end
+
+  post '/like/:article_id' => 'likes#like', as: 'like'
+  delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'
+  get "edit_articles" => "users#edit_articles"
+  #get 'signup' => 'users#new'
+  root 'static_pages#home'
   get  '/auth/:provider/callback' => 'sessions#callback'
   post '/auth/:provider/callback'  => 'sessions#callback'
   get  '/auth/failure' => 'sessions#failure'  

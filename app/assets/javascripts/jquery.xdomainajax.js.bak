@@ -16,8 +16,10 @@ jQuery.ajax = (function(_ajax) {
     var protocol = location.protocol,
         hostname = location.hostname,
         exRegex = RegExp(protocol + '//' + hostname),
-        YQL = 'http' + (/^https/.test(protocol) ? 's' : '') + '://query.yahooapis.com/v1/public/yql?callback=?',
-        query = 'select * from html where url="{URL}" and xpath="*"';
+        //YQL = 'http' + (/^https/.test(protocol) ? 's' : '') + '://query.yahooapis.com/v1/public/yql?callback=?',
+        YQL = 'http' + (/^https/.test(protocol) ? 's' : '') +'://query.yahooapis.com/v1/public/yql?', 
+        //query = 'select * from html where url="{URL}" and xpath="*"';
+        query = 'select * from htmlstring where url="{URL}" and xpath="*"';
 
     function isExternal(url) {
         return !exRegex.test(url) && /:\/\//.test(url);
@@ -26,6 +28,7 @@ jQuery.ajax = (function(_ajax) {
     return function(o) {
 
         var url = o.url;
+        console.log("inaaa:")
 
         if (/get/i.test(o.type) && !/json/i.test(o.dataType) && isExternal(url)) {
 
@@ -34,11 +37,14 @@ jQuery.ajax = (function(_ajax) {
             o.url = YQL;
             o.dataType = 'json';
 
+            console.log("in:"+o.url)
             o.data = {
                 q: query.replace('{URL}',
-                url + (o.data ? (/\?/.test(url) ? '&' : '?') + jQuery.param(o.data) : '')),
+                //url + (o.data ? (/\?/.test(url) ? '&' : '?') + jQuery.param(o.data) : '')),
+                url + (o.data ? (/\?/.test(url) ? '' : '?') + jQuery.param(o.data) : '')),
                 format: 'xml'
             };
+            console.log("in:"+o.data["q"])
 
             // Since it's a JSONP request
             // complete === success

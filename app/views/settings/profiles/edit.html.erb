@@ -6,7 +6,7 @@
             
  
             <%=form_for current_user, layout: :horizontal, url: settings_profiles_path , method: :PUT do |f| %>
-            
+                        
                 <%#= f.alert_message '以下の項目を修正して下さい。' %>
                 <%=f.label :name, "ユーザーID" %>
                 <%= f.text_field :name ,:readonly => true %>

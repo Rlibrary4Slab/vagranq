@@ -32,7 +32,7 @@
     </div>
     <div class="head_like_user">
       <ul class="user_like">
-        <li class="user"><%= link_to image_tag(@article.user.user_image_url(:thumb)), @article.user %></li>
+        <li class="user"><%= link_to image_tag(@article.user.user_image_url(:thumb)), user_path(@article.user) %></li>
         <li class="like">
          <% if logged_in? %>
           <%= render 'likes/like_links', article: @article %>
@@ -52,7 +52,7 @@
       </ul>
     </div>
     <div class="head_user_articles">
-      <%= link_to "#{@article.user.user_name}の書いた記事一覧" , @article.user %>
+      <%= link_to "#{@article.user.user_name}の書いた記事一覧" , user_path(@article.user) %>
     </div>
   </div>
 </div>
@@ -86,7 +86,7 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
- <% if Rails.env != "production" %>
+ <% if Rails.env != "production"  && @idsemptybool != true%>
   <div class="relation_list">
  <% @more_like_this.each do |article| %>
    <div class="article_list pickup_list">

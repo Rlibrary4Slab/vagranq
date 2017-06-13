@@ -39,6 +39,9 @@
                       if(urlReg.test(href)){ 
                         var loglog = title.replace(" | RanQ [ランク]","")
 			console.log("true")
+                        console.log(href)
+                        console.log(oimage)
+                        console.log(loglog)
 		        element.setHtml('<div class="article_list_content clearfix link_card"><a href="'+href+'"><img class="s_eyecatch_img s_article_thumbnail" id="s_article_thumbnail article_list_thumb" src='+oimage+' alt="'+oimage+'" /></a><div class="article_list_text"><p class="article_list_title"><a style="" href="'+href+'">'+ loglog +'</a></p></div></div>');
 		      }else{   
 			console.log("none")
@@ -68,20 +71,27 @@
 	 		console.log(href)
         	    }
 	            element.setAttribute("href", href);
+	            console.log("\n\n\n\n\n\n\n\n\n\n\n"+href)
                     $.ajax({
-         	     url: href,
+         	     url: href, 
          	     type: 'GET',
          	     cache: false,
-         	     dataType: "text",
+         	     dataType: "html",
+     	             xhrFields: {withCredentials: true},
          	     success: function(res){ 
+ 	              console.log(res);
                       r = $( "<div>" + res.responseText + "</div>" );
-		      title = r.find("title").html()
-                      oimage = r.find("meta[property="+'"og:image"'+"]").attr("content")
-                      outimage = r.find('img').attr("src")
-	              console.log(title+oimage+outimage)
+		      title = r.find("title").html();
+                      oimage = r.find("meta[property="+'"og:image"'+"]").attr("content");
+                      outimage = r.find('img').attr("src");
  	              ajaxend();
+                      
+		      console.log("通信");
 		     },
-                     error: function(){
+                     error: function(jqXHR, textStatus, errorThrown){
+		      console.log("ひどい")
+		      console.log(jqXHR)
+		      console.log(textStatus)
 		      console.log("ひどい")
 		      $("#loadingajax").remove()
 		       
