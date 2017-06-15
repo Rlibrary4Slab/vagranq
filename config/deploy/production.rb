@@ -2,8 +2,8 @@
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
-#set :branch, 'userpaging'
-set :branch, 'master'
+set :branch, 'mergingelas&favo'
+#set :branch, 'master'
 set :stage, :production
 set :rails_env, 'production'
 #server 'ranq-media.com', user: 'ranq', roles: %w{app db web}, my_property: :my_value

@@ -30,7 +30,7 @@
   <% if logged_in? %>
    <%# if user_signed_in? %> 
     <ul class="header-navi is-non-login" id="non_login_user_header_menu"> 
-      <li class="header-navi-menu"><%= link_to "まとめを作る", new_article_path %></li>
+      <li class="header-navi-menu"><%= link_to "まとめを作る", new_article_path ,:ref => "nofollow"%></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           
@@ -42,8 +42,8 @@
           <li>マイページ</li>
           <li><%= link_to current_user.user_name, user_path(current_user.name),:rel => "nofollow" %></li>
           <div id="users_use" >
-           <li><%= link_to "ユーザー情報変更", edit_settings_profiles_path %></li>
-           <li><%= link_to "投稿記事編集", edit_articles_path(current_user) %></li>
+           <li><%= link_to "ユーザー情報変更", edit_settings_profiles_path ,:rel => "nofollow"%></li>
+           <li><%= link_to "記事を編集する", edit_articles_path(current_user) ,:rel => "nofollow" %></li>
            <li class="divider"></li>
            <li>
              <%= link_to "ログアウト",destroy_user_session_path, method: "delete" %>
@@ -65,7 +65,7 @@
     </ul>
   <% else %>
    <ul class="header-navi is-non-login" id="non_login_user_header_menu">
-    <li class="header-navi-menu"><%= link_to "まとめを作る", new_article_path %></a></li>
+    <li class="header-navi-menu"><%= link_to "まとめを作る", new_article_path ,:ref =>"nofollow" %></a></li>
     <li class="header-navi-menu"><%= link_to "無料会員登録", new_user_registration_path ,:rel => "nofollow"%></li>
     <li class="header-navi-menu"><%= link_to "ログイン", new_user_session_path ,:rel => "nofollow"%></li>
   </ul>

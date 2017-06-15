@@ -5,7 +5,7 @@
     <% elements[0..-2].each do |element| %>
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
         <%# if element.path.present? %>
-            <a itemprop="item" href="<%= element.path %>"><span itemprop="name"><%= element.name %></span></a>
+            <a itemprop="item" href="<%= element.path %>" ref="nofollow" ><span itemprop="name"><%= element.name %></span></a>
         <%# else %>
             <!-- <span itemprop="title"><%= element.name %></span> -->
         <%# end %>
