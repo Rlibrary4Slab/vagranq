@@ -4,6 +4,8 @@ class Article < ActiveRecord::Base
     belongs_to :user
     #has_many :likes
     has_many :likes, dependent: :destroy
+    has_many :liked, class_name: "Like", foreign_key: "article_id", dependent: :destroy
+    has_many :notifications, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user
     is_impressionable
     validates :title, length: { maximum: 40, message: "が長すぎます40文字以下にしてください"} 

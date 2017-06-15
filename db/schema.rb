@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530140641) do
+ActiveRecord::Schema.define(version: 20170613110716) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "category",     limit: 4
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170530140641) do
     t.datetime "published_at"
     t.integer  "corporecom",   limit: 4
     t.boolean  "checkagree",                 default: false, null: false
+    t.integer  "view_count",   limit: 4
   end
 
   create_table "authentications", force: :cascade do |t|
@@ -79,6 +80,16 @@ ActiveRecord::Schema.define(version: 20170530140641) do
     t.datetime "updated_at",           null: false
     t.integer  "user_id",    limit: 4
     t.integer  "article_id", limit: 4
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "article_id", limit: 4
+    t.integer  "category",   limit: 4
+    t.integer  "content",    limit: 4
+    t.boolean  "flag"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "social_profiles", force: :cascade do |t|

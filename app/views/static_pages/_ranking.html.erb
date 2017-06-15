@@ -6,7 +6,7 @@
     </div>
   </div>
 <div class="side_article_list" >
-<% @rank.each do |article| %>
+  <% @rank.each do |article| %>
 <%# daily_article_ranking.each do |article| %>
  
   
@@ -24,7 +24,7 @@
     <div class="article_list_text">
     <p class="side_article_title"><%= link_to article.title.html_safe, article %></p>
     <p class="side_article_user">
-      <a><%= link_to article.user.user_name, article.user %></a>
+      <a><%= link_to article.user.user_name, article.user ,:rel => "nofollow"%></a>
     </p>
   </div>
 </div><!-- /.side_article_content -->

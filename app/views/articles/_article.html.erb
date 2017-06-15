@@ -13,10 +13,11 @@
           <% end %>
        </p>
           <%#= article.description.html_safe %>
-          <% if logged_in?%>
+         <% if logged_in?%>
          <% if @user != nil%>
            <span style="display:inline-block; vertical-align:bottom; width:4em">
-              <span style="float:right"><%= article.impressionist_count.to_i %>View</span>
+             <!--      <span style="float:right"><%#= article.impressionist_count.to_i %>View</span>   -->
+              <span style="float:right"><%= article.view_count %>View</span>
           </span>
           <span style="margin-left:1em">|</span>
 
@@ -27,13 +28,14 @@
           <% else %>
 
            <span style="display:inline-block; vertical-align:bottom; ">
-              <span style="float:right"><%= article.impressionist_count.to_i %></span>
+              <span style="float:right"><%#= article.impressionist_count.to_i %></span>
+              <span style="float:right"><%= article.view_count %></span>
           </span>
           <span>View</span>
           <% end %>
           <% end %>
           <% if logged_in? %>
-           <% if article.user.name == current_user.name%>
+           <% if article.user.name == current_user.name %>
             <div id="user_article_editable">
             <%= link_to "編集する", edit_article_path(article) %>|
             <%= link_to "削除する", article_path(article) , :method =>  :delete, data: {confirm: "この記事を削除してよろしいですか？"} %>
@@ -43,6 +45,7 @@
            <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%>
            <% end %>
           <% else %>
+            <span><%= article.view_count %>View</span>
             <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%>   
           <% end %>
 

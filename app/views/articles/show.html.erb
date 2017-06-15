@@ -37,7 +37,7 @@
          <% if logged_in? %>
           <%= render 'likes/like_links', article: @article %>
          <% elsif %>
-           <%= link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}),new_user_path %>
+           <%= link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}),new_user_registration_path %>
          <% end %>
          </li>
         
@@ -86,7 +86,7 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
- <% if Rails.env != "production"  && @idsemptybool != true%>
+ <% if Rails.env != "production" && @idsemptybool != true %>
   <div class="relation_list">
  <% @more_like_this.each do |article| %>
    <div class="article_list pickup_list">

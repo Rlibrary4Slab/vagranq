@@ -12,20 +12,23 @@ class Settings::ProfilesController < Settings::BaseController
     current_user.assign_attributes(user_params)
 
     if current_user.valid?
-   
-      case params[:ope][:twi]
-      when "1" 
-        current_user.twitter_s = true
-      when "0"
-        current_user.twitter_s = false 
-      end  
+      if params[:user][:user_description].present?
+       case params[:ope][:twi]
+       when "1" 
+         current_user.twitter_s = true
+       when "0"
+         current_user.twitter_s = false 
+       end  
+      end
 
-      case params[:ope][:fac]
-      when "1" 
-        current_user.facebook_s = true
-      when "0"
-        current_user.facebook_s = false 
-      end  
+      if params[:user][:user_description].present? 
+       case params[:ope][:fac]
+       when "1" 
+         current_user.facebook_s = true
+       when "0"
+         current_user.facebook_s = false 
+       end  
+      end
 
       current_user.save!
       if params[:user][:user_image].present?

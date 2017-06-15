@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
     attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face
     has_many :articles, dependent: :destroy
     has_many :likes
+    has_many :notifications, foreign_key: "user_id", dependent: :destroy
+    #has_many :likes, dependent: :destroy
     has_many :like_articles, through: :likes, source: :article
     before_save {self.email =email.downcase}
     #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" },on: :create 

@@ -1,5 +1,6 @@
 class ArticlesController < AuthorizedController
 #class ArticlesController < ApplicationController
+  include Notifications
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
@@ -11,13 +12,13 @@ class ArticlesController < AuthorizedController
     def all
       @sitename = "RanQ"
       add_breadcrumb @sitename, root_path
-      ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id)
-      @rank = Article.limit(10).published.where(id: ids).order("field(id,#{ids.join(',')})") 
+      ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id).first(10)
+      @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})").includes(:user) 
 
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
       
-      @corporecom = Article.where(:corporecom => [100..300]).published.limit(10)
+      @corporecom = Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)
     end
     
     def pvranking
@@ -39,7 +40,7 @@ class ArticlesController < AuthorizedController
     #@toprank = Article.where(:corporecom => [1..3]).published.limit(3)
 
     #@articles = Article.order('updated_at desc').page(params[:page]).published
-    @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc')
+    @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user)
   end
   
   def corporecom
@@ -72,7 +73,7 @@ class ArticlesController < AuthorizedController
     @title = "ファッション一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
-    @articles = Article.per_page_kaminari(params[:page]).published
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.fashion params[:category] 
   end
   
@@ -80,7 +81,7 @@ class ArticlesController < AuthorizedController
     @title = "美容健康一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.beauty params[:category]
     
 
@@ -89,7 +90,7 @@ class ArticlesController < AuthorizedController
     @title = "おでかけ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.hangout params[:category]
     
   end
@@ -97,7 +98,7 @@ class ArticlesController < AuthorizedController
     @title = "グルメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.gourmet params[:category]
     
   end
@@ -105,7 +106,7 @@ class ArticlesController < AuthorizedController
     @title = "ライフスタイル一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.lifestyle params[:category]
     
   end
@@ -113,7 +114,7 @@ class ArticlesController < AuthorizedController
     @title = "エンタメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.entertainment params[:category]
     
   end
@@ -121,7 +122,7 @@ class ArticlesController < AuthorizedController
     @title = "インテリア一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.interior params[:category]
     
   end
@@ -129,7 +130,7 @@ class ArticlesController < AuthorizedController
     @title = "ガジェット一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.gadget params[:category]
     
   end
@@ -137,7 +138,7 @@ class ArticlesController < AuthorizedController
     @title = "学び一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.learn params[:category]
     
   end
@@ -145,7 +146,7 @@ class ArticlesController < AuthorizedController
     @title = "おもしろ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
-    @articles = Article.per_page_kaminari(params[:page]).published 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
     @articles = @articles.funny params[:category]
     
   end
@@ -205,12 +206,35 @@ class ArticlesController < AuthorizedController
     end
     impressionist(@article, nil) #1時間起きに増やす
     @page_views = @article.impressionist_count
+
+   # sum_of_imp = 0
+   # @article.user.articles.each do |article|
+   #   sum_of_imp += article.impressionist_count
+   # end
+   
+   @article.update_columns(view_count: @article.impressionist_count)
+   sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
+   
+    if @page_views <= 1000              #記事単体view数
+      if @page_views % 100 == 0
+        notification_savesend(@article, @page_views, 4)
+      end
+    else
+      if @page_views % 2000 == 0
+        notification_savesend(@article, @page_views, 4)
+      end
+    end
+    if sum_of_imp % 1000 == 0            #総view数
+    notification_savesend(@article, sum_of_imp, 5)
+    end
+    
   end
 
   # GET /articles/new
   def new
     @article = Article.new
     2.times {@article.contents.build}
+    render layout: 'article_new'
   end
 
   # GET /articles/1/edit
@@ -285,7 +309,7 @@ class ArticlesController < AuthorizedController
       #redirect_to [:home, @article]
       redirect_to @article
     else
-      render :new
+      render :new, layout: 'article_new'
     end
   end
 
@@ -349,7 +373,7 @@ class ArticlesController < AuthorizedController
       #redirect_to [:home, @article]
       redirect_to @article
     else
-      render :edit
+     render :edit
     end
   end
   # DELETE /articles/1

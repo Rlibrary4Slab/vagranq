@@ -25,14 +25,16 @@
         <table>
           <tbody>
 
-          <% sum_of_views = 0 %>
+          <%# sum_of_views = 0 %>
          <% sum_of_likes = 0 %> 
          <%# @articleus.each do |article| %>
+           <% sum_of_views = @user.articles.sum(:view_count) %>
          <% @user.articles.each do |article| %>
-           <% sum_of_views += article.impressionist_count.to_i %>
+           <%# sum_of_views += article.impressionist_count.to_i %>
            <% sum_of_likes += article.likes_count.to_i %>
          <% end %>
          
+         <span style="letter-spacing:3.2px">総獲得View数</span>：<%= sum_of_views %></br>
          <% if logged_in? && @user == current_user %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
