@@ -18,7 +18,6 @@
   timeout $timeout
   listen  $listen
   pid $pid
-  ENV['MYSQL_DATABASE_PASS'] = "forstart10"
 #ホットデプロイをするかしないかを設定
   preload_app true
 

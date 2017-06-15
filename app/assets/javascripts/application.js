@@ -1,8 +1,12 @@
 //= require jquery
+//= require jquery-selection
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui.min
+//= require jquery.Jcrop
 //= require jquery.infinitescroll
 //= require twitter/bootstrap
 //= require websocket_rails/main
+//= require articles.js.coffee
 //= require articles_new.js.coffee
 //= require notifications.js.erb

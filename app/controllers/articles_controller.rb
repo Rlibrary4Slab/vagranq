@@ -239,6 +239,7 @@ class ArticlesController < AuthorizedController
 
   # GET /articles/1/edit
   def edit
+    render layout: 'article_new'
   end
 
   # POST /articles

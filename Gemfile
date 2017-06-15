@@ -84,7 +84,9 @@ gem 'elasticsearch'
 gem 'elasticsearch-dsl'
 gem "fluent-plugin-mysql-replicator"
 gem "fluent-logger"
-gem 'websocket-rails'
+#gem 'websocket-rails'
+gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'sync_fixes'
 gem 'counter_culture'
 gem "twitter"
 gem "fb_graph"
+gem "unicorn-worker-killer"
