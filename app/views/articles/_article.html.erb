@@ -42,11 +42,11 @@
           </div>
            <% else %>
               
-           <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%>
+           <%= link_to article.user.user_name, article.user ,:ref => "nofollow",:class => "article_list_title_name"%>
            <% end %>
           <% else %>
             <span><%= article.view_count %>View</span>
-            <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name"%>   
+            <%= link_to article.user.user_name, article.user ,:ref => "nofollow",:class => "article_list_title_name"%>   
           <% end %>
 
      </div>
