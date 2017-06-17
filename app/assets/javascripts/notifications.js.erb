@@ -1,4 +1,5 @@
-  var dispatcher = new WebSocketRails("localhost:3000/websocket");			//  ソケット通信開始
+  //var dispatcher = new WebSocketRails("localhost:3000/websocket");			//  ソケット通信開始
+  var dispatcher = new WebSocketRails("192.168.33.10:3000/websocket");			//  ソケット通信開始
 
   var toaster = function(info, msg) {									                              //  トースター通知
     if($('toaster-box').length==0)

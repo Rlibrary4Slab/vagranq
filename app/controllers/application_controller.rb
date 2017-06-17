@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
      Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
     end
     
+    
     def notification
         if logged_in?
             # @likeds = current_user.liked.per_page_kaminari(params[:page]).order('created_at DESC')

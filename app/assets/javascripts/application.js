@@ -7,6 +7,6 @@
 //= require jquery.infinitescroll
 //= require twitter/bootstrap
 //= require websocket_rails/main
-//= require articles.js.coffee
 //= require articles_new.js.coffee
+//= require articles.js.coffee
 //= require notifications.js.erb

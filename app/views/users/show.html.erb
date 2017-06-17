@@ -34,7 +34,6 @@
            <% sum_of_likes += article.likes_count.to_i %>
          <% end %>
          
-         <span style="letter-spacing:3.2px">総獲得View数</span>：<%= sum_of_views %></br>
          <% if logged_in? && @user == current_user %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
@@ -69,7 +68,6 @@
           </tbody>
         </table>
          
-      <!--<% "#{@user.user_name}さんは"%><%= link_to @user.likes.count, like_articles_user_path(@user.name) %>個の投稿にいいね！しています-->
     <%= paginate @articleus %>     
      
     </section>

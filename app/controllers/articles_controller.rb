@@ -12,9 +12,9 @@ class ArticlesController < AuthorizedController
     def all
       @sitename = "RanQ"
       add_breadcrumb @sitename, root_path
-      ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id).first(10)
-      @rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})").includes(:user) 
-
+      #ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id).first(10)
+      #@rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})").includes(:user) 
+      @rank = Article.published.limit(10).order(view_count: :desc).includes(:user)
       #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
       @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
       
@@ -216,6 +216,8 @@ class ArticlesController < AuthorizedController
    sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
    
     if @page_views <= 1000              #記事単体view数
+      puts @article.title
+      puts @page_views
       if @page_views % 100 == 0
         notification_savesend(@article, @page_views, 4)
       end

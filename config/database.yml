@@ -88,8 +88,8 @@ production:
   #database: vagranq_production 
   #username: root 
   username: forstart 
-  #password: <%= ENV['MYSQL_DATABASE_PASS'] %>
-  password: forstart10
+  password: <%= ENV['MYSQL_DATABASE_PASS'] %>
+  #password: forstart10 
   host: ranq-mysql.cm185bqkijjo.ap-northeast-1.rds.amazonaws.com 
   socket: /var/lib/mysql/mysql.sock
 
