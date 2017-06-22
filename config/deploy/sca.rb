@@ -7,7 +7,7 @@ set :branch, "master"
 set :deploy_to, "/var/www/vagranq"
 set :confitionally_migrate, true
 set :linked_files, fetch(:linked_files, []).push("config/settings.yml")
-set :stages, %w(pro sca)
+
 set :default_env, {
     path: "$PATH",
     rbenv_root: "/home/ec2-user/.rbenv",

@@ -26,6 +26,9 @@ group :development, :test do
   gem 'capistrano-safe-deploy-to', '~> 1.1.1'
   gem 'capistrano-faster-assets'
   gem 'rack-mini-profiler'
+  gem 'capistrano-multiconfig', require: false
+  #gem 'capistrano-multiconfig'
+
 end
 
 

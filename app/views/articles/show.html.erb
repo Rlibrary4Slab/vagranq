@@ -47,7 +47,8 @@
         </li>
         
         <li style="margin-left: 20px;">
-          <span><%= number_with_delimiter(@page_views) %></span>View
+          <span><%= number_with_delimiter(@inpage_views) %></span>View
+          <span><%= @page_views %></span>View
         </li>
       </ul>
     </div>
@@ -86,7 +87,7 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
- <% if Rails.env != "production" && @idsemptybool != true %>
+<%if @idsemptybool != true %>
   <div class="relation_list">
  <% @more_like_this.each do |article| %>
    <div class="article_list pickup_list">

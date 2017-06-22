@@ -19,12 +19,11 @@ WebsocketRails.setup do |config|
    config.standalone = true
    config.standalone_port = 3001
    config.redis_options = {driver: :ruby}
-   config.redis_options = {:host => 'localhost', :port => '6379'}
+   config.redis_options = {:host => 'ranq-mini-redis.ct7glm.ng.0001.apne1.cache.amazonaws.com', :port => '6379'}
   else
    config.standalone = false
   end
   
-  config.standalone = false 
 
   # Change to true to enable channel synchronization between
   # multiple server instances.

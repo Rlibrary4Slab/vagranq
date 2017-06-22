@@ -4,8 +4,8 @@ module Notifications
         puts current_user.id
         puts articled.id
    
-        #notification = articled.user.notifications.build( user_id: current_user.id, article_id: articled.id, content: content ,category: category, flag: false )
-        notification = articled.user.notifications.build(article_id: articled.id, content: content ,category: category, flag: false )
+        notification = articled.user.notifications.build( user_id: articled.user_id, article_id: articled.id, content: content ,category: category, flag: false )
+        #notification = articled.user.notifications.build(article_id: articled.id, content: content ,category: category, flag: false )
         notification.save
         
         notification_counts = @article.user.notifications.where(flag: false).count

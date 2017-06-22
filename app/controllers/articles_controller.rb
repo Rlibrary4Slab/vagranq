@@ -7,7 +7,7 @@ class ArticlesController < AuthorizedController
   before_action :correct_draft,   only: [:show]
   #before_action :twitter_share, only: [:create,:update]
   #before_action :facebook_share, only: [:create,:update]
-  impressionist actions: [:show]
+  #impressionist actions: [:show]
   before_action :all
     def all
       @sitename = "RanQ"
@@ -196,24 +196,24 @@ class ArticlesController < AuthorizedController
     end
     @likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
-    if Rails.env != "production" 
-     #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
-     #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
-     #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
-     ids = @article.more_like_this.results.map(&:id)
-     @idsemptybool = ids.empty?
-     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
-    end
-    impressionist(@article, nil) #1時間起きに増やす
-    @page_views = @article.impressionist_count
-
-   # sum_of_imp = 0
-   # @article.user.articles.each do |article|
-   #   sum_of_imp += article.impressionist_count
-   # end
-   
-   @article.update_columns(view_count: @article.impressionist_count)
-   sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
+    #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
+    #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
+    #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
+    ids = @article.more_like_this.results.map(&:id)
+    @idsemptybool = ids.empty?
+    @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
+    #impressionist(@article, nil) #1時間起きに増やす
+    @inpage_views = @article.impressionist_count
+    @daily_articleviews = Hash.new
+    #today = Date.today.to_s
+    REDIS.incr "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}/#{@article.id}"
+    REDIS.incr "user/#{@article.user_id}/articles/#{@article.id}"
+    @page_views_get = REDIS.get "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}/#{@article.id}"
+    @page_views_get_all = REDIS.get "user/#{@article.user_id}/articles/#{@article.id}"
+    @page_views = @page_views_get_all.to_i 
+    
+    @article.update_columns(view_count: @page_views)
+    sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
    
     if @page_views <= 1000              #記事単体view数
       puts @article.title
