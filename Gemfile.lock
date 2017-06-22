@@ -426,8 +426,24 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.3.0)
     redis (3.3.3)
+    redis-actionpack (5.0.1)
+      actionpack (>= 4.0, < 6)
+      redis-rack (>= 1, < 3)
+      redis-store (>= 1.1.0, < 1.4.0)
+    redis-activesupport (5.0.2)
+      activesupport (>= 3, < 6)
+      redis-store (~> 1.3.0)
     redis-objects (1.3.0)
       redis (~> 3.3)
+    redis-rack (2.0.2)
+      rack (>= 1.5, < 3)
+      redis-store (>= 1.2, < 1.4)
+    redis-rails (5.0.2)
+      redis-actionpack (>= 5.0, < 6)
+      redis-activesupport (>= 5.0, < 6)
+      redis-store (>= 1.2, < 2)
+    redis-store (1.3.0)
+      redis (>= 2.2)
     ref (2.0.0)
     remotipart (1.3.1)
     responders (2.4.0)
@@ -587,6 +603,7 @@ DEPENDENCIES
   rails (= 4.2.6)
   rails_12factor (= 0.0.2)
   rails_admin
+  redis-rails
   retriable
   rmagick
   sass-rails (= 5.0.6)

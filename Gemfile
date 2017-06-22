@@ -93,3 +93,4 @@ gem 'counter_culture'
 gem "twitter"
 gem "fb_graph"
 gem "unicorn-worker-killer"
+gem "redis-rails"
