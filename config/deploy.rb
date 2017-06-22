@@ -8,15 +8,15 @@ set :deploy_to, "/var/www/vagranq"
 set :confitionally_migrate, true
 set :linked_files, fetch(:linked_files, []).push("config/settings.yml")
 set :stages, %w(pro sca)
-set :default_env, {
-    path: "$PATH",
-    rbenv_root: "/home/ec2-user/.rbenv",
-    AWS_ACCESS_KEY_ID: ENV['AWS_ACCESS_KEY_ID'],
-    AWS_SECRET_ACCESS_KEY: ENV['AWS_SECRET_ACCESS_KEY'],
-    MYSQL_DATABASE_PASS: ENV['MYSQL_DATABASE_PASS'],
-    REDIS_PRO: ENV['REDIS_PRO']
-
-}
+#set :default_env, {
+#    path: "$PATH",
+#    rbenv_root: "/home/ec2-user/.rbenv",
+#    AWS_ACCESS_KEY_ID: ENV['AWS_ACCESS_KEY_ID'],
+#    AWS_SECRET_ACCESS_KEY: ENV['AWS_SECRET_ACCESS_KEY'],
+#    MYSQL_DATABASE_PASS: ENV['MYSQL_DATABASE_PASS'],
+#    REDIS_PRO: ENV['REDIS_PRO']
+#
+#}
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
