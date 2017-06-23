@@ -87,10 +87,12 @@ gem 'elasticsearch'
 gem 'elasticsearch-dsl'
 gem "fluent-plugin-mysql-replicator"
 gem "fluent-logger"
-#gem 'websocket-rails'
 gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'sync_fixes'
 gem 'counter_culture'
 gem "twitter"
 gem "fb_graph"
 gem "unicorn-worker-killer"
-gem "redis-rails"
+gem 'fluent-plugin-aws-elasticsearch-service'
+gem "lograge"        #elastic_search用 log整形
+gem "logstash-event" #elastic_serach用ログをカスタマイズ
+gem "rack-user_agent" #requestから、os, browserのバージョンが分かる（ログに情報をだしたいために利用）

@@ -27,10 +27,15 @@
 
          <% sum_of_likes = 0 %> 
          <% sum_of_views = @user.articles.sum(:view_count)%>
+         <% sum_of_yesterday_views =0 %> 
+         <% yesterday_most_views =0%> 
+         <% ids = "0"%> 
          <% @user.articles.each do |article| %>
            <% sum_of_likes += article.likes_count.to_i %>
+           <% page_views_get = REDIS.zscore "user/#{article.user_id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}" %>
+           <% sum_of_yesterday_views += page_views_get.to_i %> 
+           <% ids = REDIS.zrevrange "user/#{article.user_id}/articles/daily/#{Date.yesterday.to_s}",0,0 %>
          <% end %>
-         
          <% if logged_in? && @user == current_user %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
@@ -58,9 +63,13 @@
          <%end%>
       
          <span style="letter-spacing:0px">Total View</span>：<%= sum_of_views %></br>
-         <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %>
-
-    
+         <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %></br>
+         <span style="letter-spacing:0px">Total Yesterday View</span>：<%= sum_of_yesterday_views %></br>
+        
+         <% @socl = Article.where(id: ids) %>
+         <% @socl.each do |oa| %>
+           <%= oa.title %> | 
+         <% end%>
           <% if logged_in? %>
            <% if current_user.name == @user.name %>
             <%= render @articleus %>

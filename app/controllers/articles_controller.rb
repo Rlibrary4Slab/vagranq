@@ -7,7 +7,6 @@ class ArticlesController < AuthorizedController
   before_action :correct_draft,   only: [:show]
   #before_action :twitter_share, only: [:create,:update]
   #before_action :facebook_share, only: [:create,:update]
-  #impressionist actions: [:show]
   before_action :all
     def all
       @sitename = "RanQ"
@@ -202,14 +201,10 @@ class ArticlesController < AuthorizedController
     ids = @article.more_like_this.results.map(&:id)
     @idsemptybool = ids.empty?
     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
-    #impressionist(@article, nil) #1時間起きに増やす
-    @inpage_views = @article.impressionist_count
-    @daily_articleviews = Hash.new
-    #today = Date.today.to_s
-    REDIS.incr "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}/#{@article.id}"
-    REDIS.incr "user/#{@article.user_id}/articles/#{@article.id}"
-    @page_views_get = REDIS.get "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}/#{@article.id}"
-    @page_views_get_all = REDIS.get "user/#{@article.user_id}/articles/#{@article.id}"
+    REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+    REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
+    @page_views_get = REDIS.zscore "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}","#{@article.id}"
+    @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
     
     @article.update_columns(view_count: @page_views)
