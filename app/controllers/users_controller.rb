@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
   before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update,:edit_articles]
+  before_action :correct_user,   only: [:edit, :update]
+  #before_action :correct_user,   only: [:edit, :update,:edit_articles]
   before_action :set_user, only: [ :edit, :update, :like_articles]
 
 
@@ -29,6 +30,20 @@ class UsersController < ApplicationController
     @user = User.find_by(name: params[:name])
     @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
     @title = "投稿編集"
+    @weeks_views = [0,0,0,0,0,0,0]
+    @user.articles.each do |article| 
+       for num in 0..6 do
+         page_views_get = REDIS.zscore "user/#{article.user_id}/articles/daily/#{Date.today.advance(:days=>-num.to_i).to_s}", "#{article.id}" 
+         @weeks_views[num] += page_views_get.to_i
+       end
+       @ids = REDIS.zrevrange "user/#{article.user_id}/articles/daily/#{Date.yesterday.to_s}",0,0 
+    end 
+    @charts = [[Date.today.advance(:days=>-7).strftime("%m/%d"),@weeks_views[6]],[Date.today.advance(:days=>-6).strftime("%m/%d"),@weeks_views[5]],[Date.today.advance(:days=>-5).strftime("%m/%d"),@weeks_views[4]],[Date.today.advance(:days=>-4).strftime("%m/%d"),@weeks_views[3]],[
+Date.today.advance(:days=>-3).strftime("%m/%d"),@weeks_views[2]],[
+Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday.strftime("%m/%d"),@weeks_views[0]]]
+    maxviewdigits = Math.log10(@weeks_views.max).to_i #12345 5
+    flotview = @weeks_views.max * 0.1 ** maxviewdigits #1.2345
+    @floen = BigDecimal(flotview.to_i+1).ceil * 10 ** maxviewdigits #2
   end
 
   def share_twitter

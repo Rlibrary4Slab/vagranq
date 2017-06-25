@@ -5,6 +5,8 @@
 //= require jquery-ui.min
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
+//= require Chart.bundle
+//= require chartkick
 //= require twitter/bootstrap
 //= require websocket_rails/main
 //= require articles_new.js.coffee

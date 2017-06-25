@@ -19,6 +19,10 @@
         <%= image_tag @article.eyecatch_img,:class =>"s_eyecatch_img" %>
       </div>
       <%= @article.updated_at.strftime("%Y年%m月%d日　更新") %>
+      </br>
+      <% if logged_in? && @article.user.name == current_user.name %> 
+      <%= link_to "記事を編集する", edit_article_path(@article)%>
+      <% end %>
       <h1 class="article_title"><%= @article.title %></h1>
       <div style="display:none;" id="checkAgree"><%= @article.checkagree %></div>
     </div>

@@ -23,7 +23,18 @@ class ApplicationController < ActionController::Base
     def fluentpost
      Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
     end
-    
+    def append_info_to_payload(payload)
+	super
+	payload[:host]                = request.host
+	payload[:user_id]             = current_user.try(:id).to_s
+	payload[:remote_ip]           = request.remote_ip
+	payload[:user_agent]          = request.user_agent
+	payload[:os]                  = request.os
+	payload[:os_version]          = request.os_version
+	payload[:browser]             = request.browser
+	payload[:browser_version]     = request.browser_version
+	payload[:category_name]       = params.try(:[], :category_name) #アプリの出したい情報
+    end 
     
     def notification
         if logged_in?
