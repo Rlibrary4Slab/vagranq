@@ -1,6 +1,5 @@
 # Load DSL and set up stages
 require 'capistrano/setup'
-#require 'capistrano/multiconfig'
 require 'capistrano/deploy'
 require 'capistrano/rbenv' 
 require 'capistrano/safe_deploy_to' 
@@ -35,7 +34,6 @@ Dir.glob("lib/capistrano/tasks/*.rb").each { |r| import r }
 # require 'capistrano/passenger'
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 #require 'capistrano/setup'
-#require 'capistrano/multiconfig'
 #require 'capistrano/deploy'
 #require 'capistrano/rbenv' 
 #require 'capistrano/safe_deploy_to' 
