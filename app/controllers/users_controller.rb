@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
-  #before_action :correct_user,   only: [:edit, :update,:edit_articles]
+  before_action :correct_user,   only: [:edit, :update,:edit_articles]
   before_action :set_user, only: [ :edit, :update, :like_articles]
 
 
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
     @weeks_views = [0,0,0,0,0,0,0]
     @user.articles.each do |article| 
        for num in 0..6 do
-         page_views_get = REDIS.zscore "user/#{article.user_id}/articles/daily/#{Date.today.advance(:days=>-num.to_i).to_s}", "#{article.id}" 
+         page_views_get = REDIS.zscore "user/#{article.user_id}/articles/daily/#{Date.today.advance(:days=>-(num+1).to_i).to_s}", "#{article.id}" 
          @weeks_views[num] += page_views_get.to_i
        end
        @ids = REDIS.zrevrange "user/#{article.user_id}/articles/daily/#{Date.yesterday.to_s}",0,0 

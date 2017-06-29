@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   #match 'signout', to: 'sessions#destroy', as: 'signout'
   match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
-  
+  scope "/health" do
+   get "/" => "static_pages#health"
+  end 
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',   
