@@ -36,10 +36,6 @@ class ApplicationController < ActionController::Base
 	payload[:category_name]       = params.try(:[], :category_name) #アプリの出したい情報
     end 
     
-    def health
-     head :ok
-    end
-    
     def notification
         if logged_in?
             # @likeds = current_user.liked.per_page_kaminari(params[:page]).order('created_at DESC')

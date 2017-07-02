@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   #match 'signout', to: 'sessions#destroy', as: 'signout'
   match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
-  scope "/health" do
-   get "/" => "static_pages#health"
-  end 
+  
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',   
@@ -76,7 +74,11 @@ Rails.application.routes.draw do
     resource :profiles
     resource :accounts
     resource :passwords
-  end
+#    match '' => 'notifications#paginate', via: :get
+    get 'notifications/flag_off' => '/notifications#flag_off'
+    get '?page=:page' => 'notifications#paginate'
+  #get '?page=:page' => '/notifications#flag_off'
+end
 
   post '/like/:article_id' => 'likes#like', as: 'like'
   delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'
@@ -149,8 +151,7 @@ Rails.application.routes.draw do
   #get '*anything' => 'errors#not_found'
   #get '*path', controller: "application",action: 'render_404' 
   get 'notifications/flag_off'
-  
   match '' => "notifications#paginate" ,via: :get      #任意のページでpaginationするためのルーティング
-    
+  
  
 end

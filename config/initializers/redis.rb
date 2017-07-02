@@ -1,7 +1,8 @@
 require 'redis'
 
 if Rails.env != "production"
- uri = URI.parse(ENV["REDIS_DEV"]) 
+ #uri = URI.parse("localhost:6379")
+ uri = URI.parse(ENV["REDIS_DEV"])
  REDIS = Redis.new(host: uri.host, port: uri.port)
 else
  uri = URI.parse(ENV["REDIS_PRO"]) 

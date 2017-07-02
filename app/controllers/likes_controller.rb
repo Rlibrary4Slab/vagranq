@@ -8,12 +8,12 @@ class LikesController < ApplicationController
         liked_article_counts = @article.likes_count.to_i + 1
         total_liked_counts = Article.where(user_id: @article.user_id).sum(:likes_count)
 
-        notification_savesend(@article, like.id, 1)                                         #新着いいね
+        notification_savesend(@article, like.id, 1, @article.eyecatch_img)                                         #新着いいね
         if liked_article_counts % 5 == 0                                                    #記事単体いいね数
-            notification_savesend(@article, liked_article_counts, 2)
+            notification_savesend(@article, liked_article_counts, 2, @article.eyecatch_img)
         end    
         if total_liked_counts % 30 == 0                                                     #記事総合いいね数
-            notification_savesend(@article, total_liked_counts, 3)
+            notification_savesend(@article, total_liked_counts, 3, current_user.user_image_url(:thumb))
         end
     end
     

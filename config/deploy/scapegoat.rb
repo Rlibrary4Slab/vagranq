@@ -12,12 +12,12 @@ set :default_env, {
     AWS_ACCESS_KEY_ID: ENV['AWS_ACCESS_KEY_ID'],
     AWS_SECRET_ACCESS_KEY: ENV['AWS_SECRET_ACCESS_KEY'],
     MYSQL_DATABASE_PASS: ENV['MYSQL_DATABASE_PASS'],
-    REDIS_PRO: ENV['REDIS_PRO']
+    REDIS_SCA: ENV['REDIS_SCA']
 
 }
 #server 'ranq-media.com', user: 'ranq', roles: %w{app db web}, my_property: :my_value
 #server '52.197.133.116', user: 'ec2-user', roles: %w{app db web},password: "ranq"
-server '52.193.160.102', user: 'ec2-user', roles: %w{app db web},password: "ranq"
+server '13.113.15.218', user: 'ec2-user', roles: %w{app db web},password: "ranq"
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 

@@ -64,6 +64,7 @@
          <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %></br>
          <span style="letter-spacing:0px">昨日あなたが獲得したView数</span>：<%= @weeks_views[0] %></br>
          <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @floen%>
+         <div style="margin-bottom:30px;"></div>
          <%# @socl = Article.where(id: @ids) %>
          <%# @socl.each do |oa| %>
            <%#= oa.title %>  

@@ -73,24 +73,15 @@
 	            element.setAttribute("href", href);
 	            console.log("\n\n\n\n\n\n\n\n\n\n\n"+href)
                     $.ajax({
-  		     url: "https://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20htmlstring%20WHERE%20url%3D%22"+href+"%22&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys",
+         	     url: href, 
          	     type: 'GET',
          	     cache: false,
-         	     dataType: "xml",
+         	     dataType: "html",
+     	             xhrFields: {withCredentials: true},
          	     success: function(res){ 
-                      //r = $(res).find("result").html();
-		      r= $(res).find("result").each(function(){
-                        var text = $(this).text();
-                        ten= text.replace(/&lt;/g,"<").replace(/&gt;/g,">");
-                        console.log(ten+"saitou");
-		      });
-                      var dom_parser = new DOMParser();
-		      xmls = dom_parser.parseFromString(ten , "text/html");
-                      console.log(xmls.documentElement);
-                      r = $(xmls.documentElement);
- 	              console.log(r.responseText);
+ 	              console.log(res);
+                      r = $( "<div>" + res.responseText + "</div>" );
 		      title = r.find("title").html();
- 	              console.log("<div>"+title+"</div>");
                       oimage = r.find("meta[property="+'"og:image"'+"]").attr("content");
                       outimage = r.find('img').attr("src");
  	              ajaxend();
