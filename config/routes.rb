@@ -69,13 +69,13 @@ Rails.application.routes.draw do
    get :edit_articles
   end
   
-  
-  namespace :settings do
-    resource :profiles
-    resource :accounts
-    resource :passwords
+  scope module: :settings do 
+  #namespace :settings do
+    resource :profile
+    resource :account
+    resource :password
 #    match '' => 'notifications#paginate', via: :get
-    get 'notifications/flag_off' => '/notifications#flag_off'
+    #get 'notifications/flag_off' => '/notifications#flag_off'
     get '?page=:page' => 'notifications#paginate'
   #get '?page=:page' => '/notifications#flag_off'
 end

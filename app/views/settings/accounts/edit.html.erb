@@ -3,7 +3,8 @@
 
     <div class="col-sm-9">
         <div class="row" >
-            <%= form_for current_user, layout: :horizontal, url: settings_accounts_path, method: :patch do |f| %>
+            <%#= form_for current_user, layout: :horizontal, url: settings_accounts_path, method: :patch do |f| %>
+            <%= form_for current_user, layout: :horizontal, url: account_path, method: :patch do |f| %>
             
                 <%#= f.alert_message '以下の項目を修正して下さい。' %>
                 

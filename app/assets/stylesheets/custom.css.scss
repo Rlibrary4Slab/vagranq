@@ -255,6 +255,12 @@ p.article_list_lead {
     li.is-not-current a:hover {
       background-color: #eeeeee;
     }
+    a.is-current {
+      background-color: #eeeeee;
+    }
+    a.is-not-current:hover {
+      background-color: #eeeeee;
+    }
     /* category-menu-bottom */
 
     /* main-content-top */

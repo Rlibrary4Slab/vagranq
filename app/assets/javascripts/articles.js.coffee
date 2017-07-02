@@ -42,7 +42,7 @@ $(window).on "beforeunload", ->
    return "このページから離れると入力が無効になります"
 $(document).on 'submit', ->
    $(window).off 'beforeunload'
-$() ->
+$(window).on "load" ,->
   CKEDITOR.replaceAll("ckeditor")
   $('div p a[class="jihi"]').each ->
     $(this).html("ork")

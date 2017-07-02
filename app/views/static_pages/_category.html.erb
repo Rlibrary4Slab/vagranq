@@ -4,37 +4,37 @@
 <h3 class="categorymenu-caption">カテゴリ一覧</h3>
 <ul class="categorymenu-container">
     <li class="categorymenu-item is-all is-not-current">
-      <!--<a href="index.html">--><span class="iconCategory"></span><span><%= link_to "ホーム", root_path %></span></a>
+      <!--<a href="index.html">--><span class="iconCategory"></span><%= link_to "ホーム", root_path ,:ref => "nofollow", class: "categorymenu-item "+(root_path==request.fullpath ? "is-all is-current":"is-all is-not-current") %>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "ファッション",fashion_path , :ref => "nofollow" %></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "ファッション",fashion_path , :ref => "nofollow" ,class: "categorymenu-item "+(fashion_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "美容健康",beauty_path , :ref => "nofollow"%></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "美容健康",beauty_path , :ref => "nofollow",class: "categorymenu-item "+(beauty_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "おでかけ",hangout_path , :ref => "nofollow"%></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "おでかけ",hangout_path , :ref => "nofollow",class: "categorymenu-item "+(hangout_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "グルメ",gourmet_path , :ref => "nofollow"%></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "グルメ",gourmet_path , :ref => "nofollow",class: "categorymenu-item "+(gourmet_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "ライフスタイル",lifestyle_path , :ref => "nofollow" %></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "ライフスタイル",lifestyle_path , :ref => "nofollow" ,class: "categorymenu-item "+(lifestyle_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "エンタメ",entertainment_path , :ref => "nofollow" %></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "エンタメ",entertainment_path , :ref => "nofollow" ,class: "categorymenu-item "+(entertainment_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "インテリア",interior_path , :ref => "nofollow" %></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "インテリア",interior_path , :ref => "nofollow" ,class: "categorymenu-item "+(interior_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "ガジェット",gadget_path , :ref => "nofollow"%></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "ガジェット",gadget_path , :ref => "nofollow",class: "categorymenu-item "+(gadget_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "学び",learn_path , :ref => "nofollow" %></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "学び",learn_path , :ref => "nofollow" ,class: "categorymenu-item "+(learn_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
     <li class="categorymenu-item is-not-current ">
-      <!--<a href="category.html">--><span class="iconCategory"></span><span><%= link_to "おもしろ",funny_path , :ref => "nofollow" %></span></a>
+      <!--<a href="category.html">--><span class="iconCategory"></span><%= link_to "おもしろ",funny_path , :ref => "nofollow" ,class: "categorymenu-item "+(funny_path==request.fullpath ? "is-current":"is-not-current")%>
     </li>
 </ul>
 
