@@ -77,9 +77,7 @@
          	     type: 'GET',
          	     cache: false,
          	     dataType: "xml",
-     	             //xhrFields: {withCredentials: true},
          	     success: function(res){ 
- 	              //console.log(res);
                       //r = $(res).find("result").html();
 		      r= $(res).find("result").each(function(){
                         var text = $(this).text();
@@ -89,10 +87,8 @@
                       var dom_parser = new DOMParser();
 		      xmls = dom_parser.parseFromString(ten , "text/html");
                       console.log(xmls.documentElement);
-	              //rr = r.replace(/&lt;/g,"<").replace(/&gt;/g,">")
                       r = $(xmls.documentElement);
  	              console.log(r.responseText);
-                      //r = $( res.responseText);
 		      title = r.find("title").html();
  	              console.log("<div>"+title+"</div>");
                       oimage = r.find("meta[property="+'"og:image"'+"]").attr("content");
