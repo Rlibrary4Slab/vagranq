@@ -24,9 +24,9 @@
   <%#= f.collection_select :name, User.all, :id, :user_name %>
   <%= f.search_field :created_at_gteq, class: 'form-control input-sm', 'datepicker' => true %>
   <%= f.search_field :created_at_lteq, class: 'form-control input-sm', 'datepicker' => true %>
-  <%= f.sort_fields do |s| %>
-    <%= s.sort_select %>
-  <% end %>
+  <%#= f.sort_fields do |s| %>
+    <%#= s.sort_select %>
+  <%# end %>
   <%= submit_tag 'Search', :name => nil %>
 <% end %>
 
@@ -68,9 +68,9 @@
 
       </td>
       <td><%= link_to user.user_name, user_path(user.name) %></td>
-      <!--<td> <%= user.articles.order(sort_column + ' ' + sort_direction).count %></td>
-      --><td> <%= user.articles.where(created_at: params[:q][:created_at_gteq]..params[:q][:created_at_lteq]).order(sort_column + ' ' + sort_direction).count %></td>
-
+      <td> <%= user.articles.order(sort_column + ' ' + sort_direction).count %></td>
+      <!--<td> <%= user.articles.where(created_at: params[:q][:created_at_gteq]..params[:q][:created_at_lteq]).count %></td>
+-->
       <!--<td> <%#= user.ransack(params[:q]).result.count_articles%></td>
       <td> <%#= user.ransack(params[:q]).result.all_articles_views%></td>
       -->

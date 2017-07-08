@@ -14,8 +14,8 @@ class UsersController < ApplicationController
 
   def access_log_index
     @users_settings=User.all
-    @users = User.per_page_kaminari(params[:page])
-    #@users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
+    #@users = User.per_page_kaminari(params[:page])
+    @users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
     params[:q] ||= {}
     if params[:q][:created_at_lteq].present?
      params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
