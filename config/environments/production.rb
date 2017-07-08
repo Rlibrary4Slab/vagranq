@@ -62,6 +62,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.middleware.delete Rack::Lock
-  config.session_store :redis_store, servers: 'redis://ranq-mini-redis.ct7glm.ng.0001.apne1.cache.amazonaws.com/0', expire_in: 1.day 
  
 end
