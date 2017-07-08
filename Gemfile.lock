@@ -190,7 +190,7 @@ GEM
     faraday_middleware-aws-signers-v4 (0.1.1)
       aws-sdk (~> 2.1)
       faraday (~> 0.9)
-    faye-websocket (0.10.7)
+    faye-websocket (0.10.0)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     fb_graph (2.7.17)
@@ -646,6 +646,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   execjs
+  faye-websocket (= 0.10.0)
   fb_graph
   fluent-logger
   fluent-plugin-aws-elasticsearch-service
