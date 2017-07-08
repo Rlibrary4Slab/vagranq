@@ -8,22 +8,22 @@
   </form>
   
 
-    <%= form_tag articles_path, :method => 'get' do %> <%#　projects_pathはモデル名で読みかえること %>
+    <%#= form_tag articles_path, :method => 'get' do %> <%#　projects_pathはモデル名で読みかえること %>
       <p>
         <%#= text_field_tag :title, params[:title] %>
         <%#= submit_tag "Search", :title => nil %>
-        <%= text_field_tag :title, params[:title] %>
-        <%= submit_tag "Search", :title => nil %>
+        <%#= text_field_tag :title, params[:title] %>
+        <%#= submit_tag "Search", :title => nil %>
       </p>
-    <% end %>
+    <%# end %>
 -->
 
   <div id ="searchBar">
   <% if Rails.env == "development" %>
-   <%= form_tag search_path,enforce_utf8: false, :method => :get do %>
-     <%= text_field_tag :q, params[:q] %>
-     <%= submit_tag 'Search', :name => nil %>
-   <% end %>
+   <%#= form_tag search_path,enforce_utf8: false, :method => :get do %>
+     <%#= text_field_tag :q, params[:q] %>
+     <%#= submit_tag 'Search', :name => nil %>
+   <%# end %>
   <% end %>
   </div>
 

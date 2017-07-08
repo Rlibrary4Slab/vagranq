@@ -36,5 +36,13 @@ module ApplicationHelper
     end
     doc.to_html.html_safe
   end
+  
+  def sortable(column, title = nil )
+    title ||= column.titleize
+    direction = (column == sort_column && sort_direction == "desc") ? "asc" : "desc"
+    gteq = sort_gteq
+    lteq = sort_lteq
+    link_to title, :sort => column, :direction => direction,:created_at_gteq => gteq, :created_at_lteq => lteq
+  end
 
 end

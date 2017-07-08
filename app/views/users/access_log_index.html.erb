@@ -1,0 +1,92 @@
+<% provide(:title,"ユーザー一覧")%>
+<h1>ユーザー一覧</h1>
+
+       <%# @orders.each do |on| %>
+         <%#= on.user_name%></br>
+       <%# end %>
+<!--
+<%#= will_paginate %>
+
+<ul class="users">
+  <%# @users.each do |user| %>
+    <%#= render user %>
+  <%# end %>
+</ul>
+
+<%#= will_paginate %>
+-->
+
+
+<%#= page_entries_info @users%>
+
+<%= search_form_for @q, enforce_utf8: false,url: access_log_index_path, class: 'form-inline' do |f| %>
+   <%=  f.label 'Create At' %>
+  <%#= f.collection_select :name, User.all, :id, :user_name %>
+  <%= f.search_field :created_at_gteq, class: 'form-control input-sm', 'datepicker' => true %>
+  <%= f.search_field :created_at_lteq, class: 'form-control input-sm', 'datepicker' => true %>
+  <%= f.sort_fields do |s| %>
+    <%= s.sort_select %>
+  <% end %>
+  <%= submit_tag 'Search', :name => nil %>
+<% end %>
+
+<%# @users_settings.each do |user| %>
+  <%# user.update_columns(count_articles: user.articles.count)%>
+  <%# user.update_columns(all_articles_views: user.articles.sum(:view_count))%>
+<%# end %>
+<table id="shops">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  
+    
+  <tbody class="page">
+     <tr>
+      <th>img</th>
+      <th><%= sortable "user_name","名前" %></th>
+      <th>日毎投稿数</th>
+      <th><%= sortable "count_articles" ,"投稿数"%></th> 
+      <th><%= sortable "all_articles_views", "全投稿のView数"%></th>
+      <!--<th><%= sort_link(@q, "user_name") %></th>
+      <th>日毎投稿数</th>
+      <th><%= sort_link(@q, "count_articles") %></th>
+      <th><%= sort_link(@q, "all_articles_views") %></th>-->
+     </tr>
+    <% @users.each do |user| %>
+     <tr class="shop">
+
+      <td>
+       <% if user.certificated == true && Rails.env != "production" %>
+           <%= image_tag user.user_image_url(:thumb)%> 認証ユーザー
+       <%else%>
+         　<%= image_tag user.user_image_url(:thumb)%>
+
+       <% end %>
+
+      </td>
+      <td><%= link_to user.user_name, user_path(user.name) %></td>
+      <!--<td> <%= user.articles.order(sort_column + ' ' + sort_direction).count %></td>
+      --><td> <%= user.articles.where(created_at: params[:q][:created_at_gteq]..params[:q][:created_at_lteq]).order(sort_column + ' ' + sort_direction).count %></td>
+
+      <!--<td> <%#= user.ransack(params[:q]).result.count_articles%></td>
+      <td> <%#= user.ransack(params[:q]).result.all_articles_views%></td>
+      -->
+
+      <td> <%= user.count_articles%></td>
+      <td> <%= user.all_articles_views%></td>
+
+         
+
+     </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Article', new_article_path %>
+<%= paginate @users %>

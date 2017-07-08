@@ -97,3 +97,6 @@ gem "lograge"        #elastic_search用 log整形
 gem "logstash-event" #elastic_serach用ログをカスタマイズ
 gem "rack-user_agent" #requestから、os, browserのバージョンが分かる（ログに情報をだしたいために利用）
 gem "chartkick"
+gem "activeadmin"
+gem "rails-i18n"
+gem "ransack"

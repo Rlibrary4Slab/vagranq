@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #match 'auth/:provider/callback', to: 'sessions#create'
   #match 'auth/failure', to: redirect('/')
@@ -47,9 +49,10 @@ Rails.application.routes.draw do
       post :draft
     end
   end
+  get "access_log_index" => "users#access_log_index"
 
   #resources :users,param: :name ,except: [:edit ,:show] do
-  resources :users,param: :name ,only: [:index] do
+  resources :users,param: :name ,only: [:index,:access_log_index] do
     member do
       get :like_articles
       get :share_twitter

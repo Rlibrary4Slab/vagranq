@@ -26,7 +26,9 @@
   
     
   <tbody class="page">
-    <%= render @users %>
+    <% @users.each do |user| %>
+      <%= render user %>
+    <% end %>
   </tbody>
 </table>
 

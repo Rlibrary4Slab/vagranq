@@ -23,18 +23,22 @@ class ApplicationController < ActionController::Base
     def fluentpost
      Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
     end
-    def append_info_to_payload(payload)
-	super
-	payload[:host]                = request.host
-	payload[:user_id]             = current_user.try(:id).to_s
-	payload[:remote_ip]           = request.remote_ip
-	payload[:user_agent]          = request.user_agent
-	payload[:os]                  = request.os
-	payload[:os_version]          = request.os_version
-	payload[:browser]             = request.browser
-	payload[:browser_version]     = request.browser_version
-	payload[:category_name]       = params.try(:[], :category_name) #アプリの出したい情報
-    end 
+    
+    def authenticate_admin_user!
+     authenticate_user!
+  
+    # current_userはdevise提供のメソッドです。
+    # 権限ユーザのroleについては、好きな方法でよいです。（自分の場合、has_roleメソッドで実装）
+       puts "reload"
+       puts current_user.admin
+     if logged_in?
+      if current_user.admin != true 
+      #unless current_user.has_role 'admin'
+       flash[:alert] = "管理者用ページです。権限があるアカウントでログインしてください。"
+       redirect_to root_path
+      end
+     end
+    end
     
     def notification
         if logged_in?

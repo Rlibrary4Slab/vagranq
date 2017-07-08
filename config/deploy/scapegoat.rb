@@ -17,7 +17,7 @@ set :default_env, {
 }
 #server 'ranq-media.com', user: 'ranq', roles: %w{app db web}, my_property: :my_value
 #server '52.197.133.116', user: 'ec2-user', roles: %w{app db web},password: "ranq"
-server '54.92.71.45', user: 'ec2-user', roles: %w{app db web},password: "ranq"
+server '52.199.181.56', user: 'ec2-user', roles: %w{app db web},password: "ranq"
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 

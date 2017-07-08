@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   #before_action :correct_user,   only: [:edit, :update,:edit_articles]
   before_action :set_user, only: [ :edit, :update, :like_articles]
+  helper_method :sort_column, :sort_direction,:sort_gteq,:sort_lteq
 
 
   def index
@@ -11,7 +12,20 @@ class UsersController < ApplicationController
     @users = User.per_page_kaminari(params[:page])
   end
 
-
+  def access_log_index
+    @users_settings=User.all
+    @users = User.per_page_kaminari(params[:page])
+    #@users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
+    params[:q] ||= {}
+    if params[:q][:created_at_lteq].present?
+     params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
+    end
+    @q = User.ransack(params[:q])
+    @q.build_sort if @q.sorts.empty?
+    @orders = @q.result.per_page_kaminari(params[:page])
+    #@users = @q.result.per_page_kaminari(params[:page])
+    
+  end
 
 
   def show
@@ -150,4 +164,23 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
       @user = User.find_by(name: params[:name])
       redirect_to(root_url) unless @user == current_user
     end
+    
+    def sort_column
+     params[:sort] || "name"
+    end
+  
+    def sort_direction
+     params[:direction] || "asc"
+    end
+
+    def sort_gteq
+     params[:q][:created_at_gteq] || "19990101"
+    end
+
+    def sort_lteq
+     params[:q][:created_at_lteq] || "19991231"
+    end
+
+
+  
 end
