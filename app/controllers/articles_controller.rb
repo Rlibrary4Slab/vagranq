@@ -343,7 +343,6 @@ class ArticlesController < AuthorizedController
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
-        flash[:success] = '記事を公開しました。'
         if @article.published_at.nil? != true 
          if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true 
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
@@ -360,6 +359,7 @@ class ArticlesController < AuthorizedController
           )
          end
         end 
+       flash[:success] = '記事を公開しました。'
       when 'draft'
         @article.draft!
         flash[:success] = '記事を下書きにしました。'

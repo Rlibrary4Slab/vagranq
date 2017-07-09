@@ -24,16 +24,12 @@
   <%#= f.collection_select :name, User.all, :id, :user_name %>
   <%= f.search_field :created_at_gteq, class: 'form-control input-sm', 'datepicker' => true %>
   <%= f.search_field :created_at_lteq, class: 'form-control input-sm', 'datepicker' => true %>
-  <%#= f.sort_fields do |s| %>
-    <%#= s.sort_select %>
-  <%# end %>
+  <%= f.sort_fields do |s| %>
+    <%= s.sort_select %>
+  <% end %>
   <%= submit_tag 'Search', :name => nil %>
 <% end %>
 
-<%# @users_settings.each do |user| %>
-  <%# user.update_columns(count_articles: user.articles.count)%>
-  <%# user.update_columns(all_articles_views: user.articles.sum(:view_count))%>
-<%# end %>
 <table id="shops">
   <thead>
     <tr>
@@ -46,14 +42,11 @@
   <tbody class="page">
      <tr>
       <th>img</th>
-      <th><%= sortable "user_name","名前" %></th>
+      <th>名前</th>
       <th>日毎投稿数</th>
-      <th><%= sortable "count_articles" ,"投稿数"%></th> 
-      <th><%= sortable "all_articles_views", "全投稿のView数"%></th>
-      <!--<th><%= sort_link(@q, "user_name") %></th>
-      <th>日毎投稿数</th>
-      <th><%= sort_link(@q, "count_articles") %></th>
-      <th><%= sort_link(@q, "all_articles_views") %></th>-->
+      <th>投稿数</th> 
+      <th>日毎View数</th>
+      <th>全投稿のView数</th>
      </tr>
     <% @users.each do |user| %>
      <tr class="shop">
@@ -68,15 +61,24 @@
 
       </td>
       <td><%= link_to user.user_name, user_path(user.name) %></td>
-      <td> <%= user.articles.order(sort_column + ' ' + sort_direction).count %></td>
-      <!--<td> <%= user.articles.where(created_at: params[:q][:created_at_gteq]..params[:q][:created_at_lteq]).count %></td>
--->
-      <!--<td> <%#= user.ransack(params[:q]).result.count_articles%></td>
-      <td> <%#= user.ransack(params[:q]).result.all_articles_views%></td>
-      -->
+      <td> <%= user.articles.where(created_at: sort_gteq..sort_lteq).count %></td>
 
       <td> <%= user.count_articles%></td>
+      <% keys = ""%>
+      <% pren = ""%>
+      <% user.articles.each do |article| %>
+       <% (sort_gteq.to_date..sort_lteq).each do |date| %>
+         <% keys << "user/#{article.user_id}/articles/daily/#{date.to_s}" %>
+       <% end %>
+       <% puts keys%>
+       <% pren = REDIS.zunionstore("user/#{article.user_id}/articles/betweendays", keys) %>
+       <% puts "aan"%>
+       <% puts pren%>
+       <%= REDIS.zrevrange "user/#{article.user_id}/articles/betweendays", 0,-1 %>
+      <% end %>
+
       <td> <%= user.all_articles_views%></td>
+
 
          
 
@@ -89,4 +91,4 @@
 <br>
 
 <%#= link_to 'New Article', new_article_path %>
-<%= paginate @users %>
+<%#= paginate @users %>

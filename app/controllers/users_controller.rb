@@ -15,13 +15,19 @@ class UsersController < ApplicationController
   def access_log_index
     @users_settings=User.all
     #@users = User.per_page_kaminari(params[:page])
-    @users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
     params[:q] ||= {}
     if params[:q][:created_at_lteq].present?
      params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
     end
     @q = User.ransack(params[:q])
     @q.build_sort if @q.sorts.empty?
+    if params[:q] != {}
+     puts params[:q][:s]
+     @users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
+    else
+     puts params[:q][:s]
+     @users = User.per_page_kaminari(params[:page])
+    end
     @orders = @q.result.per_page_kaminari(params[:page])
     #@users = @q.result.per_page_kaminari(params[:page])
     
@@ -166,19 +172,19 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
     end
     
     def sort_column
-     params[:sort] || "name"
+      params[:q][:s]["0"][:name] || "name"
     end
   
     def sort_direction
-     params[:direction] || "asc"
+     params[:q][:s]["0"][:dir] || "asc"
     end
 
     def sort_gteq
-     params[:q][:created_at_gteq] || "19990101"
+     params[:q][:created_at_gteq] 
     end
 
     def sort_lteq
-     params[:q][:created_at_lteq] || "19991231"
+     params[:q][:created_at_lteq] 
     end
 
 
