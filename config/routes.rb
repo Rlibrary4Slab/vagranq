@@ -80,7 +80,6 @@ Rails.application.routes.draw do
 #    match '' => 'notifications#paginate', via: :get
     #get 'notifications/flag_off' => '/notifications#flag_off'
     get '?page=:page' => 'notifications#paginate'
-  #get '?page=:page' => '/notifications#flag_off'
 end
 
   post '/like/:article_id' => 'likes#like', as: 'like'

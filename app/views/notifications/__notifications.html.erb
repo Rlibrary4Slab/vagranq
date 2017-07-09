@@ -1,33 +1,49 @@
 <% @notifications.each do |notification| %>
     <% case notification.category %>
         <% when 1 %>
-            <div class='notification-<%= notification.flag %> notification-content'>
-                <div id="eyecatch_image"><%= image_tag(notification.article.eyecatch_img, size: "65") %></div>
-                <div><%= "あなたの記事がいいね！されました" %></div>
-                <div><%= "『#{notification.article.title}』" %></div>
-            </div>
+          <div class='notification-<%= notification.flag %> notification-content'>
+            <a class="notification_link" href='<%=article_path(notification.article) %>'></a>
+            <div class="eyecatch_image"><%= image_tag(notification.article.eyecatch_img, size: "65") %></div>
+            <div><%= "あなたの記事がいいね！されました" %></div>
+            <div><%= "『#{notification.article.title}』" %></div>
+            <div class="clear_float"></div> 
+           </div>
         <% when 2 %>
-            <div class='notification-<%= notification.flag %> notification-content'>
-                <div id="eyecatch_image"><%= image_tag(notification.article.eyecatch_img, size: "65") %></div>
-                <div><%= "あなたの記事が#{notification.content}回いいね！されました" %></div>
-                <div><%= "『#{notification.article.title}』" %></div>
-            </div>
+          <div class='notification-<%= notification.flag %> notification-content'>
+            <a class="notification_link" href='<%=article_path(notification.article) %>'></a>
+            <div class="eyecatch_image"><%= image_tag(notification.article.eyecatch_img, size: "65") %></div>
+            <div><%= "あなたの記事が#{notification.content}回いいね！されました" %></div>
+            <div><%= "『#{notification.article.title}』" %></div>
+            <div class="clear_float"></div> 
+          </div>
         <% when 3 %>
-            <div class='notification-<%= notification.flag %> notification-content'>
-                <div id="eyecatch_image"><%= image_tag(current_user.user_image_url(:thumb), size: "65") %></div>
-                <div><%= "総獲得いいね！数 #{notification.content}回を達成しました！" %></div>
-            </div>
+          <div class='notification-<%= notification.flag %> notification-content'>
+            <a class="notification_link" href='<%=edit_articles_path(notification.user) %>'></a>
+            <div class="eyecatch_image"><%= image_tag(current_user.user_image_url(:thumb), size: "65") %></div>
+            <div><%= "総獲得いいね！数 #{notification.content}回を達成しました！" %></div>
+            <div class="clear_float"></div> 
+          </div>
         <% when 4 %>
-            <div class='notification-<%= notification.flag %> notification-content'>
-                <div id="eyecatch_image"><%= image_tag(notification.article.eyecatch_img, size: "65") %></div>
-                <div><%= "あなたの記事が#{notification.content}回閲覧されました" %></div>
-                <div><%= "『#{notification.article.title}』" %></div>
-            </div>
+          <div class='notification-<%= notification.flag %> notification-content'>
+            <a class="notification_link" href='<%=article_path(notification.article) %>'></a>
+            <div class="eyecatch_image"><%= image_tag(notification.article.eyecatch_img, size: "65") %></div>
+            <div><%= "あなたの記事が#{notification.content}回閲覧されました" %></div>
+            <div><%= "『#{notification.article.title}』" %></div>
+            <div class="clear_float"></div> 
+          </div>
         <% when 5 %>
-            <div class='notification-<%= notification.flag %> notification-content'>
-                <div id="eyecatch_image"><%= image_tag(current_user.user_image_url(:thumb), size: "65") %></div>
-                <div><%= "総閲覧数#{notification.content}回を達成しました！" %></div>
-            </div>
+          <div class='notification-<%= notification.flag %> notification-content'>
+            <a class="notification_link" href='<%=edit_articles_path(notification.user) %>'></a>
+            <div class="eyecatch_image"><%= image_tag(current_user.user_image_url(:thumb), size: "65") %></div>
+            <div><%= "総閲覧数#{notification.content}回を達成しました！" %></div>
+            <div class="clear_float"></div> 
+          </div>
+        <% when 6 %>
+          <div class='notification-<%= notification.flag %> notification-content'>
+            <a class="notification_link" href='<%=edit_articles_path(notification.user) %>'></a>
+            <div class="eyecatch_image"><%= image_tag(current_user.user_image_url(:thumb), size: "65") %></div>
+            <div><%= "昨日あなたの記事が#{notification.content}回閲覧されました" %></div>
+            <div class="clear_float"></div> 
+          </div>
     <% end %>    
 <% end %>
-

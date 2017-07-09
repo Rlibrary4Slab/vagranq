@@ -130,6 +130,7 @@ toaster:hover{
 
 .notification-content{
 	padding:14px 0px 14px 15px; border-bottom:solid 2px #eeeeee;
+  position: relative;
 }
 
 .notification-false{
@@ -149,9 +150,30 @@ toaster:hover{
 }
 
 
-
-#eyecatch_image {
+.eyecatch_image {
   float: left;
   padding-right:1em;
 
 }
+
+.clear_float {
+  clear: both;
+}
+
+
+.notification-true:hover {
+   background: #eeeeee ;
+
+}
+
+
+.notification_link {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+
+
