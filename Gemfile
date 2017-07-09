@@ -103,3 +103,4 @@ gem "ransack"
 gem "redis","3.2.0"
 gem "redis-rails"
 gem "faye-websocket" ,"0.10.0"
+gem "whenever", :require => false

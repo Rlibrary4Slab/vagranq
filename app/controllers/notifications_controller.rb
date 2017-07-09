@@ -7,4 +7,5 @@ class NotificationsController < ApplicationController
 
   def paginate    #pagination ajaxにjsを読ませるために必要
   end
+
 end

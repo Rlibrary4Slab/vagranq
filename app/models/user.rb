@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
     has_many :notifications, foreign_key: "user_id", dependent: :destroy
     #has_many :likes, dependent: :destroy
     has_many :like_articles, through: :likes, source: :article
+    has_many :week_views
     before_save {self.email =email.downcase}
     #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" },on: :create 
     #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[A-Za-z]\w*\z/, message: "英数字入力してください" },on: :create 
