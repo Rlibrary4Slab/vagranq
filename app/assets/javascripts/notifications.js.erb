@@ -27,7 +27,7 @@
     $("#notification_count").fadeIn("slow");
   };
 
-  dispatcher.bind("notification_event", function(data){
+dispatcher.bind("notification_event", function(data){
     switch (data['category']) {			                                                       	//  新着の種類によってトースター&通知センター表示
       case 1:
         //  var toaster_msg = '<%#= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>いいね！</strong>されました';

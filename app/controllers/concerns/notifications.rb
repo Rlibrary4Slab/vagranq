@@ -12,11 +12,23 @@ module Notifications
         notify = WebsocketRails.users[@article.user_id]
         notify.send_message(:notification_event, send)
     end
-    
+   
     def notification_destroy(notification)
         if notification.present?
             notification.destroy
         end
+    end
+    
+    def live_counter_up
+        notify = WebsocketRails.users[@article.user_id]
+        data = {article_id:@article.id, content:@article.likes_count+1}
+        notify.send_message(:real_time, data)
+    end
+
+    def live_counter_down
+        notify = WebsocketRails.users[@article.user_id]
+        data = {article_id:@article.id, content:@article.likes_count-1}
+        notify.send_message(:real_time, data)
     end
     
 end

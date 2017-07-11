@@ -22,7 +22,7 @@
           <span style="margin-left:1em">|</span>
 
           <span style="display:inline-block; vertical-align:bottom; width:3em">
-              <span style="float:right"><%= article.likes_count.to_i %></span>
+            <span id="like_id<%=article.id%>" style="float:right"><%= article.likes_count.to_i %></span>
           </span>
           <span>いいね！</span>
           <% else %>
@@ -51,5 +51,3 @@
 
      </div>
    </div>
-
-
