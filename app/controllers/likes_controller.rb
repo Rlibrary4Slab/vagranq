@@ -13,6 +13,7 @@ class LikesController < ApplicationController
             notification_savesend(@article, liked_article_counts, 2, @article.eyecatch_img)
         end    
         if total_liked_counts % 30 == 0                                                     #記事総合いいね数
+       # if total_liked_counts % 1 == 0                                                     #記事総合いいね数
             notification_savesend(@article, total_liked_counts, 3, current_user.user_image_url(:thumb))
         end
     end
@@ -29,6 +30,7 @@ class LikesController < ApplicationController
             notification_destroy(notification)
         end
         if Article.where(user_id: @article.user_id).sum(:likes_count) % 30 == 29        #記事総合いいね数
+        #if Article.where(user_id: @article.user_id).sum(:likes_count) % 1 == 0        #記事総合いいね数
             notification = @article.notifications.where(category:3).last
             notification_destroy(notification)
         end
