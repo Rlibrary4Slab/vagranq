@@ -12,3 +12,4 @@
 //= require articles_new.js.coffee
 //= require articles.js.coffee
 //= require notifications.js.erb
+//= require live_counter.js

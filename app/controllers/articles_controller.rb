@@ -209,7 +209,10 @@ class ArticlesController < AuthorizedController
     
     @article.update_columns(view_count: @page_views)
     sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
-   
+    
+    live_counter_view   
+
+
     if @page_views <= 1000              #記事単体view数
       puts @article.title
       puts @page_views

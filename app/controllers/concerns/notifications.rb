@@ -30,5 +30,12 @@ module Notifications
         data = {article_id:@article.id, content:@article.likes_count-1}
         notify.send_message(:real_time, data)
     end
+
+    
+    def live_counter_view
+        notify = WebsocketRails.users[@article.user_id]
+        data = {article_id:@article.id, content:@page_views}
+        notify.send_message(:real_time_view, data)
+    end
     
 end

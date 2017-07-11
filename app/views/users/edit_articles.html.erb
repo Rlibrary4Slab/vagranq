@@ -94,4 +94,36 @@
       document.getElementById(ja).textContent = data['content'];
       console.log(like_id);
   });
+
+
+  dispatcher.bind("real_time_view",function(data){
+      var ja = "view_id" + data['article_id'];
+      console.log(ja);
+      var like_id  = document.getElementById(ja).textContent;
+      document.getElementById(ja).textContent = data['content'];
+      console.log(like_id);
+  });
+
 </script>
+
+
+
+
+
+
+
+<script>
+$(document).ready(function() {
+//setTimeout(function(){
+var i = 99;
+var countup = function(){
+$('.odometer').html(i++); //数字は最後の数値
+}
+
+setInterval(countup,2000)
+
+//}, 1000);
+});
+</script>
+
+<div class="odometer" style="font-size:14px;">99</div>
