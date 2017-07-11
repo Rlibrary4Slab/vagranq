@@ -3,12 +3,17 @@
   //var dispatcher = new WebSocketRails("192.168.33.10:3000/websocket");			//  ソケット通信開始
   var dispatcher = new WebSocketRails("ranq-media.com/websocket");			//  ソケット通信開始
 
-  var toaster = function(info, msg) {									                              //  トースター通知
+
+  // var toaster = function(info, msg) {									                              //  トースター通知
+  var toaster = function(msg) {									                              //  トースター通知
     if($('toaster-box').length==0)
-    var item1 = $('<toaster-box position="top-right"><toaster-start class="like-info" ></toaster-start></toaster-box>');
+    //var item1 = $('<toaster-box position="top-right"><toaster-start class="like-info" ></toaster-start></toaster-box>');
+    var item1 = $('<toaster-box position="top-right"><toaster-start></toaster-start></toaster-box>');
     $('body').append(item1);
-    var item2 = '<toaster class='+info+'><button type="button" class="close" data-dismiss="like_comment">×</button>'+msg+'</toaster>';
+    //var item2 = '<toaster class='+info+'><button type="button" class="close" data-dismiss="like_comment">×</button>'+msg+'</toaster>';
+    var item2 = '<toaster><button type="button" class="close" data-dismiss="like_comment">×</button>'+msg+'</toaster>';
     var toaster = $(item2).insertAfter('toaster-box > toaster-start').hide().fadeIn(800).delay(3000).fadeOut(1000);
+    //var toaster = $(item2).insertAfter('toaster-box > toaster-start');
     $('.close').click(function() {
       $(this).fadeOut(500, function() {
         $(this).parent().remove();
@@ -25,41 +30,47 @@
   dispatcher.bind("notification_event", function(data){
     switch (data['category']) {			                                                       	//  新着の種類によってトースター&通知センター表示
       case 1:
-        var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>いいね！</strong>されました';
-        var center_msg = "<div class='notification-false notification-content'><div id='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div>あなたの記事がいいね！されました </br>"+"『"+data['article_title']+"』</div>";
-        var info = "like-info"
+        //  var toaster_msg = '<%#= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>いいね！</strong>されました';
+        var toaster_msg = "<div><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>あなたの記事が<strong>いいね！</strong>されました</br>"+"『"+data['article_title']+"』</div><div class='clear_float'></div></div>";
+        var center_msg = "<div class='notification-false notification-content'><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>あなたの記事がいいね！されました </br>"+"『"+data['article_title']+"』</div><div class='clear_float'></div></div>";
+      //  var info = "like-info"
       break;
       case 2:
-        var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>'+data['content']+'いいね！</strong>獲得しました';
-        var center_msg = "<div class='notification-false notification-content'><div id='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div>あなたの記事が"+data['content']+'回いいね！されました </br>『'+data['article_title']+"』</div>";
-        var info = "like-info"
+        // var toaster_msg = '<%#= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %>あなたの記事が<strong>'+data['content']+'いいね！</strong>獲得しました';
+        var toaster_msg = "<div><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>あなたの記事が<strong>"+data['content']+"いいね！</strong>獲得しました</div><div class='clear_float'></div></div>";
+        var center_msg = "<div class='notification-false notification-content'><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>あなたの記事が"+data['content']+'回いいね！されました </br>『'+data['article_title']+"』</div><div class='clear_float'></div></div>";
+       // var info = "like-info"
       break;
       case 3:
-        var toaster_msg = '<%= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %><strong>総いいね！数'+data['content']+'回</strong>を達成しました';
-        var center_msg = "<div class='notification-false notification-content'><div id='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div>総獲得いいね！数"+data['content']+"回を達成しました！</div>";
-        var info = "like-info"
+        // var toaster_msg = '<%#= image_tag('notification_heart.png', { :size => "30" , :alt => 'いいね'}) %><strong>総いいね！数'+data['content']+'回</strong>を達成しました';
+        var toaster_msg = "<div><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div><strong>総いいね！数"+data['content']+"回</strong>を達成しました</div><div class='clear_float'></div></div>";
+        var center_msg = "<div class='notification-false notification-content'><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>総獲得いいね！数"+data['content']+"回を達成しました！</div><div class='clear_float'></div></div>";
+       // var info = "like-info"
       break;
       case 4:
-        var toaster_msg = '<%= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %>あなたの記事が'+data['content']+'回<strong>閲覧</strong>されました';
-        var center_msg = "<div class='notification-false notification-content'><div id='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div>あなたの記事が"+data['content']+'回閲覧されました </br>『'+data['article_title']+"』</div>";
-        var info = "view-info"
+        // var toaster_msg = '<%#= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %>'あなたの記事が'+data['content']+'回<strong>閲覧</strong>されました';
+        var toaster_msg = "<div><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>あなたの記事が"+data['content']+"回<strong>閲覧</strong>されました</div><div class='clear_float'></div></div>";
+        var center_msg = "<div class='notification-false notification-content'><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>あなたの記事が"+data['content']+'回閲覧されました </br>『'+data['article_title']+"』</div><div class='clear_float'></div></div>";
+       // var info = "view-info"
       break;
       case 5:
-        var toaster_msg = '<%= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %><strong>総View数</strong>'+data['content']+'回を達成しました';
-        var center_msg = "<div class='notification-false notification-content'><div id='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div>総閲覧数"+data['content']+"回を達成しました！</div>";
-        var info = "view-info"
+        // var toaster_msg = '<%#= image_tag('notification_view.png', { :size => "30" , :alt => '閲覧'}) %><strong>総view数</strong>'+data['content']+'回を達成しました';
+        var toaster_msg = "<div><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div><strong>総view数</strong>"+data['content']+"回を達成しました</div><div class='clear_float'></div></div>";
+        var center_msg = "<div class='notification-false notification-content'><div class='eyecatch_image'><img src="+data['eyecatch_img']+" width='65px' height='65px'></div><div>総閲覧数"+data['content']+"回を達成しました！</div><div class='clear_float'></div></div>";
+       // var info = "view-info"
       break;
     }
       
   	note_center(center_msg, data['notification_counts']);										       //  センター通知
-    toaster(info, toaster_msg);                                                    //  トースター通知
+    //toaster(info, toaster_msg);                                                    //  トースター通知
+    toaster(toaster_msg);                                                    //  トースター通知
      
   });
   
   $(function(){
-//    <% if @notification_counts == 0 %>
+//    <%# if @notification_counts == 0 %>
 //     $("#notification_count").hide();
-//  	<% end %>
+//  	<%# end %>
   	$(document).on('click touchend', function(e) {			//クリックしたら通知領域が隠れる
 	  	if (!$(e.target).closest('#notificationContainer').length) {
 	  		$("#notificationContainer").hide();

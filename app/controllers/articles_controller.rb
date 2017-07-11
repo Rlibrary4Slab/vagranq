@@ -215,14 +215,17 @@ class ArticlesController < AuthorizedController
       puts @article.title
       puts @page_views
       if @page_views % 100 == 0
+      # if @page_views % 1 == 0
         notification_savesend(@article, @page_views, 4, @article.eyecatch_img)
       end
     else
+      #if @page_views % 2 == 0
       if @page_views % 2000 == 0
         notification_savesend(@article, @page_views, 4, @article.eyecatch_img)
       end
     end
     if sum_of_imp % 1000 == 0            #総view数
+    #if sum_of_imp % 1 == 0            #総view数
     notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb))
     end
     
