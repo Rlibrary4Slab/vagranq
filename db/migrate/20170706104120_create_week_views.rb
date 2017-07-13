@@ -1,6 +1,7 @@
 class CreateWeekViews < ActiveRecord::Migration
   def change
     create_table :week_views do |t|
+      t.integer :user_id
       t.integer :day0
       t.integer :day1
       t.integer :day2

@@ -87,7 +87,8 @@
 
 
 <script>
-  dispatcher.bind("real_time",function(data){
+
+dispatcher.bind("real_time",function(data){
       var ja = "like_id" + data['article_id'];
       console.log(ja);
       var like_id  = document.getElementById(ja).textContent;
@@ -113,6 +114,7 @@
 
 
 <script>
+/*
 $(document).ready(function() {
 //setTimeout(function(){
 var i = 99;
@@ -124,6 +126,10 @@ setInterval(countup,2000)
 
 //}, 1000);
 });
+*/
 </script>
 
-<div class="odometer" style="font-size:14px;">99</div>
+<!--<div class="odometer" style="font-size:14px;">99</div>-->
+
+
+
