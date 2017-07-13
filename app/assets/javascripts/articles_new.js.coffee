@@ -1,4 +1,4 @@
-$(window).on "load" , ->
+$ ->
  idNum=0
  aaaa=1
  cccc=0

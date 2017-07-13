@@ -83,3 +83,10 @@
 
 <%#= link_to 'New Article', new_article_path %>
 <%#= paginate @users %>
+
+<script>
+var data = {'data-format': 'yyyy-MM-dd' };
+$(document).on("page:load ready", function(){
+    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"});
+});
+</script>

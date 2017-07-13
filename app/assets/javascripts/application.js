@@ -15,7 +15,4 @@
 //= require articles.js.coffee
 //= require static_pages.js.coffee
 //= require notifications.js.erb
-var data = {'data-format': 'yyyy-MM-dd' };
-$(document).on("page:load ready", function(){
-    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"});
-});
+//= require live_counter.js
