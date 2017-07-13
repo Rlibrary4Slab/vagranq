@@ -195,9 +195,6 @@ class ArticlesController < AuthorizedController
     end
     @likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
-    #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
-    #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
-    #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
     ids = @article.more_like_this.results.map(&:id)
     @idsemptybool = ids.empty?
     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 

@@ -19,15 +19,17 @@
 
 <%#= page_entries_info @users%>
 
-<%= search_form_for @q, enforce_utf8: false,url: access_log_index_path, class: 'form-inline' do |f| %>
+<%= search_form_for @q, enforce_utf8: false,url: access_log_index_path, style: 'position:static' do |f| %>
+   <div style="position:relative;">
    <%=  f.label 'Create At' %>
   <%#= f.collection_select :name, User.all, :id, :user_name %>
-  <%= f.search_field :created_at_gteq, class: 'form-control input-sm', 'datepicker' => true %>
-  <%= f.search_field :created_at_lteq, class: 'form-control input-sm', 'datepicker' => true %>
+  <%= f.text_field :created_at_gteq, class: 'datepicker' %>
+  <%= f.text_field :created_at_lteq, class: 'datepicker'  %>
   <%= f.sort_fields do |s| %>
     <%= s.sort_select %>
   <% end %>
   <%= submit_tag 'Search', :name => nil %>
+  </div>
 <% end %>
 
 <table id="shops">
@@ -43,9 +45,9 @@
      <tr>
       <th>img</th>
       <th>名前</th>
-      <th>日毎投稿数</th>
+      <th>期間投稿数</th>
       <th>投稿数</th> 
-      <th>日毎View数</th>
+      <th>期間View数</th>
       <th>全投稿のView数</th>
      </tr>
     <% @users.each do |user| %>
@@ -61,30 +63,19 @@
 
       </td>
       <td><%= link_to user.user_name, user_path(user.name) %></td>
-      <td> <%= user.articles.where(created_at: sort_gteq..sort_lteq).count %></td>
+      <td> <%= user.period_count_articles %></td>
 
       <td> <%= user.count_articles%></td>
-      <% keys = ""%>
-      <% pren = ""%>
-      <% user.articles.each do |article| %>
-       <% (sort_gteq.to_date..sort_lteq).each do |date| %>
-         <% keys << "user/#{article.user_id}/articles/daily/#{date.to_s}" %>
-       <% end %>
-       <% puts keys%>
-       <% pren = REDIS.zunionstore("user/#{article.user_id}/articles/betweendays", keys) %>
-       <% puts "aan"%>
-       <% puts pren%>
-       <%= REDIS.zrevrange "user/#{article.user_id}/articles/betweendays", 0,-1 %>
-      <% end %>
 
+      <td><%= user.period_articles_views %></td>
       <td> <%= user.all_articles_views%></td>
 
 
          
 
      </tr>
-
     <% end %>
+    
   </tbody>
 </table>
 

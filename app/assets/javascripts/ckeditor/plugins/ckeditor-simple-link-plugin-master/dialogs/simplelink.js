@@ -86,9 +86,9 @@
 		      });
                       var dom_parser = new DOMParser();
 		      xmls = dom_parser.parseFromString(ten , "text/html");
-                      console.log(xmls.documentElement);
+                      //console.log(xmls.documentElement);
                       r = $(xmls.documentElement);
- 	              console.log(r.responseText);
+ 	              //console.log(r.responseText);
 		      title = r.find("title").html();
  	              console.log("<div>"+title+"</div>");
                       oimage = r.find("meta[property="+'"og:image"'+"]").attr("content");
