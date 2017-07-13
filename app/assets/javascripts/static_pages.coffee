@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 arth=0
+#$(document).on ".date-picker" , ->
+#        datetimepicker(pickTime: false)
 $(window).on "load" , ->
  #$("div.s_article_thumbnail").each ->
     #arth++

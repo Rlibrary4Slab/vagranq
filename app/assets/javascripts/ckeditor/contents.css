@@ -34,6 +34,7 @@ code {
 
 .cke_editable p img {
  position: relative !important;
+ max-width: 100%;
 }
 div.img_url {
  position: absolute !important;

@@ -97,10 +97,11 @@ gem "lograge"        #elastic_search用 log整形
 gem "logstash-event" #elastic_serach用ログをカスタマイズ
 gem "rack-user_agent" #requestから、os, browserのバージョンが分かる（ログに情報をだしたいために利用）
 gem "chartkick"
-gem "activeadmin"
 gem "rails-i18n"
 gem "ransack"
 gem "redis","3.2.0"
 gem "redis-rails"
 gem "faye-websocket" ,"0.10.0"
 gem "whenever", :require => false
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'

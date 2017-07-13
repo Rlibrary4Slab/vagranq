@@ -195,9 +195,6 @@ class ArticlesController < AuthorizedController
     end
     @likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
-    #@more_like_this = Article.find(@article.more_like_this.results.map(&:id)) 
-    #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]).published 
-    #@more_like_this = Article.where(:id => @article.more_like_this.results.map(&:id)).per_page_kaminari(params[:page]) 
     ids = @article.more_like_this.results.map(&:id)
     @idsemptybool = ids.empty?
     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
@@ -346,7 +343,6 @@ class ArticlesController < AuthorizedController
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
-        flash[:success] = '記事を公開しました。'
         if @article.published_at.nil? != true 
          if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true 
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
@@ -363,6 +359,7 @@ class ArticlesController < AuthorizedController
           )
          end
         end 
+       flash[:success] = '記事を公開しました。'
       when 'draft'
         @article.draft!
         flash[:success] = '記事を下書きにしました。'
