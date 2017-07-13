@@ -105,3 +105,4 @@ gem "faye-websocket" ,"0.10.0"
 gem "whenever", :require => false
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'pry-rails'
