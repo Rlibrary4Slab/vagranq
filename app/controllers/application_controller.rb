@@ -11,18 +11,18 @@ class ApplicationController < ActionController::Base
     class IpAddressRejected < ActionController::ActionControllerError; end
 
     #include ErrorHandlers if Rails.env.production? or Rails.env.staging? 
-    #rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound, with: :render_404     
+    rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound, with: :render_404 
     #def error_404
     # render file: "#{Rails.root}/public/404.html", layout: false, status: 404
     #end
     #rescue_from ActiveRecord::RecordNotFound, with: :render_404
     #rescue_from ActionController::RoutingError, with: :render_404
-    #rescue_from Exception, with: :render_500
-    Fluent::Logger::FluentLogger.open(nil, :host=>'localhost', :port=>24224)
-    before_action :fluentpost
-    def fluentpost
-     Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
-    end
+    rescue_from Exception, with: :render_500
+    #Fluent::Logger::FluentLogger.open(nil, :host=>'localhost', :port=>24224)
+    #before_action :fluentpost
+    #def fluentpost
+    # Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
+    #end
     
     def authenticate_admin_user!
      authenticate_user!
