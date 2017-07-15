@@ -2,7 +2,6 @@ class Like < ActiveRecord::Base
     belongs_to :article
     
     counter_culture :article, column_name: 'likes_count'
-    counter_culture :user, column_name: 'total_likes'
 
 
     belongs_to :user, class_name: "User"

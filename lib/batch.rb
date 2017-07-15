@@ -89,16 +89,4 @@ class Batch
     end
   end
 
-  def self.total_likes_count
-    users = User.all
-    users.each do |user|
-      total_likes_count = 0
-      user.articles.each do |article|
-        total_likes_count += article.likes_count
-      end
-      user.update(total_likes: total_likes_count)
-      puts user.total_likes
-    end
-  end
-
 end
