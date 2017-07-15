@@ -81,11 +81,11 @@ class Batch
   def self.delete_old_notifications
     users = User.all
     users.each do |user|
-      old_notifications =  user.notifications.where("created_at < ?", Time.now.prev_month)
-      old_notifications.each do |old_notification|
-        puts old_notification.created_at
-      end
-      #old_notifications.delete_all  # delete_allで全部消そう
+     # old_notifications =  user.notifications.where("created_at < ?", Time.now.prev_month)
+      user.notifications.where("created_at < ?", Time.now.prev_month).delete_all
+     # old_notifications.each do |old_notification|
+     #   puts old_notification.created_at
+     # end
     end
   end
 
