@@ -25,12 +25,13 @@
         <table>
           <tbody>
 
-         <% sum_of_likes = 0 %> 
+         <%# sum_of_likes = 0 %> 
          <% sum_of_views = @user.articles.sum(:view_count)%>
-         <% sum_of_yesterday_views =0 %> 
-         <% @user.articles.each do |article| %>
-           <% sum_of_likes += article.likes_count.to_i %>
-         <% end %>
+         <% sum_of_likes = @user.total_likes%>
+         <%# sum_of_yesterday_views =0 %> 
+         <%# @user.articles.each do |article| %>
+           <%# sum_of_likes += article.likes_count.to_i %>
+         <%# end %>
          <% if logged_in? && @user.name == current_user.name %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
@@ -60,8 +61,8 @@
            </br> 
          <%end%>
           
-         <span style="letter-spacing:0px">Total View</span>：<%= sum_of_views %></br>
-         <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %></br>
+         <span style="letter-spacing:0px">Total View </span>：<span id="total_view_id<%=@user.id%>"><%= sum_of_views %></span></br>
+         <span style="letter-spacing:0px">Total Likes</span>：<span id="total_like_id<%=@user.id%>"><%= sum_of_likes %></span></br>
          <span style="letter-spacing:0px">昨日あなたが獲得したView数</span>：<%= @weeks_views[0] %></br>
          <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @floen%>
          <div style="margin-bottom:30px;"></div>
@@ -88,27 +89,28 @@
 
 <script>
 
-dispatcher.bind("real_time",function(data){
+dispatcher.bind("real_time_like",function(data){
       var ja = "like_id" + data['article_id'];
-      console.log(ja);
       var like_id  = document.getElementById(ja).textContent;
       document.getElementById(ja).textContent = data['content'];
-      console.log(like_id);
-  });
+      
+      var ja = "total_like_id" + data['user_id'];
+      var total_like_id  = document.getElementById(ja).textContent;
+      document.getElementById(ja).textContent = data['total_content'];
+});
 
 
   dispatcher.bind("real_time_view",function(data){
       var ja = "view_id" + data['article_id'];
-      console.log(ja);
       var like_id  = document.getElementById(ja).textContent;
-      document.getElementById(ja).textContent = data['content'];
-      console.log(like_id);
+      document.getElementById(ja).textContent++;
+      
+      var ja = "total_view_id" + data['user_id'];
+      var total_like_id  = document.getElementById(ja).textContent;
+      document.getElementById(ja).textContent++;
   });
 
 </script>
-
-
-
 
 
 
@@ -129,7 +131,6 @@ setInterval(countup,2000)
 */
 </script>
 
-<!--<div class="odometer" style="font-size:14px;">99</div>-->
-
-
-
+<!--
+<div class="odometer" style="font-size:14px;">99</div>
+-->
