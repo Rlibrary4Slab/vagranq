@@ -48,6 +48,7 @@ class Batch
     users.each do |user|
       puts user.id
       wv = user.week_views.first
+     # wv.build(user_id:user.id).save
       wv.update(day6:6,day5:5,day4:4,day3:3,day2:2,day1:1,day0:0)
     #  wv.update(day0: yesterday_total_view )
       for i in 0..6
