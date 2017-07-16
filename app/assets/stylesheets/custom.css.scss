@@ -745,6 +745,7 @@ div.stBubble {
 }
 ul.dropdown-menu li a {
     color: #000000;
+    
 }
 ul.dropdown-menu li:nth-child(2) a:hover {
     background-color: #FFFFFF;
@@ -752,6 +753,9 @@ ul.dropdown-menu li:nth-child(2) a:hover {
 ul.dropdown-menu li p {
   color: #000000;
 }
+a.dropdown-toggle:hover {
+  text-decoration: none !important;
+} 
 
 #users_use{
  background-color: rgba(0, 22, 254, 0.35);
