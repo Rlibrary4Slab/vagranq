@@ -152,8 +152,8 @@ end
   #get '*path', controller: "application",action: 'render_404' 
   get 'notifications/flag_off'
   match '' => "notifications#paginate" ,via: :get      #任意のページでpaginationするためのルーティング
-  get '*anything' => 'errors#routing_error' if Rails.env.production?
-  get '*anything' => 'errors#not_found' if Rails.env.production?
+ # get '*anything' => 'errors#routing_error' if Rails.env.production?
+ # get '*anything' => 'errors#not_found' if Rails.env.production?
   #get '*anything' => 'errors#routing_error' 
   #get '*anything' => 'errors#not_found' 
   

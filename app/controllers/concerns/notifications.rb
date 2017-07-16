@@ -18,24 +18,23 @@ module Notifications
             notification.destroy
         end
     end
-    
-    def live_counter_up
+
+    def live_counter_likeup
         notify = WebsocketRails.users[@article.user_id]
-        data = {article_id:@article.id, content:@article.likes_count+1}
-        notify.send_message(:real_time, data)
+        data = {article_id:@article.id, content:@article.likes_count+1,total_content: @article.user.total_likes, user_id: @article.user.id}
+        notify.send_message(:real_time_like, data)
     end
 
-    def live_counter_down
+    def live_counter_likedown
         notify = WebsocketRails.users[@article.user_id]
-        data = {article_id:@article.id, content:@article.likes_count-1}
-        notify.send_message(:real_time, data)
+        data = {article_id:@article.id, content:@article.likes_count-1,total_content: @article.user.total_likes, user_id: @article.user.id}
+        notify.send_message(:real_time_like, data)
     end
 
-    
-    def live_counter_view
-        notify = WebsocketRails.users[@article.user_id]
-        data = {article_id:@article.id, content:@page_views}
-        notify.send_message(:real_time_view, data)
-    end
+     def live_counter_view
+         notify = WebsocketRails.users[@article.user_id]
+         data = {article_id:@article.id, user_id:@article.user_id}
+         notify.send_message(:real_time_view, data)
+     end
     
 end

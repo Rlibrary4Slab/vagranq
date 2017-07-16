@@ -10,7 +10,7 @@ class LikesController < ApplicationController
 
         notification_savesend(@article, like.id, 1, @article.eyecatch_img)                  #新着いいね
 
-        live_counter_up                                                                     #ライブカウンター
+        live_counter_likeup                                                                     #ライブカウンター
 
         if liked_article_counts % 5 == 0                                                    #記事単体いいね数
             notification_savesend(@article, liked_article_counts, 2, @article.eyecatch_img)
@@ -26,7 +26,7 @@ class LikesController < ApplicationController
         like = current_user.likes.find_by(article_id: @article.id)
         like.destroy
         
-        live_counter_down                                                                     #ライブカウンター
+        live_counter_likedown                                                                     #ライブカウンター
 
         notification = @article.notifications.where(category:1).find_by(content: like.id)
         notification_destroy(notification)

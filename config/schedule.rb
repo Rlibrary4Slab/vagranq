@@ -24,11 +24,12 @@ set :environment, ENV['RAILS_ENV']
 #   runner "AnotherModel.prune_old_records"
 # end
 
-#every 1.minute do
-every 1.day, at: '0:00' do
+every 1.minute do
+#every 1.day, at: '0:00' do
 #  runner "Tasks::Tasks.redirect"
-  runner "Batch.yesterday_view_count"
-  runner "Batch.delete_old_notification"
+#  runner "Batch.yesterday_view_count"
+#  runner "Batch.delete_old_notifications"
+  runner "Batch.hello"
 #  command "echo 'hello'"
 end
 
