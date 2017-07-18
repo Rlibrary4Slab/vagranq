@@ -10,35 +10,19 @@ class ApplicationController < ActionController::Base
     class Forbidden < ActionController::ActionControllerError; end
     class IpAddressRejected < ActionController::ActionControllerError; end
 
-    #include ErrorHandlers if Rails.env.production? or Rails.env.staging? 
-#    rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound, with: :render_404 
-    #def error_404
-    # render file: "#{Rails.root}/public/404.html", layout: false, status: 404
-    #end
-    #rescue_from ActiveRecord::RecordNotFound, with: :render_404
-    #rescue_from ActionController::RoutingError, with: :render_404
-#    rescue_from Exception, with: :render_500
+    include ErrorHandlers if Rails.env.production? or Rails.env.staging? 
+    rescue_from ActiveRecord::RecordNotFound, with: :render_404 
+    rescue_from ActionController::RoutingError, with: :render_404
+    rescue_from Exception, with: :render_500 
+    #rescue_from ActiveRecord::RecordNotFound, with: :render_404 if Rails.env.production?
+    #rescue_from ActionController::RoutingError, with: :render_404 if Rails.env.production?
+    #rescue_from Exception, with: :render_500 if Rails.env.production?
     #Fluent::Logger::FluentLogger.open(nil, :host=>'localhost', :port=>24224)
     #before_action :fluentpost
     #def fluentpost
     # Fluent::Logger.post("myapp.access",{"url"=>request.fullpath,"time"=>Time.current.to_s})  
     #end
     
-    def authenticate_admin_user!
-     authenticate_user!
-  
-    # current_userはdevise提供のメソッドです。
-    # 権限ユーザのroleについては、好きな方法でよいです。（自分の場合、has_roleメソッドで実装）
-       puts "reload"
-       puts current_user.admin
-     if logged_in?
-      if current_user.admin != true 
-      #unless current_user.has_role 'admin'
-       flash[:alert] = "管理者用ページです。権限があるアカウントでログインしてください。"
-       redirect_to root_path
-      end
-     end
-    end
     
     def notification
         if logged_in?
@@ -47,14 +31,13 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    private
-     def render_404
-      render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
-     end
+    def render_404
+     render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
+    end
 
-     def render_500
-      render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
-     end
+    def render_500
+     render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
+    end
 
     protected
     
