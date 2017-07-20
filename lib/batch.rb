@@ -10,11 +10,11 @@ class Batch
       yesterday_total_view = 0
       user.articles.each do |article|
         if article.aasm_state != "draft"
-          #each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
-          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
-         # if each_yesterday_view.nil? #ここは閲覧数が読めてないページがあったときに必要だけど本番環境ならいらｎ
-         #   each_yesterday_view = 0
-         # end
+          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
+         # each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
+          if each_yesterday_view.nil? #ここは閲覧数が読めてないページがあったときに必要だけど本番環境ならいらｎ
+            each_yesterday_view = 0
+          end
           yesterday_total_view += each_yesterday_view.to_i
         end
       end
@@ -46,13 +46,13 @@ class Batch
   def self.initialize_data_of_week_view
     users = User.all
     users.each do |user|
-      puts user.id
+      puts "user_id=#{user.id}"
+      wv = user.week_views
+      wv.build(user_id:user.id).save      #building data schema at first
       wv = user.week_views.first
-     # wv.build(user_id:user.id).save
-      wv.update(day6:6,day5:5,day4:4,day3:3,day2:2,day1:1,day0:0)
-    #  wv.update(day0: yesterday_total_view )
+      wv.update(day6:6,day5:5,day4:4,day3:3,day2:2,day1:1,day0:0)       #adding dummy data of date
       for i in 0..6
-       print "day:"
+       print "day#{i}:"
        puts user.week_views.first.send("day#{i}")
       end
     end
@@ -62,13 +62,13 @@ class Batch
   def self.update_data_of_week_view
     users = User.all
     users.each do |user|
-     yesterday_total_view = 0
      puts user.id
      wv = user.week_views.first
        for num in 0..6 do
+         yesterday_total_view = 0
          user.articles.each do |article|
           if article.aasm_state != "draft"
-            each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.advance(:days=>1-(num.to_i)).to_s}", "#{article.id}"
+            each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.advance(:days=>-1-(num.to_i)).to_s}", "#{article.id}"
             yesterday_total_view += each_yesterday_view.to_i
           end
          end
@@ -98,7 +98,9 @@ class Batch
         total_likes_count += article.likes_count
       end
       user.update(total_likes: total_likes_count)
-      puts user.total_likes
+      puts "user_id:#{user.id}"
+      puts "total_likes:#{user.total_likes}"
     end
   end
 
+end

@@ -109,10 +109,10 @@ ActiveRecord::Schema.define(version: 20170713112659) do
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "user_id",    limit: 4
-    t.integer  "article_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "user_id",       limit: 4
+    t.integer  "article_id",    limit: 4
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -187,7 +187,6 @@ ActiveRecord::Schema.define(version: 20170713112659) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "week_views", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
     t.integer  "day0",       limit: 4
     t.integer  "day1",       limit: 4
     t.integer  "day2",       limit: 4
@@ -197,6 +196,7 @@ ActiveRecord::Schema.define(version: 20170713112659) do
     t.integer  "day6",       limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "user_id",    limit: 4
   end
 
   add_foreign_key "authentications", "users"
