@@ -16,6 +16,7 @@
   <td><%= day_count_view%></td> 
   <% wv =  user.week_views.first %>
   <% yesterday_views = wv.day0 %>
+  <td><%= day_count_view*0.9%></td> 
   <td><%= yesterday_views%></td>  
   <% calc_views = yesterday_views+(day_count_view*0.9) %>
   <td><%= calc_views.to_i%></td>  
