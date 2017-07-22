@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
     #@search=@article_form.search
     #@micropost = current_user.microposts.build if logged_in?
     
+    #@uPeriodView = User.per_page_kaminari(params[:page]).order("period_articles_views desc")
     @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user)
     #@articles = Article.paginate(:page =>  params[:page]).published
 

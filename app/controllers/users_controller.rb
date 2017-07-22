@@ -10,24 +10,25 @@ class UsersController < ApplicationController
 
 
   def index
-    #@users = User.all
-    @users = User.per_page_kaminari(params[:page])
+    @users = User.all
+    #@users.each do |user|
+       #user.update_columns(day_count_view: user.period_articles_views)
+       #wv =  user.week_views.first
+       #yesterday_views = wv.day0
+    #end 
+
+    @uPeriodView = User.per_page_kaminari(params[:page]).order("day_count_view desc")
   end
 
   def access_log_index
-    @users_settings=User.all
-    #@users = User.per_page_kaminari(params[:page])
     params[:q] ||= {}
     if params[:q][:created_at_lteq].present?
      params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
     end
     @q = User.ransack(params[:q])
     @q.build_sort if @q.sorts.empty?
-    puts params[:q] != {}
     if params[:q] != {}
-     puts "params[:q][:s]"
-     puts params[:q][:s]
-     @users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
+     @users = User.per_page_kaminari(params[:page])
      @users.each do |user|
       user.update_columns(period_count_articles: user.articles.where(created_at: sort_gteq..sort_lteq).count)
       keys = []
@@ -50,25 +51,19 @@ class UsersController < ApplicationController
 
       end # if
        betweens=  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1 
-       puts betweens.empty? 
 
        # if betweens.empty? == true
        period = 0 
         #puts "このユーザーは投稿viewが0か"
 
        betweens.each do |between|
-         puts between
          period += REDIS.zscore "user/#{user.id}/articles", between
        end # between
        #end 
-      puts "goun"
-      puts period.to_i
       user.update_columns(period_articles_views: period.to_i)
      end #user
      @users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
     else
-     puts "params[:q][:s]"
-     puts params[:q][:s]
      @users = User.per_page_kaminari(params[:page])
     end 
   end
