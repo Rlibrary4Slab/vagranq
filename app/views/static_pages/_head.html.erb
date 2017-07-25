@@ -11,12 +11,15 @@
   <meta property="og:locale" content="ja_JP">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RanQ [ランク]">
-   <% if @article != nil && @article.title != nil%>
+  <% if @article != nil && @article.title != nil%>
      <% content_for :title do %>
 
       <%= @article.title.html_safe %> | RanQ [ランク]
      <%end%>
     <!- コンテンツ ->
+    <% if @article.aasm_state != "published"%>
+     <meta name="robots" content="noindex,nofollow,noarchive" />
+    <%end%>
     <meta property="og:title" content="<%= @article.title.html_safe %> | RanQ [ランク]">
     <meta property="og:image" content="<%= @article.eyecatch_img %>">
     <meta property="og:url" content="http://ranq-media.com/articles/<%= @article.id%>">
