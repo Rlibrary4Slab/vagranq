@@ -10,8 +10,8 @@ class Batch
       yesterday_total_view = 0
       user.articles.each do |article|
         if article.aasm_state != "draft"
-          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
-         # each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
+        #  each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
+          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
           if each_yesterday_view.nil? #ここは閲覧数が読めてないページがあったときに必要だけど本番環境ならいらｎ
             each_yesterday_view = 0
           end
@@ -55,6 +55,24 @@ class Batch
        print "day#{i}:"
        puts user.week_views.first.send("day#{i}")
       end
+    end
+  end
+
+  
+  def self.initialize_data_of_week_view_for_new_user
+    users = User.all
+    users.each do |user|
+      puts "user_id=#{user.id}"
+      wv = user.week_views
+      if wv.empty?
+        wv.build(user_id:user.id).save      #building data schema at first
+        wv = user.week_views.first
+        wv.update(day6:0,day5:0,day4:0,day3:0,day2:0,day1:0,day0:0)       #adding dummy data of date
+      end
+        for i in 0..6 
+          print "day#{i}:"
+          puts wv.first.send("day#{i}")
+        end
     end
   end
 

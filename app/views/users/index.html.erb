@@ -23,8 +23,14 @@
     </tr>
   </thead>
 
-  
-    
+  <tr>
+    <td></td>
+    <td>ユーザー名 </td>
+    <td>前日までの総view</td>
+    <td>前日までの総view×0.9</td>
+    <td>前日View</td>
+    <td>計算値</td>
+</tr>
   <tbody class="page">
     <% @uPeriodView.each do |user| %>
       <%= render user %>

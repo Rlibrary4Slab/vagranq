@@ -12,7 +12,7 @@
   </td>
   <td><%= link_to user.user_name, user_path(user.name) %></td>
   <% if Rails.env.development?%>
-  <% day_count_view = user.day_count_view%> 
+  <% day_count_view = user.day_count_view %> 
   <td><%= day_count_view%></td> 
   <% wv =  user.week_views.first %>
   <% yesterday_views = wv.day0 %>
