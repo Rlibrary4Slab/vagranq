@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
     class IpAddressRejected < ActionController::ActionControllerError; end
 
     include ErrorHandlers if Rails.env.production? or Rails.env.staging? 
-   # rescue_from ActiveRecord::RecordNotFound, with: :render_404 
-   # rescue_from ActionController::RoutingError, with: :render_404
-   # rescue_from Exception, with: :render_500 
+    #rescue_from ActiveRecord::RecordNotFound, with: :render_404 
+    #rescue_from ActionController::RoutingError, with: :render_404 
+    #rescue_from Exception, with: :render_500 
     rescue_from ActiveRecord::RecordNotFound, with: :render_404 if Rails.env.production?
     rescue_from ActionController::RoutingError, with: :render_404 if Rails.env.production?
     rescue_from Exception, with: :render_500 if Rails.env.production?
