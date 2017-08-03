@@ -33,7 +33,7 @@
          <%# end %>
 
 
-
+         <div class="edit_article_block">
          <% if logged_in? && @user.name == current_user.name %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
@@ -66,12 +66,9 @@
          <span style="letter-spacing:0px">Total Likes</span>：<span id="total_like_id<%=@user.id%>"><%= sum_of_likes %></span></br>
          <span style="letter-spacing:0px">Total article</span>：<%= @user.count_articles %></br>
          <span style="letter-spacing:0px">昨日あなたが獲得したView数</span>：<%= @weeks_views[0] %></br>
+         </div>
          <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @floen%>
          <div style="margin-bottom:30px;"></div>
-         <%# @socl = Article.where(id: @ids) %>
-         <%# @socl.each do |oa| %>
-           <%#= oa.title %>  
-         <%# end%>
           <% if logged_in? %>
             <%= render @articleus %>
           <% else %>
