@@ -106,7 +106,59 @@ padding-right: 30px;
  width: 49%;
  vertical-align: top;
 }
+a.twitter-login-area {
+width: 550px;
+height: 60px;
+background-color: #56adee ;
+display: block;
+margin-bottom: 20px;
+}
 
-.login_form_area {
- margin: 20px 0 30px;
+span.twitter-login {
+display: block;
+font-size: 18px;
+line-height: 60px;
+padding-left: 20px;
+color: #ffffff ;
+}
+
+a.twitter-login-area:hover {
+text-decoration: none;
+opacity: 0.9;
+}
+
+
+
+a.facebook-login-area {
+width: 550px;
+height: 60px;
+background-color: #3b579d ;
+display: block;
+margin-bottom: 20px;
+}
+
+span.facebook-login {
+display: block;
+font-size: 18px;
+line-height: 60px;
+padding-left: 20px;
+color: #ffffff ;
+}
+
+a.facebook-login-area:hover {
+text-decoration: none;
+opacity: 0.9;
+}
+
+.normal-login .field {
+margin-bottom: 10px;
+}
+
+.normal-login input {
+padding: 20px;
+width: 100%;
+}
+
+input[type="checkbox"] {
+width: initial;
 }

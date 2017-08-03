@@ -17,17 +17,25 @@ $(document).on(
   "mouseenter" : -> 
    document.getElementById("tansubmit").click()
    document.getElementById("dansubmit").click()
+   $("#mouseOverIn").prop("checked",true)
    if $(this).parents(".ckeditors").find("textarea").attr("id") != undefined
     imgidbe = $(this).parents(".ckeditors").find("textarea").attr("id") 
     imgidaf = imgidbe.replace("article_contents_attributes_","").replace("_description","")
     $("#mouseOverSum").val(Number(imgidaf)+1)
+    console.log(Number(imgidaf)+1)
+    console.log("in")
    else
     $("#mouseOverSum").val("0")
+    console.log("outin")
   ,"mouseleave" : ->
+   console.log($("#mouseOverSum").val())
+   console.log("out")
+   $("#mouseOverIn").prop("checked",false)
    $("#mouseOverSumOff").val($("#mouseOverSum").val())
   ,"div.cke_ltr"
 )
-  
+#$(content).on "click", ".cke_contents ifra"->
+   
 
 $(window).on "beforeunload", ->
   if $("#csubmit").length ==1
