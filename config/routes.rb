@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     :omniauth_callbacks => 'omniauth_callbacks',
     :passwords => 'users/passwords'
   } 
-
+  get 'ranking' => 'static_pages#ranking'
   get 'inquiry' => 'inquiry#index'
   post 'inquiry/confirm' => 'inquiry#confirm'
   post 'inquiry/thanks' => 'inquiry#thanks'

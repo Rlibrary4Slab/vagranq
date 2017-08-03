@@ -35,7 +35,8 @@ class StaticPagesController < ApplicationController
   
   
   
-  def rank
+  def ranking
+    #@articles = Article.published.per_page_kaminari(params[:page]).limit(10).order(view_count: :desc).includes(:user)
     @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(3).pluck(:article_id))
   end 
   

@@ -5,7 +5,7 @@ module API
       format :json
       resource :articles do
         get do
-           present Article.all #, with: Entity::V1::UsersEntity
+           present Article.all.limit(1) #, with: Entity::V1::UsersEntity
 
         end
       end
@@ -13,7 +13,7 @@ module API
       resource :contents do
         get do
            #present Content.find(1) #, with: Entity::V1::UsersEntity
-           present Content.all #, with: Entity::V1::UsersEntity
+           present Content.all.limit(1) #, with: Entity::V1::UsersEntity
 
         end
       end

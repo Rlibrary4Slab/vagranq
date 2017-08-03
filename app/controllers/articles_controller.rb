@@ -51,7 +51,8 @@ class ArticlesController < AuthorizedController
   def allranking
     add_breadcrumb "ランキング一覧", :allranking_path
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
-    @articles = Article.order("corporecom").published.per_page_kaminari(params[:page])
+    @articles = Article.published.limit(10).per_page_kaminari(params[:page]).order(view_count: :desc).includes(:user)
+    #@articles = Article.order("corporecom").published.per_page_kaminari(params[:page])
     #@articles = 
   end
 
