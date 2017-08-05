@@ -68,7 +68,7 @@ gem 'chartkick'
 gem 'impressionist' , '1.5.1'
 gem 'jquery-turbolinks'
 gem 'aasm' , '3.3.1'
-gem 'ckeditor_rails','4.6.2'
+gem 'ckeditor'
 gem "jquery-selection-rails" 
 gem 'carrierwave'
 gem 'mini_magick'
