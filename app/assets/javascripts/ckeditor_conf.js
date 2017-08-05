@@ -1,4 +1,3 @@
-/*
 // 最初にダイアログの定義時のイベントにフックする関数を定義する
 CKEDITOR.on( 'dialogDefinition', function( ev ){
  // 表示されたダイアログの名前を取得
@@ -12,4 +11,4 @@ CKEDITOR.on( 'dialogDefinition', function( ev ){
   // ダイアログコンテンツから、target(ターゲット)を削除する
   dialogDefinition.removeContents( 'target' );
   
-});*/
+});

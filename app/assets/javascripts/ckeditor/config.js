@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'ja';
 	config.uiColor = '#f5f5f5';
 	//config.ignoreEmptyParagraph = true;
-	config.extraPlugins = 'SimpleLink,wordcount,youtube,notification,autogrow,uploadwidget';
+	config.extraPlugins = 'dropler,SimpleLink,wordcount,youtube,notification,autogrow';
 	//config.extraPlugins = 'wordcount,youtube,notification,autogrow';
         //config.toolbar = [["Image","Link","Youtube"]];	
 	config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]}];
@@ -56,7 +56,6 @@ CKEDITOR.editorConfig = function( config ) {
 
          }
         };
-       
 
 
 };

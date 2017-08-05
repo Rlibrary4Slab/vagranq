@@ -63,18 +63,14 @@ CKEDITOR.plugins.add( 'dropler', {
 
         function orPopError(err) { 
 		alert(err.data.error)
-                $("#loadingajax").remove()
 	}
 
         function dropHandler(e) {
-            //if($("mouseOverIn") != false){
-             console.log("true")
-	     $("body").before('<div id="loadingajax" style="opacity:0.5; height:999999px; width:999999px; background-color: #FFFFFF; z-index: 10000; position:absolute;"></div>');
-             $("#loadingajax").append('<img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif" style="position: fixed; bottom: 0; top: 0; left: 0; right: 0; margin: auto; z-index: 10000;"></div>');
-             e.preventDefault();
-             var file = e.dataTransfer.files[0];
-             backend.upload(file).then(insertImage, orPopError);
-            //}
+	    $("body").before('<div id="loadingajax" style="opacity:0.5; height:999999px; width:999999px; background-color: #FFFFFF; z-index: 10000; position:absolute;"></div>');
+            $("#loadingajax").append('<img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif" style="position: fixed; bottom: 0; top: 0; left: 0; right: 0; margin: auto; z-index: 10000;"></div>');
+            e.preventDefault();
+            var file = e.dataTransfer.files[0];
+            backend.upload(file).then(insertImage, orPopError);
         }
 
         function insertImage(href) {
@@ -86,6 +82,7 @@ CKEDITOR.plugins.add( 'dropler', {
                 }
             });*/
             //var elem = editor.setHtml('<p><img src="'+href+'"></p>')
+	    //console.log(elem)
             /*editor.insertElement(elem);*/
             editor.insertHtml('<p><img style="max-width:100%; height:100%" src="'+href+'" /></p>\n');
             $("#loadingajax").remove()
@@ -160,12 +157,31 @@ CKEDITOR.plugins.add( 'dropler', {
             });
         };
         CKEDITOR.on('instanceReady', function() {
+            //var iframeBase = document.querySelector('iframe').contentDocument.querySelector('html');
+            //var iframeBody = iframeBase.querySelector('body');
+            //var iframeBody = iframeBase.querySelector('body');
+            var iframeBase = document.querySelector('iframe').contentDocument.querySelector('html');
+            var iframeBaseA = document.querySelector('iframe');
             var iframeBaseB = document.querySelectorAll('iframe');
+            //iframeBody.ondragover = doNothing;
+            //iframeBody.ondrop = dropHandler;
             for(var i=0;i<iframeBaseB.length-1;i++){
+            //iframeBase.ondragover = doNothing;
+            //iframeBase.ondrop = dropHandler;
+            //htmlBase[i] = iframeBaseB[i].contentDocument.querySelectorAll("html")
              iframeBaseB[i].contentDocument.querySelector("html").ondragover = doNothing;
              iframeBaseB[i].contentDocument.querySelector("html").ondrop = dropHandler;
 	    }
+            console.log("aaaa")          
+            //paddingToCenterBody = ((iframeBase.offsetWidth - iframeBody.offsetWidth) / 2) + 'px';
+            //iframeBase.style.height = '100%';
+            //iframeBase.style.width = '100%';
+            //iframeBase.style.overflowX = 'hidden';
 
+            //iframeBody.style.height = '100%';
+            //iframeBody.style.margin = '0';
+            //iframeBody.style.paddingLeft = paddingToCenterBody;
+            //iframeBody.style.paddingRight = paddingToCenterBody;
         });
 	ei++;
     }
