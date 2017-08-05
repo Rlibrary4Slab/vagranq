@@ -110,3 +110,167 @@ padding-right: 30px;
 .login_form_area {
  margin: 20px 0 30px;
 }
+#signup_div #login_div{
+ width: 1200px;
+ margin: 0 auto;
+}
+
+#user_user_description{
+  height:223px;
+  width: 470px;
+
+}
+
+
+ul.user_page_entry_list {
+	display: inline-block;
+        padding-left:0;
+}
+
+li.user_page_entry {
+        box-sizing: border-box;
+	display: inline-block;
+	width: 33%;
+	vertical-align: top;
+        padding: 20px;
+
+}
+li.user_page_entry p{
+   font-size:24px;
+}
+.user_page_image_box {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   padding: 60% 0 0;
+   margin-bottom: 20px;
+
+}
+.user_page_image {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+
+}
+
+.user_page_entry a:link {
+   color: #000000 ;
+}
+.user_page_entry a:visited {
+   color: #000000 ;
+}
+.div-twi{
+ background: #1DA1F2;
+ height:40px;
+ width: 40px;
+}
+.div-face{
+ background: #FFF;
+ height:40px;
+ width: 40px;
+}
+.div-notwi{
+ background: gray;
+ height:40px;
+ width: 40px;
+}
+.div-noface{
+ background: #FFF;
+ height:40px;
+ width:40px;
+}
+.sns-logo path{
+ fill :#FFF;
+}
+.div-face .sns-logo path{
+ fill :#385998;
+}
+.div-noface .sns-logo path{
+ fill : gray;
+}
+
+#shops tbody tr th{
+padding-right: 30px;
+}
+#shops tbody tr td{
+padding-right: 30px;
+}
+.edit_article_block{
+ display: inline-block;
+ width: 400px;
+ vertical-align: top;
+}
+#chart-1 {
+ display: inline-block;
+}
+
+.sns-login {
+ display: inline-block;
+ width: 49%;
+ vertical-align: top;
+}
+
+.normal-login {
+ display: inline-block;
+ width: 49%;
+ vertical-align: top;
+}
+a.twitter-login-area {
+width: 550px;
+height: 60px;
+background-color: #56adee ;
+display: block;
+margin-bottom: 20px;
+}
+
+span.twitter-login {
+display: block;
+font-size: 18px;
+line-height: 60px;
+padding-left: 20px;
+color: #ffffff ;
+}
+
+a.twitter-login-area:hover {
+text-decoration: none;
+opacity: 0.9;
+}
+
+
+
+a.facebook-login-area {
+width: 550px;
+height: 60px;
+background-color: #3b579d ;
+display: block;
+margin-bottom: 20px;
+}
+
+span.facebook-login {
+display: block;
+font-size: 18px;
+line-height: 60px;
+padding-left: 20px;
+color: #ffffff ;
+}
+
+a.facebook-login-area:hover {
+text-decoration: none;
+opacity: 0.9;
+}
+
+.normal-login .field {
+margin-bottom: 10px;
+}
+
+.normal-login input {
+padding: 20px;
+width: 100%;
+}
+
+input[type="checkbox"] {
+width: initial;
+}
