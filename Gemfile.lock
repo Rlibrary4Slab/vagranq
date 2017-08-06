@@ -116,9 +116,13 @@ GEM
       mime-types (>= 1.16)
     chartkick (2.2.4)
     chronic (0.10.2)
-    ckeditor_rails (4.6.2)
-      railties (>= 3.0)
+    ckeditor (4.2.4)
+      cocaine
+      orm_adapter (~> 0.5.0)
+    climate_control (0.2.0)
     closure-compiler (1.1.12)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -612,7 +616,7 @@ DEPENDENCIES
   capistrano-safe-deploy-to (~> 1.1.1)
   carrierwave
   chartkick
-  ckeditor_rails (= 4.6.2)
+  ckeditor
   closure-compiler
   coffee-rails (= 4.1.0)
   counter_culture
