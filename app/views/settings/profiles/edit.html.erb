@@ -35,24 +35,26 @@
                         <%= embedded_svg("twitter.svg" ,:class => "sns-logo")%> 
                      </div>   
 	             twitterでシェアする
-		     <%if current_user.twitter_s != false %> 
-		       <%= f.check_box :twi,name: "ope[twi]"  %> 
-  	             <% else %>
-		       <%= f.check_box :twi,name: "ope[twi]"  %> 
-  	             <% end %>
+		      <%if current_user.twitter_s != false %>
+                       <%= f.check_box :twi,{:checked => true},checked_value = "1",unchecked_value = "0" %>
+                     <% else %>
+                       <%= f.check_box :twi,{},checked_value = "1",unchecked_value = "0" %>
+                     <% end %>
+
 		<% end %>
                 
+	
 
 		<%if current_user.social_profiles.where(provider: "facebook").nil? != true%>
                      <%= current_user.facebook_s != false ? '<div class="div-face">'.html_safe : '<div class="div-noface">'.html_safe%> 
                         <%= embedded_svg("facebook.svg" ,:class => "sns-logo")%> 
                      </div>   
 		     facebookでシェアする
-		     <%if current_user.facebook_s != false %> 
-		       <%= f.check_box :face,name: "ope[fac]"  %> 
-  	             <% else %>
-		       <%= f.check_box :face,name: "ope[fac]"  %> 
-  	             <% end %>
+                     <%if current_user.facebook_s != false %>
+                       <%= f.check_box :face,{:checked => true},checked_value = "1",unchecked_value = "0" %>
+                     <% else %>
+                       <%= f.check_box :face,{},checked_value = "1",unchecked_value = "0" %>
+                     <% end %>
 		<% end %>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
