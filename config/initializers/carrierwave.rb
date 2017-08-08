@@ -13,7 +13,7 @@ CarrierWave.configure do |config|
   }
 
   # 公開・非公開の切り替え
-  config.fog_public     = true
+  #config.fog_public     = true
   # キャッシュの保存期間
   #config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
 
