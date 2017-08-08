@@ -7,7 +7,7 @@ CKEDITOR.editorConfig = function( config )
 {
   // Define changes to default configuration here. For example:
   // config.language = 'fr';
-  config.uiColor = '#AADC6E';
+  config.uiColor = '#f5f5f5';
 
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
@@ -30,11 +30,14 @@ CKEDITOR.editorConfig = function( config )
 
   // The location of a script that handles file uploads.
   config.filebrowserUploadUrl = "/ckeditor/attachment_files";
-
+  
   config.allowedContent = true;
-  config.extraPlugins = "uploadimage"
+  config.resize_enabled = false;
+  config.resize_dir = 'vertical';
+  //config.extraPlugins = "uploadimage,SimpleLink,wordcount,youtube,notification,autogrow";
+  //config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]}];
   // Toolbar groups configuration.
-  config.toolbar = [
+  /*config.toolbar = [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
     { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
     // { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
@@ -54,5 +57,5 @@ CKEDITOR.editorConfig = function( config )
     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
     { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] }
-  ];
+  ];*/
 };

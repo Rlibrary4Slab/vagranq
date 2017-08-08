@@ -35,7 +35,7 @@ $(window).on "beforeunload", ->
 $(document).on 'submit', ->
    $(window).off 'beforeunload'
 $(document).on "onload" ,->
-  #CKEDITOR.replaceAll("ckeditor")
+  CKEDITOR.replaceAll("ckeditor")
   $('div p a[class="jihi"]').each ->
     $(this).html("ork")
     $(this).hide()
@@ -105,7 +105,7 @@ $(document).on 'click', '.add_fieldsl', (event) ->
   time = new Date().getTime()
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).before($(this).data('fields').replace(regexp, time))
-  #CKEDITOR.replaceAll("ckeditor")
+  CKEDITOR.replaceAll("ckeditor")
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()
@@ -119,7 +119,7 @@ $(document).on 'click', '.add_fieldsf', (event) ->
   time = new Date().getTime()
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).after($(this).data('fields').replace(regexp, time))
-  #CKEDITOR.replaceAll("ckeditor")
+  CKEDITOR.replaceAll("ckeditor")
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()

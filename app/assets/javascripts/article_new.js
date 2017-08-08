@@ -18,8 +18,8 @@
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
 //= require ckeditor/init
-// require ckeditor-jquery
 //= require twitter/bootstrap
 //= require bootstrap
 //= require websocket_rails/main
-//= require_tree .
+//= require articles.js.coffee 
+// require_tree .
