@@ -6,7 +6,7 @@
     <h2><span class="ranking-icon"></span>
     <%= f.text_field :title, :class => 'form-control title-form'%></h2><br /><br/>
     <%= f.label :description, "説明" %>
-    <%= f.text_area :description, :class => 'form-control ckeditor' %><br />
+    <%= f.cktext_area :description, :class => 'form-control ckeditor' %><br />
      <span class="hiddenButtons" value="隠す">
 
      <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
