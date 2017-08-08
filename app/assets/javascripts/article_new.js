@@ -22,4 +22,5 @@
 //= require bootstrap
 //= require websocket_rails/main
 //= require articles.js.coffee 
+//= require ckeditor_conf.js 
 // require_tree .

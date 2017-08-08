@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
 
@@ -17,14 +17,38 @@ body
 
 	margin: 20px;
 }
-
+.markedColor {
+ background: rgba(255,100,100,0.3);
+}
+code {
+ background: rgba(255,100,100,0.3);
+}
 .cke_editable
 {
 	font-size: 13px;
 	line-height: 1.6;
-
+        position: absolote;
 	/* Fix for missing scrollbars with RTL texts. (#10488) */
 	word-wrap: break-word;
+}
+
+.cke_editable p img {
+ position: relative !important;
+ max-width: 100%;
+}
+div.img_url {
+ position: absolute !important;
+ bottom: 0 !important;
+ left: 0 !important;
+ display: none ;
+}
+
+body.cke_editable p img:hover{
+
+  div.img_url {
+    display: initial !important;
+  }
+
 }
 
 blockquote
@@ -134,75 +158,58 @@ a > img {
 	outline: 1px solid #0782C1;
 }
 
-/* Widget Styles */
-.code-featured
-{
-	border: 5px solid red;
+.s_eyecatch_img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+  overflow: hidden;
 }
 
-.math-featured
-{
-	padding: 20px;
-	box-shadow: 0 0 2px rgba(200, 0, 0, 1);
-	background-color: rgba(255, 0, 0, 0.05);
-	margin: 10px;
+.article_list_content {
+      display: table;
+      table-layout: fixed;
+      //width: 100%;
+      padding: 10px 0px;
+      border-bottom: solid 1px #eeeeee;
+      vertical-align: top;
+      overflow: hidden;
 }
+.article_list_thumb {
+	display: table-cell;
+	vertical-align: top;
+}
+.article_list_text {
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle;
+}
+.link_card {
+   border: 1px solid #e5e5e5 ;
+   padding-left: 10px;
+   max-width: 680px;
+}
+.out_embed {
+     border: 1px solid #e5e5e5 ;
+     padding: 20px;
+     margin: 5px;
+     max-width: 480px;
+      
+}
+.out_embed_image_box {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     padding: 60% 0 0;
+     //margin: 20px;
+      
+}
+.out_embed_image_box a img.out_embed_image{
+     position: absolute !important;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
 
-.image-clean
-{
-	border: 0;
-	background: none;
-	padding: 0;
-}
-
-.image-clean > figcaption
-{
-	font-size: .9em;
-	text-align: right;
-}
-
-.image-grayscale
-{
-	background-color: white;
-	color: #666;
-}
-
-.image-grayscale img, img.image-grayscale
-{
-	filter: grayscale(100%);
-}
-
-.embed-240p
-{
-	max-width: 426px;
-	max-height: 240px;
-	margin:0 auto;
-}
-
-.embed-360p
-{
-	max-width: 640px;
-	max-height: 360px;
-	margin:0 auto;
-}
-
-.embed-480p
-{
-	max-width: 854px;
-	max-height: 480px;
-	margin:0 auto;
-}
-
-.embed-720p
-{
-	max-width: 1280px;
-	max-height: 720px;
-	margin:0 auto;
-}
-
-.embed-1080p
-{
-	max-width: 1920px;
-	max-height: 1080px;
-	margin:0 auto;
-}
+}  

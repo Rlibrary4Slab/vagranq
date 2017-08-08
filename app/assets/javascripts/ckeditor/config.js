@@ -34,8 +34,10 @@ CKEDITOR.editorConfig = function( config )
   config.allowedContent = true;
   config.resize_enabled = false;
   config.resize_dir = 'vertical';
-  //config.extraPlugins = "uploadimage,SimpleLink,wordcount,youtube,notification,autogrow";
-  //config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]}];
+  config.extraPlugins = "uploadimage,SimpleLink,wordcount,youtube,notification,autogrow";
+  config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]}];
+  //config.extraPlugins = "uploadimage,wordcount,youtube,notification,autogrow";
+  //config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold"]}];
   // Toolbar groups configuration.
   /*config.toolbar = [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
@@ -58,4 +60,32 @@ CKEDITOR.editorConfig = function( config )
     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
     { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] }
   ];*/
+  config.wordcount = {
+
+            // Whether or not you want to show the Word Count
+            //WordCount: true,
+
+            // Whether or not you want to show the Char Count
+            //showCharCount: false,
+
+            // Maximum allowed Word Count
+            //maxWordCount: 4,
+
+            // Maximum allowed Char Count
+            //maxCharCount: 10,
+            showParagraphs: false,// 段落カウント表示する・しない
+            showWordCount: false, // 単語カウント表示する・しない
+                showCharCount: true, // 文字数カウント表示する・しない
+                //countSpacesAsChars: false,// スペースカウントする・しない
+                countHTML: false, // HTMLタグカウントする・しない
+                maxWordCount: -1, // 最大単語数設定(無制限の場合は-1)
+                maxCharCount: -1  // 最大文字数設定(無制限の場合は-1)
+
+   };
+   config.coreStyles_bold = {
+          element: 'span',
+          attributes: {'class':"markedColor"}
+          //styles : {"background": "rgba(255,100,100,0.3)"}
+
+   };
 };
