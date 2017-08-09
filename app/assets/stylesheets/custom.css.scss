@@ -88,6 +88,18 @@ body a:visited {
   margin-top: -20px;
   padding-top: 20px;
 }
+.header.fixed {
+  
+   position: fixed;
+   margin-top: -30px;
+   background-color: rgba(255,255,255,.8);
+   z-index: 100;
+   width: 100%
+ }
+.header.fixed div h1{
+  margin: 22px auto 0;
+}
+
 .header-inner {
   position: relative;
   width: 1200px;

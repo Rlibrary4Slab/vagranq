@@ -13,6 +13,10 @@ regst=new RegExp('^article_contents_attributes_([0-9+]+)_title$')
 regz2=new RegExp('^article_contents_attributes_([0-9+]+)_description$')
 reglink=new RegExp('^http:\/\/192.168.33.10:3000\/articles\/([0-9+]+)$')
 
+$(window).on 'scroll', ->
+    $('.header').toggleClass('fixed', $(this).scrollTop() > 50)
+
+
 $(document).on(
   "mouseenter" : -> 
    document.getElementById("tansubmit").click()
