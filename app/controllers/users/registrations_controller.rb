@@ -14,7 +14,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-    puts resource
     resource.week_views.build(user_id:resource.id, day6:0,day5:0,day4:0,day3:0,day2:0,day1:0,day0:0)
     if resource.save
       yield resource if block_given?
@@ -50,7 +49,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def sign_up_params
-      params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation,:admin, :pid,:provider)
+      params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation,:admin, :pid,:provider,:day_count_view)
     end
 
   protected
