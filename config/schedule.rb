@@ -31,8 +31,10 @@ every 1.day, at: '0:00' do
 #  runner "Batch.hello"
 end
 
+#every 1.minute do
 every 1.day, at: '0:05' do
   runner "Batch.user_ranking_point"
+#  runner "Batch.hello"
 end
 
 # Learn more: http://github.com/javan/whenever
