@@ -216,6 +216,8 @@ p.article_list_lead {
     float: left;
     margin-bottom: -100000px;
     padding: 0 20px 100000px 0;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
   .title_section_in {
     clear: both;
