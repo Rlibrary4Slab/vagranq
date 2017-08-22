@@ -61,16 +61,26 @@
   </div>
 </div>
 </section>
-<% ranking_count=0%>
-<% @article.contents.each do |article| %>
-  <% ranking_count += 1%>
-  <a href="#id<%= ranking_count%>"><%= article.title%></a></br>
-<% end %>
 <div id="wrapper" class="clearfix">
 <hidden type="text" id="getattrlink" />
 <div id="column_content">
-<% ranking_count=0%>
 <div class="article_content"> 
+<% if @article.contents.count >= 5%>
+  
+  
+  <% ranking_count=0%>
+  <div class="mokuji">
+   <ul>
+   <li style="margin-bottom: 1em;">目次</li>
+   <% @article.contents.each do |article| %>
+     <% ranking_count += 1%>
+     <li><a href="#id<%= ranking_count%>"><%= article.title%></a></li>
+   <% end %>
+   </ul>
+  </div>
+<% end %>
+
+<% ranking_count=0%>
   <%= @article.description.html_safe %>
   <% @article.contents.each do |article| %>
     
