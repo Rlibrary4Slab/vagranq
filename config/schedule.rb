@@ -12,7 +12,7 @@ set :environment, ENV['RAILS_ENV']
 # Example:
 #
 # set :output, "/path/to/my/cron_log.log"
-  set :output, "/RanQ/Production/wheneverlog.log"
+#  set :output, "/RanQ/Production/wheneverlog.log"
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -25,14 +25,14 @@ set :environment, ENV['RAILS_ENV']
 # end
 
 #every 1.minute do
-every 1.day, at: '0:00' do
+every 1.day, at: '0:01 am' do
   runner "Batch.yesterday_view_count"
   runner "Batch.delete_old_notifications"
 #  runner "Batch.hello"
 end
 
 #every 1.minute do
-every 1.day, at: '0:05' do
+every 1.day, at: '0:05 am' do
   runner "Batch.user_ranking_point"
 #  runner "Batch.hello"
 end

@@ -8,8 +8,8 @@ class Batch
       yesterday_total_view = 0
       user.articles.each do |article|
         if article.aasm_state != "draft"
-        #  each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
-          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
+          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
+        #  each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
           if each_yesterday_view.nil? #it's needed when it cannot read view for nil
             each_yesterday_view = 0
           end
@@ -141,7 +141,7 @@ class Batch
     users.each do |user|
       puts "user_id:#{user.id}"
       two_weeks_view = 0  
-      for num in -1..19 do
+      for num in -1..29 do
         each_view = 0
         user.articles.each do |article|
           if article.aasm_state != "draft"
@@ -152,10 +152,10 @@ class Batch
     #  print "day#{num}:#{two_weeks_view}"
     #  puts ""
       end
-      puts "20日前の総閲覧数：#{user.articles.sum(:view_count) - two_weeks_view}. これに0.9掛けて19日前の閲覧数を足せば、18日前のポイントが算出される"
+      puts "30日前の総閲覧数：#{user.articles.sum(:view_count) - two_weeks_view}. これに0.9掛けて19日前の閲覧数を足せば、18日前のポイントが算出される"
       two_weeks_ago_point = ( user.articles.sum(:view_count) - two_weeks_view ) *0.9
       each_day_view = 0
-      18.downto(1){ |numi|
+      28.downto(1){ |numi|
         each_view = 0
         user.articles.each do |article|
           each_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.advance(:days=>-1-(numi.to_i)).to_s}", "#{article.id}"
@@ -165,7 +165,7 @@ class Batch
         puts "#{numi}日前のポイント：#{two_weeks_ago_point}"
         two_weeks_ago_point *= 0.9
       }
-      puts "↑20日前に遡っての計算過程"
+      puts "↑30日前に遡っての計算過程"
       day_count_view = two_weeks_ago_point + user.week_views.first.day0
       user.update(day_count_view: day_count_view)
       puts "1日前の閲覧数：#{user.week_views.first.day0}"
