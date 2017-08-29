@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+  #mount Ckeditor::Engine => '/ckeditor'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount API::Root => '/api'
   match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
@@ -92,8 +94,8 @@ end
   match '' => "notifications#paginate" ,via: :get      #任意のページでpaginationするためのルーティング
   #get '*path', controller: 'application', action: 'render_404' 
   #get '*path', controller: 'application', action: 'render_500' 
-  get '*path', controller: 'application', action: 'render_404' if Rails.env.production?
-  get '*path', controller: 'application', action: 'render_500' if Rails.env.production?
+  #get '*path', controller: 'application', action: 'render_404' if Rails.env.production?
+  #get '*path', controller: 'application', action: 'render_500' if Rails.env.production?
   
  
 end

@@ -8,6 +8,11 @@ set :deploy_to, "/var/www/vagranq"
 set :confitionally_migrate, true
 set :linked_files, fetch(:linked_files, []).push("config/settings.yml")
 set :stages, %w(pro sca)
+set :whenever_environment, "#{fetch(:stage)}"
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+ 
+SSHKit.config.command_map[:whenever] = "bundle exec whenever"
+
 #set :default_env, {
 #    path: "$PATH",
 #    rbenv_root: "/home/ec2-user/.rbenv",

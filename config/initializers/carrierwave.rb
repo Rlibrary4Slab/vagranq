@@ -9,11 +9,11 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
     #aws_secret_access_key: "bbbb",
     # Tokyo
-    region:                'ap-northeast-1',
+    region:                'ap-northeast-1'
   }
 
   # 公開・非公開の切り替え
-  config.fog_public     = true
+  #config.fog_public     = true
   # キャッシュの保存期間
   #config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }
 

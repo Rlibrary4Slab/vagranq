@@ -13,7 +13,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
      user = OAuthService::GetOAuthUser.call(env["omniauth.auth"])
      if user.week_views.empty?
-      user.week_views.build(user_id:user.id, day6:0,day5:0,day4:0,day3:0,day2:0,day1:0,day0:0).save
+      user.week_views.build(user_id:user.id, day6:0,day5:0,day4:0,day3:0,day2:0,day1:0,day0:0)
+      user.attributes= {day_count_view: 0}
+      user.save
      end
     end
     # ユーザーがデータベースに保存されており、且つemailを確認済みであれば、ユーザーをログインする。

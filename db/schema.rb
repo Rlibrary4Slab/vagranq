@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722093228) do
+ActiveRecord::Schema.define(version: 20170808111513) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -74,6 +74,19 @@ ActiveRecord::Schema.define(version: 20170722093228) do
   add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid", unique: true, using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",    limit: 255, null: false
+    t.string   "data_content_type", limit: 255
+    t.integer  "data_file_size",    limit: 4
+    t.string   "type",              limit: 30
+    t.integer  "width",             limit: 4
+    t.integer  "height",            limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "ckeditor_assets", ["type"], name: "index_ckeditor_assets_on_type", using: :btree
+
   create_table "contents", force: :cascade do |t|
     t.string   "title",       limit: 255
     t.text     "description", limit: 65535
@@ -109,10 +122,10 @@ ActiveRecord::Schema.define(version: 20170722093228) do
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "user_id",       limit: 4
-    t.integer  "article_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "article_id", limit: 4
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -188,6 +201,7 @@ ActiveRecord::Schema.define(version: 20170722093228) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "week_views", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
     t.integer  "day0",       limit: 4
     t.integer  "day1",       limit: 4
     t.integer  "day2",       limit: 4
@@ -197,7 +211,6 @@ ActiveRecord::Schema.define(version: 20170722093228) do
     t.integer  "day6",       limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.integer  "user_id",    limit: 4
   end
 
   add_foreign_key "authentications", "users"

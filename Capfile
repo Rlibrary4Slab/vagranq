@@ -8,6 +8,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets' 
 require 'capistrano/faster_assets'
 require 'capistrano/rails/migrations'
+require "whenever/capistrano"
 Dir.glob("lib/capistrano/tasks/*.rb").each { |r| import r }
 #Dir.glob("lib/capistrano/tasks/*.cap").each { |r| import r }
 #require "capistrano/setup"

@@ -24,11 +24,17 @@ set :environment, ENV['RAILS_ENV']
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.minute do
-#every 1.day, at: '0:00' do
-#  runner "Batch.yesterday_view_count"
-#  runner "Batch.delete_old_notifications"
-  runner "Batch.hello"
+#every 1.minute do
+every 1.day, at: '0:00' do
+  runner "Batch.yesterday_view_count"
+  runner "Batch.delete_old_notifications"
+#  runner "Batch.hello"
+end
+
+#every 1.minute do
+every 1.day, at: '0:05' do
+  runner "Batch.user_ranking_point"
+#  runner "Batch.hello"
 end
 
 # Learn more: http://github.com/javan/whenever

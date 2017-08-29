@@ -1,10 +1,10 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-arth=0
+#arth=0
 #$(document).on ".date-picker" , ->
 #        datetimepicker(pickTime: false)
-$(window).on "load" , ->
+#$(window).on "load" , ->
  #$("div.s_article_thumbnail").each ->
     #arth++
     #console.log("arth"+arth)
@@ -18,7 +18,7 @@ $(window).on "load" , ->
     #   thichil.css("height":"auto","width":"100%")
        #$("#s_eyecatch_img:nth-child("+arth+")").css("height":"auto","width":"100%")
 
-    $(".s_article_thumbnail").css("display":"")  
+  #  $(".s_article_thumbnail").css("display":"")  
   #if document.getElementById("s_eyecatch_img").naturalWidth() < document.getElementById("s_eyecatch_img").naturalHeight()
   #  $("#s_eyecatch_img").css("height":"auto","width":"100%")
   #$("#s_article_thumbnail").show()
@@ -32,10 +32,10 @@ $(window).on "load" , ->
 #regsd=new RegExp('^user_addresses_attributes_([0-9]+)_zipcode$')
 
   
-$(document).on 'ready page:load', ->
+#$(document).on 'ready page:load', ->
   
-  console.log("どくめんｔ")
-  $("div.s_article_thumbnail").each ->
+  #console.log("どくめんｔ")
+  #$("div.s_article_thumbnail").each ->
    #if document.getElementsByClassName("s_eyecatch_img").naturalWidth < document.getElementsByClassName("s_eyecatch_img").naturalHeight
 
    #$(".s_eyecatch_img").css("height":"auto","width":"100%")

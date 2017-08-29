@@ -25,7 +25,8 @@ code {
 }
 .cke_editable
 {
-	font-size: 13px;
+	//font-size: 13px;
+	font-size: 18px;
 	line-height: 1.6;
         position: absolote;
 	/* Fix for missing scrollbars with RTL texts. (#10488) */

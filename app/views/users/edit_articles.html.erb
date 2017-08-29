@@ -33,7 +33,7 @@
          <%# end %>
 
 
-         <div class="edit_article_block" >
+         <div class="edit_article_block">
          <% if logged_in? && @user.name == current_user.name %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
@@ -69,10 +69,6 @@
          </div>
          <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @floen%>
          <div style="margin-bottom:30px;"></div>
-         <%# @socl = Article.where(id: @ids) %>
-         <%# @socl.each do |oa| %>
-           <%#= oa.title %>  
-         <%# end%>
           <% if logged_in? %>
             <%= render @articleus %>
           <% else %>

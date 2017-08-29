@@ -112,27 +112,30 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
     
     current_user.update_attributes(:twitter_s => true)
     flash[:success] = "投稿時Twitterにてシェアされます"
-    redirect_to current_user
+    redirect_to :back
   end
 
   def inshare_twitter
     
     current_user.update_attributes(:twitter_s => false)
     flash[:success] = "投稿時Twitterにてシェアされなくなります"
-    redirect_to current_user
+    #redirect_to current_user
+    redirect_to :back
   end
 
   def share_facebook
     current_user.update_attributes(:facebook_s => true)
     flash[:success] = "投稿時Facebookにてシェアされます"
-    redirect_to current_user
+    #redirect_to current_user
+    redirect_to :back
     
   end
 
   def inshare_facebook
     current_user.update_attributes(:facebook_s => false)
     flash[:success] = "投稿時Facebookにてシェアされなくなります"
-    redirect_to current_user
+    #redirect_to current_user
+    redirect_to :back
     
   end
 

@@ -7,6 +7,7 @@ CKEDITOR.on( 'dialogDefinition', function( ev ){
  // リンクのダイアログの場合
   // ダイアログコンテンツから、advanced(高度な設定)を削除する
   dialogDefinition.removeContents( 'advanced' );
+  dialogDefinition.removeContents( 'Upload' );
   dialogDefinition.removeContents( 'Link' );
   // ダイアログコンテンツから、target(ターゲット)を削除する
   dialogDefinition.removeContents( 'target' );

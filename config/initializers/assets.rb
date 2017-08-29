@@ -13,3 +13,4 @@ Rails.application.config.assets.version = '1.0'
 #Rails.application.config.assets.precompile += %w( *.eot *.woff *.ttf *.svg *.otf *.png *.jpg *.jpeg *.gif *.css *.js )
 
 Rails.application.config.assets.precompile += %w(article_new.js)
+#Rails.application.config.assets.precompile += %w( ckeditor/config.js)
