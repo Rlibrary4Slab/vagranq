@@ -3,6 +3,8 @@ module API
     class Users < Grape::API
       version 'v1'
       format :json
+      resources :users
+
       resource :articles do
         get do
            present Article.all.limit(1) #, with: Entity::V1::UsersEntity
