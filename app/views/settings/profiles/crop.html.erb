@@ -1,11 +1,11 @@
 <h1>Crop Edit</h1>
 <%= image_tag current_user.user_image_url(:large), id:"cropbox"%>
 
-<div style="width:100px;height:100px;overflow:hidden;">
+<div class="croprofimg" style="width:100px;height:100px;overflow:hidden;">
     <%= image_tag current_user.user_image_url(:large), :id => "preview"%>
     
 </div>
-<%= form_for current_user ,url: settings_profiles_path do |f|%>
+<%= form_for current_user ,url: profile_path do |f|%>
     <% %w[x y w h].each do |attribute| %>
         <%= f.hidden_field "crop_#{attribute}" %><br>
     <%end%>

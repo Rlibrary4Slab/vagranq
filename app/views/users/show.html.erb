@@ -7,12 +7,14 @@
   <div class="" style="">
     <section class="user_info">
       <h1>
+       <div class="profimg">
         <% if @user.certificated == true %>
 		くろぶち<%= image_tag @user.user_image_url(:thumb)%>
         <%else%>
 	　<%= image_tag @user.user_image_url(:thumb)%>
      
         <% end %>    
+       </div>
       </h1>
         <%= @user.user_name %>
        <% if @user.user_description !=nil%>

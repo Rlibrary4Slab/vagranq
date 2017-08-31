@@ -287,8 +287,15 @@ h2.aft{
 }
 div.afd{
   font-size: 18px;
+  p a {
+   color: blue !important; 
+  }
 }
+
 
 .afd p img{
  max-width: 100%;
+}
+.afsubmits p a{
+ color: blue !important; 
 }
