@@ -115,6 +115,12 @@ h1.header-logo a:visited {
 h1.header-logo a:hover {
   text-shadow: 0 0 3px #ffffff;
 }
+.profimg {
+    display: inline-block !important;
+  img{
+   border-radius: 50%;
+  }
+}
 .header-search {
   position: absolute;
   left: 0;
