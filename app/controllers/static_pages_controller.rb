@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :like_articles,:edit_articles]
 
   def home
+    puts cookies[:_ranq_session] 
     #@article_form = ArticleForm.new params[:article_form]
     #@search=@article_form.search
     #@micropost = current_user.microposts.build if logged_in?

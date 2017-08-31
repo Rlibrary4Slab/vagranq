@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
     # before_action :pvranking
     class Forbidden < ActionController::ActionControllerError; end
     class IpAddressRejected < ActionController::ActionControllerError; end
-
     include ErrorHandlers if Rails.env.production? or Rails.env.staging? 
     #rescue_from ActiveRecord::RecordNotFound, with: :render_404 
     #rescue_from ActionController::RoutingError, with: :render_404 
