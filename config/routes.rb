@@ -94,6 +94,7 @@ end
   get  '/auth/:provider/callback' => 'sessions#callback'
   post '/auth/:provider/callback'  => 'sessions#callback'
   get  '/auth/failure' => 'sessions#failure'  
+  resource :authentication_token, only: [:update, :destroy]
   #resources :microposts,          only: [:create, :destroy]
   
   #get '*path', controller: "application",action: 'render_404' 

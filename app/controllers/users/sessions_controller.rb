@@ -6,10 +6,12 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  #POST /resource/sign_in
+   def create
+    super do |resource|
+      resource.ensure_authentication_token if request.format.json?
+    end
+   end
 
   # DELETE /resource/sign_out
   # def destroy

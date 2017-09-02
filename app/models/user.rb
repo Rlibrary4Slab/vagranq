@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:twitter,:facebook]
     has_many :social_profiles, dependent: :destroy
-    has_many :authentication, dependent: :destroy
+    validates:authentication_token, uniqueness: true, allow_nil: true
     attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face
     has_many :articles, dependent: :destroy
     has_many :likes
@@ -45,22 +45,38 @@ class User < ActiveRecord::Base
         BCrypt::Password.create(string, cost: cost)
     end
     
-    def User.new_token
-        SecureRandom.urlsafe_base64
-    end
+    #def User.new_token
+    #    SecureRandom.urlsafe_base64
+    #end
+    #def remember
+    #   self.remember_token = User.new_token
+    #   update_attribute(:remember_digest, User.digest(remember_token))
+    #end
+    #def authenticated?(remember_token)
+    #   BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    #end
     
-    def remember
-       self.remember_token = User.new_token
-       update_attribute(:remember_digest, User.digest(remember_token))
+    #def forget
+    #    return false if remember_digest.nil?
+    #    update_attribute(:remember_digest, nil)
+    #end
+     
+    # 認証トークンが無い場合は作成
+    def ensure_authentication_token
+      self.authentication_token || generate_authentication_token
     end
-    
-    def authenticated?(remember_token)
-       BCrypt::Password.new(remember_digest).is_password?(remember_token)
+
+    # 認証トークンの作成
+    def generate_authentication_token
+      loop do
+       old_token = self.authentication_token
+       token = SecureRandom.urlsafe_base64(24).tr('lIO0', 'sxyz')
+       break token if (self.update!(authentication_token: token) rescue false) && old_token != token
+      end
     end
-    
-    def forget
-        return false if remember_digest.nil?
-        update_attribute(:remember_digest, nil)
+
+    def delete_authentication_token
+      self.update(authentication_token: nil)
     end
     
     
