@@ -6,33 +6,25 @@
 <div class="row" >
   <div class="" style="">
     <section class="user_info">
-      <h1>
-       <div class="profimg">
+      <div class="user_prof">
+       <div class="user_prof_lefttop">
         <% if @user.certificated == true %>
-		くろぶち<%= image_tag @user.user_image_url(:thumb)%>
+		くろぶち<%= image_tag @user.user_image_url(:thumb_view)%>
         <%else%>
-	　<%= image_tag @user.user_image_url(:thumb)%>
+	　<%= image_tag @user.user_image_url(:thumb_view)%>
      
         <% end %>    
+        <p><%= @user.user_name %></p>
        </div>
-      </h1>
-        <%= @user.user_name %>
-       <% if @user.user_description !=nil%>
-                <p><%= @user.user_description.html_safe %><p>
-
-        <% else %>
-                <p><%= @user.user_description %><p>
-        <% end %> 
-
-        <table>
-          <tbody>
-
+       <div class="user_prof_righttop">
          <% sum_of_likes = 0 %> 
          <% sum_of_views = @user.articles.sum(:view_count) %>
          <% @user.articles.each do |article| %>
            <% sum_of_likes += article.likes_count.to_i %>
          <% end %>
-         
+         <span style="letter-spacing:0px">Total View</span>：<%= sum_of_views %></br>
+         <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %>
+         <p>
          <% if logged_in? && @user == current_user %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
             <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
@@ -41,15 +33,15 @@
              <%#= link_to current_user.twitter_s == true ? '通知解除' : '通知する', current_user.twitter_s == true ? inshare_twitter_user_path : share_twitter_user_path , class: 'btn btn-lg btn-default' %> 
  
           <%end%>
-
+	  
           <% if current_user.social_profiles.where(provider: "facebook").empty? != false %>
             <%= link_to "facebook認証", user_facebook_omniauth_authorize_path %>
           <%else%>
             <%= link_to "facebook認証済み", @user.social_profiles.where(provider: "facebook").map(&:url).first %>
              <%#= link_to current_user.facebook_s == true ? '通知解除' : '通知する', current_user.facebook_s == true ? inshare_facebook_user_path : share_facebook_user_path , class: 'btn btn-lg btn-default' %> 
           <%end%>
-
          <%else%>
+           
            <% if @user.social_profiles.where(provider: "twitter").empty? != true %>
             <%= link_to "twitter認証済み", @user.social_profiles.where(provider: "twitter").map(&:url).first %>
            <%end%>
@@ -58,11 +50,22 @@
            <%end%>
          
          <%end%>
-         </br>
-         <span style="letter-spacing:0px">Total View</span>：<%= sum_of_views %></br>
-         <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %>
+          </p>
 
+       </div>
+       <div class="user_prof_bottom">
+       <p>
+       <% if @user.user_description !=nil%>
+                <%= @user.user_description.html_safe %>
 
+        <% else %>
+                <%= @user.user_description %>
+        <% end %> 
+        </p>
+      </div>
+
+        <table>
+          <tbody>
             <%= render :partial => "articles/uarticle" %>
           </tbody>
         </table>

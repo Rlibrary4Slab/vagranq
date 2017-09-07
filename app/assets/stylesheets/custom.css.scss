@@ -549,6 +549,33 @@ ul.user_like li {
  width: 1200px;
  margin: 0 auto;
 }
+.user_prof {
+padding: 10px;
+}
+
+.user_prof_lefttop {
+    display: table-cell;
+    padding: 10px;
+    vertical-align: top;
+    text-align: center;
+
+}
+
+.user_prof_lefttop img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.user_prof_righttop {
+    display: table-cell;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.user_prof_bottom {
+    padding: 10px;
+}
 /* headline-bottom */
 
 /* article-top */
@@ -1049,3 +1076,8 @@ iframe {
 }
 
 /* sumahoE */
+.row{
+    margin-left: 0;
+    margin-right: 0; 
+ 
+}

@@ -78,7 +78,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   version :thumb_view do
    process :crop
-   resize_to_fill(50,50)
+   resize_to_fill(80,80)
    #process :resize_to_fill => [50, 50, gravity = ::Magick::CenterGravity]
    #process :resize_to_fit => [40, 40]
   end
