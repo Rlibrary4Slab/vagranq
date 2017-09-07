@@ -76,6 +76,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    resize_to_fill(40,40)
    #process :resize_to_fit => [40, 40]
   end
+
   version :thumb_view do
    process :crop
    resize_to_fill(50,50)

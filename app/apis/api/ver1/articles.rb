@@ -1,12 +1,5 @@
 module Entity
   module V1
-    class ContentsEntity < Grape::Entity
-      expose :title
-    end
-
-    class UsersEntity < Grape::Entity
-      expose :user_name
-    end
 
     class ArticlesEntity < Grape::Entity
       expose :id,:title,:eyecatch_img,:view_count
@@ -14,31 +7,27 @@ module Entity
     end
 
     class ArticleDetailEntity < Grape::Entity
-      #expose :id,:title,:description,:eyecatch_img,:view_count,:likes_count
-      #expose :user, using: Entity::V1::UsersEntity
-      expose :contents #, using: Entity::V1::ContentsEntity
+      expose :id,:title,:description,:eyecatch_img,:view_count,:likes_count
+      expose :user, using: Entity::V1::UsersEntity
+      expose :contents , using: Entity::V1::ContentsEntity
     end
 
+    class ContentsEntity < Grape::Entity
+      expose :title,:description
+    end
+
+    class UsersEntity < Grape::Entity
+      expose :user_name
+    end
   end
 end
 
 module API
   module Ver1
-    class Users < Grape::API
+    class Articles < Grape::API
       version 'v1'
       format :json
-      resource :users do
-       get do
-        #user = User.find_by(id: params[:session][:id])
-          #if user
-           #render text: "verified", status: 200
-           #present User.all.limit(1), with: Entity::V1::UsersEntity
-          #else
-          # render text: "Token failed verification", status: 422
-          #end
-       end
-      end
-=begin
+
       resource :articles do
         get do
             present Article.all.limit(2), with: Entity::V1::ArticlesEntity
@@ -62,7 +51,6 @@ module API
 
         end
       end
-=end
     end
   end
 end

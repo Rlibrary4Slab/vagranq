@@ -191,6 +191,16 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
     render :show
   end
   
+  def verify_access_token
+      user = User.find_by(id: params[:session][:id])
+        if user
+          #render text: "verified", status: 200
+          reder text: user.username, status: 200
+        else
+          render text: "Token failed verification", status: 422
+        end
+  end  
+  
   private
   
     def set_user

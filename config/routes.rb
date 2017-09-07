@@ -4,13 +4,6 @@ Rails.application.routes.draw do
   #mount Ckeditor::Engine => '/ckeditor'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount API::Root => '/api'
-  #namespace :apis do
-  #  post   'login'   => 'sessions#create'
-  #  delete 'logout'  => 'sessions#destroy'
-  #  get    'verify'  => 'sessions#verify_access_token'
-  #  resources :users, param: :authenticity_token
-  #  resources :password_resets, only: [:new, :create, :edit, :update]
-  #end
   match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   
@@ -57,6 +50,7 @@ Rails.application.routes.draw do
     end
   end
   get "access_log_index" => "users#access_log_index"
+  get 'verify'  => 'sessions#verify_access_token'
 
   resources :users,param: :name ,only: [:index,:access_log_index] do
     member do

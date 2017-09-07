@@ -19,6 +19,15 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
 
+  def verify_access_token
+      user = User.find_by(id: params[:session][:id])
+        if user
+          render text: "verified", status: 200
+        else
+          render text: "Token failed verification", status: 422
+        end
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
