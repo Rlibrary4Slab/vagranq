@@ -513,8 +513,13 @@ h1.article_title {
  margin-top: 20px;
 }
 .mokuji ul {
- list-style-type: none;
- margin-left: 20px;
+    list-style-type: none;
+    margin: 0 20px 20px;
+    padding: 0;
+}
+
+.mokuji ul li {
+    margin-bottom: 10px;
 }
 
 ul.social-bottun {
@@ -558,7 +563,12 @@ padding: 10px;
     padding: 10px;
     vertical-align: top;
     text-align: center;
+    font-size: 0;
 
+}
+
+.user_prof_lefttop p {
+    font-size: 14px;
 }
 
 .user_prof_lefttop img {
