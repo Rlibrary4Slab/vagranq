@@ -2,7 +2,7 @@ module Entity
   module V1
 
     class ArticlesEntity < Grape::Entity
-      expose :id,:title,:eyecatch_img,:view_count
+      expose :id,:title,:description,:eyecatch_img,:view_count
       expose :user, using: Entity::V1::UsersEntity
     end
 
@@ -30,7 +30,8 @@ module API
 
       resource :articles do
         get do
-            present Article.all.limit(2), with: Entity::V1::ArticlesEntity
+            #present Article.all.published.limit(2), with: Entity::V1::ArticlesEntity
+            present Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user), with: Entity::V1::ArticlesEntity
             #Article.all.limit(1).each do |article|  #, with: Entity::V1::UsersEntity
              #present article, with: Entity::V1::ArticlesEntity
              #present article.as_json.merge({user_name: user.user_name})

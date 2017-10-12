@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   mount API::Root => '/api'
   match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
-  
+  namespace :api do
+    resources :users, param: :access_token
+    resources :password_resets, only: [:new, :create, :edit, :update]
+  end  
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',   
@@ -31,6 +34,15 @@ Rails.application.routes.draw do
   scope "/search" do
     get "/" => "articles#search", as: "search"
   end
+  scope module: :settings do 
+    resource :setup
+    resource :profile
+    resource :account
+    resource :password
+#    match '' => 'notifications#paginate', via: :get
+    #get 'notifications/flag_off' => '/notifications#flag_off'
+    get '?page=:page' => 'notifications#paginate'
+  end
   get 'allranking' => "articles#allranking"
   get "fashion" => "articles#fashion"
   get "beauty" => "articles#beauty"
@@ -51,6 +63,11 @@ Rails.application.routes.draw do
   end
   get "access_log_index" => "users#access_log_index"
   get 'verify'  => 'sessions#verify_access_token'
+  get 'verify_user'  => 'sessions#verify_user_column'
+  get 'verify_logout'  => 'sessions#verify_logout'
+  get 'verify_like'  => 'likes#verify_like'
+  get 'verify_unlike'  => 'likes#verify_unlike'
+  get 'verify_like_or_not'  => 'likes#verify_like_or_not'
 
   resources :users,param: :name ,only: [:index,:access_log_index] do
     member do
@@ -72,14 +89,6 @@ Rails.application.routes.draw do
    get :edit_articles
   end
   
-  scope module: :settings do 
-    resource :profile
-    resource :account
-    resource :password
-#    match '' => 'notifications#paginate', via: :get
-    #get 'notifications/flag_off' => '/notifications#flag_off'
-    get '?page=:page' => 'notifications#paginate'
-end
 
   post '/like/:article_id' => 'likes#like', as: 'like'
   delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'

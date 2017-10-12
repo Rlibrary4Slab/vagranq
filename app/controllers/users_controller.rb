@@ -10,14 +10,16 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.all
+    puts Time.now.to_s+" "+Time.now.hour.to_s+":"+Time.now.min.to_s+":"+Time.now.sec.to_s
+    #@users = User.all
     #@users.each do |user|
        #user.update_columns(day_count_view: user.period_articles_views)
        #wv =  user.week_views.first
        #yesterday_views = wv.day0
     #end 
 
-    @uPeriodView = User.per_page_kaminari(params[:page]).order("day_count_view desc")
+    #@uPeriodView = User.per_page_kaminari(params[:page]).order("day_count_view desc")
+    @uPeriodView = User.with_not_regexp("name", "guest00[0-9+]+").order("day_count_view desc")
   end
 
   def access_log_index
@@ -70,6 +72,8 @@ class UsersController < ApplicationController
 
 
   def show
+    #str = "heroheroguest00hero"
+    #str = "guest00hero"
     if params[:name] != "websocket"
      @user = User.find_by(name: params[:name])
      @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
@@ -166,7 +170,7 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
 
   def edit
     #@user = User.find(params[:id])
-    @user = User.find_by(name: params[:name])
+    @user = current_user 
 
   end
   
@@ -195,7 +199,7 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
       user = User.find_by(id: params[:session][:id])
         if user
           #render text: "verified", status: 200
-          reder text: user.username, status: 200
+          render text: user.id, status: 200
         else
           render text: "Token failed verification", status: 422
         end

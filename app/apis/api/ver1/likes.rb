@@ -4,33 +4,32 @@ module Entity
       expose :title
     end
 
-    class UsersEntity < Grape::Entity
-      expose :user_name
+    class LikesEntity < Grape::Entity
+      expose :id
+      unexpose :user#, using: Entity::V1::UsersEntity
+      expose :article, using: Entity::V1::ArticlesEntity
     end
 
 
     class ArticlesEntity < Grape::Entity
       expose :id,:title,:eyecatch_img,:view_count
-      expose :user, using: Entity::V1::UsersEntity
-      expose :contents , using: Entity::V1::ContentsEntity
+      unexpose :user
+      unexpose :contents
     end
 
-    class ArticleDetailEntity < Grape::Entity
-      expose :id,:title,:description,:eyecatch_img,:view_count
-      expose :user, using: Entity::V1::UsersEntity
-      expose :contents , using: Entity::V1::ContentsEntity
-    end
 
   end
 end
 
 module API
   module Ver1
-    class Users < Grape::API
+    class Likes < Grape::API
       version 'v1'
       format :json
-      resource :users do
+      resource :likes do
        get do
+        present Like.find_by(user_id: 5),with: Entity::V1::LikesEntity
+  
         #user = User.find_by(id: params[:session][:id])
           #if user
            #render text: "verified", status: 200
@@ -41,7 +40,7 @@ module API
        end
   
        get ":authentication_token" do
-	 present User.find_by(authentication_token: params[:authentication_token]).likes with: Entity::V1::ArticlesLikesEntity
+	 present User.find_by(authentication_token: params[:authentication_token]).likes.order(created_at: :desc) ,with: Entity::V1::LikesEntity
        end
       end
       #resource :articles do
@@ -53,21 +52,9 @@ module API
              #present article.as_json.merge({user_name: user.user_name})
             #end
       #  end
-      #  get ":id" do
-	  #at = Article.find(params[:id])
-          #          present Article.all.limit(2)
-      #    present Article.find(params[:id]), with: Entity::V1::ArticleDetailEntity
-      #  end
       #end
  
       
-      resource :contents do
-        get do
-           #present Content.find(1) #, with: Entity::V1::UsersEntity
-           present Content.find(96) , with: Entity::V1::ContentsEntity
-
-        end
-      end
     end
   end
 end

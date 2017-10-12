@@ -1,5 +1,5 @@
 #module api
-  class Apis::UsersController < ApplicationController
+  class Api::UsersController < ApplicationController
 
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -23,7 +23,8 @@
     # GET /users/1/edit
     def edit
       if @user
-        render json: @user, only: [:email, :name],  status: 200
+        #render json: @user, only: [:email, :name],  status: 200
+        render json: @user, status: 200
       else
         render text: "Unidentified user", status: 422
       end
@@ -42,7 +43,7 @@
     # PATCH/PUT /users/1
     def update
       if @user.update_attributes(user_params)
-        render text: "Account has been updated successfully", status: 200
+        render json: "Account has been updated successfully", status: 200
       else
         render json: @user.errors, status: 422
       end
@@ -60,14 +61,14 @@
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_user
-        #@user = User.find_by(access_token: params[:access_token])
-        @user = User.find_by(authenticity_token: params[:authenticity_token])
+        @user = User.find_by(authentication_token: params[:access_token])
+        #@user = User.find_by(authenticity_token: params[:authenticity_token])
         #@user = User.find_by(id: params[:id])
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation ,:user_name)
       end
 
   end

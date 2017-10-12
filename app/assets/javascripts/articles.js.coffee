@@ -253,8 +253,12 @@ $(document).on 'click' ,-> #clicked
    
   eyeimg= $("div div div iframe").contents().find("html body p img")
   ym=eyeimg.first().prop("src")
+  ymval=$("#eyecatch_img").prop("value")
   if ym != undefined
     $("#eyecatch_img").val(ym) 
+  else if ymval != undefined
+    $("#eyecatch_img").val(ymval)
+     
   else
     
     $("#eyecatch_img").val('l_e_others_500.png')

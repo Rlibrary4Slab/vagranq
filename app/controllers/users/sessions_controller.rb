@@ -7,10 +7,27 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   #POST /resource/sign_in
+  # def create
+  #  super do |resource|
+  #    resource.ensure_authentication_token if request.format.json?
+  #  end
+  # end
    def create
-    super do |resource|
+
+      puts "dsdjfodsiafhsd"
+      puts self.resource
+      self.resource = warden.authenticate!(auth_options)
+      puts resource.name
+      set_flash_message(:notice, :signed_in) if is_flashing_format?
+      sign_in(resource_name, resource)
       resource.ensure_authentication_token if request.format.json?
-    end
+      puts resource.name
+      if resource.name =~ /^guest00[0-9+]+$/
+        render :guest 
+      else
+        respond_with resource, location: after_sign_in_path_for(resource)   
+      end  
+      #redirect_to root_url
    end
 
   # DELETE /resource/sign_out

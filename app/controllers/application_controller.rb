@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
             u.permit(:name,:admin ,:email,:password, :password_confirmation)
         }
         devise_parameter_sanitizer.permit(:sign_in){|u|
-            u.permit(:name, :email,:password, :remember_me)
+            u.permit(:login,:name, :email,:password, :remember_me)
         }
         devise_parameter_sanitizer.permit(:account_update){|u|
             u.permit(:name,:admin ,:email,:password, :password_confirmation)

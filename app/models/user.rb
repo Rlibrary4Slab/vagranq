@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, 
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
-         omniauth_providers: [:twitter,:facebook]
+         omniauth_providers: [:twitter,:facebook],:authentication_keys =>[:login]
     has_many :social_profiles, dependent: :destroy
     validates:authentication_token, uniqueness: true, allow_nil: true
-    attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face
+    attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face,:login
     has_many :articles, dependent: :destroy
     has_many :likes
     has_many :notifications, foreign_key: "user_id", dependent: :destroy
@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
     before_save {self.email =email.downcase}
     #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" },on: :create 
     #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[A-Za-z]\w*\z/, message: "英数字入力してください" },on: :create 
-    validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,20}+\z/i, message: "少なくともそれぞれ1種類の半角英数字を6文字以上20以下で入力してください" },on: :create 
+    validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,20}+\z/i, message: "少なくともそれぞれ1種類の半角英数字を6文字以上20以下で入力してください" }
     #validates :name, presence: true,length: {maximum: 50},uniqueness: {case_sensitive:false},on: :create
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+.[a-z]+\z/i
-    validates :email, presence: true,  length: {maximum:255},uniqueness: {case_sensitive:false},on: :create,format: {with: VALID_EMAIL_REGEX, message: "メールアドレスを入力してください"}
+    validates :email, presence: true,  length: {maximum:255},uniqueness: {case_sensitive:false},format: {with: VALID_EMAIL_REGEX, message: "メールアドレスを入力してください"}
     validates :password, presence: true, on: :create,length: {minimum:6,message: "6桁以上入力してください"}
     #has_secure_password
     mount_uploader :user_image,ImageUploader
@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
     #    update_attribute(:remember_digest, nil)
     #end
      
+    scope :with_regexp, -> (column, pattern) { where("`#{table_name}`.`#{column}` REGEXP ?", pattern) }
+    scope :with_not_regexp, -> (column, pattern) { where.not("`#{table_name}`.`#{column}` REGEXP ?", pattern) }
     # 認証トークンが無い場合は作成
     def ensure_authentication_token
       self.authentication_token || generate_authentication_token
@@ -99,9 +101,15 @@ class User < ActiveRecord::Base
      # Get current user from Thread.
      Thread.current[:current_user]
     end
-
-
-
+    
+    def self.find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      if login = conditions.delete(:login)
+       where(conditions).where(["name = :value OR lower(email) = lower(:value)", {:value => login}]).first
+      else
+       where(conditions).first
+      end    
+    end       
 
 
 

@@ -3,6 +3,7 @@ class Settings::ProfilesController < Settings::BaseController
   before_filter do
     add_breadcrumb('プロフィール設定')
   end
+
   
   def edit
   

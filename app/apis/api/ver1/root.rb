@@ -7,6 +7,7 @@ module API
       format :json
 
       mount API::Ver1::Users
+      mount API::Ver1::Likes
       mount API::Ver1::Articles
 
       # 404NotFoundの扱い
