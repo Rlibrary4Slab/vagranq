@@ -233,11 +233,11 @@ $(document).on 'click' ,-> #clicked
 
    
   $('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
-  if $("#user_name").length <1 
-  else
-   if $("#user_user_image").length <1 
-    dsds=$("#user_name").val()
-    $("#user_user_name").val(dsds).change() 
+  #if $("#user_name").length <1 
+  #else
+  # if $("#user_user_image").length <1 
+  #  dsds=$("#user_name").val()
+  #  $("#user_user_name").val(dsds).change() 
    
   if $("#csubmit").length==1   
    $('p img').css({"height":"28.2%","width":"100%"})
@@ -253,8 +253,12 @@ $(document).on 'click' ,-> #clicked
    
   eyeimg= $("div div div iframe").contents().find("html body p img")
   ym=eyeimg.first().prop("src")
+  ymval=$("#eyecatch_img").prop("value")
   if ym != undefined
     $("#eyecatch_img").val(ym) 
+  else if ymval != undefined
+    $("#eyecatch_img").val(ymval)
+     
   else
     
     $("#eyecatch_img").val('l_e_others_500.png')

@@ -40,5 +40,47 @@ class LikesController < ApplicationController
             notification_destroy(notification)
         end
     end
+
+    def verify_like_or_not
+    
+      user = User.find_by(authentication_token: params[:session][:access_token])
+      like = user.likes.find_by(article_id: params[:article_id])
+      puts like.nil?
+      if like.nil?
+ 
+        render text: user.user_name, status: 200
+      else
+	render text: like.id, status: 200
+      end
+    end
+
+    def verify_like
+      #article = Article.find(params[:article_id])
+      user = User.find_by(authentication_token: params[:session][:access_token])
+      like = user.likes.build(article_id: params[:article_id])
+      puts "ゆべし" 
+      puts user
+      puts params[:article_id] 
+      #like.save
+      
+        if like.save 
+          render text: user.user_name, status: 200
+        else
+          render text: "だめみたいですね", status: 422
+        end
+    end
+
+    def verify_unlike
+      user = User.find_by(authentication_token: params[:session][:access_token])
+      #@article = Article.find(params[:article_id])
+      like = user.likes.find_by(article_id: params[:article_id])
+      #like.destroy
+      
+        if like.destroy
+          render text: user.user_name, status: 200
+        else
+          render text: "Token failed verification", status: 422
+        end
+    end
     
 end

@@ -23,10 +23,6 @@
 
 <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
   <%= devise_error_messages! %>
-   <div class="field" style="display:none;">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name, autofocus: true %>
-  </div>
    <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>

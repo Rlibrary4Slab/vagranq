@@ -38,6 +38,26 @@ class SessionsController < ApplicationController
     end
   end
 
+  def verify_access_token
+      user = User.find_by(authentication_token: params[:session][:access_token])
+      
+        if user
+          render text: user, status: 200
+        else
+          render text: "Token failed verification", status: 422
+        end
+  end
+
+  def verify_user_column
+      user = User.find_by(authentication_token: params[:session][:access_token])
+      
+        if user
+          render json: user, status: 200
+        else
+          render text: "Token failed verification", status: 422
+        end
+  end
+
   def destroy
     log_out
     redirect_to root_url

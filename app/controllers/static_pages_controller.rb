@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :like_articles,:edit_articles]
 
   def home
+    #puts cookies[:_ranq_session] 
     #@article_form = ArticleForm.new params[:article_form]
     #@search=@article_form.search
     #@micropost = current_user.microposts.build if logged_in?
@@ -35,7 +36,8 @@ class StaticPagesController < ApplicationController
   
   
   
-  def rank
+  def ranking
+    #@articles = Article.published.per_page_kaminari(params[:page]).limit(10).order(view_count: :desc).includes(:user)
     @rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(3).pluck(:article_id))
   end 
   

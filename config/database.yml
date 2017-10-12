@@ -53,6 +53,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  database: vagranq_production
+  <<: *default
   database: ranqdeployer_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -85,11 +87,8 @@ production:
   encoding: utf8mb4
   pool: 5
   database: ranq_mysql 
-  #database: vagranq_production 
-  #username: root 
   username: forstart 
   password: <%= ENV['MYSQL_DATABASE_PASS'] %>
-  #password: forstart10 
   host: ranq-mysql.cm185bqkijjo.ap-northeast-1.rds.amazonaws.com 
   socket: /var/lib/mysql/mysql.sock
 

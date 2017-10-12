@@ -6,15 +6,44 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # POST /resource/sign_in
+  #POST /resource/sign_in
   # def create
-  #   super
+  #  super do |resource|
+  #    resource.ensure_authentication_token if request.format.json?
+  #  end
   # end
+   def create
+
+      puts "dsdjfodsiafhsd"
+      puts self.resource
+      self.resource = warden.authenticate!(auth_options)
+      puts resource.name
+      set_flash_message(:notice, :signed_in) if is_flashing_format?
+      sign_in(resource_name, resource)
+      resource.ensure_authentication_token if request.format.json?
+      puts resource.name
+      if resource.name =~ /^guest00[0-9+]+$/
+        render :guest 
+      else
+        respond_with resource, location: after_sign_in_path_for(resource)   
+      end  
+      #redirect_to root_url
+   end
 
   # DELETE /resource/sign_out
   # def destroy
   #   super
   # end
+
+
+  def verify_access_token
+      user = User.find_by(id: params[:session][:id])
+        if user
+          render text: "verified", status: 200
+        else
+          render text: "Token failed verification", status: 422
+        end
+  end
 
   # protected
 

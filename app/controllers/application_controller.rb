@@ -3,13 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
     before_filter :configure_permitted_parameters, if: :devise_controller?
     protect_from_forgery with: :exception
+    skip_before_action :verify_authenticity_token,     if: -> {request.format.json?}
+  # トークンによる認証
+    before_action      :authenticate_user_from_token!, if: -> {params[:email].present?}
     before_action :notification
     #protect_from_forgery with: :null_session
     include SessionsHelper
     # before_action :pvranking
     class Forbidden < ActionController::ActionControllerError; end
     class IpAddressRejected < ActionController::ActionControllerError; end
-
     include ErrorHandlers if Rails.env.production? or Rails.env.staging? 
     #rescue_from ActiveRecord::RecordNotFound, with: :render_404 
     #rescue_from ActionController::RoutingError, with: :render_404 
@@ -47,11 +49,17 @@ class ApplicationController < ActionController::Base
             u.permit(:name,:admin ,:email,:password, :password_confirmation)
         }
         devise_parameter_sanitizer.permit(:sign_in){|u|
-            u.permit(:name, :email,:password, :remember_me)
+            u.permit(:login,:name, :email,:password, :remember_me)
         }
         devise_parameter_sanitizer.permit(:account_update){|u|
             u.permit(:name,:admin ,:email,:password, :password_confirmation)
         }
+     end
+     def authenticate_user_from_token!
+      user = User.find_by(email: params[:email])
+      if Devise.secure_compare(user.try(:authentication_token), params[:token])
+        sign_in user, store: false
+      end
      end
   
   

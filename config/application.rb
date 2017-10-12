@@ -32,6 +32,11 @@ module Ranq
     #config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     
     config.autoload_paths += %W(#{config.root}/lib)
+    config.paths.add File.join('app', 'apis'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'apis', '*')]
+    config.to_prepare do
+      DeviseController.respond_to :html, :json
+    end
 
   end
 end
