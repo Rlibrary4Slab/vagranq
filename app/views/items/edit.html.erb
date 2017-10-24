@@ -1,0 +1,14 @@
+<div id="form_template">
+<h1>アイテム編集</h1>
+
+
+<%= render 'form' %>
+</div>
+<script>
+var data = {'data-format': 'yyyy-MM-dd' };
+$(document).on("page:load ready", function(){
+    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD HH:mm"});
+});
+</script>
+<%#= link_to 'Show', @article %> 
+<%#= link_to 'Back', articles_path %>

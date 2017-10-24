@@ -3,6 +3,7 @@
 
 <%= @user.user_name %> | RanQ [ランク]
 <%end%>
+<% if @user.certificated != true %>
 <div class="row" >
   <div class="" style="">
     <section class="user_info">
@@ -57,9 +58,6 @@
        <p>
        <% if @user.user_description !=nil%>
                 <%= @user.user_description.html_safe %>
-
-        <% else %>
-                <%= @user.user_description %>
         <% end %> 
         </p>
       </div>
@@ -74,4 +72,8 @@
      
     </section>
   </div>
-</div>
+</div>   
+<%else%>
+<p>このアカウントは運営によって凍結されています</p>
+<div style="margin:400px;"></div>
+<%end%>

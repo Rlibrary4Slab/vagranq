@@ -1,0 +1,40 @@
+
+<!--<p id="notice"><%#= notice %></p>
+<%#= render_breadcrumbs %>-->
+<section id="topcontent" style="background-color: #ffffff;">
+ <div class="topcontent_in clearfix">
+<% provide(:title, @title)%>
+
+<p id="notice"><%= notice %></p>
+<%= render_breadcrumbs %>
+
+ </div><!-- /.eyecatch_in -->
+</section>
+  
+<!-- Swrapper-->
+<div id="wrapper" class="clearfix">
+  <!--Scolumn_content-->
+  <div id="column_content">
+    <!--Scategorymenu-->
+    <div class="categorymenu">
+    <%= render 'static_pages/category' %>
+  </div><!--Ecategorymenu-->
+
+    <!-- Scontent -->
+    <div id="content">
+       <!--Sheadline is-border-->
+      <div class="headline is-border"> 
+        <h2 class="headline-title">記事一覧</h2>
+      </div>
+      <!--Eheadline is-border-->
+       <%= render @items %>
+      <br>
+    <%= paginate @items ,:action => :index %>
+    </div>
+    <!-- Econtent -->
+  </div><!-- /#column_content -->
+  <div id="column_sidebar">
+    <%= render 'static_pages/sidecontent' %>
+
+  </div>
+</div>

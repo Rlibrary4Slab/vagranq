@@ -57,8 +57,6 @@ $(document).on "onload" ,->
   $('#spsubmit').click()
   if $("#csubmit").length ==1 
    document.getElementById("csubmit").click() 
-  if $("#showsubmit").length ==1
-   document.getElementById("showsubmit").click() 
   
 red=0
 priorityStyle = 'none'
@@ -71,6 +69,8 @@ jam=[]
 
 
 $(document).on 'ready page:load', ->
+  if $("#showsubmit").length ==1
+   document.getElementById("showsubmit").click() 
   $("p img").css("height":"","width":"")
 
   $('div p a[class="jihi"]').each ->
@@ -497,11 +497,11 @@ $(document).on "click", "#showsubmit", ->
   red=0
   maxf=0
  
-  $('div.article_content h2').each ->
+  $('div.article_content h2.rankingh2').each ->
    $(this).find(".ranking-icon").text(aaaa)   
    aaaa++
   
-  $('div.article_content h2').each ->
+  $('div.article_content h2.rankingh2').each ->
    if $("#checkAgree").text() == "true" 
     aaaa--
     $(this).find(".ranking-icon").text(aaaa)   

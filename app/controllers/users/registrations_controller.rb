@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.name != "ranqmedia1" && resource.email != "ranq1@media.com"
        if resource.name !~ /^guest00[0-9+]+$/
 	   resource.week_views.build(user_id:resource.id, day6:0,day5:0,day4:0,day3:0,day2:0,day1:0,day0:0)
-	   resource.attributes= {user_name: resource.name,day_count_view: 0}
+	   resource.attributes= {user_name: resource.name,day_count_view: 0,certificated: false}
 	   if resource.save
 	     puts resource.id
 	     resource.generate_authentication_token
@@ -89,7 +89,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def sign_up_params
-      params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation,:admin, :pid,:provider,:day_count_view)
+      params.require(:user).permit(:name, :user_name,:email, :password, :password_confirmation,:admin, :pid,:provider,:day_count_view,:certificated)
     end
 
   protected

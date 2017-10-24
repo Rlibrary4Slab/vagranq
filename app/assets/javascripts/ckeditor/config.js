@@ -35,10 +35,8 @@ CKEDITOR.editorConfig = function( config )
   config.allowedContent = true;
   config.resize_enabled = false;
   config.resize_dir = 'vertical';
-  config.extraPlugins = "uploadimage,SimpleLink,wordcount,youtube,notification,autogrow";
-  config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]}];
-  //config.extraPlugins = "uploadimage,wordcount,youtube,notification,autogrow";
-  //config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold"]}];
+  config.extraPlugins = "uploadimage,SimpleLink,wordcount,youtube,notification,autogrow,RanqLink";
+  config.toolbar= [{name: 'image', items:["Image"]},{name:"link",items:["Link"]},{name:"Yout",items:["Youtube"]},{name:"Sour",items:["Source"]},{name:"Recommend",items:["Bold","SimpleLink"]},{name:"RanqC",items:["RanqLink"]}];
   // Toolbar groups configuration.
   /*config.toolbar = [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },

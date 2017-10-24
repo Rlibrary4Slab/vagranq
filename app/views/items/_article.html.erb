@@ -1,0 +1,54 @@
+
+    <div class="article_list_content clearfix">
+    <%= link_to image_tag(article.eyecatch_img, :style =>" width:70px; height: 70px; object-fit: cover;" ,:class =>"s_eyecatch_img") ,article %>
+
+      <!--</div>-->
+    <div class="article_list_text">
+
+       <p class="article_list_title">
+          <% if article.aasm_state == "draft" %>
+          <span style="color:#AAAAAA;"><%= link_to article.title.html_safe, article, style: "color:#AAAAAA;" %><下書き></p>
+          <% else %>
+          <%= link_to article.title.html_safe, article  %>
+          <% end %>
+       </p>
+          <%#= article.description.html_safe %>
+         <% if logged_in?%>
+         <% if @user != nil%>
+           <span style="display:inline-block; vertical-align:bottom; width:4em">
+             <!--      <span style="float:right"><%#= article.impressionist_count.to_i %>View</span>   -->
+              <span id="view_id<%=article.id%>" style="float:right"><%= article.view_count %></span>
+          </span>
+          <span>View</span>
+          <span style="margin-left:1em">|</span>
+
+          <span style="display:inline-block; vertical-align:bottom; width:3em">
+            <span id="like_id<%=article.id%>" style="float:right"><%= article.likes_count.to_i %></span>
+          </span>
+          <span>いいね！</span>
+          <% else %>
+
+           <span style="display:inline-block; vertical-align:bottom; ">
+              <span style="float:right"><%#= article.impressionist_count.to_i %></span>
+              <span style="float:right"><%= article.view_count %></span>
+          </span>
+          <span>View</span>
+          <% end %>
+          <% end %>
+          <% if logged_in? %>
+           <% if article.user.name == current_user.name %>
+            <div id="user_article_editable">
+            <%= link_to "編集する", edit_article_path(article) %>|
+            <%= link_to "削除する", article_path(article) , :method =>  :delete, data: {confirm: "この記事を削除してよろしいですか？"} %>
+          </div>
+           <% else %>
+              
+           <%= link_to article.user.user_name, article.user ,:ref => "nofollow",:class => "article_list_title_name"%>
+           <% end %>
+          <% else %>
+            <span><%= article.view_count %>View</span>
+            <%= link_to article.user.user_name, article.user ,:ref => "nofollow",:class => "article_list_title_name"%>   
+          <% end %>
+
+     </div>
+   </div>

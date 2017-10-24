@@ -235,6 +235,9 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
       @user = User.find_by(name: params[:name])
       redirect_to(root_url) unless current_user.admin != false 
     end
+    def certificate_user
+      redirect_to root_url if current_user.certificated != false
+    end
    
     
     def sort_column

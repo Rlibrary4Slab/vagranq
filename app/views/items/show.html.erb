@@ -1,0 +1,77 @@
+<%# provide(:title) %>
+
+<!-- コンテンツ -->
+
+<section id="topcontent" style="background-color: #ffffff;">
+ <div class="topcontent_in clearfix">
+
+
+<p id="notice"><%= notice %></p>
+
+<ul class="breadcrumbs_lists" ><%= render_breadcrumbs builder: CustomBreadcrumbsBuilder %></ul>
+
+ </div><!-- /.eyecatch_in -->
+</section>
+<section id="headcontent">
+<div id="headline">
+  <div class="head_container">
+      <time datetime="<%= @item.updated_at %>" itemprop="datePublished"><%= @item.updated_at.strftime("%Y年%m月%d日　更新") %></time>
+      </br>
+      <% if logged_in? && @item.user.name == current_user.name %> 
+      <%= link_to "記事を編集する", edit_item_path(@item)%>
+      <% end %>
+      <h1 class="article_title"><%= @item.title %></h1>
+    </div>
+    <input type="button" id="showsubmit" style="display:none;"/>
+    <div class="head_social" style="float:right;">
+      <ul class="social-bottun">
+        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
+        <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
+        <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
+      </ul>
+    </div>
+    <div class="head_like_user">
+      <ul class="user_like">
+        <li class="user">
+    	 <div class="profimg"> 
+         <%= link_to image_tag(@item.user.user_image_url(:thumb)), user_path(@item.user) ,:ref => "nofollow"%>
+         </div>
+	</li>
+        <li class="like">
+         <% if logged_in? %>
+          <%= render 'item_likes/like_links', item: @item %>
+         <% elsif %>
+           <%= link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}),new_user_registration_path %>
+         <% end %>
+         </li>
+        
+        <li id="like-count">
+          <%=  @item.item_likes.count id: "like-count" %>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+<div id="wrapper" class="clearfix">
+<hidden type="text" id="getattrlink" ></hidden>
+<div id="column_content">
+<div class="article_content"> 
+  <div><%= @item.description%></div>
+  <div><%= @item.date.strftime("%Y-%m-%d %H:%M")%></div>
+  <div><%= @item.price%></div>
+
+ <div class="head_social" style="float:right;">
+      <ul class="social-bottun">
+        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
+        <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
+        <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
+      </ul>
+ </div>
+</div><!-- /article_content -->
+</div><!-- /#column_content -->
+<div id="column_sidebar">
+ <%= render "static_pages/sidecontent" %>
+</div>
+</div>

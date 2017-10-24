@@ -20,6 +20,8 @@
 //= require ckeditor/init
 //= require twitter/bootstrap
 //= require bootstrap
+//= require moment
+//= require bootstrap-datetimepicker
 //= require websocket_rails/main
 //= require articles.js.coffee 
 //= require ckeditor_conf.js 

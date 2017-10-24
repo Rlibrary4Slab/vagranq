@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   get 'verify_like'  => 'likes#verify_like'
   get 'verify_unlike'  => 'likes#verify_unlike'
   get 'verify_like_or_not'  => 'likes#verify_like_or_not'
+  resources :items ,except: [:index] 
 
   resources :users,param: :name ,only: [:index,:access_log_index] do
     member do
@@ -79,7 +80,7 @@ Rails.application.routes.draw do
       get :edit_articles
     end
   end
-  scope ":name", controller: :users do  
+  scope "@:name", controller: :users do  
    get "/" => "users#show", as: "user" 
    get :like_articles
    get :share_twitter
@@ -89,6 +90,9 @@ Rails.application.routes.draw do
    get :edit_articles
   end
   
+
+  post '/itemlike/:item_id' => 'item_likes#like', as: 'itemlike'
+  delete '/unitemlike/:item_id' => 'item_likes#unlike', as: 'unitemlike'
 
   post '/like/:article_id' => 'likes#like', as: 'like'
   delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'
@@ -105,7 +109,7 @@ Rails.application.routes.draw do
   match '' => "notifications#paginate" ,via: :get      #任意のページでpaginationするためのルーティング
   #get '*path', controller: 'application', action: 'render_404' 
   #get '*path', controller: 'application', action: 'render_500' 
-  #get '*path', controller: 'application', action: 'render_404' if Rails.env.production?
+  get '*path', controller: 'application', action: 'render_404' if Rails.env.production?
   #get '*path', controller: 'application', action: 'render_500' if Rails.env.production?
   
  

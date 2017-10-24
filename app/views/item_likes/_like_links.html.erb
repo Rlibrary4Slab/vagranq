@@ -1,0 +1,7 @@
+   
+    <% if current_user.item_likes.find_by(item_id: item.id) %>
+      <%= link_to image_tag('heart_1.png', { :size => "30", :border => '0', :alt => ''}), unitemlike_path(item.id), method: :delete, id: "like-link",remote: true %>
+    <% else %>
+      <%= link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}), itemlike_path(item.id), method: :post, id: "like-link",remote: true %>
+    <% end %>
+  

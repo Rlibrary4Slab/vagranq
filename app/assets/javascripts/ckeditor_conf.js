@@ -13,3 +13,23 @@ CKEDITOR.on( 'dialogDefinition', function( ev ){
   dialogDefinition.removeContents( 'target' );
   
 });
+CKEDITOR.on('instanceReady', function(ev) 
+{
+        var dragSrc =null;
+	ev.editor.document.on('dragstart', function (evt) 	
+	{
+                dragSrc=this;
+                e.dataTransfer.setData('text/html', this.innerHTML);
+		/*var draggedtext = evt.data.$.dataTransfer.getData("text/html");
+        	draggedtext = draggedtext.replace('http://domain.com/','');
+		evt.data.$.dataTransfer.setData("text/html",draggedtext);
+	        */
+        });
+        ev.editor.document.on('drop', function (evt) {
+          
+           console.log($("#dragSrc").val());
+           evt.data.$.dataTransfer.setData("text/html", $("#dragSrc").val());
+
+          
+        });
+});

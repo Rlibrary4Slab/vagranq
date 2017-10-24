@@ -18,7 +18,7 @@
     <div class="u-clearfix" ng-non-bindable>
         <%= image_tag @article.eyecatch_img,:class =>"s_eyecatch_img" %>
       </div>
-      <time datetime="<%= @article.updated_at %>" itemprop="datePublished"><%= @article.updated_at.strftime("%Y年%m月%d日　更新") %></time>
+      <time datetime="<%= @article.updated_at %>" itemprop="datePublished"><%= @article.updated_at.strftime("%Y年%m月%d日") %></time>
       </br>
       <% if logged_in? && @article.user.name == current_user.name %> 
       <%= link_to "記事を編集する", edit_article_path(@article)%>
@@ -59,9 +59,6 @@
         </li>
       </ul>
     </div>
-    <div class="head_user_articles">
-      <%= link_to "#{@article.user.user_name}のメディアを見る" , user_path(@article.user) %>
-    </div>
   </div>
 </div>
 </section>
@@ -89,7 +86,7 @@
   <% @article.contents.each do |article| %>
     
      <% ranking_count += 1%>
-      <h2 id="id<%= ranking_count%>">
+      <h2 id="id<%= ranking_count%>" class="rankingh2">
       <span class="ranking-icon"><%= ranking_count%></span>
          <!--タイトル-->
         <%= article.title.html_safe%>
@@ -109,8 +106,35 @@
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
  </div>
+<div class="prof-card">
+  <div class="prof-card-content">
+    <div class="">
+
+      <div class="prof-card-left">
+         <%= link_to image_tag(@article.user.user_image_url(:thumb)), user_path(@article.user) ,:ref => "nofollow"%>
+      </div>
+      <div class="prof-card-right">
+      <h3 class="prof-user-name">
+         <%= link_to @article.user.user_name, user_path(@article.user) ,:ref => "nofollow"%>
+      </h3>
+      <p class="prof-user-des">
+        <% if @article.user.user_description !=nil%>
+         <%= @article.user.user_description.truncate(200).html_safe%>
+        <% end %>
+
+      </p>
+      </div>
+      <div class="prof-card-link">
+        <span>
+          <%= link_to "メディアを見る" , user_path(@article.user) %>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 <%if @idsemptybool != true %>
   <div class="relation_list">
+  <h2>この記事に関連した記事</h2>
  <% @more_like_this.each do |article| %>
    <div class="article_list pickup_list">
     <div class="article_list_content clearfix">

@@ -1,0 +1,120 @@
+<%= form_for(@article) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <!--<h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+-->
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div id="posting_buttons">
+  <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
+  <%#= f.button '下書き保存', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default'%>
+  <%= f.button @article.new_record? ? '下書き保存' : '更新する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
+
+  <%if @article.published? %>
+    <%= f.button '下書き保存！', name: 'ope[cmd]', value: 'draft', class: 'btn  btn-lg btn-default'%>
+
+  <%end%>
+  <%if @article.draft?%>
+    <%= f.button '公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default'%>
+  <% end %>
+  </div>  
+   <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.text_field :eyecatch_img, :style =>"display:none;" ,:id => "eyecatch_img"%>    
+    <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="csubmit" value="checked">
+       <input type="button" id="tansubmit" value="ansubmit">
+       <input type="button" id="dansubmit" value="ansubmit">
+       <%= f.check_box :checkagree ,:id =>"checkAgree"%>
+    </div>
+    <div class="field selectpicker">
+      <%= f.select :category ,Article.categories.keys.to_a,{} ,{class: "selectpicker"} %></div>
+    <div class="field">
+      <%= f.label :title %><!--<input type = "button" class="tdsubmit btn btn-default"  value="交換">--><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="description_field">
+     <div class="field" style="display:none;">
+       <%= f.label :description , "説明"%><br>
+       <%= f.text_area :description, :class =>  "form-control ckeditor" %>
+
+         <span class="hiddenButtons" value="隠す">
+
+      <%#= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+      <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+      </div>
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="pdsubmit btn btn-default" id="psubmit" style="display:none;"value="追加する">
+     <input type="button" style="" class="btn btn-default esubmit" value="編集">
+    </span>
+
+       
+     </div>
+       <div class="afsubmits" style="">
+   <span class="hiddenButtons" value="隠す">
+
+     <%#= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+     <div style="display:none;">
+       <input type="button" id="tsubmit" value="交換">
+       <input type="button" id="dsubmit" value="交換">
+       <input type="button" id="utsubmit" >
+       <input type="button" id="udsubmit" >
+       <input type="button" id="dtsubmit" >
+       <input type="button" id="ddsubmit" >
+     </div>
+
+     <input type="button" id="csubmit" style="display:none;">
+     <input type="button" class="pdsubmit btn btn-default" id="psubmit" value="追加する" style="display:none;">
+     <input type="button" style="" class="btn btn-default esubmit" value="編集">
+    </span>
+    <div class="afd"></div>
+  </div>
+
+
+     </div>
+    
+  <input type="text" style="display:none;" id="iurtmp" />
+       <input type="button" id="spsubmit" value="sssssdsd" style="display:none;">
+
+
+   <div class="field sortable">
+    <ul class="ranking-content">
+    <%= link_to_add_fieldsf "+", f, :contents %>
+        <%= f.fields_for :contents do |builder| %>
+             <%= render "econtent_fields", f: builder  %>
+        <% end %>
+   
+    <%= link_to_add_fieldsl "+", f, :contents %>
+    </ul>
+  </div>
+  <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
+  <%#= f.button '下書き保存', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default'%>
+  <%= f.button @article.new_record? ? '下書き保存' : '更新する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
+
+  <%if @article.published? %>
+     <%= f.button '下書き保存！', name: 'ope[cmd]', value: 'draft', class: 'btn btn-lg btn-default'%>
+    
+  <%end%>    
+  <%if @article.draft?%>
+    <%= f.button '公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default'%>
+    
+  <%end%>
+  <%#= f.submit 'このまま保存する', :id => "fullput",:style =>"display",:class => 'btn btn-primary' %>
+  <%#= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            articles_path, :class => 'btn btn-lg btn-default' %>
+  
+  
+<% end %>

@@ -103,7 +103,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   
   def default_url
       #ActionController::Base.helpers.asset_path(["image-1.jpg"].compact.join('_'))
-     "thumb_thumb_illust-52.jpg"
+     "thumb_thumb_illust-52.png"
      #"heart_0.png"
   end
   

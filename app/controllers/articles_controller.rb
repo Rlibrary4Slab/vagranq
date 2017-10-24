@@ -5,8 +5,7 @@ class ArticlesController < AuthorizedController
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
-  #before_action :twitter_share, only: [:create,:update]
-  #before_action :facebook_share, only: [:create,:update]
+  before_action :certificate_user
   before_action :all
     def all
       @sitename = "RanQ"
@@ -73,16 +72,14 @@ class ArticlesController < AuthorizedController
     @title = "ファッション一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.fashion params[:category] 
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).fashion params[:category] 
   end
   
   def beauty
     @title = "美容健康一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.beauty params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).beauty params[:category]
     
 
   end
@@ -90,64 +87,56 @@ class ArticlesController < AuthorizedController
     @title = "おでかけ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.hangout params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).hangout params[:category]
     
   end
   def gourmet
     @title = "グルメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.gourmet params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).gourmet params[:category]
     
   end
   def lifestyle
     @title = "ライフスタイル一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.lifestyle params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).lifestyle params[:category]
     
   end
   def entertainment
     @title = "エンタメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.entertainment params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).entertainment params[:category]
     
   end
   def interior
     @title = "インテリア一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.interior params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).interior params[:category]
     
   end
   def gadget
     @title = "ガジェット一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.gadget params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).gadget params[:category]
     
   end
   def learn
     @title = "学び一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.learn params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).learn params[:category]
     
   end
   def funny
     @title = "おもしろ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user)
-    @articles = @articles.funny params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).funny params[:category]
     
   end
   #categoriesend
@@ -199,8 +188,10 @@ class ArticlesController < AuthorizedController
     ids = @article.more_like_this.results.map(&:id)
     @idsemptybool = ids.empty?
     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
-    REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
-    REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
+    if User.find_by(id: @article.user_id).certificated != true
+      REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
+     end 
     @page_views_get = REDIS.zscore "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}","#{@article.id}"
     @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
@@ -236,44 +227,16 @@ class ArticlesController < AuthorizedController
   def new
     @article = Article.new
     2.times {@article.contents.build}
+    @items = Item.where(combine: nil)
     render layout: 'article_new'
   end
 
   # GET /articles/1/edit
   def edit
+    @article= Article.find(params[:id])
     render layout: 'article_new'
   end
 
-  # POST /articles
-  # POST /articles.json
-  #def create
-  #  @article = current_user.articles.build(article_params)
-  #
-  #  respond_to do |format|
-  #    if @article.save
-  #      format.html { redirect_to @article, notice: 'Article was successfully created.' }
-  #      format.json { render :show, status: :created, location: @article }
-  #    else
-  #      format.html { render :new }
-  #      format.json { render json: @article.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
-  
-  #def update
-  #  respond_to do |format|
-  #    if @article.update(article_params)
-  #      format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-  #      format.json { render :show, status: :ok, location: @article }
-  #    else
-  #      format.html { render :edit }
-  #      format.json { render json: @article.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
   
   def create
     @article = current_user.articles.build(article_params)
@@ -403,8 +366,14 @@ class ArticlesController < AuthorizedController
     end
     
     def correct_user
-      @article = current_user.articles.find_by(id: params[:id])
-      redirect_to root_url if @article.nil?
+       @article = current_user.articles.find_by(id: params[:id])
+       redirect_to root_url if current_user.admin != true && @article.nil?
+ 
+    end
+    def certificate_user
+      if logged_in?
+      redirect_to root_url if current_user.certificated != false 
+      end
     end
     
     def correct_draft

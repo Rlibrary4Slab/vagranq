@@ -2,25 +2,26 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, 
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable,
          omniauth_providers: [:twitter,:facebook],:authentication_keys =>[:login]
     has_many :social_profiles, dependent: :destroy
     validates:authentication_token, uniqueness: true, allow_nil: true
     attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face,:login
     has_many :articles, dependent: :destroy
     has_many :likes
+    has_many :items
+    has_many :item_likes
     has_many :notifications, foreign_key: "user_id", dependent: :destroy
     #has_many :likes, dependent: :destroy
     has_many :like_articles, through: :likes, source: :article
+    has_many :like_items, through: :item_likes, source: :item
     has_many :week_views
     before_save {self.email =email.downcase}
-    #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[a-z0-9]+\z/i, message: "英数字入力してください" },on: :create 
-    #validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A[A-Za-z]\w*\z/, message: "英数字入力してください" },on: :create 
-    validates :name, presence: true, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,20}+\z/i, message: "少なくともそれぞれ1種類の半角英数字を6文字以上20以下で入力してください" }
-    #validates :name, presence: true,length: {maximum: 50},uniqueness: {case_sensitive:false},on: :create
+    validates :name, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?[a-zA-Z])[a-zA-Z\d]{6,20}+\z/i, message: "半角英字の6文字以上20以下で入力してください" }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+.[a-z]+\z/i
-    validates :email, presence: true,  length: {maximum:255},uniqueness: {case_sensitive:false},format: {with: VALID_EMAIL_REGEX, message: "メールアドレスを入力してください"}
-    validates :password, presence: true, on: :create,length: {minimum:6,message: "6桁以上入力してください"}
+    #validates :email, length: {maximum:255},uniqueness: {case_sensitive:false},format: {with: VALID_EMAIL_REGEX,message: "メールアドレスを入力してください"}
+    validates :password, on: :create,length: {minimum:6,message: "6桁以上入力してください"}
     #has_secure_password
     mount_uploader :user_image,ImageUploader
     mount_uploader :header_image,ImageUploader

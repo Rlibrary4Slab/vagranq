@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831120840) do
+ActiveRecord::Schema.define(version: 20171024074152) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -121,6 +121,28 @@ ActiveRecord::Schema.define(version: 20170831120840) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}, using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
+  create_table "item_likes", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "item_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string   "title",            limit: 255
+    t.text     "description",      limit: 65535
+    t.string   "category",         limit: 255
+    t.datetime "date"
+    t.integer  "price",            limit: 4
+    t.integer  "user_id",          limit: 4
+    t.integer  "article_id",       limit: 4
+    t.integer  "like_id",          limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "item_likes_count", limit: 4
+    t.integer  "combine",          limit: 4
+  end
+
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -159,21 +181,21 @@ ActiveRecord::Schema.define(version: 20170831120840) do
   add_index "social_profiles", ["user_id"], name: "index_social_profiles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "remember_digest",        limit: 255
-    t.string   "name",                   limit: 255, default: "",   null: false
+    t.string   "name",                   limit: 255,   default: "",   null: false
     t.string   "user_name",              limit: 255
-    t.string   "user_description",       limit: 255
+    t.text     "user_description",       limit: 65535
     t.string   "user_image",             limit: 255
     t.string   "header_image",           limit: 255
     t.boolean  "admin"
-    t.string   "email",                  limit: 255, default: "",   null: false
-    t.string   "encrypted_password",     limit: 255, default: "",   null: false
+    t.string   "email",                  limit: 255,   default: "",   null: false
+    t.string   "encrypted_password",     limit: 255,   default: "",   null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,    null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -185,8 +207,8 @@ ActiveRecord::Schema.define(version: 20170831120840) do
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
     t.boolean  "certificated"
-    t.boolean  "twitter_s",                          default: true
-    t.boolean  "facebook_s",                         default: true
+    t.boolean  "twitter_s",                            default: true
+    t.boolean  "facebook_s",                           default: true
     t.integer  "count_articles",         limit: 4
     t.integer  "all_articles_views",     limit: 4
     t.integer  "period_count_articles",  limit: 4
@@ -194,6 +216,7 @@ ActiveRecord::Schema.define(version: 20170831120840) do
     t.integer  "total_likes",            limit: 4
     t.integer  "day_count_view",         limit: 4
     t.string   "authentication_token",   limit: 255
+    t.integer  "total_item_likes",       limit: 4
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

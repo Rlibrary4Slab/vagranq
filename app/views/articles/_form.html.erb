@@ -115,5 +115,18 @@
   <%#= link_to t('.cancel', :default => t("helpers.links.cancel")),
             articles_path, :class => 'btn btn-lg btn-default' %>
   
+  <div id="embeds">
+    <% @items.each do |item|  %>
+  <div class="embedDiv" draggable="true">
+        <a href="ranq-media.com" >
+  <div class="lon" style="background-color: black; height:300px; width:300px;">
+        <img src="https://s3-ap-northeast-1.amazonaws.com/dev-ranq-media-image-store/s1/uploads/user/user_image/5/thumb_643e52d3__1_.jpg" alt="Thumb 6" /> 
+ 	<span><%= item.title%></span>
+  </div>
+</a>
+  </div>
+
+    <%end%>
+  </div>
   
 <% end %>

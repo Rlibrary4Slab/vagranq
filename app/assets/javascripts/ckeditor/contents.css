@@ -191,6 +191,10 @@ a > img {
    padding-left: 10px;
    max-width: 680px;
 }
+.link_card a img{
+    max-width: initial;
+   }
+
 .out_embed {
      border: 1px solid #e5e5e5 ;
      padding: 20px;

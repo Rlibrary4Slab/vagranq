@@ -47,6 +47,8 @@
           <div id="users_use" >
            <li><%= link_to "ユーザー情報変更", edit_profile_path ,:rel => "nofollow"%></li>
            <li><%= link_to "記事を編集する", edit_articles_path(current_user) ,:rel => "nofollow" %></li>
+
+           <li><%= link_to "アイテムを作る", new_item_path ,:rel => "nofollow"%></li>           
            <li class="divider"></li>
            <li>
              <%= link_to "ログアウト",destroy_user_session_path, method: "delete" %>

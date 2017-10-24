@@ -28,8 +28,19 @@
 
   </div><!-- /#column_sidebar -->
 </div>
-
-
+<% if logged_in?%>
+<% if current_user.certificated != false%>
+<div style="position: fixed; z-index: 999999; height:100%; width:100%; background-color:white; top:0px; opacity: 0.9;">
+ <p style="opacity: 1;
+    filter: none;
+    font: bold 16px Verdana,Arial,sans-serif;
+    text-align: center;
+    margin: 20% 0;">このアカウントは運営によって利用を禁止されております
+   <br> <%= link_to "お問い合わせはこちらまで", inquiry_path %>
+ </p>
+</div>
+<%end%>
+<%end%>
 
 
     <!-- /コンテンツ -->
