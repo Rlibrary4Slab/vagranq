@@ -5,6 +5,8 @@
 //= require jquery-ui.min
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
+// require underscore
+// require gmaps/google
 //= require Chart.bundle
 //= require chartkick
 //= require twitter/bootstrap

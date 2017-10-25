@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+ geocoded_by :address
+ after_validation :geocode
  belongs_to :user, class_name: "User"
  has_many :item_likes, dependent: :destroy
  has_many :item_liked, class_name: "ItemLike", foreign_key: "item_id", dependent: :destroy

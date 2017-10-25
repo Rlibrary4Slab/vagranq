@@ -97,7 +97,7 @@ class ItemsController < AuthorizedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :description, :user_id,:price,:date,:eyecatch_img,:combine,:address,:lontitude,:latitude)
+      params.require(:item).permit(:title, :description, :user_id,:price,:date,:eyecatch_img,:combine,:address)
     end
     
     def correct_user
