@@ -1,7 +1,7 @@
 <%# provide(:title) %>
 
 <!-- コンテンツ -->
-
+<div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">
  <div class="topcontent_in clearfix">
 
@@ -62,9 +62,10 @@
   </div>
 </div>
 </section>
+</div>
 <div id="wrapper" class="clearfix">
 <hidden type="text" id="getattrlink" ></hidden>
-<div id="column_content">
+<div id="column_content" class="article_column">
 <div class="article_content"> 
 
   <%= @article.description.html_safe %>
@@ -153,7 +154,7 @@
 <%#= link_to_next_page @more_like_this, 'もっと見る', id: 'read_mores', remote: true %>
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
-<div id="column_sidebar">
+<div id="column_sidebar" class="article_sidebar">
  <%= render "static_pages/sidecontent" %>
 </div>
 </div>

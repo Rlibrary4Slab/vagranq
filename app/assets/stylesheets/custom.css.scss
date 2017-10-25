@@ -217,7 +217,18 @@ p.article_list_lead {
   margin: 20px auto 0;
   overflow: hidden;
   }
-
+#header_content {
+  width: 890px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.article_sidebar {
+  display: none;
+}
+.article_column {
+  margin: 0 auto;
+  float: none !important;
+}
 
   /* left-content-top */
   #column_content {
@@ -912,7 +923,7 @@ a.dropdown-toggle:hover {
 
 .prof-card {
   clear: both;
-  margin: 20px 0;
+  margin: 100px 0 20px 0;
 }
 .prof-card-content {
   margin: 4px;
