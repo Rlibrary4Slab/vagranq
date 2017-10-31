@@ -11,10 +11,16 @@
     </div>
   <% end %>
   <div id="posting_buttons">
+   <hidden type="button" id="tansubmit" value="ansubmit">
+       <hidden type="button" id="dansubmit" value="ansubmit">
 
 
   </div> 
    <%= f.hidden_field :user_id, value: current_user.id %>
+    <div>
+      <%= f.label :image %><br>
+      <%= f.file_field :image %>
+    </div>
     <div class="field">
       <%= f.select :category ,Item.categories.keys.to_a%></div>
     <div class="field">
@@ -29,15 +35,26 @@
     </div>
     <div class="field">
       <%= f.label :date %><br>
-      <%= f.text_field :date, class: 'datepicker' %>
+      <%= f.text_field :date, class: 'datetimepicker' %>
     </div>
     <div class="field">
       <%= f.label :price %><br>
       <%= f.number_field :price %>
     </div>
-    <div class="field">
+    <div>
       <%= f.label :address %><br>
       <%= f.text_field :address %>
+    </div>
+    <div class="field">
+     <ul style="display:none;">
+     <%= link_to_add_fieldsf "+", f, :item_days %>
+        <%= f.fields_for :item_days do |builder| %>
+          <%= render "item_day_fields", f: builder  %>
+        <% end %>
+
+
+    <%#= link_to_add_fieldsl "+", f, :item_days %>
+     </ul>
     </div>
     <% if !@item.new_record?  %>
     <div class="field">

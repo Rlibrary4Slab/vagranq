@@ -6,8 +6,11 @@ class Item < ActiveRecord::Base
  has_many :item_liked, class_name: "ItemLike", foreign_key: "item_id", dependent: :destroy
  validates :user_id, presence: true
  validates :description, presence: true
- validates :date, presence: true
+ #validates :date, presence: true
  validates :price, presence: true
+ has_many :item_days
+ mount_uploader :image, ItemImageUploader
+ accepts_nested_attributes_for :item_days, allow_destroy: true, reject_if: :all_blank
  paginates_per 21
  validates :category , exclusion: { in: %w(カテゴリを選択してください) ,message: "を入力してください"}
  enum category: {"カテゴリを選択してください":10 ,"スポット": 20, "イベント": 30}

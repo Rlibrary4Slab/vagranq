@@ -1,0 +1,47 @@
+<li>
+  <fieldset class="fields ui-sortable-handle" >
+     <a class="toplinkmove" href="#"></a>
+  <div>
+    <div class="item_weeks" >
+    <hidden type="button" id="item_cat"> 
+    <%= f.label :begin_time, "開始時間" %>
+    <%= f.text_field :begin_time ,class: "timepicker"%>
+    <%= f.label :finish_time, "終了時間" %>
+    <%= f.text_field :finish_time , class: "timepicker"%>
+    <%= f.label :mon, "月" %>
+    <%= f.check_box :mon %>
+    <%= f.label :tue, "火" %>
+    <%= f.check_box :tue %>
+    <%= f.label :wed, "水" %>
+    <%= f.check_box :wed %>
+    <%= f.label :thu, "木" %>
+    <%= f.check_box :thu %>
+    <%= f.label :fri, "金" %>
+    <%= f.check_box :fri %>
+    <%= f.label :sat, "土" %>
+    <%= f.check_box :sat %>
+    <%= f.label :sun, "日" %>
+    <%= f.check_box :sun %>
+    <%= f.label :hol, "祝日" %>
+    <%= f.check_box :hol %>
+   </div>
+   <div class="item_days">
+
+    <%= f.label :begin_time, "開始時間" %>
+    <%= f.text_field :begin_time ,class: "timepicker"%>
+    <%= f.label :finish_time, "終了時間" %>
+    <%= f.text_field :finish_time , class: "timepicker"%>
+
+    <%= f.label :begin_day, "開始日" %>
+    <%= f.text_field :begin_day ,class: "datepicker"%>
+    <%= f.label :finish_day, "終了日" %>
+    <%= f.text_field :finish_day,class: "datepicker" %>
+   </div>
+  </div>
+
+    <%= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
+    <%= f.hidden_field :_destroy, class: "_destroy" %>
+   
+     <a class="bottomlinkmove" href="#"></a>
+</fieldset>
+</li>

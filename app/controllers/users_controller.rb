@@ -212,8 +212,7 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
     end
     
     def user_params
-      params.require(:user).permit(:name, :email, :password,:user_image,:header_image,
-                                   :password_confirmation,:twitter_s,:facebook_s)
+      params.require(:user).permit(:name, :email, :password,:user_image,:header_image,:password_confirmation,:twitter_s,:facebook_s)
     end
     
     def logged_in_user

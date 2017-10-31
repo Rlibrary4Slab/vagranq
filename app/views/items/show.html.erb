@@ -15,6 +15,9 @@
 <section id="headcontent">
 <div id="headline">
   <div class="head_container">
+       <div class="u-clearfix" ng-non-bindable>
+        <%= image_tag @item.image,:class =>"s_eyecatch_img" %>
+      </div>
       <time datetime="<%= @item.updated_at %>" itemprop="datePublished"><%= @item.updated_at.strftime("%Y年%m月%d日　更新") %></time>
       </br>
       <% if logged_in? && @item.user.name == current_user.name %> 
@@ -61,8 +64,19 @@
   <div><%= @item.description%></div>
   <div><%= @item.date.strftime("%Y-%m-%d %H:%M")%></div>
   <div><%= @item.price%></div>
-  <div style='width: 800px;'>
-   <div id="map" style='width: 800px; height: 400px;'></div>
+  <div>
+    <% @item.item_days.each do |item|%>
+     <%= item.mon%>
+    <%end%>
+  
+  </div>
+   <div style='width: 800px;'>
+   <iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBph7ayjW9Kx-IXJ-EijLXvJX7HEzpTbgA&q=<%= @item.address%>" allowfullscreen>
+</iframe>
   </div>
 
  <div class="head_social" style="float:right;">
@@ -81,10 +95,11 @@
 <script type="text/javascript">
     function initMap() {
 
-        var test ={lat: <%= @item.latitude %>, lng: <%= @item.longitude %>};
+        var position ={lat: <%= @item.latitude %>, lng: <%= @item.longitude %>};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
-            center: test
+            center: position,
+	    streetViewControl: true
         });
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
@@ -95,7 +110,7 @@
         });
 
         var marker = new google.maps.Marker({
-            position:test,
+            position: position,
             map: map,
             title: contentString
         });

@@ -27,8 +27,38 @@ $(document).on(
    $("#mouseOverSumOff").val($("#mouseOverSum").val())
   ,"div.cke_ltr"
 )
+$(document).on "click", "#item_cat", ->
+ if $("#item_category").length == 1
+   $("input.datetimepicker").datetimepicker({format: "YYYY-MM-DD HH:mm"})
+   $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"})
+   $("input.timepicker").datetimepicker({format: "HH:mm"})
+   if $("#item_category").val() == "カテゴリを選択してください"
+    $(".field ul").css("display": "none")  
+   if $("#item_category").val() == "スポット"
+    $(".field ul").css("display": "initial")
+    $(".item_weeks").css("display": "initial")  
+    $(".item_days").css("display": "none")  
+   if $("#item_category").val() == "イベント"
+    $(".field ul").css("display": "initial")  
+    $(".item_days").css("display": "initial")  
+    $(".item_weeks").css("display": "none")  
+ 
   
-
+$(document).on "change" ,->
+  if $("#item_category").length == 1
+   if $("#item_category").val() == "カテゴリを選択してください"
+    $(".field ul").css("display": "none")  
+   if $("#item_category").val() == "スポット"
+    console.log("sp")
+    $(".field ul").css("display": "initial")  
+    $(".item_weeks").css("display": "initial")  
+    $(".item_days").css("display": "none")  
+   if $("#item_category").val() == "イベント"
+    $(".field ul").css("display": "initial")  
+    $(".item_days").css("display": "initial")  
+    $(".item_weeks").css("display": "none")  
+   
+　
 $(window).on "beforeunload", ->
   if $("#csubmit").length ==1
    return "このページから離れると入力が無効になります"
@@ -98,6 +128,7 @@ $(document).on 'click', '.remove_fields', (event) ->
   $(".add_fields").css("display","");
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
+  document.getElementById("item_cat").click()
   event.preventDefault()
 
 $(document).on 'click', '.add_fieldsl', (event) ->
@@ -106,6 +137,7 @@ $(document).on 'click', '.add_fieldsl', (event) ->
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).before($(this).data('fields').replace(regexp, time))
   CKEDITOR.replaceAll("ckeditor")
+  document.getElementById("item_cat").click()
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()
@@ -120,6 +152,7 @@ $(document).on 'click', '.add_fieldsf', (event) ->
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).after($(this).data('fields').replace(regexp, time))
   CKEDITOR.replaceAll("ckeditor")
+  document.getElementById("item_cat").click()
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()

@@ -33,6 +33,7 @@ class ItemsController < AuthorizedController
 
   def new
     @item = Item.new
+    @item.item_days.build
     render layout: 'article_new'
   end
 
@@ -97,7 +98,7 @@ class ItemsController < AuthorizedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :description, :user_id,:price,:date,:eyecatch_img,:combine,:address)
+      params.require(:item).permit(:title, :description, :user_id,:price,:date,:eyecatch_img,:combine,:address,:image,:category,item_days_attributes: [:id, :mon,:tue ,:wed,:thu,:fri,:sat,:sun,:hol,:begin_time, :finish_time, :begin_day,:finish_day])
     end
     
     def correct_user

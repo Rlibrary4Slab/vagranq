@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025105242) do
+ActiveRecord::Schema.define(version: 20171031074651) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -121,6 +121,24 @@ ActiveRecord::Schema.define(version: 20171025105242) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}, using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
+  create_table "item_days", force: :cascade do |t|
+    t.integer  "item_id",     limit: 4
+    t.boolean  "mon",                   default: false
+    t.boolean  "tue",                   default: false
+    t.boolean  "wed",                   default: false
+    t.boolean  "thu",                   default: false
+    t.boolean  "fri",                   default: false
+    t.boolean  "sat",                   default: false
+    t.boolean  "sun",                   default: false
+    t.boolean  "hol",                   default: false
+    t.datetime "begin_time"
+    t.datetime "finish_time"
+    t.datetime "begin_day"
+    t.datetime "finish_day"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
   create_table "item_likes", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "item_id",    limit: 4
@@ -144,6 +162,8 @@ ActiveRecord::Schema.define(version: 20171025105242) do
     t.string   "address",          limit: 255
     t.float    "latitude",         limit: 24
     t.float    "longitude",        limit: 24
+    t.integer  "item_days_id",     limit: 4
+    t.text     "image",            limit: 65535
   end
 
   create_table "likes", force: :cascade do |t|

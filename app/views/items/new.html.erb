@@ -3,9 +3,11 @@
 <%= render 'form' %>
 </div>
 <script>
-var data = {'data-format': 'yyyy-MM-dd' };
+//var data = {'data-format': 'yyyy-MM-dd' };
 $(document).on("page:load ready", function(){
-    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD HH:mm"});
+    $("input.datetimepicker").datetimepicker({format: "YYYY-MM-DD HH:mm"});
+    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"});
+    $("input.timepicker").datetimepicker({format: "HH:mm"});
 });
 </script>
 
