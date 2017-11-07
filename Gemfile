@@ -111,4 +111,7 @@ gem 'grape'
 gem 'grape-entity'
 gem "gmaps4rails"
 gem "geocoder"
+gem 'acts-as-taggable-on', '~> 3.4'
+gem "gon"
+gem 'font-awesome-rails'
 

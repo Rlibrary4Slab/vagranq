@@ -6,6 +6,7 @@ class ArticlesController < AuthorizedController
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
   before_action :certificate_user
+  before_action :set_like_items_to_gon , only: [:show]
   before_action :all
     def all
       @sitename = "RanQ"
@@ -220,6 +221,11 @@ class ArticlesController < AuthorizedController
     #if sum_of_imp % 1 == 0            #総view数
     notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb))
     end
+    respond_to do |format|
+      format.html
+      format.json {render :json => @article}
+      format.xml  {render :xml => @article}
+    end
     
   end
 
@@ -400,5 +406,9 @@ class ArticlesController < AuthorizedController
      #graph = Koala::Facebook::API.new(result["token"].to_s)
      graph = FbGraph::User.me(result["token"].to_s)
      return graph
+    end
+    
+    def set_like_items_to_gon
+     gon.like_items = current_user.item_likes.where(:article_id => params[:id])
     end
 end

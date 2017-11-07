@@ -3,10 +3,9 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui.min
+//= require tag-it 
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
-// require underscore
-// require gmaps/google
 //= require Chart.bundle
 //= require chartkick
 //= require twitter/bootstrap

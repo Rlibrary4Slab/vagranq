@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031074651) do
+ActiveRecord::Schema.define(version: 20171107072708) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20171031074651) do
     t.integer  "corporecom",   limit: 4
     t.boolean  "checkagree",                 default: false, null: false
     t.integer  "view_count",   limit: 4
+    t.integer  "item_like_id", limit: 4
   end
 
   create_table "authentications", force: :cascade do |t|
@@ -131,8 +132,8 @@ ActiveRecord::Schema.define(version: 20171031074651) do
     t.boolean  "sat",                   default: false
     t.boolean  "sun",                   default: false
     t.boolean  "hol",                   default: false
-    t.datetime "begin_time"
-    t.datetime "finish_time"
+    t.time     "begin_time"
+    t.time     "finish_time"
     t.datetime "begin_day"
     t.datetime "finish_day"
     t.datetime "created_at",                            null: false
@@ -144,12 +145,13 @@ ActiveRecord::Schema.define(version: 20171031074651) do
     t.integer  "item_id",    limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "article_id", limit: 4
   end
 
   create_table "items", force: :cascade do |t|
     t.string   "title",            limit: 255
     t.text     "description",      limit: 65535
-    t.string   "category",         limit: 255
+    t.integer  "category",         limit: 4
     t.datetime "date"
     t.integer  "price",            limit: 4
     t.integer  "user_id",          limit: 4
@@ -164,6 +166,8 @@ ActiveRecord::Schema.define(version: 20171031074651) do
     t.float    "longitude",        limit: 24
     t.integer  "item_days_id",     limit: 4
     t.text     "image",            limit: 65535
+    t.text     "remark",           limit: 65535
+    t.text     "phonenumber",      limit: 65535
   end
 
   create_table "likes", force: :cascade do |t|
@@ -202,6 +206,26 @@ ActiveRecord::Schema.define(version: 20171031074651) do
 
   add_index "social_profiles", ["provider", "uid"], name: "index_social_profiles_on_provider_and_uid", unique: true, using: :btree
   add_index "social_profiles", ["user_id"], name: "index_social_profiles_on_user_id", using: :btree
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id",        limit: 4
+    t.integer  "taggable_id",   limit: 4
+    t.string   "taggable_type", limit: 255
+    t.integer  "tagger_id",     limit: 4
+    t.string   "tagger_type",   limit: 255
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name",           limit: 255
+    t.integer "taggings_count", limit: 4,   default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                                          null: false

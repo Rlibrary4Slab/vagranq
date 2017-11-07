@@ -1,7 +1,7 @@
 <%# provide(:title) %>
 
 <!-- コンテンツ -->
-
+<div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">
  <div class="topcontent_in clearfix">
 
@@ -12,34 +12,23 @@
 
  </div><!-- /.eyecatch_in -->
 </section>
-<section id="headcontent">
+
+<section class="item_headcontent" id="headcontent">
 <div id="headline">
   <div class="head_container">
-       <div class="u-clearfix" ng-non-bindable>
-        <%= image_tag @item.image,:class =>"s_eyecatch_img" %>
-      </div>
-      <time datetime="<%= @item.updated_at %>" itemprop="datePublished"><%= @item.updated_at.strftime("%Y年%m月%d日　更新") %></time>
       </br>
       <% if logged_in? && @item.user.name == current_user.name %> 
-      <%= link_to "記事を編集する", edit_item_path(@item)%>
+      <%= link_to "アイテムを編集する", edit_item_path(@item)%>
       <% end %>
-      <h1 class="article_title"><%= @item.title %></h1>
+       <div class="u-clearfix" ng-non-bindable>
+        <%= image_tag @item.image,:class =>"item_eyecatch_img" %>
+      </div>
+      <time datetime="<%= @item.updated_at %>" itemprop="datePublished"><%#= @item.updated_at.strftime("%Y年%m月%d日　更新") %></time>
+      <h1 class="spot_title"><%= @item.title %></h1>
     </div>
     <input type="button" id="showsubmit" style="display:none;"/>
-    <div class="head_social" style="float:right;">
-      <ul class="social-bottun">
-        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
-        <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
-        <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
-      </ul>
-    </div>
-    <div class="head_like_user">
+    <div class="item_head_like_user">
       <ul class="user_like">
-        <li class="user">
-    	 <div class="profimg"> 
-         <%= link_to image_tag(@item.user.user_image_url(:thumb)), user_path(@item.user) ,:ref => "nofollow"%>
-         </div>
-	</li>
         <li class="like">
          <% if logged_in? %>
           <%= render 'item_likes/like_links', item: @item %>
@@ -57,70 +46,87 @@
   </div>
 </div>
 </section>
+
 <div id="wrapper" class="clearfix">
 <hidden type="text" id="getattrlink" ></hidden>
-<div id="column_content">
-<div class="article_content"> 
-  <div><%= @item.description%></div>
-  <div><%= @item.date.strftime("%Y-%m-%d %H:%M")%></div>
-  <div><%= @item.price%></div>
-  <div>
-    <% @item.item_days.each do |item|%>
-     <%= item.mon%>
-    <%end%>
-  
-  </div>
-   <div style='width: 800px;'>
-   <iframe
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBph7ayjW9Kx-IXJ-EijLXvJX7HEzpTbgA&q=<%= @item.address%>" allowfullscreen>
-</iframe>
-  </div>
+<div id="column_content" class="item_column">
+<div class="article_content item_detail"> 
+  <h2>「<%= @item.title %>」の基本情報</h2>
+  <div class="item_table">
+   <table>
+     <tbody>
+      <tr>
+       <th>名前</th>
+       <td><%= @item.title %></td>
+      </tr>
+      <tr>
+       <th>説明</th>
+       <td><%= @item.description %></td>
+      </tr>
+      <tr>
+       <th>場所</th>
+       <td class="map">
+          <span><%= @item.address %></span>
+          <iframe
+            width="600"
+            height="450"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBph7ayjW9Kx-IXJ-EijLXvJX7HEzpTbgA&q=<%= @item.address%>" allowfullscreen>
+           </iframe>
+       </td>
+      </tr>
 
- <div class="head_social" style="float:right;">
-      <ul class="social-bottun">
-        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
-        <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
-        <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
-      </ul>
- </div>
+      <% if @item.phonenumber.nil? %>
+      <tr>
+       <th>電話番号</th>
+       <td><%= @item.phonenumber %></td>
+      </tr>
+      <tr>
+      <% end %>
+
+       <th>
+         <% if @item.category == "イベント"%>
+           開催期間
+	 <% end %>
+         <% if @item.category == "スポット"%>
+           営業時間
+	 <% end %>
+       </th>
+       <td>
+         
+          <% @item.item_days.each do |item|%>
+           <div>
+            <%= item.begin_time.strftime("%H:%M")%>~<%= item.finish_time.strftime("%H:%M")%>
+            <% if @item.category == "イベント"%>
+     	     <%= item.begin_day%>~<%= item.finish_day%>
+            <% end%>
+　　　　　　<% if @item.category == "スポット"%>
+             <%= item.mon != false ? "月 ": ""%>
+             <%= item.tue != false ? "火 ": ""%>
+             <%= item.wed != false ? "水 ": ""%>
+             <%= item.thu != false ? "木 ": ""%>
+             <%= item.fri != false ? "金 ": ""%>
+             <span style="color: blue"><%= item.sat != false ? "土 ": ""%> </span>
+             <span style="color: red"><%= item.sun != false ? "日 ": ""%> </span>
+             <span style="color: red"><%= item.hol != false ? "祝": ""%> </span>
+            <% end%>
+           </div>
+         <%end%>
+
+       </td>
+      </tr>
+      <% if @item.remark.nil? %>
+      <tr>
+       <th>備考</th>
+       <td><%= @item.remark %></td>
+      </tr>
+      <% end %>
+     </tbody>
+   </table>
+  </div>
+  <%= render partial: 'tags', locals: { tags: @item.tags } %>
+
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
-<div id="column_sidebar">
- <%= render "static_pages/sidecontent" %>
 </div>
 </div>
-<script type="text/javascript">
-    function initMap() {
-
-        var position ={lat: <%= @item.latitude %>, lng: <%= @item.longitude %>};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: position,
-	    streetViewControl: true
-        });
-        var transitLayer = new google.maps.TransitLayer();
-        transitLayer.setMap(map);
-
-        var contentString = '住所：<%= @item.address %>';
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-
-        var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: contentString
-        });
-
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBph7ayjW9Kx-IXJ-EijLXvJX7HEzpTbgA&callback=initMap">
-</script>
-

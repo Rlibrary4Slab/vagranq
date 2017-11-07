@@ -29,36 +29,43 @@ $(document).on(
 )
 $(document).on "click", "#item_cat", ->
  if $("#item_category").length == 1
-   $("input.datetimepicker").datetimepicker({format: "YYYY-MM-DD HH:mm"})
-   $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"})
-   $("input.timepicker").datetimepicker({format: "HH:mm"})
    if $("#item_category").val() == "カテゴリを選択してください"
-    $(".field ul").css("display": "none")  
+    $(".field ul#ul_item_day").css("display": "none")  
    if $("#item_category").val() == "スポット"
-    $(".field ul").css("display": "initial")
+    $(".field ul#ul_item_day").css("display": "initial")
     $(".item_weeks").css("display": "initial")  
     $(".item_days").css("display": "none")  
+    $(".item_address").css("display": "initial")  
+    $(".item_tags").css("display": "none")  
    if $("#item_category").val() == "イベント"
-    $(".field ul").css("display": "initial")  
+    $(".field ul#ul_item_day").css("display": "initial")  
     $(".item_days").css("display": "initial")  
+    $(".item_tags").css("display": "initial")  
     $(".item_weeks").css("display": "none")  
+    $(".item_address").css("display": "none")  
+   if $("#pac-input").val() != ""
+    $("#item_add").val($("#pac-input").val())
+    $("#pac-input").val("") 
+   
  
   
 $(document).on "change" ,->
   if $("#item_category").length == 1
    if $("#item_category").val() == "カテゴリを選択してください"
-    $(".field ul").css("display": "none")  
+    $(".field ul#ul_item_day").css("display": "none")  
    if $("#item_category").val() == "スポット"
-    console.log("sp")
-    $(".field ul").css("display": "initial")  
-    $(".item_weeks").css("display": "initial")  
-    $(".item_days").css("display": "none")  
+    $(".field ul#ul_item_day").css("display": "initial")
+    $(".item_weeks").css("display": "initial")
+    $(".item_days").css("display": "none")
+    $(".item_address").css("display": "initial")
+    $(".item_tags").css("display": "none")
    if $("#item_category").val() == "イベント"
-    $(".field ul").css("display": "initial")  
-    $(".item_days").css("display": "initial")  
-    $(".item_weeks").css("display": "none")  
-   
-　
+    $(".field ul#ul_item_day").css("display": "initial")
+    $(".item_days").css("display": "initial")
+    $(".item_tags").css("display": "initial")
+    $(".item_weeks").css("display": "none")
+    $(".item_address").css("display": "none") 
+    
 $(window).on "beforeunload", ->
   if $("#csubmit").length ==1
    return "このページから離れると入力が無効になります"
@@ -99,6 +106,34 @@ jam=[]
 
 
 $(document).on 'ready page:load', ->
+    # いいねボタンといいね総数をwrapしている.js-article-likesをすべて取得
+    # ループ回して一個一個インスタンス生成
+  for like_item in gon.like_items
+      console.log(like_item.item_id)
+      $('#itemlike'+like_item.item_id).removeClass('icon-fav-off').addClass('icon-fav-on')
+      $('#itemlike'+like_item.item_id).html('<img alt="" border="0" height="30" src="/assets/heart_1.png" width="30">')
+  favButtons = document.querySelectorAll('.js-item-likes')
+  for favButton in favButtons
+      new FavArticle(favButton)
+  if $("input#pac-input").length == 1
+   $("form").on "keypress", (e) ->
+    if e.keyCode == 13 
+        return false;
+   #$("#item_cat").click()  
+   #document.getElementById("item_cat").click()  
+  if $('#item-tags').length == 1
+   $('#item-tags').tagit
+    fieldName:   'item[tag_list]'
+    singleField: true
+    availableTags: gon.available_tags 
+    placeholderText: "スポットを入力"
+    beforeTagAdded: (ev,ui) ->
+     if $.inArray(ui.tagLabel, gon.available_tags) == -1 
+      return false
+ 
+  if gon.item_tags?
+    for tag in gon.item_tags
+      $('input#item-tags').tagit 'createTag', tag
   if $("#showsubmit").length ==1
    document.getElementById("showsubmit").click() 
   $("p img").css("height":"","width":"")
@@ -130,6 +165,7 @@ $(document).on 'click', '.remove_fields', (event) ->
   document.getElementById("dansubmit").click()
   document.getElementById("item_cat").click()
   event.preventDefault()
+
 
 $(document).on 'click', '.add_fieldsl', (event) ->
  
@@ -207,7 +243,6 @@ $(document).on "click" ,".psubmit", ->
   else  
     $(this).parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
 
-
   $(this).parents("fieldset").find(".toplinkmove").click()
 
 
@@ -249,6 +284,8 @@ tsubmit=0
   
     
 $(document).on 'click' ,-> #clicked
+  if $("#item_cat").length ==1 
+   document.getElementById("item_cat").click()
   if $("#csubmit").length ==1 
    document.getElementById("csubmit").click()  
   $(".pup").css("display":"initial")
@@ -702,7 +739,75 @@ class ImageCropper
       marginLeft: "-" + Math.round(100/coords.w * coords.x) + "px"
       marginTop: "-" + Math.round(100/coords.h *coords.y) + "px"
 
+class FavArticle
+    constructor: ($el) ->
+      # インスタンス作成したときの引数をコンストラクタで受け取ってjqueryobjにして$el変数に格納
+      @$el = $($el)
+      # いいねボタン探して$likesButton変数に格納
+      @$likesButton = @$el.find('.js-item_likes-button')
+      # いいね総数表示要素を取得して$likesCount変数に格納
+      #@$likesCount = @$el.find('.js-item_likes-count')
+      # イベントリスナー呼び出し
+      @setEventListener()
 
+    setEventListener: ->
+      # ボタンをクリックした際のイベントリスナー
+      @$likesButton.on 'click', (e) =>
+        # Ajax呼び出し
+        console.log(e)  
+        console.log(e.currentTarget.attributes[1].value)  
+        console.log(e.currentTarget.id)  
+        console.log(location.pathname.replace("\/articles\/",""))
+        @_setLikesAjax(e)
+
+    _setLikesAjax: (e)->
+      $this = $(e.currentTarget)
+      
+      # 記事idを取得
+      articleId = location.pathname.replace("\/articles\/","")
+      # destroyアクションへのリクエストURL
+      unLikeURL = '/unitemlike/' + e.currentTarget.id.replace("itemlike","") 
+      # createアクションへのリクエストURL
+      likeURL = '/itemlike/' + e.currentTarget.id.replace("itemlike","") 
+      # もしクリックした要素がいいねされてなかったら
+      if $this.hasClass('icon-fav-off')
+        $.ajax({
+          # createアクションにリクエスト飛ばす
+          url: likeURL
+          # POSTメソッドで
+          type: 'POST'
+          # キャッシュは保持しない
+          cache: false
+          # 記事idを送る
+          data: {
+            'article_id': articleId,
+            'item_id': e.currentTarget.id.replace("itemlike","") 
+          }
+          # 帰ってくるデータはjson形式で
+          datatype: 'json'
+        })
+        # Ajax通信が成功した場合
+        .done (data) =>
+          # 灰色ハートのクラスを削除し赤いハートのクラスを付与
+          $this.removeClass('icon-fav-off').addClass('icon-fav-on')
+          $this.html('<img alt="" border="0" height="30" src="/assets/heart_1.png" width="30">')
+          # いいね総数を表示
+          #@$likesCount.text(data[0].likes_count)
+      else
+        $.ajax({
+          url: unLikeURL
+          type: 'DELETE'
+          cache: false
+          data: {
+            'article_id': articleId,
+            'item_id': e.currentTarget.id.replace("itemlike","")
+          }
+          datatype: 'json'
+        })
+        .done (data) =>
+          $this.removeClass('icon-fav-on').addClass('icon-fav-off')
+          $this.html('<img alt="" border="0" height="30" src="/assets/heart_0.png" width="30">')
+          #@$likesCount.text(data[0].likes_count)
   
     
  

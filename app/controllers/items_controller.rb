@@ -1,10 +1,13 @@
 class ItemsController < AuthorizedController
 #class ArticlesController < ApplicationController
   include Notifications
+  
   before_action :combine_item?, only: [:show]
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_item, only: [ :show,:edit, :update,:destroy]
   before_action :correct_user,   only: [:edit, :update]
+  before_action :set_item_tags_to_gon,   only: [:edit, :update]
+  before_action :set_available_tags_to_gon,   only: [:new,:edit]
   before_action :correct_draft,   only: [:show]
   before_action :all
   def all
@@ -28,6 +31,11 @@ class ItemsController < AuthorizedController
 
   
   def show
+    respond_to do |format|
+      format.html
+      format.json {render :json => @item}
+      format.xml  {render :xml => @item}
+    end
     
   end
 
@@ -80,6 +88,7 @@ class ItemsController < AuthorizedController
       format.json { head :no_content }
     end
   end
+
   
   private
     def combine_item?
@@ -98,7 +107,7 @@ class ItemsController < AuthorizedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :description, :user_id,:price,:date,:eyecatch_img,:combine,:address,:image,:category,item_days_attributes: [:id, :mon,:tue ,:wed,:thu,:fri,:sat,:sun,:hol,:begin_time, :finish_time, :begin_day,:finish_day])
+      params.require(:item).permit(:title, :description, :user_id,:price,:date,:eyecatch_img,:combine,:address,:image,:category,:tag_list,:phonenumber,:remark,item_days_attributes: [:id, :mon,:tue ,:wed,:thu,:fri,:sat,:sun,:hol,:begin_time, :finish_time, :begin_day,:finish_day,:_destroy])
     end
     
     def correct_user
@@ -110,6 +119,12 @@ class ItemsController < AuthorizedController
       @itemp = Item.find_by(id: params[:id])
       @item = Item.find_by(id: params[:id])
       redirect_to root_url if @itemp.nil? && current_user.name != @item.user.name 
+    end
+    def set_item_tags_to_gon
+     gon.item_tags = @item.tag_list
+    end
+    def set_available_tags_to_gon
+     gon.available_tags = Item.where(category: 20).pluck(:title)
     end
    
 end

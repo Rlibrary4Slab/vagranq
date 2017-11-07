@@ -1,13 +1,14 @@
 class Item < ActiveRecord::Base
+ acts_as_taggable
  geocoded_by :address
  after_validation :geocode
  belongs_to :user, class_name: "User"
+ belongs_to :article
  has_many :item_likes, dependent: :destroy
  has_many :item_liked, class_name: "ItemLike", foreign_key: "item_id", dependent: :destroy
  validates :user_id, presence: true
- validates :description, presence: true
- #validates :date, presence: true
- validates :price, presence: true
+ #validates :title, presence: true,uniqueness: {case_sensitive:false}
+ #validates :description, presence: true
  has_many :item_days
  mount_uploader :image, ItemImageUploader
  accepts_nested_attributes_for :item_days, allow_destroy: true, reject_if: :all_blank

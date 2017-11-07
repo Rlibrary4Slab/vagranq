@@ -2,14 +2,6 @@
 <h1>新規アイテム</h1>
 <%= render 'form' %>
 </div>
-<script>
-//var data = {'data-format': 'yyyy-MM-dd' };
-$(document).on("page:load ready", function(){
-    $("input.datetimepicker").datetimepicker({format: "YYYY-MM-DD HH:mm"});
-    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"});
-    $("input.timepicker").datetimepicker({format: "HH:mm"});
-});
-</script>
 
 
 <%#= link_to 'Back', articles_path %>

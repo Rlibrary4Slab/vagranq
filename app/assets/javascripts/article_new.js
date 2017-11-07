@@ -15,6 +15,10 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui.min
+//= require tag-it
+//= require underscore
+//= require gmaps/google
+// require tag-in
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
 //= require ckeditor/init
@@ -26,3 +30,9 @@
 //= require articles.js.coffee 
 //= require ckeditor_conf.js 
 // require_tree .
+$("form").on("keypress", function (e) {
+    if (e.keyCode == 13) {
+        return false;
+    }
+});
+

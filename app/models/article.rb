@@ -2,8 +2,9 @@ class Article < ActiveRecord::Base
     include AASM
     include ArticleSearchable 
     belongs_to :user
-    #has_many :likes
     has_many :likes, dependent: :destroy
+    has_many :item_likes, dependent: :destroy
+    has_many :items, dependent: :destroy
     has_many :liked, class_name: "Like", foreign_key: "article_id", dependent: :destroy
     has_many :notifications, dependent: :destroy
     has_many :liking_users, through: :likes, source: :user

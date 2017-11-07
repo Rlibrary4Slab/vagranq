@@ -23,8 +23,8 @@
    <div style="position:relative;">
    <%=  f.label 'Create At' %>
   <%#= f.collection_select :name, User.all, :id, :user_name %>
-  <%= f.text_field :created_at_gteq, class: 'datepicker' %>
-  <%= f.text_field :created_at_lteq, class: 'datepicker'  %>
+  <%= f.date_field :created_at_gteq %>
+  <%= f.date_field :created_at_lteq %>
   <%= f.sort_fields do |s| %>
     <%= s.sort_select %>
   <% end %>
@@ -81,12 +81,3 @@
 
 <br>
 
-<%#= link_to 'New Article', new_article_path %>
-<%#= paginate @users %>
-
-<script>
-var data = {'data-format': 'yyyy-MM-dd' };
-$(document).on("page:load ready", function(){
-    $("input.datepicker").datetimepicker({format: "YYYY-MM-DD"});
-});
-</script>

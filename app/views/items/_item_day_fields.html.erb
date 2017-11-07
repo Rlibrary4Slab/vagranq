@@ -2,12 +2,12 @@
   <fieldset class="fields ui-sortable-handle" >
      <a class="toplinkmove" href="#"></a>
   <div>
-    <div class="item_weeks" >
     <hidden type="button" id="item_cat"> 
     <%= f.label :begin_time, "開始時間" %>
-    <%= f.text_field :begin_time ,class: "timepicker"%>
+    <%= f.time_select :begin_time ,value: (f.object.begin_time || Time.now.strftime("%H:%m")),class: "timepicker"%>
     <%= f.label :finish_time, "終了時間" %>
-    <%= f.text_field :finish_time , class: "timepicker"%>
+    <%= f.time_select :finish_time , value: (f.object.finish_time || Time.now.strftime("%H:%m")) ,class: "timepicker"%>
+    <div class="item_weeks" >
     <%= f.label :mon, "月" %>
     <%= f.check_box :mon %>
     <%= f.label :tue, "火" %>
@@ -27,15 +27,11 @@
    </div>
    <div class="item_days">
 
-    <%= f.label :begin_time, "開始時間" %>
-    <%= f.text_field :begin_time ,class: "timepicker"%>
-    <%= f.label :finish_time, "終了時間" %>
-    <%= f.text_field :finish_time , class: "timepicker"%>
 
     <%= f.label :begin_day, "開始日" %>
-    <%= f.text_field :begin_day ,class: "datepicker"%>
+    <%= f.date_field :begin_day %>
     <%= f.label :finish_day, "終了日" %>
-    <%= f.text_field :finish_day,class: "datepicker" %>
+    <%= f.date_field :finish_day %>
    </div>
   </div>
 
