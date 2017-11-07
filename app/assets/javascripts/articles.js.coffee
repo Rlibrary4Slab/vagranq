@@ -755,14 +755,14 @@ class FavArticle
       # ボタンをクリックした際のイベントリスナー
       @$likesButton.on 'click', (e) =>
         # Ajax呼び出し
-        console.log(e)  
-        console.log(e.currentTarget.attributes[1].value)  
-        console.log(e.currentTarget.id)  
-        console.log(location.pathname.replace("\/articles\/",""))
-        @_setLikesAjax(e)
-
+        if gon.logged_in != false
+          @_setLikesAjax(e)
+        else
+          window.location.href = "http://ranq-media.com/users/sign_up"
+        
     _setLikesAjax: (e)->
       $this = $(e.currentTarget)
+      
       
       # 記事idを取得
       articleId = location.pathname.replace("\/articles\/","")

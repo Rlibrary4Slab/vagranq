@@ -385,7 +385,12 @@ class ArticlesController < AuthorizedController
     def correct_draft
       @articlep = Article.published.find_by(id: params[:id])
       @article = Article.find_by(id: params[:id])
-      redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
+      if logged_in?
+       redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
+      else 
+       redirect_to root_url if @articlep.nil? 
+       
+      end 
     end
    
     def twitter_share
@@ -409,6 +414,9 @@ class ArticlesController < AuthorizedController
     end
     
     def set_like_items_to_gon
-     gon.like_items = current_user.item_likes.where(:article_id => params[:id])
+     gon.logged_in = logged_in?
+     if logged_in?
+      gon.like_items = current_user.item_likes.where(:article_id => params[:id])
+     end
     end
 end
