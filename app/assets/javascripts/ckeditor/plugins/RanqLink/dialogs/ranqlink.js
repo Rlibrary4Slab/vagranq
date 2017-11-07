@@ -40,7 +40,8 @@
                       if(urlReg.test(href)){ 
                         var loglog = title.replace(" | RanQ [ランク]","")
 			console.log("true")
-		        element.setHtml('<div class="item_card_box"><div class="article_list_content clearfix link_card"><a href="http://ranq-media.com/items/'+href+'"><img class="s_eyecatch_img s_article_thumbnail" id="s_article_thumbnail article_list_thumb" src='+oimage+' alt="'+oimage+'" /></a><div class="js-item-likes"><div class="js-item_likes-button icon-fav-off" rel="nofollow" id="itemlike'+href+'"href="/itemlike/'+href+'"><img border="0" alt="" src="/assets/heart_0.png" width="30" height="30"></div></div><div class="article_list_text"><p class="article_list_title"><a style="" href="http://ranq-media.com/items/'+href+'">'+ loglog +'</a></p><span class="spot_list_address">'+address+'</span></div></div></div>');
+		        element.setHtml('<div class="item_card_box"><div class="article_list_content clearfix link_card"><div class="item_card_img"><a href="http://ranq-media.com/items/'+href+'"><img class="s_eyecatch_img s_article_thumbnail" id="s_article_thumbnail article_list_thumb" src='+oimage+' alt="'+oimage+'" /></a></div><div class="article_list_text"><p class="article_list_title"><a style="" href="http://ranq-media.com/items/'+href+'">'+ loglog +'</a></p><p class="spot_list_address_area"><span class="spot_list_address">'+address+'</span></p><div class="js-item-likes"><div class="js-item_likes-button icon-fav-off" rel="nofollow" id="itemlike'+href+'"href="/itemlike/'+href+'"><img border="0" alt="" src="/assets/heart_0.png" width="30" height="30"></div></div></div></div></div>');
+
 		      }else{   
 			console.log("none")
                       }
@@ -58,7 +59,7 @@
                     $.ajax({
                      //url: "http://cors-proxy.htmldriven.com/?url=http:ranq-media.com/items/"+href,
                      //url: "http://ranq-media.com/items/"+href,
-                     url: "http://192.168.33.10:3000/items/"+href,
+                     url: "http://192.168.1.13:3000/items/"+href,
 
          	     type: 'GET',
          	     cache: false,

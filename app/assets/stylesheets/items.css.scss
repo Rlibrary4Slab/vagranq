@@ -35,3 +35,11 @@ h1.spot_title {
   bottom: 0;
   right: 0;
 }
+.item_card_img {
+	display: table-cell;
+	vertical-align: middle;
+}
+.js-item-likes {
+	text-align: right;
+	padding: 0 20px;
+}

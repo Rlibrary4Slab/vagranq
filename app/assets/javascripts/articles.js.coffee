@@ -108,7 +108,8 @@ jam=[]
 $(document).on 'ready page:load', ->
     # いいねボタンといいね総数をwrapしている.js-article-likesをすべて取得
     # ループ回して一個一個インスタンス生成
-  for like_item in gon.like_items
+  if $("#item_category").length == -1
+   for like_item in gon.like_items
       console.log(like_item.item_id)
       $('#itemlike'+like_item.item_id).removeClass('icon-fav-off').addClass('icon-fav-on')
       $('#itemlike'+like_item.item_id).html('<img alt="" border="0" height="30" src="/assets/heart_1.png" width="30">')
