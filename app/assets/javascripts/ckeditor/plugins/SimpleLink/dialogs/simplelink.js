@@ -27,8 +27,8 @@
         	var href = this.getValue();
         	var isExternalURL = /^(http|https):\/\//;
 	        var title,oimage,outimage;
-	        //var urlReg = /^http:\/\/ranq-media\.com\/articles\/([0-9+]+)$/;
-	        var urlReg = /^http:\/\/192.168.1.13:3000\/articles\/([0-9+]+)$/;
+	        var urlReg = /^http:\/\/ranq-media\.com\/articles\/([0-9+]+)$/;
+	        //var urlReg = /^http:\/\/192.168.1.13:3000\/articles\/([0-9+]+)$/;
 	        //$(".lists").append("<div style="height:999999px; width:999999px; background-color: #000000; z-index: 999;"></div>");
 	        $("body").before('<div id="loadingajax" style="opacity:0.5; height:999999px; width:999999px; background-color: #FFFFFF; z-index: 10000; position:absolute;"></div>');
 	        $("#loadingajax").append('<img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif" style="position: fixed; bottom: 0; top: 0; left: 0; right: 0; margin: auto; z-index: 10000;"></div>');

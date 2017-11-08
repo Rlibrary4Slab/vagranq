@@ -58,8 +58,8 @@
                     console.log(href)
                     $.ajax({
                      //url: "http://cors-proxy.htmldriven.com/?url=http:ranq-media.com/items/"+href,
-                     //url: "http://ranq-media.com/items/"+href,
-                     url: "http://192.168.1.13:3000/items/"+href,
+                     url: "http://ranq-media.com/items/"+href,
+                     //url: "http://192.168.1.13:3000/items/"+href,
 
          	     type: 'GET',
          	     cache: false,
