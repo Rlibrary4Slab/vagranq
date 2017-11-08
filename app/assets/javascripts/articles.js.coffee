@@ -110,7 +110,6 @@ $(document).on 'ready page:load', ->
     # ループ回して一個一個インスタンス生成
   if $("#item_category").length == -1
    for like_item in gon.like_items
-      console.log(like_item.item_id)
       $('#itemlike'+like_item.item_id).removeClass('icon-fav-off').addClass('icon-fav-on')
       $('#itemlike'+like_item.item_id).html('<img alt="" border="0" height="30" src="/assets/heart_1.png" width="30">')
   favButtons = document.querySelectorAll('.js-item-likes')
@@ -132,7 +131,7 @@ $(document).on 'ready page:load', ->
      if $.inArray(ui.tagLabel, gon.available_tags) == -1 
       return false
  
-  if gon.item_tags?
+   if gon.item_tags?
     for tag in gon.item_tags
       $('input#item-tags').tagit 'createTag', tag
   if $("#showsubmit").length ==1
