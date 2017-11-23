@@ -9,6 +9,8 @@ module API
       mount API::Ver1::Users
       mount API::Ver1::Likes
       mount API::Ver1::Articles
+      mount API::Ver1::Items
+      mount API::Ver1::ItemLikes
 
       # 404NotFoundの扱い
       #route :any, '*path' do

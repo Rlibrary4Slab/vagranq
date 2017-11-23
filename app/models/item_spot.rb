@@ -1,0 +1,3 @@
+class ItemSpot < ActiveRecord::Base
+ belongs_to :item
+end

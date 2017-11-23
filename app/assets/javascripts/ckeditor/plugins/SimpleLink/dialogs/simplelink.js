@@ -43,22 +43,21 @@
                         console.log(href)
                         console.log(oimage)
                         console.log(loglog)
-		        element.setHtml('<div class="article_list_content clearfix link_card"><a href="'+href+'"><img class="s_eyecatch_img s_article_thumbnail" id="s_article_thumbnail article_list_thumb" src='+oimage+' alt="'+oimage+'" /></a><div class="article_list_text"><p class="article_list_title"><a style="" href="'+href+'">'+ loglog +'</a></p></div></div>');
+		        element.setHtml('</br><div class="article_list_content clearfix link_card"><a href="'+href+'"><img class="s_eyecatch_img s_article_thumbnail" id="s_article_thumbnail article_list_thumb" src='+oimage+' alt="'+oimage+'" /></a><div class="article_list_text"><p class="article_list_title"><a style="" href="'+href+'">'+ loglog +'</a></p></div></div></br>');
 		      }else{   
 			console.log("none")
 		        if (oimage != undefined){
 			console.log("inimage")
-  			 element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+oimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
+  			 element.setHtml('</br><div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+oimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div></br>');
 			}else if(outimage != undefined){ 
 			console.log("outimage")
 			console.log(outimage)
 	                var srcroot;
-  			 element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+outimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
+  			 element.setHtml('</br><div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+outimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div></br>');
 			}else{
 			console.log("nonimage")
 	                var nonimage = "/assets/l_e_others_500.png"
-  			 //element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+assets/l_e_others_500.png+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
-  			 element.setHtml('<div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+nonimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div>');
+  			 element.setHtml('</br><div class="out_embed"><div class="out_embed_image_box"><a href="'+href+'"><img class="out_embed_image" src="'+nonimage+'" /></a></div><p class="out_article_title"><a style="" href="'+href+'">'+title+'</a></p></div></br>');
 		        }
                       }
 		      $("#loadingajax").remove()

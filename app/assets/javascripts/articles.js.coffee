@@ -59,7 +59,7 @@ $(document).on "change" ,->
     $(".item_days").css("display": "none")
     $(".item_address").css("display": "initial")
     $(".item_tags").css("display": "none")
-   if $("#item_category").val() == "イベント"
+   if $("#item_category").val() == "イベント" && $("#map").attr("style") != undefined
     $(".field ul#ul_item_day").css("display": "initial")
     $(".item_days").css("display": "initial")
     $(".item_tags").css("display": "initial")
@@ -119,21 +119,23 @@ $(document).on 'ready page:load', ->
    $("form").on "keypress", (e) ->
     if e.keyCode == 13 
         return false;
-   #$("#item_cat").click()  
-   #document.getElementById("item_cat").click()  
+   
   if $('#item-tags').length == 1
    $('#item-tags').tagit
     fieldName:   'item[tag_list]'
     singleField: true
     availableTags: gon.available_tags 
     placeholderText: "スポットを入力"
+    tagLimit: 1
     beforeTagAdded: (ev,ui) ->
+     $("#item_add").val("")
      if $.inArray(ui.tagLabel, gon.available_tags) == -1 
       return false
+    afterTagAdded: (ev,ui) ->
+      $("#item_add").val(ui.tagLabel)
  
-   if gon.item_tags?
-    for tag in gon.item_tags
-      $('input#item-tags').tagit 'createTag', tag
+   for tag in gon.item_tags
+      $('#item-tags').tagit 'createTag', tag 
   if $("#showsubmit").length ==1
    document.getElementById("showsubmit").click() 
   $("p img").css("height":"","width":"")
@@ -148,7 +150,6 @@ $(document).on 'ready page:load', ->
   $('fieldset div').each ->
     if z=$(this).prop('id').match(regz)
       aaaa=z[1]
-  $('#spsubmit').click()
   $('#spsubmit').click()
 
   
@@ -284,7 +285,7 @@ tsubmit=0
   
     
 $(document).on 'click' ,-> #clicked
-  if $("#item_cat").length ==1 
+  if $("#map").attr("style") != undefined
    document.getElementById("item_cat").click()
   if $("#csubmit").length ==1 
    document.getElementById("csubmit").click()  

@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
  belongs_to :user, class_name: "User"
  belongs_to :article
  has_many :item_likes, dependent: :destroy
+ has_many :item_spots, dependent: :destroy
  has_many :item_liked, class_name: "ItemLike", foreign_key: "item_id", dependent: :destroy
  validates :user_id, presence: true
  #validates :title, presence: true,uniqueness: {case_sensitive:false}

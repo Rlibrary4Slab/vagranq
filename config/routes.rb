@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     :passwords => 'users/passwords'
   } 
   get 'ranking' => 'static_pages#ranking'
+  get 'help' => 'static_pages#help'
+  get 'agreement' => 'static_pages#agreement'
   get 'inquiry' => 'inquiry#index'
   post 'inquiry/confirm' => 'inquiry#confirm'
   post 'inquiry/thanks' => 'inquiry#thanks'
@@ -67,7 +69,10 @@ Rails.application.routes.draw do
   get 'verify_logout'  => 'sessions#verify_logout'
   get 'verify_like'  => 'likes#verify_like'
   get 'verify_unlike'  => 'likes#verify_unlike'
+  get 'verify_item_like'  => 'item_likes#verify_like'
+  get 'verify_item_unlike'  => 'item_likes#verify_unlike'
   get 'verify_like_or_not'  => 'likes#verify_like_or_not'
+  get 'verify_item_like_or_not'  => 'item_likes#verify_like_or_not'
   resources :items ,except: [:index] 
 
   resources :users,param: :name ,only: [:index,:access_log_index] do

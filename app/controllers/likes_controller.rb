@@ -55,13 +55,8 @@ class LikesController < ApplicationController
     end
 
     def verify_like
-      #article = Article.find(params[:article_id])
       user = User.find_by(authentication_token: params[:session][:access_token])
       like = user.likes.build(article_id: params[:article_id])
-      puts "ゆべし" 
-      puts user
-      puts params[:article_id] 
-      #like.save
       
         if like.save 
           render text: user.user_name, status: 200

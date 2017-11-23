@@ -1,4 +1,3 @@
-#$('#like-link').html('いいねを取り消しました！');
-#$('#like-link').html('<%= escape_javascript(render("item_likes/like_links",item: @item )) %>');
+$('#item_like-link').html('<%= escape_javascript(render("item_likes/like_links",item: @item )) %>');
 
-#$('#like-count').html('<%= @item.item_likes.count %>');
+$('#item_like-count').html('<%= @item.item_likes.count %>');

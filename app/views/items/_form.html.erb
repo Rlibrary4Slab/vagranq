@@ -38,12 +38,12 @@
       <%= f.hidden_field :address ,id: "item_add"%>
       <div id="map"></div>
     </div>
-    <div class="field item_tags" style="display: none;">
+    <div class="field item_tags" >
      <label>スポット</label>
      <ul id="item-tags"></ul>
     </div>
     <div class="field">
-     <ul style="display:none;" id="ul_item_day">
+     <ul  id="ul_item_day">
 
         <%= f.fields_for :item_days do |builder| %>
           <%= render "item_day_fields", f: builder  %>

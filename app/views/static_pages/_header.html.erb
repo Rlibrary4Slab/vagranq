@@ -1,37 +1,9 @@
 <header class="header">
 <div class="header-inner">
     <h1 class="header-logo"><%= link_to "RanQ", root_path ,:style =>"color: black;"%></h1>
-<!--
-
-<form accept-charset="UTF-8" action="/search" class="header-search" id="searchForm" method="get"><div style="margin:0;padding:0;display:inline"><input type="hidden" /></div>
-  <input class="header-search-input" id="q" name="q" placeholder="気になるワードを入力" type="text" />
-  <input class="m-header-search-button" type="submit" value="" />
-  </form>
-  
-
-    <%#= form_tag articles_path, :method => 'get' do %> <%#　projects_pathはモデル名で読みかえること %>
-      <p>
-        <%#= text_field_tag :title, params[:title] %>
-        <%#= submit_tag "Search", :title => nil %>
-        <%#= text_field_tag :title, params[:title] %>
-        <%#= submit_tag "Search", :title => nil %>
-      </p>
-    <%# end %>
--->
-
-  <div id ="searchBar">
-  <% if Rails.env == "development" %>
-   <%#= form_tag search_path,enforce_utf8: false, :method => :get do %>
-     <%#= text_field_tag :q, params[:q] %>
-     <%#= submit_tag 'Search', :name => nil %>
-   <%# end %>
-  <% end %>
-  </div>
-
   <% if logged_in? %>
-   <%# if user_signed_in? %> 
     <ul class="header-navi is-non-login" id="non_login_user_header_menu"> 
-      <li class="header-navi-menu"><%= link_to "記事を投稿する", new_article_path ,:ref => "nofollow"%></li><!--　ドメインパワーなし -->
+      <li class="header-navi-menu"><%= link_to "記事を投稿する", new_article_path ,:ref => "nofollow"%></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           
@@ -68,6 +40,9 @@
         </div>
       </li>
     </ul>
+   <% if @notification_counts == 0 %>
+    <script> $("#notification_count").hide(); </script>
+   <% end %>
   <% else %>
    <ul class="header-navi is-non-login" id="non_login_user_header_menu">
     <li class="header-navi-menu"><%= link_to "記事を投稿する", new_article_path ,:ref =>"nofollow" %></a></li>
@@ -77,8 +52,5 @@
   <%end%>
 </div><!-- /.hd_in -->
 
-<% if @notification_counts == 0 %>
-  <script> $("#notification_count").hide(); </script>
-<% end %>
 
 </header>

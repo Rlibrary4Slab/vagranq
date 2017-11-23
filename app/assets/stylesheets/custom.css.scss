@@ -234,8 +234,8 @@ p.article_list_lead {
   #column_content {
     width: 890px;
     float: left;
-    margin-bottom: -100000px;
-    padding: 0 20px 100000px 0;
+    //margin-bottom: -100000px;
+    //padding: 0 20px 100000px 0;
     overflow-x: hidden;
     overflow-y: visible;
   }
@@ -557,6 +557,9 @@ ul.user_like li {
   margin-right: 5px;
 }
 #like-count {
+ color : #ED4B4B;
+}
+#item_like-count {
  color : #ED4B4B;
 }
 
@@ -950,11 +953,18 @@ a.dropdown-toggle:hover {
 .prof-card-right h3 a:link {
   color: #000000 !important;
 }
+.prof-card-right h3 a:visited {
+	color: #000000 !important;
+}
 .prof-card-link {
   color: #3897f0 ;
   text-align: right;
 }
 .prof-card-link span a:link{
+  color: #3897f0 !important;
+  text-align: right;
+}
+.prof-card-link span a:visited{
   color: #3897f0 !important;
   text-align: right;
 }

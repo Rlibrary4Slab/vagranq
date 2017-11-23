@@ -12,16 +12,7 @@
  
   
   <div class="article_list_content clearfix">
-    <!--
-     <div class="article_list_thumb" style="width:60px;">
-    -->
-    <!--<div id="s_article_thumbnail article_list_thumb" class="s_article_thumbnail" style="    width: 60px;
-    height: 60px;
-    overflow: hidden;
-    background-color: #888;
-    border: 1px solid #222; margin-right: 20px; index:-1;"> -->
     <%= link_to image_tag(article.eyecatch_img ,:class =>"s_eyecatch_img") ,article %>
-    <!--</div>-->
     <div class="article_list_text">
     <p class="side_article_title"><%= link_to article.title.html_safe, article %></p>
     <p class="side_article_user">
@@ -32,4 +23,3 @@
 <%end %> 
 </div>
 
-<!--<p class="genre_to_allTags">&raquo;&nbsp;<%#= link_to "ランキングを20位までみる",allranking_path %></a></p>-->

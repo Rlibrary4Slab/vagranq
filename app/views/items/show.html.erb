@@ -37,7 +37,7 @@
          <% end %>
          </li>
         
-        <li id="like-count">
+        <li id="item_like-count">
           <%=  @item.item_likes.count id: "like-count" %>
         </li>
         
@@ -66,7 +66,8 @@
       <tr>
        <th>場所</th>
        <td class="map">
-          <span><%= @item.address %></span>
+          <span><%= @item.tag_list.first %></span>
+          <span><%= @item.address if @item.category == "イベント"%></span>
           <iframe
             width="600"
             height="450"
@@ -124,7 +125,12 @@
      </tbody>
    </table>
   </div>
-  <%= render partial: 'tags', locals: { tags: @item.tags } %>
+  <%#= render partial: 'tags', locals: { tags: @item.tags } %>
+  <% if @item.category == "スポット" %>
+   <% ItemSpot.where(spot_id: @item.id).each do |event|%>
+    <%= link_to Item.find(event.item_id).title , item_path(Item.find(event.item_id))%>
+   <% end %>
+  <% end %>
 
 </div><!-- /article_content -->
 </div><!-- /#column_content -->

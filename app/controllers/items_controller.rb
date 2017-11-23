@@ -1,5 +1,4 @@
 class ItemsController < AuthorizedController
-#class ArticlesController < ApplicationController
   include Notifications
   
   before_action :combine_item?, only: [:show]
@@ -11,14 +10,8 @@ class ItemsController < AuthorizedController
   before_action :correct_draft,   only: [:show]
   before_action :all
   def all
-      @sitename = "RanQ"
-      add_breadcrumb @sitename, root_path
-      #ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id).first(10)
-      #@rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})").includes(:user)
+      add_breadcrumb "RanQ", root_path
       @rank = Article.published.limit(10).order(view_count: :desc).includes(:user)
-      #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
-      @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
-
       @corporecom = Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)
   end
     
@@ -31,6 +24,7 @@ class ItemsController < AuthorizedController
 
   
   def show
+    puts @item.title
     respond_to do |format|
       format.html
       format.json {render :json => @item}
@@ -58,7 +52,6 @@ class ItemsController < AuthorizedController
       
       @item.save!
       flash[:success] = '[編集対象]を保存しました。'
-      #redirect_to [:home, @article]
       redirect_to @item
     else
       render :new, layout: 'article_new'
@@ -66,13 +59,24 @@ class ItemsController < AuthorizedController
   end
 
   def update
+    puts Item.find(39).item_spots.empty?
+    puts Item.find(39).title
 
     @item.assign_attributes(item_params)
     if @item.valid?
+      if @item.category == "イベント"
+        spot_id = Item.find_by(title: @item.tag_list.first).id 
+        if !@item.item_spots.empty? #アイテムがスポットを保持しているばあい通す
+          ItemSpot.find_by(item_id: @item.id).update_attributes(spot_id: spot_id)
+        else
+          item_spot = @item.item_spots.build(item_id: @item.id,spot_id: spot_id ) 
+          item_spot.save! 
+        end
+      end
+      @item.update_attributes(address: Item.find_by(title: @item.tag_list.first).address)
       @item.save!
       flash[:success] = '[編集箇所]を更新しました'
       
-      #redirect_to [:home, @article]
       redirect_to @item
     else
      render :edit

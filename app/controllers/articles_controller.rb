@@ -1,5 +1,4 @@
 class ArticlesController < AuthorizedController
-#class ArticlesController < ApplicationController
   include Notifications
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
@@ -7,17 +6,15 @@ class ArticlesController < AuthorizedController
   before_action :correct_draft,   only: [:show]
   before_action :certificate_user
   before_action :set_like_items_to_gon , only: [:show]
-  before_action :all
+  before_action :all, except: [:show,:new,:create,:edit,:update]
+  before_action :allshow, only: [:show]
     def all
-      @sitename = "RanQ"
-      add_breadcrumb @sitename, root_path
-      #ids = Like.group(:article_id).order('count(article_id) desc').pluck(:article_id).first(10)
-      #@rank = Article.published.where(id: ids).order("field(id,#{ids.join(',')})").includes(:user) 
+      add_breadcrumb "RanQ", root_path
       @rank = Article.published.limit(10).order(view_count: :desc).includes(:user)
-      #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
-      @toprank = Article.where(:corporecom => [1..3]).published.limit(3)
-      
       @corporecom = Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)
+    end
+    def allshow
+      add_breadcrumb "RanQ", root_path
     end
     
     def pvranking
@@ -31,14 +28,6 @@ class ArticlesController < AuthorizedController
   # GET /articles.json
   def index
     add_breadcrumb "記事一覧", :articles_path
-    #@corporecom = Article.order("corporecom desc").published.per_page_kaminari(params[:page]).limit(10)
-    #@articles = Article.page(params[:page]).per(3).published.get_by_title params[:title]
-    #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
-
-    #@toprank = Article.find(Like.group(:article_id).where('updated_at >= ?', 24.hour.ago).order('count(article_id) desc').limit(3).pluck(:article_id))
-    #@toprank = Article.where(:corporecom => [1..3]).published.limit(3)
-
-    #@articles = Article.order('updated_at desc').page(params[:page]).published
     @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user)
   end
   
@@ -154,45 +143,26 @@ class ArticlesController < AuthorizedController
   # GET /articles/1.json
   def show
     
-    if @article.category == "ファッション"
-      add_breadcrumb @article.category, fashion_path
-    end
-    if @article.category == "美容健康"
-      add_breadcrumb @article.category, beauty_path
-    end
-    if @article.category == "おでかけ"
-      add_breadcrumb @article.category, hangout_path
-    end
-    if @article.category == "グルメ"
-      add_breadcrumb @article.category, gourmet_path
-    end
-    if @article.category == "ライフスタイル"
-      add_breadcrumb @article.category, lifestyle_path
-    end
-    if @article.category == "エンタメ"
-      add_breadcrumb @article.category, entertainment_path
-    end
-    if @article.category == "インテリア"
-      add_breadcrumb @article.category, interior_path
-    end
-    if @article.category == "ガジェット"
-      add_breadcrumb @article.category, gadget_path
-    end
-    if @article.category == "学び"
-      add_breadcrumb @article.category, learn_path
-    end
-    if @article.category == "おもしろ"
-      add_breadcrumb @article.category, funny_path
-    end
+    add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
+    add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
+    add_breadcrumb @article.category, hangout_path if @article.category == "おでかけ"
+    add_breadcrumb @article.category, gourmet_path if @article.category == "グルメ"
+    add_breadcrumb @article.category, lifestyle_path if @article.category == "ライフスタイル"
+    add_breadcrumb @article.category, entertainment_path if @article.category == "エンタメ"
+    add_breadcrumb @article.category, interior_path if @article.category == "インテリア"
+    add_breadcrumb @article.category, gadget_path if @article.category == "ガジェット"
+    add_breadcrumb @article.category, learn_path if @article.category == "学び"
+    add_breadcrumb @article.category, funny_path if @article.category == "おもしろ"
+
     @likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
     ids = @article.more_like_this.results.map(&:id)
     @idsemptybool = ids.empty?
-    @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) 
+    @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})")
     if User.find_by(id: @article.user_id).certificated != true
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
-     end 
+    end 
     @page_views_get = REDIS.zscore "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}","#{@article.id}"
     @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
@@ -205,22 +175,11 @@ class ArticlesController < AuthorizedController
 
 
     if @page_views <= 1000              #記事単体view数
-      puts @article.title
-      puts @page_views
-      if @page_views % 100 == 0
-      # if @page_views % 1 == 0
-        notification_savesend(@article, @page_views, 4, @article.eyecatch_img)
-      end
+      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 100 == 0
     else
-      #if @page_views % 2 == 0
-      if @page_views % 2000 == 0
-        notification_savesend(@article, @page_views, 4, @article.eyecatch_img)
-      end
+      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 2000 == 0
     end
-    if sum_of_imp % 1000 == 0            #総view数
-    #if sum_of_imp % 1 == 0            #総view数
-    notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb))
-    end
+    notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb)) if sum_of_imp % 1000 == 0 
     respond_to do |format|
       format.html
       format.json {render :json => @article}
