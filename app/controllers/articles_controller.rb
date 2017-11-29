@@ -142,6 +142,7 @@ class ArticlesController < AuthorizedController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    puts @article.published?
     
     add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
     add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
@@ -159,7 +160,7 @@ class ArticlesController < AuthorizedController
     ids = @article.more_like_this.results.map(&:id)
     @idsemptybool = ids.empty?
     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})")
-    if User.find_by(id: @article.user_id).certificated != true
+    if  @article.published? != false && User.find_by(id: @article.user_id).certificated != true 
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
     end 

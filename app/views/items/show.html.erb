@@ -66,8 +66,10 @@
       <tr>
        <th>場所</th>
        <td class="map">
-          <span><%= @item.tag_list.first %></span>
-          <span><%= @item.address if @item.category == "イベント"%></span>
+          <%if @item.category == "イベント"%>
+          <span><%= @item.tag_list.first  %></span><br/>
+          <% end %>
+          <span><%= @item.address %></span>
           <iframe
             width="600"
             height="450"

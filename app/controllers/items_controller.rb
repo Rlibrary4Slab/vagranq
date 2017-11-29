@@ -49,6 +49,19 @@ class ItemsController < AuthorizedController
     
     
     if @item.valid?
+      if @item.category == "イベント"
+        spot_id = Item.find_by(title: @item.tag_list.first).id
+        if !@item.item_spots.empty? #アイテムがスポットを保持しているばあい通す
+          ItemSpot.find_by(item_id: @item.id).update_attributes(spot_id: spot_id)
+        else
+          item_spot = @item.item_spots.build(item_id: @item.id,spot_id: spot_id )
+          item_spot.save!
+        end
+        if !Item.find_by(title: @item.tag_list.first).nil?
+         puts "ちゃんとアドレスがあればこっち"
+         @item.update_attributes(address: Item.find_by(title: @item.tag_list.first).address)
+        end
+      end
       
       @item.save!
       flash[:success] = '[編集対象]を保存しました。'
@@ -59,8 +72,6 @@ class ItemsController < AuthorizedController
   end
 
   def update
-    puts Item.find(39).item_spots.empty?
-    puts Item.find(39).title
 
     @item.assign_attributes(item_params)
     if @item.valid?
@@ -72,8 +83,11 @@ class ItemsController < AuthorizedController
           item_spot = @item.item_spots.build(item_id: @item.id,spot_id: spot_id ) 
           item_spot.save! 
         end
+        if !Item.find_by(title: @item.tag_list.first).nil?
+         puts "ちゃんとアドレスがあればこっち"
+         @item.update_attributes(address: Item.find_by(title: @item.tag_list.first).address)
+        end
       end
-      @item.update_attributes(address: Item.find_by(title: @item.tag_list.first).address)
       @item.save!
       flash[:success] = '[編集箇所]を更新しました'
       

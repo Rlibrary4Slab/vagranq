@@ -8,7 +8,7 @@ class Item < ActiveRecord::Base
  has_many :item_spots, dependent: :destroy
  has_many :item_liked, class_name: "ItemLike", foreign_key: "item_id", dependent: :destroy
  validates :user_id, presence: true
- #validates :title, presence: true,uniqueness: {case_sensitive:false}
+ validates :title, presence: true,uniqueness: {case_sensitive:false}
  #validates :description, presence: true
  has_many :item_days
  mount_uploader :image, ItemImageUploader

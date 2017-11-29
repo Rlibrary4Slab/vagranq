@@ -193,8 +193,45 @@ a > img {
 }
 .link_card a img{
     max-width: initial;
-   }
+}
+.button1 a {
+	text-decoration: none;
+	padding: 10px;
+	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background: -o-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5e5e5));
+	background-image: -ms-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background-image: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+	box-shadow: 0px 0px 2px #cccccc;
+	-webkit-box-shadow: 0px 0px 2px #cccccc;
+}
+.button1 a:hover {
+	background: -moz-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background: -webkit-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background: -o-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#ffffff));
+	background-image: -ms-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background-image: linear-gradient(to bottom, #e5e5e5 0%, #ffffff 100%);
+}
 
+.button2 a {
+	padding: 10px;
+	border: 3px solid #142430;
+	color: #4c3f37;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	transition: all .5s;
+}
+.button2 a:hover {
+	color: #ffffff;
+	background: #142430;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;
+}
 .out_embed {
      border: 1px solid #e5e5e5 ;
      padding: 20px;
