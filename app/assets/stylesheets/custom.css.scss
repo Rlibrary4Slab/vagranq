@@ -535,10 +535,12 @@ h1.article_title {
 ul.social-bottun {
   list-style-type: none;
   padding-left: 0;
+  
 }
 ul.social-bottun li {
   display: inline-block;
   margin-right: 5px;
+  vertical-align: top;
 }
 .head_like_user {
   float: left;
