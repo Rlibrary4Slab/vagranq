@@ -41,6 +41,13 @@ module API
  
       get "/articles/:id" do
 	at = Article.find(params[:id])
+        #puts "aaa|#{at.user_id}|#{params[:id]}"
+        REDIS.zincrby "user/#{at.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{params[:id]}"
+        REDIS.zincrby "user/#{at.user_id}/articles", 1, "#{params[:id]}"
+        @page_views_get_all = REDIS.zscore "user/#{at.user_id}/articles","#{params[:id]}"
+        @page_views = @page_views_get_all.to_i
+
+        at.update_columns(view_count: @page_views)
         #present at
         present at, with: Entity::V1::ArticleDetailEntity
       end

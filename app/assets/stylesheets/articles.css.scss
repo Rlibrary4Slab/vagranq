@@ -372,12 +372,14 @@ div.afd{
   }
 }
 .hb_button {
-  background-color: #00a4de;
-  height:20px;
-  border-radius:10%;
+  width: 60px;
   a {
+   background-color: #00a4de;
+   border-radius:10%;
    color: white !important;
-   margin: 10px;
+   display: block;
    text-decoration: none !important;
+   text-align: center;
+   height: 20px;
   }
 }

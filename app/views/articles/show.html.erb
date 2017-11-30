@@ -27,7 +27,7 @@
     <input type="button" id="showsubmit" style="display:none;"/>
     <div class="head_social" style="float:right;">
       <ul class="social-bottun">
-        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
+        <li class="hb_button"><a href="javascript:void(0);"  onclick="window.open('http://b.hatena.ne.jp/entry/http://ranq-media.com/articles/<%= @article.id%>', '', 'width=500,height=400')">B!</a></li>
         <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
       </ul>
@@ -99,12 +99,9 @@
 
  <div class="head_social" style="float:right;">
       <ul class="social-bottun">
-        <li><span class='st_sharethis_vcount' displayText='ShareThis'></span></li>
+        <li class="hb_button"><a href="javascript:void(0);"  onclick="window.open('http://b.hatena.ne.jp/entry/http://ranq-media.com/articles/<%= @article.id%>', '', 'width=500,height=400')">B!</a></li>
         <li><span class='st_facebook_vcount' displayText='Facebook'></span></li>
         <li><span class='st_twitter_vcount' displayText='Tweet'></span></li>
-        <li  class="tw_button" ><a href="javascript:void(0);" onclick="window.open('https://twitter.com/share?url=http://ranq-media.com/articles/<%= @article.id%>', '', 'width=500,height=400')">ツイート</a></li>
-        <li class="fb_button"><a href="javascript:void(0);"  onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http://ranq-media.com/articles/<%= @article.id%>', '', 'width=500,height=400')">シェア</a></li>
-        <li class="hb_button"><a href="javascript:void(0);"  onclick="window.open('http://b.hatena.ne.jp/entry/http://ranq-media.com/articles/<%= @article.id%>', '', 'width=500,height=400')">B!</a></li>
       </ul>
  </div>
 <div class="prof-card">
