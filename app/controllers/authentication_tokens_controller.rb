@@ -1,5 +1,5 @@
 class AuthenticationTokensController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def update
     token = current_user.generate_authentication_token
@@ -7,7 +7,10 @@ class AuthenticationTokensController < ApplicationController
   end
 
   def destroy
-    current_user.delete_authentication_token
+    #current_user.delete_authentication_token
+    user = User.find_by(authentication_token: params[:user_token])
+    user.delete_authentication_token
+
     render nothing: true
   end
 end

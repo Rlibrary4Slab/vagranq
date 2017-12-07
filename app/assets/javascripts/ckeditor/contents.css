@@ -196,6 +196,7 @@ a > img {
 }
 .button1 a {
 	text-decoration: none;
+ 	display: inline-block;
 	padding: 10px;
 	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
 	background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
@@ -216,6 +217,7 @@ a > img {
 }
 
 .button2 a {
+	display: inline-block;
 	padding: 10px;
 	border: 3px solid #142430;
 	color: #4c3f37;
