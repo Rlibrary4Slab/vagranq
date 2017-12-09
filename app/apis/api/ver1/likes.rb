@@ -1,22 +1,3 @@
-module Entity
-  module V1
-    class ArticlesEntity < Grape::Entity
-      expose :id,:title,:eyecatch_img,:view_count
-      unexpose :contents
-    end
-
-    class LikesEntity < Grape::Entity
-      expose :id
-      #unexpose :user #, using: Entity::V1::UsersEntity
-      expose :article, using: Entity::V1::ArticlesEntity
-    end
-
-
-
-
-  end
-end
-
 module API
   module Ver1
     class Likes < Grape::API
