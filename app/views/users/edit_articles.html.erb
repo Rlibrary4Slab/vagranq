@@ -8,12 +8,8 @@
     <section class="user_info">
       <h1>
         <div class="profimg">
-        <% if @user.certificated == true %>
-		くろぶち<%= image_tag @user.user_image_url(:thumb)%>
-        <%else%>
 	　<%= image_tag @user.user_image_url(:thumb)%>
      
-        <% end %>    
         </div>
       </h1>
         <%= @user.user_name %>
@@ -69,13 +65,9 @@
          <span style="letter-spacing:0px">Total article</span>：<%= @user.count_articles %></br>
          <span style="letter-spacing:0px">昨日あなたが獲得したView数</span>：<%= @weeks_views[0] %></br>
          </div>
-         <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @floen%>
+         <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @maxfloen,min: @minfloen%>
          <div style="margin-bottom:30px;"></div>
-          <% if logged_in? %>
-            <%= render @articleus %>
-          <% else %>
-            <%= render @nuarticleus %>
-          <% end %> 
+          <%= render @articleus %>
 
           </tbody>
         </table>

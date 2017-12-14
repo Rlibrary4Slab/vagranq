@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   
   before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
-  #before_action :correct_user,   only: [:edit, :update,:edit_articles]
-  before_action :set_user, only: [ :edit, :update, :like_articles]
+  before_action :set_user, only: [ :edit, :update, :like_articles,:show,:edit_articles]
+  #before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update,:edit_articles]
 #  before_action :admin_user?, only: [ :edit, :update, :like_articles,:edit_articles,:access_log_index]
   helper_method :sort_column, :sort_direction,:sort_gteq,:sort_lteq
  
@@ -30,85 +30,102 @@ class UsersController < ApplicationController
     @q = User.ransack(params[:q])
     @q.build_sort if @q.sorts.empty?
     if params[:q] != {}
-     @users = User.per_page_kaminari(params[:page])
+     @users = User.with_not_regexp("name", "guest00[0-9+]+").order(sort_column + ' ' + sort_direction).per_page_kaminari(params[:page])
      @users.each do |user|
-      user.update_columns(period_count_articles: user.articles.where(created_at: sort_gteq..sort_lteq).count)
       keys = []
       beting =0
       
       if sort_gteq != 0           
-       user.articles.each do |article| 
         (sort_gteq.to_date..sort_lteq.to_date).each do |date| 
+	  #検索した日の間までの記事を取得させる準備
     
-          keys.concat(["user/#{article.user_id}/articles/daily/#{date.to_s}"]) 
+          keys.concat(["user/#{user.id}/articles/daily/#{date.to_s}"]) 
          end #date 
 
-        betweens=  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1 
-        # if betweens.empty? == true 
             #puts "このユーザーの#{sort_gteq}から#{sort_lteq}までの期間変数が定まっていないため"
-        REDIS.zunionstore "user/#{article.user_id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", keys 
-        # end 
-
-       end #article
-
+        REDIS.zunionstore "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", keys 
       end # if
-       betweens=  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1 
+       betweens=  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1,with_scores: true   #ユーザー全公開投稿ID取得 View数を取得　
 
-       # if betweens.empty? == true
        period = 0 
-        #puts "このユーザーは投稿viewが0か"
 
        betweens.each do |between|
-         period += REDIS.zscore "user/#{user.id}/articles", between
+         period += between.last.to_i
        end # between
-       #end 
-      user.update_columns(period_articles_views: period.to_i)
+      sum_of_views =0
+      
+     
+      all_users_view =REDIS.zrevrange "user/#{user.id}/articles", 0, -1, withscores: true
+     all_users_view.each do |view|
+      sum_of_views+=view.last.to_i
+     end
+     
+      user.update_columns(period_articles_views: period.to_i,
+                          all_articles_views: sum_of_views,
+                          period_count_articles: user.articles.published.where(created_at: sort_gteq..sort_lteq).count) #投稿された「期間内の投稿」の総View
+    
      end #user
-     @users = User.per_page_kaminari(params[:page]).order(sort_column + ' ' + sort_direction)
+     @users = User.per_page_kaminari(params[:page]).with_not_regexp("name", "guest00[0-9+]+").order(sort_column + ' ' + sort_direction)
     else
-     @users = User.per_page_kaminari(params[:page])
+     @users = User.with_not_regexp("name", "guest00[0-9+]+").per_page_kaminari(params[:page])
     end 
   end
 
 
   def show
-    #str = "heroheroguest00hero"
-    #str = "guest00hero"
+     
     if params[:name] != "websocket"
-     @user = User.find_by(name: params[:name])
-     @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
+     #puts  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1
+     #keys = []
+     #(2017-12-01.to_date..2017-12-12.to_date).each do |date|
+          #検索した日の間までの記事を取得させる準備
+   
+     #     keys.concat(["user/#{user.id}/articles/daily/#{date.to_s}"])
+     #end 
+     @sum_of_views=0
+     all_users_view =REDIS.zrevrange "user/#{@user.id}/articles", 0, -1, withscores: true
+     all_users_view.each do |view|
+      @sum_of_views+=view.last.to_i
+     end
+     
+     @yesterday_article_published = REDIS.scard "user/#{@user.id}/articles/published/#{Date.yesterday.to_s}"
+
+     #test = 200
+     #@user.update_attributes(writer_status: 10)
+     #@user.update_attributes(writer_status: 20) if test >= 200 && @user.writer_status == "序" 
+     #@user.update_attributes(writer_status: 30) if test >= 300 && @user.writer_status == "破"
+     #@user.update_attributes(writer_status: 40) if test >= 400 && @user.writer_status == "急" 
+
+     #User.all.limit(50).each do |user|
+     # puts "#{user.user_name}:#{user.week_views.first.day0}"   
+     #end
+
      @nuarticleus = @user.articles.published.order("created_at desc").per_page_kaminari(params[:page])
-     @title = "自身の投稿"
-     @larticles = @user.like_articles
     else
      @user = current_user
     end
   end
 
   def edit_articles
-    @user = User.find_by(name: params[:name])
     @articleus = @user.articles.order("created_at desc").per_page_kaminari(params[:page])
     @title = "投稿編集"
     wv =  @user.week_views.first
     @weeks_views = [wv.day0,wv.day1,wv.day2,wv.day3,wv.day4,wv.day5,wv.day6]
-#   @weeks_views = [0,0,0,0,0,0,0]
-#    @user.articles.each do |article| 
-#       for num in 0..6 do
-#         page_views_get = REDIS.zscore "user/#{article.user_id}/articles/daily/#{Date.today.advance(:days=>1-(num.to_i)).to_s}", "#{article.id}" 
-#         @weeks_views[num] += page_views_get.to_i
-#       end
-#       @ids = REDIS.zrevrange "user/#{article.user_id}/articles/daily/#{Date.yesterday.to_s}",0,0 
-#    end 
     @charts = [[Date.today.advance(:days=>-7).strftime("%m/%d"),@weeks_views[6]],[Date.today.advance(:days=>-6).strftime("%m/%d"),@weeks_views[5]],[Date.today.advance(:days=>-5).strftime("%m/%d"),@weeks_views[4]],[Date.today.advance(:days=>-4).strftime("%m/%d"),@weeks_views[3]],[
 Date.today.advance(:days=>-3).strftime("%m/%d"),@weeks_views[2]],[
 Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday.strftime("%m/%d"),@weeks_views[0]]]
     if @weeks_views.max != 0
      
      maxviewdigits = Math.log10(@weeks_views.max).to_i #12345 5
-     flotview = @weeks_views.max * 0.1 ** maxviewdigits #1.2345
-     @floen = BigDecimal(flotview.to_i+1).ceil * 10 ** maxviewdigits #2
+     flotmaxview = @weeks_views.max * 0.1 ** maxviewdigits #1.2345
+     @maxfloen = BigDecimal(flotmaxview.to_i+1).ceil * 10 ** maxviewdigits #2
+
+     minviewdigits = Math.log10(@weeks_views.min).to_i #12345 5
+     flotminview = @weeks_views.min * 0.1 ** minviewdigits #1.2345
+     @minfloen = BigDecimal(flotminview.to_i+1).ceil * 10 ** minviewdigits #2
     else
-     @floen = 0
+     @maxfloen = 0
+     @minfloen = 0
     end
   end
 
@@ -224,14 +241,11 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
     end
     
     def correct_user
-      #@user = User.find(params[:id])
-      @user = User.find_by(name: params[:name])
-      redirect_to(root_url) unless @user == current_user
+      redirect_to(user_path(@user)) unless @user == current_user
     end
     
     def admin_user?
-      #@user = User.find(params[:id])
-      @user = User.find_by(name: params[:name])
+      
       redirect_to(root_url) unless current_user.admin != false 
     end
     def certificate_user

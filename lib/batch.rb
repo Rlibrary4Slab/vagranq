@@ -6,16 +6,20 @@ class Batch
     users = User.all
     users.each do |user|
       yesterday_total_view = 0
-      user.articles.each do |article|
-        if article.aasm_state != "draft"
-          each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
-        #  each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
-          if each_yesterday_view.nil? #it's needed when it cannot read view for nil
-            each_yesterday_view = 0
-          end
-          yesterday_total_view += each_yesterday_view.to_i
-        end
+      user_yesterday_views = REDIS.zrevrange "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}",0 ,-1,with_scores: true
+      user_yesterday_views.each do |view|
+        yesterday_total_view+=view.last.to_i
       end
+      #user.articles.each do |article|
+        #if article.aasm_state != "draft"
+          #each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
+        #  each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.today.to_s}", "#{article.id}"
+          #if each_yesterday_view.nil? #it's needed when it cannot read view for nil
+          #  each_yesterday_view = 0
+          #end
+          #yesterday_total_view += each_yesterday_view.to_i
+        #end
+      #end
       if yesterday_total_view != 0 
        # puts user.id
        # puts yesterday_total_view

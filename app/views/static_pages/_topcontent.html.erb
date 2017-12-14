@@ -12,14 +12,12 @@
     <%= link_to image_tag(article.eyecatch_img, :class =>"top_s_eyecatch_img") ,article %>  
    
     <p class="article_list_title"><span><%= link_to article.title.html_safe, article %></p></span></p>
-    <p class="article_list_lead">
-      <%#= article.description.html_safe %>
-    </p>
     
     <div class="topcontent_user">
       <a><%= link_to article.user.user_name, article.user ,:ref => "nofollow" %></a>
     </div>
-          <span><%= article.view_count %>View</span>
+          <% page_views_get_all = REDIS.zscore "user/#{article.user_id}/articles","#{article.id}" %>
+          <span><%= page_views_get_all.to_i %>View</span>
   </li>
   <!-- /.topcontet_content -->
 <% end %>

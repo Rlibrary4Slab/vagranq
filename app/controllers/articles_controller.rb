@@ -1,7 +1,7 @@
 class ArticlesController < AuthorizedController
   include Notifications
-  before_action :authenticate_user!, only: [:new,:edit]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
+  before_action :authenticate_user!, only: [:new,:edit]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
   before_action :certificate_user
@@ -142,7 +142,6 @@ class ArticlesController < AuthorizedController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    puts @article.published?
     
     add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
     add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
@@ -155,30 +154,36 @@ class ArticlesController < AuthorizedController
     add_breadcrumb @article.category, learn_path if @article.category == "学び"
     add_breadcrumb @article.category, funny_path if @article.category == "おもしろ"
 
-    @likes = Like.where(article_id: params[:id])
+    #@likes = Like.where(article_id: params[:id])
     add_breadcrumb @article.title
-    ids = @article.more_like_this.results.map(&:id)
+    ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
     @idsemptybool = ids.empty?
     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})")
     if  @article.published? != false && User.find_by(id: @article.user_id).certificated != true 
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
     end 
-    @page_views_get = REDIS.zscore "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}","#{@article.id}"
     @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
-    
-    @article.update_columns(view_count: @page_views)
-    @article_view = @article.view_count
-    sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
+
+    #@article.update_columns(view_count: @page_views)
+    #@article_view = @article.view_count
+    @article_view = @page_views 
+    sum_of_imp=0
+    all_users_view =REDIS.zrevrange "user/#{@article.user_id}/articles", 0, -1, withscores: true
+    all_users_view.each do |view|
+      sum_of_imp+=view.last.to_i
+    end
+    #sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
+    #記事を書いたユーザーの総投稿の総View数取得 もっと早くできる
     
     live_counter_view   
 
 
     if @page_views <= 1000              #記事単体view数
-      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 100 == 0
+      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 100 == 0 && @page_views !=0
     else
-      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 2000 == 0
+      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 2000 == 0 && @page_views !=0
     end
     notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb)) if sum_of_imp % 1000 == 0 
     respond_to do |format|
@@ -193,7 +198,6 @@ class ArticlesController < AuthorizedController
   def new
     @article = Article.new
     2.times {@article.contents.build}
-    @items = Item.where(combine: nil)
     render layout: 'article_new'
   end
 
@@ -216,10 +220,17 @@ class ArticlesController < AuthorizedController
     if @article.valid?
       
       @article.save!
+      ids = @article.more_like_this.results.map(&:id)
+      REDIS.del "articles/#{@article.id}/morelikethis"
+      REDIS.lpush "articles/#{@article.id}/morelikethis", ids
+      #puts @article.id
+     
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
+        REDIS.sadd "user/#{@article.user_id}/articles/published/#{Date.today.to_s}", "#{@article.id}"
         flash[:success] = '記事を公開しました。'
+        
         if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
         end
@@ -273,10 +284,15 @@ class ArticlesController < AuthorizedController
 
     if @article.valid?
       @article.save!
+      puts "update"
+      ids = @article.more_like_this.results.map(&:id)
+      REDIS.del "articles/#{@article.id}/morelikethis"
+      REDIS.lpush "articles/#{@article.id}/morelikethis", ids 
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
         if @article.published_at.nil? != true 
+         REDIS.sadd "user/#{@article.user_id}/articles/published/#{Date.today.to_s}", "#{@article.id}"
          if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true 
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
          end
@@ -323,7 +339,6 @@ class ArticlesController < AuthorizedController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
-      #@article = current_user.articles.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -344,7 +359,6 @@ class ArticlesController < AuthorizedController
     
     def correct_draft
       @articlep = Article.published.find_by(id: params[:id])
-      @article = Article.find_by(id: params[:id])
       if logged_in?
        redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
       else 

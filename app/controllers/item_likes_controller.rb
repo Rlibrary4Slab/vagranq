@@ -8,8 +8,8 @@ class ItemLikesController < ApplicationController
     
     def unlike
         @item = Item.find(params[:item_id])
-        unlike = current_user.item_likes.find_by(item_id: @item.id,article_id: params[:article_id])
-        unlike.destroy
+        like = current_user.item_likes.find_by(item_id: @item.id,article_id: params[:article_id])
+        like.destroy
         
     end
 

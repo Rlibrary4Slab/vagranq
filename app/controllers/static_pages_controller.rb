@@ -12,7 +12,6 @@ class StaticPagesController < ApplicationController
     
     #@uPeriodView = User.per_page_kaminari(params[:page]).order("period_articles_views desc")
     @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user)
-    #@articles = Article.paginate(:page =>  params[:page]).published
 
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').order(created_at: :desc).limit(8).pluck(:article_id))
     

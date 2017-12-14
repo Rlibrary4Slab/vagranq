@@ -1,32 +1,14 @@
 
-<%# logged_in? && current_user.name != @user.name ?  val = @nuarticleus  : val= @articleus %>
     <ul class="user_page_entry_list">
 <% @nuarticleus.each do |article| %>
- 
-
-
-
      <li class="user_page_entry">
       <div class="user_page_image_box">
         <%= link_to image_tag(article.eyecatch_img,:class=>"user_page_image" ) ,article %>
        </div>
 
        <p class="out_article_title">
-          <% if article.aasm_state == "draft" %>
-          <span style="color:#AAAAAA;"><%= link_to article.title.html_safe, article, style: "color:#AAAAAA;"  %><下書き>
-          <% else %>
-          <%= link_to article.title.html_safe, article  %>
-          <% end %>
+          <%= link_to article.title, article  %>
        </p>
        </li>
-
-
-
-
-
-
-
-
-
 <% end %>
     </ul>

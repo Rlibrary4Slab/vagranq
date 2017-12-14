@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
     
     #is_impressionable
     paginates_per 20 
+
+    enum writer_status: {"序":10,"破":20,"急":30,"終":40}
     def to_param
      name
    

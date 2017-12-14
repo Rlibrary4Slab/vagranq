@@ -21,7 +21,7 @@ module Notifications
 
     def live_counter_likeup
         notify = WebsocketRails.users[@article.user_id]
-        data = {article_id:@article.id, content:@article.likes_count+1,total_content: @article.user.total_likes, user_id: @article.user.id}
+        data = {article_id:@article.id, content:@article.likes_count.to_i+1,total_content: @article.user.total_likes, user_id: @article.user.id}
         notify.send_message(:real_time_like, data)
     end
 
