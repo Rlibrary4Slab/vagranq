@@ -127,6 +127,7 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
      @maxfloen = 0
      @minfloen = 0
     end
+    render layout: "user_page"
   end
 
   def share_twitter

@@ -34,7 +34,7 @@ class Settings::ProfilesController < Settings::BaseController
 
       current_user.save!
       if params[:user][:user_image].present?
-        render :crop
+        render :crop,layout: "user_page"
       else
         flash[:success] = '保存しました'
         redirect_to action: :edit

@@ -18,7 +18,6 @@
 //= require tag-it
 //= require underscore
 //= require gmaps/google
-// require tag-in
 //= require jquery.Jcrop
 //= require jquery.infinitescroll
 //= require ckeditor/init

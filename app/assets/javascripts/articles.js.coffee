@@ -164,7 +164,6 @@ $(document).on 'click', '.remove_fields', (event) ->
   $(".add_fields").css("display","");
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
-  document.getElementById("item_cat").click()
   event.preventDefault()
 
 
@@ -174,7 +173,6 @@ $(document).on 'click', '.add_fieldsl', (event) ->
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).before($(this).data('fields').replace(regexp, time))
   CKEDITOR.replaceAll("ckeditor")
-  document.getElementById("item_cat").click()
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()
@@ -189,7 +187,6 @@ $(document).on 'click', '.add_fieldsf', (event) ->
   regexp = new RegExp($(this).data('id'), 'g')
   $(this).after($(this).data('fields').replace(regexp, time))
   CKEDITOR.replaceAll("ckeditor")
-  document.getElementById("item_cat").click()
   document.getElementById("tansubmit").click()
   document.getElementById("dansubmit").click()
   document.getElementById("dansubmit").click()
@@ -688,14 +685,14 @@ $(document).on "click", "#dsubmit", ->
   
 $ ->
 
-  $("#shops .page").infinitescroll
-      loading: {
-        img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
-        msgText: "ロード中..."
-      }
-      navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
-      nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
-      itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
+  #$("#shops .page").infinitescroll
+  #    loading: {
+  #      img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
+  #      msgText: "ロード中..."
+  #    }
+  #    navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
+  #    nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
+  #    itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
   
   replace_tag_inner = (tag,str) ->
     result = tag
@@ -714,31 +711,6 @@ $ ->
   #    $('.position').each ->
   #      $(this).val($('.position').index($(this)) + 1)
   
-  new ImageCropper()
-  
-class ImageCropper
-  constructor: ->
-    $('#cropbox').Jcrop
-      aspectRatio: 1
-      setSelect: [0, 0, 600, 600]
-      onSelect: @update
-      onChange: @update
-      #allowResize: true
-		  #allowSelect: false
-      
-  update: (coords) =>
-    $("#user_crop_x").val(coords.x)
-    $("#user_crop_y").val(coords.y)
-    $("#user_crop_w").val(coords.w)
-    $("#user_crop_h").val(coords.h)
-    @updatePreview(coords)
-  
-  updatePreview: (coords) =>
-    $("#preview").css
-      width: Math.round(100/coords.w * $("#cropbox").width()) + "px"
-      height: Math.round(100/coords.h * $("#cropbox").height()) + "px"
-      marginLeft: "-" + Math.round(100/coords.w * coords.x) + "px"
-      marginTop: "-" + Math.round(100/coords.h *coords.y) + "px"
 
 class FavArticle
     constructor: ($el) ->

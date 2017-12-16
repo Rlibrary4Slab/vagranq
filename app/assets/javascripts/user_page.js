@@ -1,0 +1,13 @@
+//= require jquery
+//= require jquery-selection
+//= require jquery.turbolinks
+//= require jquery_ujs
+//= require jquery-ui.min
+//= require Chart.bundle
+//= require chartkick
+//= require jquery.Jcrop
+//= require crop.js.coffee
+//= require twitter/bootstrap
+//= require websocket_rails/main
+//= require notifications.js.erb
+//= require live_counter.js

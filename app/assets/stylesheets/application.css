@@ -13,10 +13,16 @@
  *= require_self
  //  bootstrap
  *= require jquery.tagit
- //*= require jquery.tagin
+ *= require jquery.tagin
  // require font-awesome
  *= require tagit.ui-zendesk
  *= require jquery.Jcrop
  *= require jquery-ui.min
- *= require_tree .
+ *= require custom.css.scss 
+ *= require articles.css.scss 
+ *= require users.css.scss 
+ *= require items.css.scss 
+ *= require notifications.scss 
+ *= require live_counter.scss 
+ * require_tree .
  */

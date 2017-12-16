@@ -1,0 +1,261 @@
+/*
+Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+body
+{
+	/* Font */
+	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
+	font-size: 12px;
+
+	/* Text color */
+	color: #333;
+
+	/* Remove the background color to make it transparent */
+	background-color: #fff;
+
+	margin: 20px;
+}
+.markedColor {
+ background: rgba(255,100,100,0.3);
+}
+code {
+ background: rgba(255,100,100,0.3);
+}
+.cke_editable
+{
+	//font-size: 13px;
+	font-size: 18px;
+	line-height: 1.6;
+        position: absolote;
+	/* Fix for missing scrollbars with RTL texts. (#10488) */
+	word-wrap: break-word;
+}
+
+.cke_editable p img {
+ position: relative !important;
+ max-width: 100%;
+}
+div.img_url {
+ position: absolute !important;
+ bottom: 0 !important;
+ left: 0 !important;
+ display: none ;
+}
+
+body.cke_editable p img:hover{
+
+  div.img_url {
+    display: initial !important;
+  }
+
+}
+
+blockquote
+{
+	font-style: italic;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	padding: 2px 0;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 0;
+}
+
+.cke_contents_ltr blockquote
+{
+	padding-left: 20px;
+	padding-right: 8px;
+	border-left-width: 5px;
+}
+
+.cke_contents_rtl blockquote
+{
+	padding-left: 8px;
+	padding-right: 20px;
+	border-right-width: 5px;
+}
+
+a
+{
+	//color: #0782C1;
+	color: blue;
+}
+
+ol,ul,dl
+{
+	/* IE7: reset rtl list margin. (#7334) */
+	*margin-right: 0px;
+	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+	padding: 0 40px;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+	font-weight: normal;
+	line-height: 1.2;
+}
+
+hr
+{
+	border: 0px;
+	border-top: 1px solid #ccc;
+}
+
+img.right
+{
+	border: 1px solid #ccc;
+	float: right;
+	margin-left: 15px;
+	padding: 5px;
+}
+
+img.left
+{
+	border: 1px solid #ccc;
+	float: left;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+pre
+{
+	white-space: pre-wrap; /* CSS 2.1 */
+	word-wrap: break-word; /* IE7 */
+	-moz-tab-size: 4;
+	tab-size: 4;
+}
+
+.marker
+{
+	background-color: Yellow;
+}
+
+span[lang]
+{
+	font-style: italic;
+}
+
+figure
+{
+	text-align: center;
+	border: solid 1px #ccc;
+	border-radius: 2px;
+	background: rgba(0,0,0,0.05);
+	padding: 10px;
+	margin: 10px 20px;
+	display: inline-block;
+}
+
+figure > figcaption
+{
+	text-align: center;
+	display: block; /* For IE8 */
+}
+
+a > img {
+	padding: 1px;
+	margin: 1px;
+	border: none;
+	outline: 1px solid #0782C1;
+}
+
+.s_eyecatch_img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.article_list_content {
+      display: table;
+      table-layout: fixed;
+      //width: 100%;
+      padding: 10px 0px;
+      border-bottom: solid 1px #eeeeee;
+      vertical-align: top;
+      overflow: hidden;
+}
+.article_list_thumb {
+	display: table-cell;
+	vertical-align: top;
+}
+.article_list_text {
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle;
+}
+.link_card {
+   border: 1px solid #e5e5e5 ;
+   padding-left: 10px;
+   max-width: 680px;
+}
+.link_card a img{
+    max-width: initial;
+}
+.button1 a {
+	text-decoration: none;
+ 	display: inline-block;
+	padding: 10px;
+	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background: -o-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5e5e5));
+	background-image: -ms-linear-gradient(top, #ffffff 0%, #e5e5e5 100%);
+	background-image: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+	box-shadow: 0px 0px 2px #cccccc;
+	-webkit-box-shadow: 0px 0px 2px #cccccc;
+}
+.button1 a:hover {
+	background: -moz-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background: -webkit-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background: -o-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#ffffff));
+	background-image: -ms-linear-gradient(top, #e5e5e5 0%, #ffffff 100%);
+	background-image: linear-gradient(to bottom, #e5e5e5 0%, #ffffff 100%);
+}
+
+.button2 a {
+	display: inline-block;
+	padding: 10px;
+	border: 3px solid #142430;
+	color: #4c3f37;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	transition: all .5s;
+}
+.button2 a:hover {
+	color: #ffffff;
+	background: #142430;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;
+}
+.out_embed {
+     border: 1px solid #e5e5e5 ;
+     padding: 20px;
+     margin: 5px;
+     max-width: 480px;
+      
+}
+.out_embed_image_box {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     padding: 60% 0 0;
+     //margin: 20px;
+      
+}
+.out_embed_image_box a img.out_embed_image{
+     position: absolute !important;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+
+}  
