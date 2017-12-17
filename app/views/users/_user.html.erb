@@ -6,7 +6,7 @@
    <% if user.certificated == true && Rails.env != "production" %>
                 <%= image_tag user.user_image_url(:thumb)%> 認証ユーザー
    <%else%>
-        　<%= image_tag user.user_image_url(:thumb)%>
+        　<%= image_tag user.user_image_url(:thumb),:alt => ""%>
 
    <% end %>
    </div>

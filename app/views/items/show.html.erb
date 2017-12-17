@@ -21,7 +21,7 @@
       <%= link_to "アイテムを編集する", edit_item_path(@item)%>
       <% end %>
        <div class="u-clearfix" ng-non-bindable>
-        <%= image_tag @item.image,:class =>"item_eyecatch_img" %>
+        <%= image_tag @item.image,:class =>"item_eyecatch_img" ,:alt => ""%>
       </div>
       <time datetime="<%= @item.updated_at %>" itemprop="datePublished"><%#= @item.updated_at.strftime("%Y年%m月%d日　更新") %></time>
       <h1 class="spot_title"><%= @item.title %></h1>

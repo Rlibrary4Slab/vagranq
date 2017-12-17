@@ -7,6 +7,7 @@
 //= require chartkick
 //= require jquery.Jcrop
 //= require crop.js.coffee
+//= require articles.js.min.coffee 
 //= require twitter/bootstrap
 //= require websocket_rails/main
 //= require notifications.js.erb

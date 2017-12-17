@@ -1,17 +1,24 @@
 class ArticlesController < AuthorizedController
   include Notifications
+  #before_action :load_paper,  only: [:index]
   before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
   before_action :certificate_user
   before_action :set_like_items_to_gon , only: [:show]
-  before_action :all, except: [:show,:new,:create,:edit,:update]
+  before_action :siderank, except: [:show]
   before_action :allshow, only: [:show]
-    def all
+    def siderank 
       add_breadcrumb "RanQ", root_path
-      @rank = Article.published.limit(10).order(view_count: :desc).includes(:user)
-      @corporecom = Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)
+       #@rank ||= Rails.cache.fetch("rank1", expires_in: 10.seconds) do
+       
+       @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user) unless read_fragment "articles/page#{params[:page]}"
+       #end
+       #@corporecom ||= Rails.cache.fetch("corp1", expires_in: 10.seconds) do
+         @corporecom =Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)  unless read_fragment "articles/page#{params[:page]}"
+       #end 
+       
     end
     def allshow
       add_breadcrumb "RanQ", root_path
@@ -28,13 +35,14 @@ class ArticlesController < AuthorizedController
   # GET /articles.json
   def index
     add_breadcrumb "記事一覧", :articles_path
-    @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user)
+   # @data = load_paper.per_page_kaminari(params[:page])
+    @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user) unless read_fragment "articles/page#{params[:page]}" 
   end
   
   def corporecom
     add_breadcrumb "おすすめ一覧", :allranking_path
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
-    @articles = Article.order("corporecom").order('updated_at >=? desc').published.page(params[:page])
+    @articles = Article.order("corporecom").order('updated_at >=? desc').published.page(params[:page]) unless read_fragment "pusher"
   end
 
   def allranking
@@ -142,23 +150,24 @@ class ArticlesController < AuthorizedController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    
-    add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
-    add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
-    add_breadcrumb @article.category, hangout_path if @article.category == "おでかけ"
-    add_breadcrumb @article.category, gourmet_path if @article.category == "グルメ"
-    add_breadcrumb @article.category, lifestyle_path if @article.category == "ライフスタイル"
-    add_breadcrumb @article.category, entertainment_path if @article.category == "エンタメ"
-    add_breadcrumb @article.category, interior_path if @article.category == "インテリア"
-    add_breadcrumb @article.category, gadget_path if @article.category == "ガジェット"
-    add_breadcrumb @article.category, learn_path if @article.category == "学び"
-    add_breadcrumb @article.category, funny_path if @article.category == "おもしろ"
-
-    #@likes = Like.where(article_id: params[:id])
-    add_breadcrumb @article.title
-    ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
-    @idsemptybool = ids.empty?
-    @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})")
+   
+    unless read_fragment "articles/#{params[:id]}" 
+     add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
+     add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
+     add_breadcrumb @article.category, hangout_path if @article.category == "おでかけ"
+     add_breadcrumb @article.category, gourmet_path if @article.category == "グルメ"
+     add_breadcrumb @article.category, lifestyle_path if @article.category == "ライフスタイル"
+     add_breadcrumb @article.category, entertainment_path if @article.category == "エンタメ"
+     add_breadcrumb @article.category, interior_path if @article.category == "インテリア"
+     add_breadcrumb @article.category, gadget_path if @article.category == "ガジェット"
+     add_breadcrumb @article.category, learn_path if @article.category == "学び"
+     add_breadcrumb @article.category, funny_path if @article.category == "おもしろ"
+     #@likes = Like.where(article_id: params[:id])
+     add_breadcrumb @article.title
+     ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
+     @idsemptybool = ids.empty?
+     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})") 
+    end 
     if  @article.published? != false && User.find_by(id: @article.user_id).certificated != true 
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
@@ -338,7 +347,7 @@ class ArticlesController < AuthorizedController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      @article = Article.find(params[:id]) #unless read_fragment "articles/#{params[:id]}"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -358,11 +367,12 @@ class ArticlesController < AuthorizedController
     end
     
     def correct_draft
-      @articlep = Article.published.find_by(id: params[:id])
       if logged_in?
-       redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
+       #redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
+       redirect_to root_url if !@article.published? && current_user.name != @article.user.name 
       else 
-       redirect_to root_url if @articlep.nil? 
+       #redirect_to root_url if @articlep.nil? 
+       redirect_to root_url if !@article.published? 
        
       end 
     end
@@ -392,5 +402,19 @@ class ArticlesController < AuthorizedController
      if logged_in?
       gon.like_items = current_user.item_likes.where(:article_id => params[:id])
      end
+    end
+
+    def load_paper
+
+       @articles ||= Rails.cache.fetch("KEY-page-#{params[:page]}", expires_in: 30.minutes) do
+        articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user)
+        Kaminari.paginate_array(articles.to_a, limit: articles.limit_value, offset: 0, total_count: articles.total_count, padding: -articles.offset_value)
+       end
+    end
+    def cache_key(type = nil)
+      [
+       self.class.name.underscore,
+       type
+      ].join('')
     end
 end

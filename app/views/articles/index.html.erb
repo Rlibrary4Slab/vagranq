@@ -1,32 +1,4 @@
-<!--
-<p id="notice"><%= notice %></p>
-<%#= render_breadcrumbs %>
-<h1>Listing Articles</h1>
-<%#= page_entries_info @articles%>
-<table id="shops">
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Content</th>
-      
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  
-    
-  <tbody class="page">
-    <%#= render @articles %>
-  </tbody>
-</table>
-
-<br>
-
-<%#= link_to 'New Article', new_article_path %>
-<%= paginate @articles %>
--->
+<% cache "articles/page#{params[:page]}" , expires_in: 10.seconds ,skip_digest: true do%>
 <%= render "inarticle" %>
+<% end %>
 
-<%#= paginate @articles %>

@@ -16,9 +16,13 @@ ls=[]
 jam=[]
 
   
-
+#$('img').on "error",->
+#  puts "eer"
+#  $(this).attr('src','/assets/l_e_others_500.png')
 
 $(document).on 'ready page:load', ->
+  $('img').on "error",->
+   $(this).attr('src','/assets/l_e_others_500.png')
     # いいねボタンといいね総数をwrapしている.js-article-likesをすべて取得
     # ループ回して一個一個インスタンス生成
   if $("#item_category").length == -1

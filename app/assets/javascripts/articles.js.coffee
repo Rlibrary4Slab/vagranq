@@ -321,13 +321,16 @@ $(document).on 'click' ,-> #clicked
    
   eyeimg= $("div div div iframe").contents().find("html body p img")
   ym=eyeimg.first().prop("src")
-  ymval=$("#eyecatch_img").prop("value")
+  ymval=$("#eyecatch_img").val()
   if ym != undefined
+    console.log("ym")
     $("#eyecatch_img").val(ym) 
-  else if ymval != undefined
+  else if ymval != "" 
+    console.log(ymval)
     $("#eyecatch_img").val(ymval)
      
   else
+    console.log("none")
     
     $("#eyecatch_img").val('l_e_others_500.png')
 $(document).on 'click', '.cke_btn_reset' ,->

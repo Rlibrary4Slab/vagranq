@@ -1,6 +1,6 @@
 <%= Gon::Base.render_data({}) %>
-
 <!-- コンテンツ -->
+<% cache "articles/#{params[:id]}" ,:expires_in => 5.seconds , skip_digest: true do%>
 <div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">
  <div class="topcontent_in clearfix">
@@ -16,7 +16,7 @@
 <div id="headline">
   <div class="head_container">
     <div class="u-clearfix" ng-non-bindable>
-        <%= image_tag @article.eyecatch_img,:class =>"s_eyecatch_img" %>
+        <%= image_tag @article.eyecatch_img,:class =>"s_eyecatch_img" ,:alt => ""%>
       </div>
       <time datetime="<%= @article.updated_at %>" itemprop="datePublished"><%= @article.updated_at.strftime("%Y年%m月%d日") %></time>
       </br>
@@ -51,6 +51,7 @@
           <%=  @article.likes.count id: "like-count" %>
         </li>
         
+
         <li style="margin-left: 20px;">
           <span><%= @article_view %></span>View
         </li>
@@ -149,3 +150,4 @@
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 </div>
+<% end %>

@@ -3,7 +3,7 @@
 <% @nuarticleus.each do |article| %>
      <li class="user_page_entry">
       <div class="user_page_image_box">
-        <%= link_to image_tag(article.eyecatch_img,:class=>"user_page_image" ) ,article %>
+        <%= link_to image_tag(article.eyecatch_img,:class=>"user_page_image" ,:alt => "") ,article %>
        </div>
 
        <p class="out_article_title">
