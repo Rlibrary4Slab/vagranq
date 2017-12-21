@@ -151,7 +151,7 @@ class ArticlesController < AuthorizedController
   # GET /articles/1.json
   def show
    
-    unless read_fragment "articles/#{params[:id]}" 
+    unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" 
      add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
      add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
      add_breadcrumb @article.category, hangout_path if @article.category == "おでかけ"
@@ -168,7 +168,7 @@ class ArticlesController < AuthorizedController
      @idsemptybool = ids.empty?
      @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})") 
     end 
-    if  @article.published? != false && User.find_by(id: @article.user_id).certificated != true 
+    if  @article.published? != false #&& User.find_by(id: @article.user_id).certificated != true 
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
     end 
@@ -231,7 +231,9 @@ class ArticlesController < AuthorizedController
       @article.save!
       ids = @article.more_like_this.results.map(&:id)
       REDIS.del "articles/#{@article.id}/morelikethis"
-      REDIS.lpush "articles/#{@article.id}/morelikethis", ids
+      if ids.empty? != true
+       REDIS.lpush "articles/#{@article.id}/morelikethis", ids
+      end
       #puts @article.id
      
       case params[:ope][:cmd]
@@ -292,11 +294,15 @@ class ArticlesController < AuthorizedController
     
 
     if @article.valid?
+      Rails.cache.delete("views/#{current_user.id}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}")      
+      Rails.cache.delete("views/nonuser/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}")      
+      @article.updated_at = Time.now
       @article.save!
-      puts "update"
       ids = @article.more_like_this.results.map(&:id)
       REDIS.del "articles/#{@article.id}/morelikethis"
+      if ids.empty? != true 
       REDIS.lpush "articles/#{@article.id}/morelikethis", ids 
+      end
       case params[:ope][:cmd]
       when 'publish'
         @article.publish!
@@ -347,7 +353,12 @@ class ArticlesController < AuthorizedController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id]) #unless read_fragment "articles/#{params[:id]}"
+      @user_discrime = logged_in? ? current_user.id : "nonuser" 
+      #@article = Article.find(params[:id]) 
+      @article ||= Rails.cache.fetch("page/article/#{params[:id]}", expires_in: 30.seconds) do
+         Article.find(params[:id])  
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -356,8 +367,10 @@ class ArticlesController < AuthorizedController
     end
     
     def correct_user
-       @article = current_user.articles.find_by(id: params[:id])
-       redirect_to root_url if current_user.admin != true && @article.nil?
+      unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
+       article = current_user.articles.find_by(id: params[:id])
+       redirect_to root_url if current_user.admin != true && article.nil?
+      end
  
     end
     def certificate_user
@@ -367,6 +380,7 @@ class ArticlesController < AuthorizedController
     end
     
     def correct_draft
+      unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
       if logged_in?
        #redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
        redirect_to root_url if !@article.published? && current_user.name != @article.user.name 
@@ -374,6 +388,7 @@ class ArticlesController < AuthorizedController
        #redirect_to root_url if @articlep.nil? 
        redirect_to root_url if !@article.published? 
        
+      end 
       end 
     end
    

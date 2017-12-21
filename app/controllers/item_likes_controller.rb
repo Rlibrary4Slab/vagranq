@@ -2,6 +2,9 @@ class ItemLikesController < ApplicationController
     def like
         @item = Item.find(params[:item_id])
         like = current_user.item_likes.build(item_id: @item.id,article_id: params[:article_id])
+        user_discrime = current_user || "nonuser"
+        Rails.cache.delete("views/#{user_discrime}/articles/#{@article.id}")
+
         like.save
        
     end
@@ -9,6 +12,8 @@ class ItemLikesController < ApplicationController
     def unlike
         @item = Item.find(params[:item_id])
         like = current_user.item_likes.find_by(item_id: @item.id,article_id: params[:article_id])
+        user_discrime = current_user || "nonuser"
+        Rails.cache.delete("views/#{user_discrime}/articles/#{@article.id}")
         like.destroy
         
     end

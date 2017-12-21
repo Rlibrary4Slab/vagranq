@@ -1,9 +1,9 @@
 require 'redis'
 
-if Rails.env != "production"
+#if Rails.env != "production"
 
   #REDIS = Redis.new(host: ENV['REDIS_PRO'] ,port: "6379")
-  REDIS = Redis.new(host: "localhost", port: "6379") 
-else
-  REDIS = Redis.new(host: ENV['REDIS_PRO'] ,port: "6379")
-end
+REDIS = Redis.new(host: "localhost", port: "6379",db: 0) 
+#else
+#  REDIS = Redis.new(host: ENV['REDIS_PRO'] ,port: "6379",db: 0)
+#end

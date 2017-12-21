@@ -4,26 +4,26 @@
 <footer class="footer" onload="">
   <div class="footer-inner">
     <ul>
-      <li class="footer-logo"><%= link_to "RanQ", root_path %></li>
+      <li class="footer-logo"><%= link_to "RanQ", "/" %></li>
       
       <!-- カテゴリ -->
       <li class="footer-column">
         <p class="footer-column-title">カテゴリ一覧</p>
       
         <ul class="footer-column-list">
-          <li><%= link_to "ファッション",fashion_path %></li>
-          <li><%= link_to "美容健康",beauty_path %></li>
-          <li><%= link_to "おでかけ",hangout_path %></li>
-          <li><%= link_to "グルメ",gourmet_path %></li>
-          <li><%= link_to "ライフスタイル",lifestyle_path %></li>
+          <li><%= link_to "ファッション","/fashion" %></li>
+          <li><%= link_to "美容健康","/beauty" %></li>
+          <li><%= link_to "おでかけ","/hangout" %></li>
+          <li><%= link_to "グルメ","/gourmet" %></li>
+          <li><%= link_to "ライフスタイル","/lifestyle" %></li>
         </ul>
       
         <ul class="footer-column-list">
-          <li><%= link_to "エンタメ",entertainment_path %></li>
-          <li><%= link_to "インテリア",interior_path %></li>
-          <li><%= link_to "ガジェット",gadget_path %></li>
-          <li><%= link_to "学び",learn_path %></li>
-          <li><%= link_to "おもしろ",funny_path %></li>
+          <li><%= link_to "エンタメ","/entertainment" %></li>
+          <li><%= link_to "インテリア","/interior" %></li>
+          <li><%= link_to "ガジェット","/gadget" %></li>
+          <li><%= link_to "学び","/learn" %></li>
+          <li><%= link_to "おもしろ","/funny" %></li>
         </ul>
       </li>
     <!-- /カテゴリ -->
@@ -33,15 +33,15 @@
         <p class="footer-column-title">RanQについて</p>
       
         <ul class="footer-column-list">
-          <li><%= link_to "まとめ一覧" ,articles_path %></li>
-          <li><%= link_to "ユーザー一覧" ,users_path %></li>
-          <li><%= link_to "お問い合わせ", inquiry_path %></li>
+          <li><%= link_to "まとめ一覧" ,"/articles" %></li>
+          <li><%= link_to "ユーザー一覧" ,"/users" %></li>
+          <li><%= link_to "お問い合わせ", "/inquiry" %></li>
         </ul>
       
         <ul class="footer-column-list">
           <li><a href="http://forstart.jp/" target="_blank">運営会社</a></li>
-          <li><%= link_to "よくある質問" ,help_path %></li>
-          <li><%= link_to "利用規約" ,agreement_path %></li>
+          <li><%= link_to "よくある質問" ,"/help" %></li>
+          <li><%= link_to "利用規約" ,"/agreement" %></li>
         </ul>
       
         <ul class="footer-column-last">

@@ -3,6 +3,8 @@ class LikesController < ApplicationController
     def like
         @article = Article.find(params[:article_id])
         like = current_user.likes.build(article_id: @article.id)
+        user_discrime = current_user || "nonuser"
+        Rails.cache.delete("views/#{user_discrime}/articles/#{@article.id}")
         like.save
        
         liked_article_counts = @article.likes_count.to_i + 1
@@ -24,6 +26,8 @@ class LikesController < ApplicationController
     def unlike
         @article = Article.find(params[:article_id])
         like = current_user.likes.find_by(article_id: @article.id)
+        user_discrime = current_user || "nonuser"
+        Rails.cache.delete("views/#{user_discrime}/articles/#{@article.id}")
         like.destroy
         
         live_counter_likedown                                                                     #ライブカウンター

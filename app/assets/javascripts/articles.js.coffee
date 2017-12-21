@@ -323,15 +323,11 @@ $(document).on 'click' ,-> #clicked
   ym=eyeimg.first().prop("src")
   ymval=$("#eyecatch_img").val()
   if ym != undefined
-    console.log("ym")
     $("#eyecatch_img").val(ym) 
   else if ymval != "" 
-    console.log(ymval)
     $("#eyecatch_img").val(ymval)
      
   else
-    console.log("none")
-    
     $("#eyecatch_img").val('l_e_others_500.png')
 $(document).on 'click', '.cke_btn_reset' ,->
   

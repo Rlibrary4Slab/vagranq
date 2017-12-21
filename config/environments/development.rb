@@ -13,8 +13,14 @@ Rails.application.configure do
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
+  
+  #config.cache_store = :file_store, "ranqcache"
+  config.cache_store = :redis_store, {
+   host: "localhost", 
+   port: "6379", 
+   db: 1}
 
-  config.cache_store = :memory_store, { size: 64.megabytes, :expires_in => 3.seconds }
+  #config.cache_store = :memory_store, { size: 64.megabytes, :expires_in => 3.seconds }
   config.action_controller.perform_caching = true 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -38,9 +44,11 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  #config.assets.debug = true 
+  config.assets.debug = false 
+  #config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/ 
 
-  #config.assets.compile = true
+  config.assets.compile = true
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = false 

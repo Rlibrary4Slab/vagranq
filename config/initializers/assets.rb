@@ -11,6 +11,8 @@ Rails.application.config.assets.version = '1.0'
 #Rails.application.config.assets.precompile += %w( search.js )
 #Rails.application.config.assets.precompile += %w( jquery.infinitescroll.js )
 #Rails.application.config.assets.precompile += %w( *.eot *.woff *.ttf *.svg *.otf *.png *.jpg *.jpeg *.gif *.css *.js )
+#Rails.application.config.assets.precompile += %w( *.css *.js )
 
 Rails.application.config.assets.precompile += %w(article_new.js user_page.js article_page.js)
 #Rails.application.config.assets.precompile += %w( ckeditor/config.js)
+Rails.application.config.assets.precompile += %w( ckeditor/*)
