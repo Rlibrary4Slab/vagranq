@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   namespace :api do
+    post "inquiry_article" => "inquiry#inquiry_article"
     resources :users, param: :access_token
     resources :password_resets, only: [:new, :create, :edit, :update]
   end  
@@ -58,6 +59,7 @@ Rails.application.routes.draw do
   get "funny" => "articles#funny" 
   resources :articles do
     member do
+      get :article_inquiry
       get :liking_users
       post :publish
       post :draft
@@ -73,7 +75,7 @@ Rails.application.routes.draw do
   get 'verify_item_unlike'  => 'item_likes#verify_unlike'
   get 'verify_like_or_not'  => 'likes#verify_like_or_not'
   get 'verify_item_like_or_not'  => 'item_likes#verify_like_or_not'
-  resources :items ,except: [:index] 
+  resources :items 
 
   resources :users,param: :name ,only: [:index,:access_log_index] do
     member do

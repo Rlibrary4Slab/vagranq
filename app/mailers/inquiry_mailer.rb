@@ -6,5 +6,13 @@ class InquiryMailer < ActionMailer::Base
     @inquiry = inquiry
     mail(:subject => 'お問い合わせを承りました')
   end
+  def received_email_about_article(inquiry)
+    @inquiry = inquiry
+    mail(:subject => 'お問い合わせを承りました')
+  end
+  def received_email_about_article_for_user(inquiry)
+    @inquiry = inquiry
+    mail(:subject => 'お問い合わせを承りました')
+  end
  
 end

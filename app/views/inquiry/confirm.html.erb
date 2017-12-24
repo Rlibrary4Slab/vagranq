@@ -4,6 +4,28 @@
  
 <%= form_for @inquiry, :url => inquiry_thanks_path do |f| %>
   <table class="table">
+    <% if !@inquiry.article_title.nil? %> 
+    <tr>
+      <th>お問い合わせの種類</th>
+      <td>
+        <%= f.hidden_field :type %>
+         <% if @inquiry.type == "20" %>
+          投稿への報告 
+         <% end %>
+         <% if @inquiry.type == "30" %>
+         投稿を書いたユーザーへの提案
+         <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>投稿</th>
+      <td>
+        <%= f.hidden_field :article_title %>
+        <%= f.hidden_field :article_id %>
+        <%= @inquiry.article_title %>
+      </td>
+    </tr>
+    <% end %>
     <tr>
       <th>名前</th>
       <td>

@@ -1,0 +1,39 @@
+<%= form_for @inquiry, :url => inquiry_confirm_path do |f| %>
+  <div class="page-header">
+    <h1><%= @inquiry.article_title%>についてのお問い合わせ</h1>
+  </div>
+ 
+  <% if @inquiry.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <strong>入力内容にエラーがあります</strong>
+      <ul>
+        <% @inquiry.errors.each do |attr, msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <table class="table">
+    <tr>
+      <th>お問い合わせ種類<span class="text-danger">（必須）</span></th>
+      <td><%= select :inquiry,:type, { "投稿への報告": 20, "投稿を書いたユーザーへの提案": 30 }, :prompt => "お問い合わせ種類を選択してください" %></td>
+    </tr>
+    <tr>
+      <th>名前<span class="text-danger">（必須）</span></th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス<span class="text-danger">（必須）</span></th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <%= f.hidden_field :article_id %>
+    <%= f.hidden_field :article_title %>
+    <tr>
+      <th>お問い合わせ内容</th>
+      <td><%= f.text_area :message %></td>
+    </tr>
+  </table>
+  <%= f.submit '確認', class: 'btn btn-primary' %>
+<% end %>
+

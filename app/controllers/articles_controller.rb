@@ -1,7 +1,8 @@
 class ArticlesController < AuthorizedController
   include Notifications
   #before_action :load_paper,  only: [:index]
-  before_action :set_article, only: [ :show,:edit, :update,:destroy, :liking_users,:publish, :draft]
+  before_action :set_article, only: [ :show ,:liking_users,:publish, :draft]
+  before_action :edit_set_article, only: [ :article_inquiry,:edit, :update,:destroy,:publish, :draft]
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
@@ -38,6 +39,11 @@ class ArticlesController < AuthorizedController
    # @data = load_paper.per_page_kaminari(params[:page])
     @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user) unless read_fragment "articles/page#{params[:page]}" 
   end
+ 
+  def article_inquiry
+    
+    @inquiry = Inquiry.new(article_id: params[:id],article_title: @article.title)
+  end 
   
   def corporecom
     add_breadcrumb "おすすめ一覧", :allranking_path
@@ -336,7 +342,7 @@ class ArticlesController < AuthorizedController
       #redirect_to [:home, @article]
       redirect_to @article
     else
-     render :edit
+     render :edit, layout: 'article_new'
     end
   end
   # DELETE /articles/1
@@ -354,11 +360,13 @@ class ArticlesController < AuthorizedController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @user_discrime = logged_in? ? current_user.id : "nonuser" 
-      #@article = Article.find(params[:id]) 
       @article ||= Rails.cache.fetch("page/article/#{params[:id]}", expires_in: 30.seconds) do
          Article.find(params[:id])  
       end
-
+    end
+    def edit_set_article
+      @article = Article.find(params[:id]) 
+    
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

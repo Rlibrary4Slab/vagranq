@@ -18,7 +18,10 @@ class ItemsController < AuthorizedController
   # GET /articles
   # GET /articles.json
   def index
-    @Items = Item.per_page_kaminari(params[:page]).order('updated_at desc').includes(:user)
+    add_breadcrumb "アイテム一覧", :items_path
+
+    #@items = Item.all.count
+    @items = Item.per_page_kaminari(params[:page]).order('updated_at desc')
   end
   
 

@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
     has_many :like_items, through: :item_likes, source: :item
     has_many :week_views
     before_save {self.email =email.downcase}
-    validates :name, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?[a-zA-Z])[a-zA-Z\d]{6,20}+\z/i, message: "半角英字の6文字以上20以下で入力してください" }
+    validates :name, length: {maximum: 50},uniqueness: {case_sensitive:false}, format: { with: /\A(?=.*?\w)[\w\d]{6,20}+\z/i, message: "半角英字の6文字以上20以下で入力してください" }
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+.[a-z]+\z/i
-    #validates :email, length: {maximum:255},uniqueness: {case_sensitive:false},format: {with: VALID_EMAIL_REGEX,message: "メールアドレスを入力してください"}
+    validates :email, length: {maximum:255},uniqueness: {case_sensitive:false},format: {with: VALID_EMAIL_REGEX,message: "メールアドレスを入力してください"}
     validates :password, on: :create,length: {minimum:6,message: "6桁以上入力してください"}
     #has_secure_password
     mount_uploader :user_image,ImageUploader
