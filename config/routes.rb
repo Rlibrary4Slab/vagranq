@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     post "inquiry_article" => "inquiry#inquiry_article"
     resources :users, param: :access_token
+    resources :items,only:[:create,:update]
     resources :password_resets, only: [:new, :create, :edit, :update]
   end  
   devise_for :users, :controllers => {

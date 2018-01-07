@@ -76,14 +76,14 @@ class ArticlesController < AuthorizedController
     @title = "ファッション一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).fashion params[:category] 
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).fashion params[:category] 
   end
   
   def beauty
     @title = "美容健康一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).beauty params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).beauty params[:category]
     
 
   end
@@ -91,56 +91,56 @@ class ArticlesController < AuthorizedController
     @title = "おでかけ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).hangout params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).hangout params[:category]
     
   end
   def gourmet
     @title = "グルメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).gourmet params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).gourmet params[:category]
     
   end
   def lifestyle
     @title = "ライフスタイル一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).lifestyle params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).lifestyle params[:category]
     
   end
   def entertainment
     @title = "エンタメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).entertainment params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).entertainment params[:category]
     
   end
   def interior
     @title = "インテリア一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).interior params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user).interior params[:category]
     
   end
   def gadget
     @title = "ガジェット一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).gadget params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).order("updated_at desc").published.includes(:user).gadget params[:category]
     
   end
   def learn
     @title = "学び一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).learn params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).order("updated_at desc").published.includes(:user).learn params[:category]
     
   end
   def funny
     @title = "おもしろ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
-    @articles = Article.per_page_kaminari(params[:page]).published.includes(:user).funny params[:category]
+    @articles = Article.per_page_kaminari(params[:page]).order("updated_at desc").published.includes(:user).funny params[:category]
     
   end
   #categoriesend
@@ -181,9 +181,6 @@ class ArticlesController < AuthorizedController
     @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
 
-    #@article.update_columns(view_count: @page_views)
-    #@article_view = @article.view_count
-    @article_view = @page_views 
     sum_of_imp=0
     all_users_view =REDIS.zrevrange "user/#{@article.user_id}/articles", 0, -1, withscores: true
     all_users_view.each do |view|
@@ -233,14 +230,13 @@ class ArticlesController < AuthorizedController
     end
     
     if @article.valid?
-      
+      @article.attributes= {likes_count: 0} 
       @article.save!
       ids = @article.more_like_this.results.map(&:id)
       REDIS.del "articles/#{@article.id}/morelikethis"
       if ids.empty? != true
        REDIS.lpush "articles/#{@article.id}/morelikethis", ids
       end
-      #puts @article.id
      
       case params[:ope][:cmd]
       when 'publish'

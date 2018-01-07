@@ -17,7 +17,7 @@
       <%= @article.title.html_safe %> | RanQ [ランク]
      <%end%>
     <!- コンテンツ ->
-    <% if @article.aasm_state != "published" || User.find_by(id: @article.user_id).certificated != false%>
+    <% if @article.aasm_state != "published" %>
      <meta name="robots" content="noindex,nofollow,noarchive" />
     <%end%>
     <meta property="og:title" content="<%= @article.title.html_safe %> | RanQ [ランク]">

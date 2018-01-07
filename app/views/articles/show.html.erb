@@ -48,12 +48,13 @@
          </li>
         
         <li id="like-count">
-          <%=  @article.likes.count id: "like-count" %>
+          <%#= @article.likes.count id: "like-count" %>
+          <%= @article.likes_count  %>
         </li>
         
 
         <li style="margin-left: 20px;">
-          <span><%= @article_view %></span>View
+          <span><%= @page_views %></span>View
         </li>
       </ul>
     </div>
