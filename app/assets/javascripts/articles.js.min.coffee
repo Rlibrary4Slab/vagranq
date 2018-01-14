@@ -14,11 +14,7 @@ idNum = 0
 cccc=0
 ls=[]
 jam=[]
-
   
-#$('img').on "error",->
-#  puts "eer"
-#  $(this).attr('src','/assets/l_e_others_500.png')
 
 $(document).on 'ready page:load', ->
   $('img').on "error",->

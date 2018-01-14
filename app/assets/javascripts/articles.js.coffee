@@ -318,16 +318,24 @@ $(document).on 'click' ,-> #clicked
   $(".pdown").css("display":"initial")
   $("input#article_contents_attributes_0_title").parents("fieldset").find(".pup").css("display":"none")
   $("input#article_contents_attributes_"+titz+"_title").parents("fieldset").find(".pdown").css("display":"none")
-   
-  eyeimg= $("div div div iframe").contents().find("html body p img")
-  ym=eyeimg.first().prop("src")
-  ymval=$("#eyecatch_img").val()
-  if ym != undefined
-    $("#eyecatch_img").val(ym) 
-  else if ymval != "" 
+  
+  eym=$("div.afd p img").first().prop("src")
+  eymval=$("#eyecatch_img").val()
+  #console.log(eym.match(/^data*/))
+  if eym != undefined #&& !eym.match(/^data*/) 
+   console.log(eym,"aaa")
+   $("#eyecatch_img").val(eym)
+  else if eymval != "" #&& !eym.match(/^data*/)
+   console.log("eym")
+   $("#eyecatch_img").val(eymval)
+   eyeimg= $("div div div iframe").contents().find("html body p img")
+   ym=eyeimg.first().prop("src")
+   ymval=$("#eyecatch_img").val()
+   if ym != undefined #&& !eym.match(/^data*/)
+     $("#eyecatch_img").val(ym) 
+   else if ymval != "" #&& !eym.match(/^data*/)
     $("#eyecatch_img").val(ymval)
-     
-  else
+   else
     $("#eyecatch_img").val('l_e_others_500.png')
 $(document).on 'click', '.cke_btn_reset' ,->
   

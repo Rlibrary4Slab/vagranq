@@ -27,6 +27,34 @@ class UsersController < ApplicationController
     if params[:q][:created_at_lteq].present?
      params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
     end
+    @user = User.find(5)
+    #puts User.where("day_count_view<60000").maximum(:day_count_view) 
+    #puts User.where("day_count_view>0").minimum(:day_count_view)
+    #puts User.average(:day_count_view).to_i
+    liking_users_count =0
+    #User.all.each do |user|
+      #liking_users_count += article.liking_users.count  
+    #  user.articles.each do |article| 
+    #   REDIS.zincrby "user/#{article.user_id}/likes/daily/#{Date.today.to_s}", article.liking_users.count, "#{article.id}"
+    #   REDIS.zincrby "user/#{article.user_id}/likes", article.liking_users.count, "#{article.id}"
+    #  end
+    #end
+    #puts liking_users_count
+    total_more_100_view = 0
+    
+    user_articles_views = REDIS.zrevrange "user/#{@user.id}/articles",0 ,-1,with_scores: true
+    redis_counting = REDIS.zrevrange "user/#{@user.id}/articles",0 ,-1
+    #puts "ユーザーが所持する全投稿とView数"
+    #puts user_articles_views
+    #puts redis_counting.count
+    user_articles_views.each do |view|
+         
+        total_more_100_view+=1 if view.last.to_i >= 100
+    end
+    puts total_more_100_view.to_d/redis_counting.count.to_d
+    #arek = REDIS.keys "user/5/ar*"
+    #arek = REDIS.zrevrangebyscore "user/5/articles","+inf","-inf" 
+    #puts arek.count
     @q = User.ransack(params[:q])
     @q.build_sort if @q.sorts.empty?
     if params[:q] != {}
@@ -59,10 +87,13 @@ class UsersController < ApplicationController
      all_users_view.each do |view|
       sum_of_views+=view.last.to_i
      end
+     #conting_article = user.articles.count || 
+     redis_article_counts = REDIS.zrevrangebyscore "user/#{user.id}/articles","+inf","-inf" 
      
-      user.update_columns(period_articles_views: period.to_i,
-                          all_articles_views: sum_of_views,
-                          period_count_articles: user.articles.published.where(created_at: sort_gteq..sort_lteq).count) #投稿された「期間内の投稿」の総View
+    #  user.update_columns(period_articles_views: period.to_i,
+                          #all_articles_views: sum_of_views,
+                          #count_articles: redis_article_counts.count,
+                          #period_count_articles: user.articles.published.where(created_at: sort_gteq..sort_lteq).count) #投稿された「期間内の投稿」の総View
     
      end #user
      @users = User.per_page_kaminari(params[:page]).with_not_regexp("name", "guest00[0-9+]+").order(sort_column + ' ' + sort_direction)
@@ -87,8 +118,9 @@ class UsersController < ApplicationController
      all_users_view.each do |view|
       @sum_of_views+=view.last.to_i
      end
-     
+     #puts @sum_of_views     
      @yesterday_article_published = REDIS.scard "user/#{@user.id}/articles/published/#{Date.yesterday.to_s}"
+     #puts @yesterday_article_published
 
      #test = 200
      #@user.update_attributes(writer_status: 10)

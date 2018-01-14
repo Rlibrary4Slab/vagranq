@@ -1,5 +1,6 @@
 <%= Gon::Base.render_data({}) %>
 <!-- コンテンツ -->
+<%# cache @article.updated_at.strftime('%Y%m%d%H%M%S') ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
 <% cache "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
 <div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">
@@ -152,3 +153,16 @@
 </div><!-- /#column_content -->
 </div>
 <% end %>
+<%# puts request.user_agent %>
+<% unless request.user_agent !~ /arienaiarienai/ %>
+<%# unless request.user_agent !~ /iPhone/ %>
+  <div> 
+   <p>iPhoneです</p>
+  </div>
+<% end%>
+<% unless request.user_agent !~ /arienaiarienai/ %>
+<%# unless request.user_agent !~ /Android/ %>
+  <div> 
+   <p>Androidです</p>
+  </div>
+<% end%>

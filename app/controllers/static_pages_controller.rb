@@ -5,9 +5,11 @@ class StaticPagesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :like_articles,:edit_articles]
 
   def home
-    
-    @articles = Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user)
-
+    #timers = 1.hours.ago
+    #ifarticle = !Article.per_page_kaminari(params[:page]).published.where(updated_at: timers..Time.now).order("updated_at desc").includes(:user).empty? && Article.per_page_kaminari(params[:page]).published.where(updated_at: timers..Time.now).order("updated_at desc").count > 10
+    #@articles = ifarticle ? Article.per_page_kaminari(params[:page]).published.where(updated_at: timers..Time.now).order("updated_at desc").includes(:user) : Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user) 
+    #@articles =  Article.per_page_kaminari(params[:page]).published.where(updated_at: Time.now..timers).order("updated_at desc").includes(:user)  
+    @articles =  Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user)  
     @rank = Article.published.limit(10).order(view_count: :desc).includes(:user)
 
     @toprank = Article.where(:corporecom => [1..3]).published.limit(3).includes(:user)

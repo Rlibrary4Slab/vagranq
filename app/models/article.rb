@@ -44,7 +44,8 @@ class Article < ActiveRecord::Base
             transitions :from => :published, :to => :draft
 
         end
-        event :publish, before: ->{ self.published_at = Time.now } do
+        event :publish do
+        #event :publish, before: ->{ self.published_at = Time.now } do
             transitions :from => :draft, :to => :published
         end
 

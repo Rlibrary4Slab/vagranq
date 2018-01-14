@@ -4,8 +4,8 @@
 <%= search_form_for @q, enforce_utf8: false,url: access_log_index_path, style: 'position:static' do |f| %>
    <div style="position:relative;">
    <%=  f.label 'Create At' %>
-  <%= f.date_field :created_at_gteq %>
-  <%= f.date_field :created_at_lteq %>
+  <%= f.date_field :created_at_gteq ,value: (f.object.created_at_gteq || Time.now.strftime("%Y-%m-%d")) %>
+  <%= f.date_field :created_at_lteq ,value: (f.object.created_at_lteq || Time.now.strftime("%Y-%m-%d")) %>
   <%= f.sort_fields do |s| %>
     <%= s.sort_select %>
   <% end %>
@@ -47,6 +47,12 @@
       <td><%= user.period_articles_views %></td>
       <td> <%= user.all_articles_views%></td>
       <td> <%= user.day_count_view%></td>
+      <% article_likes_all = 0%>
+      <%# user.articles.each do |article| %>
+         <%#article_likes_all += article.likes.count%>
+      <%#end %>
+      <td><%#= user.likes.count%></td>
+        <td><%#= article_likes_all%> </td>
 
      </tr>
     <% end %>

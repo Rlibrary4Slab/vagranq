@@ -1,6 +1,12 @@
 class InquiryController < ApplicationController
   def index
     # 入力画面を表示
+     puts REDIS.zrevrange "articles_ranking/daily/#{Date.today.to_s}/#{Time.now.to_time.strftime("%H00").to_s}", 0, -1,withscores: true
+     #@articles_ranking = ids.map{ |id| Article.find(id) }
+     #Article.find([ids]).each do |article|
+     # puts article.id
+     #end
+     
     @inquiry = Inquiry.new
     render :action => 'index'
   end

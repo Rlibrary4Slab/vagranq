@@ -27,8 +27,8 @@ class ItemsController < AuthorizedController
 
   
   def show
-    User.maximum(:day_count_view)
-    User.where("day_count_view >0 ").minimum(:day_count_view)
+    #puts User.maximum(:day_count_view)
+    #puts User.where("day_count_view >0 ").minimum(:day_count_view)
     respond_to do |format|
       format.html
       format.json {render :json => @item}

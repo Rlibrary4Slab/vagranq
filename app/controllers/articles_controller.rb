@@ -1,8 +1,7 @@
 class ArticlesController < AuthorizedController
   include Notifications
   #before_action :load_paper,  only: [:index]
-  before_action :set_article, only: [ :show ,:liking_users,:publish, :draft]
-  before_action :edit_set_article, only: [ :article_inquiry,:edit, :update,:destroy,:publish, :draft]
+  before_action :set_article, only: [ :show ,:liking_users,:article_inquiry,:edit, :update,:destroy,:publish, :draft]
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
@@ -12,10 +11,8 @@ class ArticlesController < AuthorizedController
   before_action :allshow, only: [:show]
     def siderank 
       add_breadcrumb "RanQ", root_path
-       #@rank ||= Rails.cache.fetch("rank1", expires_in: 10.seconds) do
        
        @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user) unless read_fragment "articles/page#{params[:page]}"
-       #end
        #@corporecom ||= Rails.cache.fetch("corp1", expires_in: 10.seconds) do
          @corporecom =Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)  unless read_fragment "articles/page#{params[:page]}"
        #end 
@@ -73,6 +70,7 @@ class ArticlesController < AuthorizedController
   
   #categories
   def fashion
+    @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).fashion params[:category] #unless read_fragment "articles/page#{params[:page]}"
     @title = "ファッション一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ファッション一覧", :fashion_path
@@ -80,6 +78,7 @@ class ArticlesController < AuthorizedController
   end
   
   def beauty
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).beauty params[:category] #unless read_fragment "articles/page#{params[:page]}"
     @title = "美容健康一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "美容健康一覧", :beauty_path
@@ -88,6 +87,7 @@ class ArticlesController < AuthorizedController
 
   end
   def hangout
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).hangout params[:category]
     @title = "おでかけ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おでかけ一覧", :hangout_path
@@ -95,6 +95,7 @@ class ArticlesController < AuthorizedController
     
   end
   def gourmet
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).gourmet params[:category]
     @title = "グルメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "グルメ一覧", :gourmet_path
@@ -102,6 +103,7 @@ class ArticlesController < AuthorizedController
     
   end
   def lifestyle
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).lifestyle params[:category]
     @title = "ライフスタイル一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ライフスタイル一覧", :lifestyle_path
@@ -109,6 +111,7 @@ class ArticlesController < AuthorizedController
     
   end
   def entertainment
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).entertainment params[:category]
     @title = "エンタメ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "エンタメ一覧", :entertainment_path
@@ -116,6 +119,7 @@ class ArticlesController < AuthorizedController
     
   end
   def interior
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).interior params[:category]
     @title = "インテリア一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "インテリア一覧", :interior_path
@@ -123,6 +127,7 @@ class ArticlesController < AuthorizedController
     
   end
   def gadget
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).gadget params[:category]
     @title = "ガジェット一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "ガジェット一覧", :gadget_path
@@ -130,6 +135,7 @@ class ArticlesController < AuthorizedController
     
   end
   def learn
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).learn params[:category]
     @title = "学び一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "学び一覧", :learn_path
@@ -137,6 +143,7 @@ class ArticlesController < AuthorizedController
     
   end
   def funny
+     @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user).funny params[:category]
     @title = "おもしろ一覧"
     add_breadcrumb "記事一覧", :articles_path
     add_breadcrumb "おもしろ一覧", :funny_path
@@ -152,22 +159,34 @@ class ArticlesController < AuthorizedController
   def liking_users
     add_breadcrumb "いいねしたユーザー"
     @users = @article.liking_users
+    puts @article.liking_users.count
   end
   # GET /articles/1
   # GET /articles/1.json
   def show
+    puts @article.category.to_i
    
     unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" 
      add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
+     redis_category = "fashion" if @article.category == "ファッション"
      add_breadcrumb @article.category, beauty_path if @article.category == "美容健康"
+     redis_category = "beauty" if @article.category == "美容健康"
      add_breadcrumb @article.category, hangout_path if @article.category == "おでかけ"
+     redis_category = "hangout" if @article.category == "おでかけ"
      add_breadcrumb @article.category, gourmet_path if @article.category == "グルメ"
+     redis_category = "gourmet" if @article.category == "グルメ"
      add_breadcrumb @article.category, lifestyle_path if @article.category == "ライフスタイル"
+     redis_category = "lifestyle" if @article.category == "ライフスタイル"
      add_breadcrumb @article.category, entertainment_path if @article.category == "エンタメ"
+     redis_category = "entertainment" if @article.category == "エンタメ"
      add_breadcrumb @article.category, interior_path if @article.category == "インテリア"
+     redis_category = "interior" if @article.category == "インテリア"
      add_breadcrumb @article.category, gadget_path if @article.category == "ガジェット"
+     redis_category = "gadget" if @article.category == "ガジェット"
      add_breadcrumb @article.category, learn_path if @article.category == "学び"
+     redis_category = "learn" if @article.category == "学び"
      add_breadcrumb @article.category, funny_path if @article.category == "おもしろ"
+     redis_category = "funny" if @article.category == "おもしろ"
      #@likes = Like.where(article_id: params[:id])
      add_breadcrumb @article.title
      ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
@@ -175,6 +194,11 @@ class ArticlesController < AuthorizedController
      @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})") 
     end 
     if  @article.published? != false #&& User.find_by(id: @article.user_id).certificated != true 
+      REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"
+      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}/#{Time.now.to_time.strftime("%H00").to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "articles_ranking", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
     end 
@@ -296,10 +320,8 @@ class ArticlesController < AuthorizedController
     
 
     if @article.valid?
-      Rails.cache.delete("views/#{current_user.id}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}")      
-      Rails.cache.delete("views/nonuser/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}")      
+      Rails.cache.delete("page/article/#{params[:id]}")      
       @article.updated_at = Time.now
-      @article.save!
       ids = @article.more_like_this.results.map(&:id)
       REDIS.del "articles/#{@article.id}/morelikethis"
       if ids.empty? != true 
@@ -307,8 +329,11 @@ class ArticlesController < AuthorizedController
       end
       case params[:ope][:cmd]
       when 'publish'
+        Rails.cache.delete("page/article/#{params[:id]}")      
         @article.publish!
         if @article.published_at.nil? != true 
+         @article.published_at = Time.now
+         @article.save!
          REDIS.sadd "user/#{@article.user_id}/articles/published/#{Date.today.to_s}", "#{@article.id}"
          if current_user.twitter_s != false && current_user.social_profiles.where(provider: "twitter").empty? != true 
           twitter_share.update("『#{@article.title}』をRanQで書きました\nranq-media.com/articles/#{@article.id}")
@@ -327,9 +352,11 @@ class ArticlesController < AuthorizedController
         end 
        flash[:success] = '記事を公開しました。'
       when 'draft'
+        @article.save!
         @article.draft!
         flash[:success] = '記事を下書きにしました。'
       when 'save'
+        @article.save!
         flash[:success] = '記事を更新しました。'
       else
         raise
@@ -356,13 +383,9 @@ class ArticlesController < AuthorizedController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @user_discrime = logged_in? ? current_user.id : "nonuser" 
-      @article ||= Rails.cache.fetch("page/article/#{params[:id]}", expires_in: 30.seconds) do
-         Article.find(params[:id])  
-      end
-    end
-    def edit_set_article
-      @article = Article.find(params[:id]) 
-    
+      #@article ||= Rails.cache.fetch("article/#{params[:id]}") do
+       @article=  Article.find(params[:id])  
+      #end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

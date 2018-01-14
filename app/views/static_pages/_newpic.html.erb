@@ -1,9 +1,9 @@
     <div class="headline is-border">
-        <h2 class="headline-title">新着コンテンツ</h2>
+        <h2 class="headline-title">新着aaコンテンツ</h2>
     </div>
     <div class="article_list pickup_list">
 
-    <% @articles.order(created_at: :desc).each do |article| %>
+    <% @articles.each do |article| %>
 
     <div class="article_list_content clearfix">
 
@@ -13,7 +13,6 @@
        <p class="article_list_title">
           <%= link_to article.title.html_safe, article, style: "" %></p>
           <% page_views_get_all = REDIS.zscore "user/#{article.user_id}/articles","#{article.id}" %>
-          <!-- <span><%#= article.view_count %>View</span> -->
           <span><%= page_views_get_all.to_i %>View</span>
           <%= link_to article.user.user_name, article.user ,:class => "article_list_title_name",:rel => "nofollow"%> 
       
