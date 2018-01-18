@@ -66,6 +66,26 @@ class Batch
       puts "------------------"
     end
   end
+  
+  def self.user_status_set
+    users = User.all
+    users.each do |user|
+     user_total_view=0
+     user_article_views = REDIS.zrevrange "user/#{user.id}/articles",0 ,-1,with_scores: true
+     user_article_views.each do |view|
+        user_total_view += view.last.to_i
+     end
+     user_total_like = 0
+     user_likes = REDIS.zrevrange "user/#{user.id}/likes",0 ,-1,with_scores: true
+     user_likes.each do |view|
+        user_total_like += view.last.to_i
+     end
+     status_score = user_total_view + 30 * user_total_like     
+     user.update_attributes(writer_status: 10) if status_score < 10000 
+     user.update_attributes(writer_status: 20) if status_score > 10000 && @user.writer_status == "ホワイト"
+     user.update_attributes(writer_status: 30) if status_score > 30000 && @user.writer_status == "ブルー"
+    end
+  end
 
   
 #one-time#

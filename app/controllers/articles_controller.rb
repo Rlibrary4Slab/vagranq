@@ -254,6 +254,7 @@ class ArticlesController < AuthorizedController
     end
     
     if @article.valid?
+      current_user.update_attributes(count_articles: current_user.articles.count)
       @article.attributes= {likes_count: 0} 
       @article.save!
       ids = @article.more_like_this.results.map(&:id)
@@ -320,6 +321,7 @@ class ArticlesController < AuthorizedController
     
 
     if @article.valid?
+      current_user.update_attributes(count_articles: current_user.articles.count)
       Rails.cache.delete("page/article/#{params[:id]}")      
       @article.updated_at = Time.now
       ids = @article.more_like_this.results.map(&:id)

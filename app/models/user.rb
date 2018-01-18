@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          omniauth_providers: [:twitter,:facebook],:authentication_keys =>[:login]
     has_many :social_profiles, dependent: :destroy
     validates:authentication_token, uniqueness: true, allow_nil: true
-    attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face,:login
+    attr_accessor :crop_x , :crop_y, :crop_w, :crop_h ,:username,:remember_token,:twi,:face,:login,:article_count
     has_many :articles, dependent: :destroy
     has_many :likes
     has_many :items
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     #is_impressionable
     paginates_per 20 
 
-    enum writer_status: {"序":10,"破":20,"急":30,"終":40}
+    enum writer_status: {"ホワイト":10,"ブルー":20,"レッド":30}
     def to_param
      name
    

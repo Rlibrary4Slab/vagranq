@@ -50,6 +50,8 @@ class SessionsController < ApplicationController
 
   def verify_user_column
       user = User.find_by(authentication_token: params[:session][:access_token])
+      puts user.articles.count
+      puts REDIS.zrevrangebyscore "user/#{user.id}/articles","+inf","-inf"
       
         if user
           render json: user, status: 200

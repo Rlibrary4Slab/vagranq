@@ -28,6 +28,7 @@ set :environment, ENV['RAILS_ENV']
 every 1.day, at: '0:01 am' do
   runner "Batch.yesterday_view_count"
   runner "Batch.delete_old_notifications"
+  runner "Batch.user_status_set"
 #  runner "Batch.hello"
 end
 

@@ -72,23 +72,19 @@
   <% if @article.contents.count >= 5%>
   
   
-   <% ranking_count=0%>
    <div class="mokuji">
      <ul>
       <li style="margin-bottom: 1em;">目次</li>
-      <% @article.contents.each do |article| %>
-       <% ranking_count += 1%>
-       <li><%= ranking_count%>.<a href="#id<%= ranking_count%>"><%= article.title%></a></li>
+      <% @article.contents.each_with_index do |article, index| %>
+       <li><%= index+1%>.<a href="#id<%= index+1%>"><%= article.title%></a></li>
       <% end %>
      </ul>
     </div>
    <% end %>
-  <% ranking_count=0%>
-  <% @article.contents.each do |article| %>
+  <% @article.contents.each_with_index do |article,index| %>
     
-     <% ranking_count += 1%>
-      <h2 id="id<%= ranking_count%>" class="rankingh2">
-      <span class="ranking-icon"><%= ranking_count%></span>
+      <h2 id="id<%= index+1%>" class="rankingh2">
+      <span class="ranking-icon"><%= index+1%></span>
          <!--タイトル-->
         <%= article.title.html_safe%>
       </h2>

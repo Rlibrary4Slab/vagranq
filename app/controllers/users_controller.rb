@@ -113,6 +113,18 @@ class UsersController < ApplicationController
    
      #     keys.concat(["user/#{user.id}/articles/daily/#{date.to_s}"])
      #end 
+     #countviewmorehundred = REDIS.zcount "user/#{@user.id}/articles", 100, "+inf" 
+     #countviewmoretwohundred = REDIS.zcount "user/#{@user.id}/articles", 200, "+inf" 
+     #countviewmorethousand = REDIS.zcount "user/#{@user.id}/articles", 1000, "+inf" 
+     #countlikemorethree = REDIS.zcount "user/#{@user.id}/likes", 3, "+inf" 
+     #countlikemorefive = REDIS.zcount "user/#{@user.id}/likes", 5, "+inf" 
+     #countlikemoreten = REDIS.zcount "user/#{@user.id}/likes", 10, "+inf" 
+     #puts countviewmorehundred,countviewmorehundred > 3 
+     #puts countviewmoretwohundred,countviewmoretwohundred > 10
+     #puts countviewmorethousand ,countviewmorethousand> 12
+     #puts countlikemorethree ,countlikemorethree> 3
+     #puts countlikemorefive ,countlikemorefive> 10
+     #puts countlikemoreten,countlikemoreten > 12
      @sum_of_views=0
      all_users_view =REDIS.zrevrange "user/#{@user.id}/articles", 0, -1, withscores: true
      all_users_view.each do |view|
@@ -122,11 +134,6 @@ class UsersController < ApplicationController
      @yesterday_article_published = REDIS.scard "user/#{@user.id}/articles/published/#{Date.yesterday.to_s}"
      #puts @yesterday_article_published
 
-     #test = 200
-     #@user.update_attributes(writer_status: 10)
-     #@user.update_attributes(writer_status: 20) if test >= 200 && @user.writer_status == "序" 
-     #@user.update_attributes(writer_status: 30) if test >= 300 && @user.writer_status == "破"
-     #@user.update_attributes(writer_status: 40) if test >= 400 && @user.writer_status == "急" 
 
      #User.all.limit(50).each do |user|
      # puts "#{user.user_name}:#{user.week_views.first.day0}"   
