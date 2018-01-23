@@ -9,7 +9,7 @@ module API
        end
   
        get ":authentication_token" do
-	 present User.find_by(authentication_token: params[:authentication_token]).likes.order(created_at: :desc) ,with: Entity::V1::LikesEntity
+	 present User.find_by(authentication_token: params[:authentication_token]).likes.order(created_at: :desc).limit(10) ,with: Entity::V1::LikesEntity
        end
       end
  
