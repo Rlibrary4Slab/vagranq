@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @news_tag.title %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @news_tag.link %>
+</p>
+
+<p>
+  <strong>Updated_at:</strong>
+  <%= @news_tag.updated_at %>
+</p>
+<p>
+  <strong>Created_at:</strong>
+  <%= @news_tag.created_at %>
+</p>
+<%= link_to 'Edit', edit_news_tag_path(@news_tag) %> |
+<%= link_to 'Back', news_tags_path %>

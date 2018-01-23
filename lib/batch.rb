@@ -2,6 +2,12 @@ class Batch
   
 #routine#
 #---------------------------------------------------------------------------------------------------------------------#
+  def self.newsToPublish
+    Article.find(NewsTag.where("created_at < ?",24.hours.ago).map(&:link)).each do |article|
+     article.publish
+    end
+  end
+
   def self.yesterday_view_count
     users = User.all
     users.each do |user|

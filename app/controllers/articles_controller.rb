@@ -400,7 +400,6 @@ class ArticlesController < AuthorizedController
        article = current_user.articles.find_by(id: params[:id])
        redirect_to root_url if current_user.admin != true && article.nil?
       end
- 
     end
     def certificate_user
       if logged_in?
@@ -411,11 +410,9 @@ class ArticlesController < AuthorizedController
     def correct_draft
       unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
       if logged_in?
-       #redirect_to root_url if @articlep.nil? && current_user.name != @article.user.name 
-       redirect_to root_url if !@article.published? && current_user.name != @article.user.name 
+       redirect_to root_url if @article.draft? && current_user.name != @article.user.name 
       else 
-       #redirect_to root_url if @articlep.nil? 
-       redirect_to root_url if !@article.published? 
+       redirect_to root_url if @article.draft? 
        
       end 
       end 

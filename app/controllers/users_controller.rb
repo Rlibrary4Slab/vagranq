@@ -106,6 +106,10 @@ class UsersController < ApplicationController
   def show
      
     if params[:name] != "websocket"
+     puts Article.find(391).news?
+     #Article.find(391).to_news!
+     puts Article.find(391).news?
+     puts Article.news.count
      #puts  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1
      #keys = []
      #(2017-12-01.to_date..2017-12-12.to_date).each do |date|

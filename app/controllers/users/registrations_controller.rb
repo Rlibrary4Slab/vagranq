@@ -51,7 +51,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
        if resource.save
          puts resource.id
          resource.attributes= {name:"guest00"+resource.id.to_s, user_name: "ゲスト",
-                             email: "guest00"+resource.id.to_s+"@guest00"+resource.id.to_s+".com"}
+                             email: "guest00"+resource.id.to_s+"@guest00"+resource.id.to_s+".com",
+                             day_count_view: 0}
          resource.generate_authentication_token
 
          yield resource if block_given?

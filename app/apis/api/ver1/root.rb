@@ -45,6 +45,10 @@ module Entity
  
     end
   
+    class NewsTagEntity < Grape::Entity
+      expose :id ,:title,:link
+      expose :article, using: Entity::V1::ArticleTitleEntity
+    end
   end
 end
 module API
@@ -58,6 +62,7 @@ module API
       mount API::Ver1::Users
       #mount API::Ver1::Likes
       mount API::Ver1::Articles
+      mount API::Ver1::NewsTags
       mount API::Ver1::Items
       #mount API::Ver1::ItemLikes
 

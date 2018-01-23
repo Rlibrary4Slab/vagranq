@@ -1,0 +1,35 @@
+<%= form_for(@news_tag) do |f| %>
+  <% if @news_tag.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @news_tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :link %><br>
+    <%= f.number_field :link %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<div>
+	<div>
+	  <% @news_tags.each_with_index do |tag,i|%>
+	    <div><%= i+1 %>.<%=tag.title%></div>
+	  <% end%>
+	</div>
+	<div>
+	  <% Article.find(@news_tags.map(&:link)).each_with_index do |article,i|%>
+	    <div><%= i+1 %>.<%=article.title%></div>
+	  <% end%>
+	</div>
+</div>

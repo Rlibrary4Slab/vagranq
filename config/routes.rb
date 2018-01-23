@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :news_tags
   mount Ckeditor::Engine => '/ckeditor'
   #mount Ckeditor::Engine => '/ckeditor'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

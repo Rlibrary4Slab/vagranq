@@ -25,6 +25,11 @@ set :environment, ENV['RAILS_ENV']
 # end
 
 #every 1.minute do
+every 1.hours do
+  runner "Batch.newsToPublish"
+
+end
+
 every 1.day, at: '0:01 am' do
   runner "Batch.yesterday_view_count"
   runner "Batch.delete_old_notifications"
