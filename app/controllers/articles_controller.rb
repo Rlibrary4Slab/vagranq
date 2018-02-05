@@ -34,7 +34,7 @@ class ArticlesController < AuthorizedController
   def index
     add_breadcrumb "記事一覧", :articles_path
    # @data = load_paper.per_page_kaminari(params[:page])
-    @articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user) unless read_fragment "articles/page#{params[:page]}" 
+    @articles = Article.per_page_kaminari(params[:page]).where("(aasm_state =? ) OR (aasm_state=?)", "published","news").order('updated_at desc').includes(:user) unless read_fragment "articles/page#{params[:page]}" 
   end
  
   def article_inquiry
@@ -193,7 +193,7 @@ class ArticlesController < AuthorizedController
      @idsemptybool = ids.empty?
      @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})") 
     end 
-    if  @article.published? != false #&& User.find_by(id: @article.user_id).certificated != true 
+    if  @article.draft? != true #&& User.find_by(id: @article.user_id).certificated != true 
       REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"
       REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}", 1, "#{@article.id}"
@@ -232,7 +232,12 @@ class ArticlesController < AuthorizedController
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @article = if params[:neid] 
+             nc = NewsCrawler.find(params[:neid])  
+             Article.new(title: nc.title, description: nc.news_image+nc.news_body,neid: params[:neid])
+             else 
+               Article.new
+             end
     2.times {@article.contents.build}
     render layout: 'article_new'
   end
@@ -288,7 +293,11 @@ class ArticlesController < AuthorizedController
         raise
       end
       #redirect_to [:home, @article]
-      redirect_to @article
+      if @article.neid ==""
+       redirect_to @article
+      else
+       redirect_to new_news_tag_path(title: @article.title,link: @article.id)
+      end
     else
       render :new, layout: 'article_new'
     end
@@ -311,6 +320,7 @@ class ArticlesController < AuthorizedController
 
   # PATCH/PUT /articles/1
   def update
+      Rails.cache.delete("views/#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}")      
 
     @article.assign_attributes(article_params)
     if @article.description != "" 
@@ -344,9 +354,7 @@ class ArticlesController < AuthorizedController
          if current_user.facebook_s != false && current_user.social_profiles.where(provider: "facebook").empty? != true
           facebook_share.feed!(
            :message => "『#{@article.title}』をRanQで書きました\n",
-           #:picture => 'https://graph.facebook.com/matake/picture',
            :link => "ranq-media.com/articles/#{@article.id}",
-           #:link => "ranq-media.com/articles/351",
            :name => "#{@article.title}",
            :description => "#{drion}"
           )
@@ -392,7 +400,7 @@ class ArticlesController < AuthorizedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:category, :title, :description, :user_id,:aasm_state,:eyecatch_img,:checkagree,contents_attributes: [:id,:title,:description,:_destroy,:position])
+      params.require(:article).permit(:category, :title, :description, :user_id,:aasm_state,:eyecatch_img,:checkagree,:neid,contents_attributes: [:id,:title,:description,:_destroy,:position])
     end
     
     def correct_user

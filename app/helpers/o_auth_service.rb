@@ -82,11 +82,11 @@ module OAuthService
              )
             end
             # email確認メール送信を延期するために一時的にemail確認済みの状態にする。
-	    puts user.user_name
             #user.skip_confirmation!
-    
+             
             # email仮をデータベースに保存するため、validationを一時的に無効化。
             user.save(validate: false)
+            user.remote_user_image_url =  auth.info.image.gsub('http://','https://') unless user.user_image.to_s == "thumb_thumb_illust-52.png"
             user
           end
         end

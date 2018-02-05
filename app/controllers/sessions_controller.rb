@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
       #puts REDIS.zrevrangebyscore "user/#{user.id}/articles","+inf","-inf"
       
         if user
-          render json: user, status: 200
+          render json: user.to_json(:include => :social_profiles), status: 200
         else
           render text: "Token failed verification", status: 422
         end

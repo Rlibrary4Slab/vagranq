@@ -21,31 +21,40 @@
          <span style="letter-spacing:0px">Total View</span>：<%= @sum_of_views %></br>
          <span style="letter-spacing:0px">Total Likes</span>：<%= sum_of_likes %></br>
          <span style="letter-spacing:0px">昨日の公開投稿数</span>：<%= @yesterday_article_published %>
-         <p>
          <% if logged_in? && @user == current_user %>
           <% if current_user.social_profiles.where(provider: "twitter").empty? != false %>
-            <%= link_to "twitter認証", user_twitter_omniauth_authorize_path %>
+             <div class="div-notwi">
+            <%= link_to embedded_svg("twitter.svg" ,:class => "sns-logo"), user_twitter_omniauth_authorize_path %>
+            </div>
           <%else%>
-            <%= link_to "twitter認証済み", @user.social_profiles.where(provider: "twitter").map(&:url).first %>
- 
+             <div class="div-twi">
+            <%= link_to embedded_svg("twitter.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "twitter").map(&:url).first%>
+            </div>
           <%end%>
 	  
           <% if current_user.social_profiles.where(provider: "facebook").empty? != false %>
-            <%= link_to "facebook認証", user_facebook_omniauth_authorize_path %>
+             <div class="div-noface">
+            <%= link_to embedded_svg("facebook.svg" ,:class => "sns-logo") ,  user_facebook_omniauth_authorize_path %>
+             </div>
           <%else%>
-            <%= link_to "facebook認証済み", @user.social_profiles.where(provider: "facebook").map(&:url).first %>
+             <div class="div-face">
+            <%= link_to embedded_svg("facebook.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "facebook").map(&:url).first%>
+             </div>
           <%end%>
          <%else%>
            
            <% if @user.social_profiles.where(provider: "twitter").empty? != true %>
-            <%= link_to "twitter認証済み", @user.social_profiles.where(provider: "twitter").map(&:url).first %>
+            <div class="div-twi">
+            <%= link_to embedded_svg("twitter.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "twitter").map(&:url).first%>
+             </div>
            <%end%>
            <% if @user.social_profiles.where(provider: "facebook").empty? != true %>
-            <%= link_to "facebook認証済み", @user.social_profiles.where(provider: "facebook").map(&:url).first %>
+             <div class="div-face">
+            <%= link_to embedded_svg("facebook.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "facebook").map(&:url).first%>
+             </div>
            <%end%>
          
          <%end%>
-          </p>
 
        </div>
        <div class="user_prof_bottom">

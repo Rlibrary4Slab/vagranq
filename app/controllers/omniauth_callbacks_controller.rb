@@ -12,9 +12,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     else
      user = OAuthService::GetOAuthUser.call(env["omniauth.auth"])
+     puts env["omniauth.auth"]
      if user.week_views.empty?
       user.week_views.build(user_id:user.id, day6:0,day5:0,day4:0,day3:0,day2:0,day1:0,day0:0)
-      user.attributes= {day_count_view: 0,certificated: false}
+      user.attributes= {day_count_view: 0,certificated: false,count_articles: 0,
+all_articles_views: 0,
+period_count_articles: 0,
+period_articles_views: 0,
+total_likes: 0}
       user.save
      end
     end

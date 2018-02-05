@@ -3,19 +3,20 @@ class Batch
 #routine#
 #---------------------------------------------------------------------------------------------------------------------#
   def self.newsToPublish
-    Article.find(NewsTag.where("created_at < ?",24.hours.ago).map(&:link)).each do |article|
-     article.publish
-    end
+    Article.where.not(aasm_state: "published").where(id: NewsTag.where("created_at < ?",24.hours.ago).map(&:link)).each {|article| 
+       article.publish!
+    }
+    NewsCrawler.where("created_at<?", 24.hours.ago ).each{|news| news.destroy! }
   end
 
   def self.yesterday_view_count
     users = User.all
-    users.each do |user|
+    users.each {|user|
       yesterday_total_view = 0
       user_yesterday_views = REDIS.zrevrange "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}",0 ,-1,with_scores: true
-      user_yesterday_views.each do |view|
+      user_yesterday_views.each {|view|
         yesterday_total_view+=view.last.to_i
-      end
+      }
       #user.articles.each do |article|
         #if article.aasm_state != "draft"
           #each_yesterday_view = REDIS.zscore "user/#{user.id}/articles/daily/#{Date.yesterday.to_s}", "#{article.id}"
@@ -48,49 +49,49 @@ class Batch
 
      # for i in 1..6
      # user.week_views.first.send("day#{i}") = user.week_views.first.send("day#{i-1}")
-    end
+    }
   end
 
   def self.delete_old_notifications
     users = User.all
-    users.each do |user|
+    users.each {|user|
      # old_notifications =  user.notifications.where("created_at < ?", Time.now.prev_month)
       user.notifications.where("created_at < ?", Time.now.prev_month).delete_all
      # old_notifications.each do |old_notification|
      #   puts old_notification.created_at
      # end
-    end
+    }
   end
 
   def self.user_ranking_point
     users = User.all
-    users.each do |user|
+    users.each {|user|
       today_user_view_point = user.day_count_view * 0.9 + user.week_views.first.day0
       user.update(day_count_view:today_user_view_point)
-      puts "user_id:#{user.id}"
-      puts "day_count_view:#{user.day_count_view}"
-      puts "------------------"
-    end
+      #puts "user_id:#{user.id}"
+      #puts "day_count_view:#{user.day_count_view}"
+      #puts "------------------"
+    }
   end
   
   def self.user_status_set
     users = User.all
-    users.each do |user|
+    users.each {|user|
      user_total_view=0
      user_article_views = REDIS.zrevrange "user/#{user.id}/articles",0 ,-1,with_scores: true
-     user_article_views.each do |view|
+     user_article_views.each{ |view|
         user_total_view += view.last.to_i
-     end
+     }
      user_total_like = 0
      user_likes = REDIS.zrevrange "user/#{user.id}/likes",0 ,-1,with_scores: true
-     user_likes.each do |view|
+     user_likes.each { |view|
         user_total_like += view.last.to_i
-     end
+     }
      status_score = user_total_view + 30 * user_total_like     
      user.update_attributes(writer_status: 10) if status_score < 10000 
      user.update_attributes(writer_status: 20) if status_score > 10000 && @user.writer_status == "ホワイト"
      user.update_attributes(writer_status: 30) if status_score > 30000 && @user.writer_status == "ブルー"
-    end
+    }
   end
 
   

@@ -10,6 +10,27 @@ class SocialProfile < ActiveRecord::Base
     profile.save_oauth_data!(auth)
     profile
   end
+  def save_oauth_twi_data!(auth)
+
+       self.update_attributes( uid:      auth["info"]["user"]["id_str"],
+                            name:        auth["info"]["user"]["name"],
+                            nickname:    auth["info"]["user"]["screen_name"],
+                            url:         "https://twitter.com/#{auth["info"]["user"]["screen_name"]}",
+                            image_url:   auth["info"]["user"]["profile_image_url"],
+                            description: auth["info"]["user"]["description"],
+                            credentials: auth["info"]["credentials"],
+                            raw_info:    auth )
+   end
+ 
+   def save_oauth_face_data!(auth)
+
+       self.update_attributes( uid:      auth["info"]["user"]["id"],
+                            name:        auth["info"]["user"]["name"],
+                            url:         auth["info"]["user"]["link"],
+                            image_url:   "http://graph.facebook.com/v2.7/#{auth["info"]["user"]["id"]}/picture",
+                            credentials: auth["info"]["credentials"],
+                            raw_info:    auth )
+   end
 
   def save_oauth_data!(auth)
     return unless valid_oauth?(auth)

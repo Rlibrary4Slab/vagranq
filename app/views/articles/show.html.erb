@@ -1,6 +1,5 @@
 <%= Gon::Base.render_data({}) %>
 <!-- コンテンツ -->
-<%# cache @article.updated_at.strftime('%Y%m%d%H%M%S') ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
 <% cache "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
 <div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">

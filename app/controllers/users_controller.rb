@@ -106,10 +106,6 @@ class UsersController < ApplicationController
   def show
      
     if params[:name] != "websocket"
-     puts Article.find(391).news?
-     #Article.find(391).to_news!
-     puts Article.find(391).news?
-     puts Article.news.count
      #puts  REDIS.zrevrange "user/#{user.id}/articles/betweendays/#{sort_gteq}/#{sort_lteq}", 0,-1
      #keys = []
      #(2017-12-01.to_date..2017-12-12.to_date).each do |date|
@@ -138,7 +134,6 @@ class UsersController < ApplicationController
      @yesterday_article_published = REDIS.scard "user/#{@user.id}/articles/published/#{Date.yesterday.to_s}"
      #puts @yesterday_article_published
 
-
      #User.all.limit(50).each do |user|
      # puts "#{user.user_name}:#{user.week_views.first.day0}"   
      #end
@@ -157,7 +152,7 @@ class UsersController < ApplicationController
     @charts = [[Date.today.advance(:days=>-7).strftime("%m/%d"),@weeks_views[6]],[Date.today.advance(:days=>-6).strftime("%m/%d"),@weeks_views[5]],[Date.today.advance(:days=>-5).strftime("%m/%d"),@weeks_views[4]],[Date.today.advance(:days=>-4).strftime("%m/%d"),@weeks_views[3]],[
 Date.today.advance(:days=>-3).strftime("%m/%d"),@weeks_views[2]],[
 Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday.strftime("%m/%d"),@weeks_views[0]]]
-    if @weeks_views.max != 0
+    if @weeks_views.max != 0 && @weeks_views.min != 0
      
      maxviewdigits = Math.log10(@weeks_views.max).to_i #12345 5
      flotmaxview = @weeks_views.max * 0.1 ** maxviewdigits #1.2345

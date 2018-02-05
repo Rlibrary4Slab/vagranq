@@ -14,8 +14,6 @@ class Users::SessionsController < Devise::SessionsController
   # end
    def create
 
-      puts "dsdjfodsiafhsd"
-      puts self.resource
       self.resource = warden.authenticate!(auth_options)
       puts resource.name
       set_flash_message(:notice, :signed_in) if is_flashing_format?

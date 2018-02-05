@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
   namespace :api do
     post "inquiry_article" => "inquiry#inquiry_article"
+    post "oauth_user" => "users#oauth_user"
+    post "guest_user_registration" => "users#guest_user_registration"
+    post "oauth_loginuser" => "users#oauth_loginuser"
     resources :users, param: :access_token
     resources :items,only:[:create,:update]
     resources :password_resets, only: [:new, :create, :edit, :update]
@@ -80,6 +83,7 @@ Rails.application.routes.draw do
   resources :items 
 
   resources :users,param: :name ,only: [:index,:access_log_index] do
+
     member do
       get :like_articles
       get :share_twitter

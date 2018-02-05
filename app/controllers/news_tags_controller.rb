@@ -7,17 +7,25 @@ class NewsTagsController < AuthorizedController
   # GET /news_tags
   # GET /news_tags.json
   def index
-    #@news_tags = NewsTag.where("created_at > ?",24.hours.ago).order("created_at desc").limit(7)
+    @news_tags = NewsTag.where("created_at > ?",24.hours.ago).order("created_at desc").limit(7)
     #agent = Mechanize.new
-    #yahoopage = agent.get("https://news.yahoo.co.jp/pickup/rss.xml")
     #yahoorss =  RSS::Parser.parse("https://news.yahoo.co.jp/pickup/rss.xml")
     #yahoopage=""
+    #NewsCrawler.all.each {|new|  new.destroy!  }
+    #newsCrawler=""
     #yahoorss.items.each{|item|
-     #puts item.title
-     #puts item.link
-    #yahoopage=agent.get(item.link)
+    # yahoopage=agent.get(item.link)
+    # yahooHeadTxt = yahoopage.search(".headlineTxt")
+    # yahooHeadImg = yahoopage.search(".headlinePic a span img")
+    # nimage = if !yahooHeadImg.empty? 
+    #        yahooHeadImg.at("img")["data-src"]
+    #        else
+    #         ""
+    #        end
+    # newsCrawler = NewsCrawler.new(title: item.title,news_link: item.link,news_body: yahooHeadTxt,news_image: '<img src="'+nimage+'"/>')
+    # newsCrawler.save
     #}
-    #@yahoonews = yahoopage.search(".headlineTxt")
+    @crawlingnews = NewsCrawler.all
     
   end
 
@@ -29,7 +37,11 @@ class NewsTagsController < AuthorizedController
 
   # GET /news_tags/new
   def new
-    @news_tag = NewsTag.new
+    @news_tag =  if params[:link]
+             NewsTag.new(title:params[:title],link: params[:link]) 
+             else
+             NewsTag.new
+             end
     @news_tags = NewsTag.where("created_at > ?",24.hours.ago).order("created_at desc")
   end
 
@@ -49,8 +61,11 @@ class NewsTagsController < AuthorizedController
           if NewsTag.where(title: @news_tag.title).where("created_at > ?",1.days.ago).count < 1
             @news_tag.attributes = {article_title: article.title,article_description: article.description}
             if @news_tag.save
+
               Article.find(@news_tag.link).to_news!
-              format.html { redirect_to new_news_tag_path, notice: 'News tag was successfully created.' }
+              twitter_share.update("#{article.title}\nranq-media.com/articles/#{article.id}") if Rails.env.production?
+
+              format.html { redirect_to article_path(@news_tag.link), notice: 'News tag was successfully created.' }
               format.json { render :show, status: :created, location: @news_tag }
             else
               puts @news_tag.errors
@@ -105,7 +120,7 @@ class NewsTagsController < AuthorizedController
     end
 
     def correct_user
-       redirect_to root_url if current_user.admin != true && article.nil?
+       redirect_to root_url if current_user.admin != true 
     end
    
     def twitter_share
@@ -115,8 +130,8 @@ class NewsTagsController < AuthorizedController
       config.consumer_key         = OAUTH_CONFIG[:twitter]['key']
       config.consumer_secret      = OAUTH_CONFIG[:twitter]['secret']
       # user
-      config.access_token         = result["token"].to_s
-      config.access_token_secret  = result["secret"].to_s
+      config.access_token         = "958240210923397120-F7mA6zAiu6e0cx4IN1PzQxE8Oy5cpfI" 
+      config.access_token_secret  = "CeDNZydygOp82SxBEYvlf08QbXfJiyG9Jl3hrvRUqv88l"
      end
      return client
     end
