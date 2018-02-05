@@ -13,13 +13,16 @@
         </div>
       </h1>
         <%= @user.user_name %>
+        <div class="user_prof_bottom">
+        <p>
        <% if @user.user_description !=nil%>
                 <p><%= @user.user_description.html_safe %><p>
 
         <% else %>
                 <p><%= @user.user_description %><p>
         <% end %> 
-
+         </p>
+        </div>
         <table>
           <tbody>
          <%# sum_of_likes = 0 %>
