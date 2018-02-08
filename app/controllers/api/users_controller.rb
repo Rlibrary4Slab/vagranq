@@ -1,5 +1,9 @@
 class Api::UsersController < ApplicationController
-
+    require "oauth"
+    require "omniauth"
+    require 'net/http'
+    require 'uri'
+    require 'json'
     before_action :set_user, only: [:guest_user_registration,:show, :edit, :update, :destroy]
 
 
@@ -10,10 +14,26 @@ class Api::UsersController < ApplicationController
     end
  
     def guest_user_registration
-      profile = SocialProfile.find_or_create_by(uid: params["info"]["user"]["id_str"], provider: params["provider"]) if params["provider"] == "twitter"
-      profile = SocialProfile.find_or_create_by(uid: params["info"]["user"]["id"], provider: params["provider"]) if params["provider"] == "facebook"
-      profile.save_oauth_twi_data!(params) if params["provider"] == "twitter"
-      profile.save_oauth_face_data!(params) if params["provider"] == "facebook"
+      if params["provider"] == "facebook"
+       aToken = params[:info][:response][:credentials][:accessToken]
+       uri = URI.parse("https://graph.facebook.com/v2.8/me?&access_token=#{aToken}&fields=id,name,link")
+       json = Net::HTTP.get(uri)
+       result = JSON.parse(json)
+     end
+    
+     if params["provider"] == "twitter"
+      aToken = params[:info][:response][:credentials][:access_token]
+      aTokenSecret = params[:info][:response][:credentials][:access_token_secret]
+      consumer= OAuth::Consumer.new("tvy3oyXU5kdIkZFJr6Fjqvycr", "Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd", {:site=>"http://twitter.com",:scheme => :header})
+      access_token = OAuth::AccessToken.new(consumer, aToken, aTokenSecret)
+      response = access_token.request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json")
+      result = JSON.parse(response.body)
+     end
+
+       profile = SocialProfile.find_or_create_by(uid: result["id_str"], provider: params["provider"]) if params["provider"] == "twitter"
+       profile = SocialProfile.find_or_create_by(uid: result["id"], provider: params["provider"]) if params["provider"] == "facebook"
+       profile.save_oauth_twi_data!(result) if params["provider"] == "twitter"
+       profile.save_oauth_face_data!(result) if params["provider"] == "facebook"
       # ユーザーを探す。
       # 第１候補：ログイン中のユーザー、第２候補：SocialProfileオブジェクトに紐付けされているユーザー。
       if !profile.user_id
@@ -52,23 +72,55 @@ class Api::UsersController < ApplicationController
     def oauth_loginuser
       # 認証データに対応するSocialProfileが存在するか確認し、なければSocialProfileを新規作成。
       # 認証データをSocialProfileオブジェクトにセットし、データベースに保存。
-      profile = SocialProfile.find_or_create_by(uid: params["info"]["user"]["id_str"], provider: params["provider"]) if params["provider"] == "twitter"
-      profile = SocialProfile.find_or_create_by(uid: params["info"]["user"]["id"], provider: params["provider"]) if params["provider"] == "facebook"
-      profile.save_oauth_twi_data!(params) if params["provider"] == "twitter"
-      profile.save_oauth_face_data!(params) if params["provider"] == "facebook"
+      if params["provider"] == "facebook"
+       aToken = params[:info][:response][:credentials][:accessToken]
+       uri = URI.parse("https://graph.facebook.com/v2.8/me?&access_token=#{aToken}&fields=id,name,link")
+       json = Net::HTTP.get(uri)
+       result = JSON.parse(json)
+     end
+    
+     if params["provider"] == "twitter"
+      aToken = params[:info][:response][:credentials][:access_token]
+      aTokenSecret = params[:info][:response][:credentials][:access_token_secret]
+      consumer= OAuth::Consumer.new("tvy3oyXU5kdIkZFJr6Fjqvycr", "Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd", {:site=>"http://twitter.com",:scheme => :header})
+      access_token = OAuth::AccessToken.new(consumer, aToken, aTokenSecret)
+      response = access_token.request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json")
+      result = JSON.parse(response.body)
+     end
+
+       profile = SocialProfile.find_or_create_by(uid: result["id_str"], provider: params["provider"]) if params["provider"] == "twitter"
+       profile = SocialProfile.find_or_create_by(uid: result["id"], provider: params["provider"]) if params["provider"] == "facebook"
+       profile.save_oauth_twi_data!(result) if params["provider"] == "twitter"
+       profile.save_oauth_face_data!(result) if params["provider"] == "facebook"
       # ユーザーを探す。
       # 第１候補：ログイン中のユーザー、第２候補：SocialProfileオブジェクトに紐付けされているユーザー。
       user = User.find_by(authentication_token: params[:auth]) 
       profile.update!(user_id: user.id) if profile.user != user
       render json: user.to_json(:include => :social_profiles),status: 200
     end
+
    
     def oauth_user
+     if params["provider"] == "facebook"
+       aToken = params[:info][:response][:credentials][:accessToken]
+       uri = URI.parse("https://graph.facebook.com/v2.8/me?&access_token=#{aToken}&fields=id,name,link")
+       json = Net::HTTP.get(uri)
+       result = JSON.parse(json)
+     end
+    
+     if params["provider"] == "twitter"
+      aToken = params[:info][:response][:credentials][:access_token]
+      aTokenSecret = params[:info][:response][:credentials][:access_token_secret]
+      consumer= OAuth::Consumer.new("tvy3oyXU5kdIkZFJr6Fjqvycr", "Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd", {:site=>"http://twitter.com",:scheme => :header})
+      access_token = OAuth::AccessToken.new(consumer, aToken, aTokenSecret)
+      response = access_token.request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json")
+      result = JSON.parse(response.body)
+     end
 
-       profile = SocialProfile.find_or_create_by(uid: params["info"]["user"]["id_str"], provider: params["provider"]) if params["provider"] == "twitter"
-       profile = SocialProfile.find_or_create_by(uid: params["info"]["user"]["id"], provider: params["provider"]) if params["provider"] == "facebook"
-       profile.save_oauth_twi_data!(params) if params["provider"] == "twitter"
-       profile.save_oauth_face_data!(params) if params["provider"] == "facebook"
+       profile = SocialProfile.find_or_create_by(uid: result["id_str"], provider: params["provider"]) if params["provider"] == "twitter"
+       profile = SocialProfile.find_or_create_by(uid: result["id"], provider: params["provider"]) if params["provider"] == "facebook"
+       profile.save_oauth_twi_data!(result) if params["provider"] == "twitter"
+       profile.save_oauth_face_data!(result) if params["provider"] == "facebook"
        #以下ログイン機能　現時点では万全　登録機能との兼ねあわせはきついかな？
         if profile.user 
             puts "socialari"
