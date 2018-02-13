@@ -124,7 +124,6 @@ class NewsTagsController < AuthorizedController
     end
    
     def twitter_share
-     result = JSON.parse(current_user.social_profiles.where(provider: "twitter").map(&:credentials).first)
      client = Twitter::REST::Client.new do |config|
       # developer
       config.consumer_key         = OAUTH_CONFIG[:twitter]['key']
@@ -137,7 +136,6 @@ class NewsTagsController < AuthorizedController
     end
 
     def facebook_share
-     result = JSON.parse(current_user.social_profiles.where(provider: "facebook").map(&:credentials).first)
      #graph = Koala::Facebook::API.new(result["token"].to_s)
      graph = FbGraph::User.me(result["token"].to_s)
      return graph

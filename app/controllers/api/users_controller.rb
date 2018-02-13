@@ -15,15 +15,15 @@ class Api::UsersController < ApplicationController
  
     def guest_user_registration
       if params["provider"] == "facebook"
-       aToken = params[:info][:response][:credentials][:accessToken]
+       aToken = params[:accessToken]
        uri = URI.parse("https://graph.facebook.com/v2.8/me?&access_token=#{aToken}&fields=id,name,link")
        json = Net::HTTP.get(uri)
        result = JSON.parse(json)
      end
     
      if params["provider"] == "twitter"
-      aToken = params[:info][:response][:credentials][:access_token]
-      aTokenSecret = params[:info][:response][:credentials][:access_token_secret]
+      aToken = params[:authToken]
+      aTokenSecret = params[:authTokenSecret]
       consumer= OAuth::Consumer.new("tvy3oyXU5kdIkZFJr6Fjqvycr", "Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd", {:site=>"http://twitter.com",:scheme => :header})
       access_token = OAuth::AccessToken.new(consumer, aToken, aTokenSecret)
       response = access_token.request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json")
@@ -73,15 +73,15 @@ class Api::UsersController < ApplicationController
       # 認証データに対応するSocialProfileが存在するか確認し、なければSocialProfileを新規作成。
       # 認証データをSocialProfileオブジェクトにセットし、データベースに保存。
       if params["provider"] == "facebook"
-       aToken = params[:info][:response][:credentials][:accessToken]
+       aToken = params[:accessToken]
        uri = URI.parse("https://graph.facebook.com/v2.8/me?&access_token=#{aToken}&fields=id,name,link")
        json = Net::HTTP.get(uri)
        result = JSON.parse(json)
      end
-    
+   
      if params["provider"] == "twitter"
-      aToken = params[:info][:response][:credentials][:access_token]
-      aTokenSecret = params[:info][:response][:credentials][:access_token_secret]
+      aToken = params[:authToken]
+      aTokenSecret = params[:authTokenSecret]
       consumer= OAuth::Consumer.new("tvy3oyXU5kdIkZFJr6Fjqvycr", "Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd", {:site=>"http://twitter.com",:scheme => :header})
       access_token = OAuth::AccessToken.new(consumer, aToken, aTokenSecret)
       response = access_token.request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json")
@@ -102,15 +102,15 @@ class Api::UsersController < ApplicationController
    
     def oauth_user
      if params["provider"] == "facebook"
-       aToken = params[:info][:response][:credentials][:accessToken]
+       aToken = params[:accessToken]
        uri = URI.parse("https://graph.facebook.com/v2.8/me?&access_token=#{aToken}&fields=id,name,link")
        json = Net::HTTP.get(uri)
        result = JSON.parse(json)
      end
     
      if params["provider"] == "twitter"
-      aToken = params[:info][:response][:credentials][:access_token]
-      aTokenSecret = params[:info][:response][:credentials][:access_token_secret]
+      aToken = params[:authToken]
+      aTokenSecret = params[:authTokenSecret]
       consumer= OAuth::Consumer.new("tvy3oyXU5kdIkZFJr6Fjqvycr", "Y2pO7ilI7cP4iX4DBhgsrQIYtyzXbPWlbLruMg9cADibJy9LQd", {:site=>"http://twitter.com",:scheme => :header})
       access_token = OAuth::AccessToken.new(consumer, aToken, aTokenSecret)
       response = access_token.request(:get, "https://api.twitter.com/1.1/account/verify_credentials.json")

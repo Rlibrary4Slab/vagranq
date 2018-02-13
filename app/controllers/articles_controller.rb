@@ -293,10 +293,10 @@ class ArticlesController < AuthorizedController
         raise
       end
       #redirect_to [:home, @article]
-      if @article.neid ==""
-       redirect_to @article
-      else
+      if @article.neid
        redirect_to new_news_tag_path(title: @article.title,link: @article.id)
+      else
+       redirect_to @article
       end
     else
       render :new, layout: 'article_new'
