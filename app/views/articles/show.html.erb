@@ -20,7 +20,7 @@
       </div>
       <time datetime="<%= @article.updated_at %>" itemprop="datePublished"><%= @article.updated_at.strftime("%Y年%m月%d日") %></time>
       </br>
-      <%= link_to "記事を編集する", "/articles/#{@article.id}/edit" if logged_in? && @article.user.name == current_user.name %>
+      <%= link_to "記事を編集する", "/articles/#{@article.id}/edit/" if logged_in? && @article.user.name == current_user.name %>
       <h1 class="article_title"><%= @article.title %></h1>
       <div style="display:none;" id="checkAgree"><%= @article.checkagree %></div>
     </div>
@@ -36,7 +36,7 @@
       <ul class="user_like">
         <li class="user">
     	 <div class="profimg"> 
-         <%= link_to image_tag(@article.user.user_image_url(:thumb)), "/@#{@article.user.name}" ,:ref => "nofollow"%>
+         <%= link_to image_tag(@article.user.user_image_url(:thumb)), "/@#{@article.user.name}/" ,:ref => "nofollow"%>
          </div>
 	</li>
         <li class="like">
@@ -109,11 +109,11 @@
     <div class="">
 
       <div class="prof-card-left">
-         <%= link_to image_tag(@article.user.user_image_url(:thumb)), "/@#{@article.user.name}" ,:ref => "nofollow"%>
+         <%= link_to image_tag(@article.user.user_image_url(:thumb)), "/@#{@article.user.name}/" ,:ref => "nofollow"%>
       </div>
       <div class="prof-card-right">
       <h3 class="prof-user-name">
-         <%= link_to @article.user.user_name, "/@#{@article.user.name}" ,:ref => "nofollow"%>
+         <%= link_to @article.user.user_name, "/@#{@article.user.name}/" ,:ref => "nofollow"%>
       </h3>
       <p class="prof-user-des">
          <%= @article.user.user_description.truncate(200).html_safe if @article.user.user_description !=nil%>
@@ -122,7 +122,7 @@
       </div>
       <div class="prof-card-link">
         <span>
-          <%= link_to "メディアを見る" , "/@#{@article.user.name}" ,:ref => "nofollow" %>
+          <%= link_to "メディアを見る" , "/@#{@article.user.name}/" ,:ref => "nofollow" %>
         </span>
       </div>
     </div>
@@ -134,10 +134,10 @@
  <% @more_like_this.each do |article| %>
    <div class="article_list pickup_list">
     <div class="article_list_content clearfix">
-    <%= link_to image_tag(article.eyecatch_img,:class =>"s_eyecatch_img s_article_thumbnail", :id => "s_article_thumbnail article_list_thumb") ,"/articles/#{article.id}" %>
+    <%= link_to image_tag(article.eyecatch_img,:class =>"s_eyecatch_img s_article_thumbnail", :id => "s_article_thumbnail article_list_thumb") ,"/articles/#{article.id}/" %>
     <div class="article_list_text">
        <p class="article_list_title">
-          <%= link_to article.title.html_safe, "/articles/#{article.id}", style: "" %></p>
+          <%= link_to article.title.html_safe, "/articles/#{article.id}/", style: "" %></p>
      </div>
    </div>
   </div>

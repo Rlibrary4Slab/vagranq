@@ -396,6 +396,7 @@ class ArticlesController < AuthorizedController
       #@article ||= Rails.cache.fetch("article/#{params[:id]}") do
        @article=  Article.find(params[:id])  
       #end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -453,13 +454,6 @@ class ArticlesController < AuthorizedController
      end
     end
 
-    def load_paper
-
-       @articles ||= Rails.cache.fetch("KEY-page-#{params[:page]}", expires_in: 30.minutes) do
-        articles = Article.per_page_kaminari(params[:page]).published.order('updated_at desc').includes(:user)
-        Kaminari.paginate_array(articles.to_a, limit: articles.limit_value, offset: 0, total_count: articles.total_count, padding: -articles.offset_value)
-       end
-    end
     def cache_key(type = nil)
       [
        self.class.name.underscore,
