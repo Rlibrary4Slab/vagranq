@@ -1,0 +1,11 @@
+   
+    <% if current_user.twitter_s %>
+      <%= link_to share_twitter_path, method: :post, id: "tcar",class: "on",remote: true do %>
+       <span class="twitter-login">投稿時にTwitterへシェアします</span>
+      <%end%>
+    <% else %>
+      <%= link_to share_twitter_path, method: :post, id: "tcar",class: "off",remote: true do %>
+       <span class="twitter-login">投稿時にTwitterへシェアしません</span>
+      <%end%>
+    <% end %>
+  

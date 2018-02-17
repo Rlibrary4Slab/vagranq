@@ -32,31 +32,26 @@
                 <%#= image_tag current_user.header_image_url(:thumb)%>
                 <%#=f.file_field :header_image %>
                  
-		<%if current_user.social_profiles.where(provider: "twitter").nil? != true%>
-                     <%= current_user.twitter_s != false ? '<div class="div-twi">'.html_safe : '<div class="div-notwi">'.html_safe%> 
-                        <%= embedded_svg("twitter.svg" ,:class => "sns-logo")%> 
-                     </div>   
-	             twitterでシェアする
-		      <%if current_user.twitter_s != false %>
-                       <%= f.check_box :twi,{:checked => true},checked_value = "1",unchecked_value = "0" %>
-                     <% else %>
-                       <%= f.check_box :twi,{},checked_value = "1",unchecked_value = "0" %>
-                     <% end %>
+		<%if !current_user.social_profiles.where(provider: "twitter").empty?%>
+                   <%= render 'settings/profiles/share_twi_links'%>
+                    <div class="twi_text">
+                       <%= link_to "twitter認証解除", twitter_auth_out_path , method: :delete, data: { confirm: 'twitter認証を解除しますか?' }%>
+                    </div>
+                <% else %>
+                     <%= link_to "twitter認証する", user_twitter_omniauth_authorize_path %>
 
 		<% end %>
                 
 	
 
-		<%if current_user.social_profiles.where(provider: "facebook").nil? != true%>
-                     <%= current_user.facebook_s != false ? '<div class="div-face">'.html_safe : '<div class="div-noface">'.html_safe%> 
-                        <%= embedded_svg("facebook.svg" ,:class => "sns-logo")%> 
-                     </div>   
-		     facebookでシェアする
-                     <%if current_user.facebook_s != false %>
-                       <%= f.check_box :face,{:checked => true},checked_value = "1",unchecked_value = "0" %>
-                     <% else %>
-                       <%= f.check_box :face,{},checked_value = "1",unchecked_value = "0" %>
-                     <% end %>
+		<%if !current_user.social_profiles.where(provider: "facebook").empty?%>
+                   <%= render 'settings/profiles/share_face_links'%>
+                    <div class="face_text">
+                        <%= link_to "facebook認証解除", facebook_auth_out_path , method: :delete, data: { confirm: 'facebook認証を解除しますか?' }%>
+                        </div>
+                <% else %>
+                     <%= link_to "facebook認証する" ,  user_facebook_omniauth_authorize_path %>
+                
 		<% end %>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

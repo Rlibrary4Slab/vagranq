@@ -168,24 +168,37 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
     render layout: "user_page"
   end
 
+  def twitter_auth_out
+    SocialProfile.where(provider: "twitter").find_by(user_id: current_user.id).destroy!
+    flash[:success] = "Twitter認証を解除しました"
+    redirect_to :back
+    #redirect_to user_path(current_user.name)
+  end
+
+  def facebook_auth_out
+    SocialProfile.where(provider: "facebook").find_by(user_id: current_user.id).destroy!
+    flash[:success] = "Facebook認証を解除しました"
+    redirect_to :back 
+  end
+
   def share_twitter
     
     current_user.update_attributes(:twitter_s => true)
-    flash[:success] = "投稿時Twitterにてシェアされます"
+    flash[:success] = "投稿公開時Twitterにてシェアされます"
     redirect_to :back
   end
 
   def inshare_twitter
     
     current_user.update_attributes(:twitter_s => false)
-    flash[:success] = "投稿時Twitterにてシェアされなくなります"
+    flash[:success] = "投稿公開時Twitterにてシェアされなくなります"
     #redirect_to current_user
     redirect_to :back
   end
 
   def share_facebook
     current_user.update_attributes(:facebook_s => true)
-    flash[:success] = "投稿時Facebookにてシェアされます"
+    flash[:success] = "投稿公開時Facebookにてシェアされます"
     #redirect_to current_user
     redirect_to :back
     
@@ -193,7 +206,7 @@ Date.today.advance(:days=>-2).strftime("%m/%d"),@weeks_views[1]],[Date.yesterday
 
   def inshare_facebook
     current_user.update_attributes(:facebook_s => false)
-    flash[:success] = "投稿時Facebookにてシェアされなくなります"
+    flash[:success] = "投稿公開時Facebookにてシェアされなくなります"
     #redirect_to current_user
     redirect_to :back
     

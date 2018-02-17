@@ -44,7 +44,7 @@
              <div class="div-twi">
             <%= link_to embedded_svg("twitter.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "twitter").map(&:url).first%>
             </div>
-             <%= link_to current_user.twitter_s == true ? '通知解除' : '通知する', current_user.twitter_s == true ? inshare_twitter_user_path : share_twitter_user_path , class: 'btn btn-lg btn-default' %> 
+             <%#= link_to current_user.twitter_s == true ? 'シェアしない' : '記事公開時にTwitterでシェアする', current_user.twitter_s == true ? inshare_twitter_user_path : share_twitter_user_path , class: 'btn btn-lg btn-default btn_share_sns' %> 
  
           <%end%>
             </br>
@@ -57,7 +57,7 @@
              <div class="div-face">
             <%= link_to embedded_svg("facebook.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "facebook").map(&:url).first%>
              </div>
-             <%= link_to current_user.facebook_s == true ? '通知解除' : '通知する', current_user.facebook_s == true ? inshare_facebook_user_path : share_facebook_user_path , class: 'btn btn-lg btn-default' %> 
+             <%#= link_to current_user.facebook_s == true ? 'シェアしない' : '記事公開時にFacebookでシェアする', current_user.facebook_s == true ? inshare_facebook_user_path : share_facebook_user_path , class: 'btn btn-lg btn-default btn_share_sns' %> 
           <%end%>
             </br>
 

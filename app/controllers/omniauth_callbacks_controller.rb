@@ -9,7 +9,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     provider = __callee__.to_s
     if logged_in?
      user = OAuthService::GetOAuthUser.logcall(env["omniauth.auth"],current_user)
-
     else
      user = OAuthService::GetOAuthUser.call(env["omniauth.auth"])
      puts env["omniauth.auth"]
@@ -27,7 +26,7 @@ total_likes: 0}
     #if user.persisted? && user.email_verified?
     if user.persisted? 
       if logged_in?
-       redirect_to user, event: :authentication
+       redirect_to :back, event: :authentication
       else
        sign_in_and_redirect user, event: :authentication
       end

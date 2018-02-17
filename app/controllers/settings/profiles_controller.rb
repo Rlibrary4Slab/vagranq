@@ -45,6 +45,14 @@ class Settings::ProfilesController < Settings::BaseController
     end
   end
   
+  def share_facebook
+    current_user.update_attributes(:facebook_s => !current_user.facebook_s  )
+  end
+  def share_twitter
+    current_user.update_attributes(:twitter_s => !current_user.twitter_s  )
+  end
+
+
 
 
   private

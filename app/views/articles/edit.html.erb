@@ -1,8 +1,17 @@
 <div id="form_template">
-<h1>記事編集</h1><input style= "display:none;"id="mouseOverSum" /><input style= "display:none;"id="mouseOverSumOff" />
+<input style= "display:none;"id="mouseOverSum" /><input style= "display:none;"id="mouseOverSumOff" />
 
 
 <%= render 'eform' %>
+</div>
+<input id="dragSrc" />
+<div id="loading-modal" style="position: fixed; z-index: 999999; height:100%; width:100%; background-color:white; top:0px; opacity: 0.9;">
+ <p style="opacity: 1;
+    filter: none;
+    font: bold 16px Verdana,Arial,sans-serif;
+    text-align: center;
+    margin: 20% 0;">エディタ作成中
+ </p>
 </div>
 <%#= link_to 'Show', @article %> 
 <%#= link_to 'Back', articles_path %>

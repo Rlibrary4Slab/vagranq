@@ -79,6 +79,9 @@ li.user_page_entry p{
 .div-noface .sns-logo path{
  fill : gray;
 }
+.btn_share_sns {
+ font-size: 12px;
+}
 
 #shops tbody tr th{
 padding-right: 30px;
@@ -218,6 +221,20 @@ padding-right: 30px;
  width: 49%;
  vertical-align: top;
 }
+#tcar.on {
+width: 400px;
+height: 60px;
+background-color: #56adee ;
+display: block;
+margin-bottom: 20px;
+}
+#tcar.off {
+width: 400px;
+height: 60px;
+background-color: gray ;
+display: block;
+margin-bottom: 20px;
+}
 a.twitter-login-area {
 width: 550px;
 height: 60px;
@@ -240,6 +257,25 @@ opacity: 0.9;
 }
 
 
+#car.on {
+width: 400px;
+height: 60px;
+background-color: #3b579d ;
+display: block;
+margin-bottom: 20px;
+}
+#car.off {
+width: 400px;
+height: 60px;
+background-color: gray ;
+display: block;
+margin-bottom: 20px;
+}
+
+#car:hover ,#tcar:hover{
+text-decoration: none;
+opacity: 0.9;
+}
 
 a.facebook-login-area {
 width: 550px;

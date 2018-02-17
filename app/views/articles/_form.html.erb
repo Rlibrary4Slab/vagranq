@@ -12,16 +12,9 @@
   <% end %>
   <div id="posting_buttons">
   <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
-  <%= f.button @article.new_record? ? '下書き保存' : '変更する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
-
-  <%if @article.published? %>
-    <%= f.button '下書き保存！', name: 'ope[cmd]', value: 'draft', class: 'btn btn-lg btn-default'%>
-
-  <%end%>
-
-  <%if @article.draft?%>
-    <%= f.button '公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default'%>
-  <% end %>
+  <%= f.button @article.new_record? ? '下書きして保存' : '更新する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
+    <%= f.button '記事を下書き保存', name: 'ope[cmd]', value: 'draft', class: 'btn btn-lg btn-default' if @article.published?%>
+    <%= f.button '記事を新規公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default' if @article.draft?%>
 
 
   </div> 
@@ -101,19 +94,9 @@
     </ul>
    </div>
   <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
-  <%= f.button @article.new_record? ? '下書き保存' : '変更する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
-
-  <%if @article.published? %>
-    <%= f.button '下書き保存！', name: 'ope[cmd]', value: 'draft', class: 'btn btn-lg btn-default'%>
-    
-  <%end%>    
-  <%if @article.draft?%>
-    <%= f.button '公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default'%>
-    
-  <%end%>
-  <%#= f.submit 'このまま保存する', :id => "fullput",:style =>"display",:class => 'btn btn-primary' %>
-  <%#= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            articles_path, :class => 'btn btn-lg btn-default' %>
+  <%= f.button @article.new_record? ? '下書きして保存' : '更新する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
+    <%= f.button '記事を下書きして保存する', name: 'ope[cmd]', value: 'draft', class: 'btn btn-lg btn-default' if @article.published?%>
+    <%= f.button '記事を新規公開する', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default' if @article.draft?%>
   
   
 <% end %>

@@ -174,6 +174,22 @@ total_likes: 0}
       @user = User.new
     end
 
+    def twitter_auth_out
+      if SocialProfile.where(provider: "twitter").find_by(user_id: current_user.id).destroy!
+       render json: "Twitter認証を解除しました",status: 200
+      else
+       render json: "問題が発生しました" ,status: 400
+      end
+    end
+
+    def facebook_auth_out
+      if SocialProfile.where(provider: "facebook").find_by(user_id: current_user.id).destroy!
+       render json: "Facebook認証を解除しました",status: 200
+      else
+       render json: "問題が発生しました" ,status: 400
+      end
+    end
+
     # GET /users/1/edit
     def edit
       if @user

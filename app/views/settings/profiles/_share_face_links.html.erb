@@ -1,0 +1,11 @@
+   
+    <% if current_user.facebook_s %>
+      <%= link_to share_facebook_path, method: :post, id: "car",class: "on",remote: true do %>
+        <span class="facebook-login">投稿時にFacebookへシェアします</span>
+      <% end %>
+    <% else %>
+      <%= link_to share_facebook_path, method: :post, id: "car",class: "off",remote: true do%>
+        <span class="facebook-login">投稿時にFacebookへシェアしません</span>
+      <% end %>
+    <% end %>
+  

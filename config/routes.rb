@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     post "oauth_user" => "users#oauth_user"
     post "guest_user_registration" => "users#guest_user_registration"
     post "oauth_loginuser" => "users#oauth_loginuser"
+    delete "twitter_auth_out" => "users#twitter_auth_out"
+    delete "facebook_auth_out" => "users#facebook_auth_out"
     resources :users, param: :access_token
     resources :items,only:[:create,:update]
     resources :password_resets, only: [:new, :create, :edit, :update]
@@ -86,22 +88,19 @@ Rails.application.routes.draw do
 
     member do
       get :like_articles
-      get :share_twitter
-      get :share_facebook
-      get :inshare_twitter
-      get :inshare_facebook
       get :edit_articles
     end
   end
   scope "@:name", controller: :users do  
    get "/" => "users#show", as: "user" 
    get :like_articles
-   get :share_twitter
-   get :share_facebook
-   get :inshare_twitter
-   get :inshare_facebook
    get :edit_articles
   end
+  delete "twitter_auth_out" => "users#twitter_auth_out"
+  delete "facebook_auth_out" => "users#facebook_auth_out"
+  
+  post "share_twitter" => "settings/profiles#share_twitter"
+  post "share_facebook" => "settings/profiles#share_facebook"
   
 
   post '/itemlike/:item_id' => 'item_likes#like', as: 'itemlike'
@@ -109,6 +108,7 @@ Rails.application.routes.draw do
 
   post '/like/:article_id' => 'likes#like', as: 'like'
   delete '/unlike/:article_id' => 'likes#unlike', as: 'unlike'
+
   get "edit_articles" => "users#edit_articles"
   root 'static_pages#home'
   get  '/auth/:provider/callback' => 'sessions#callback'
