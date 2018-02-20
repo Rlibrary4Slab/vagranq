@@ -19,7 +19,8 @@ class UsersController < ApplicationController
     #end 
 
     #@uPeriodView = User.per_page_kaminari(params[:page]).order("day_count_view desc")
-    @uPeriodView = User.with_not_regexp("name", "guest00[0-9+]+").order("day_count_view desc")
+    @uPeriodView = User.per_page_kaminari(params[:page]).with_not_regexp("name", "guest00[0-9+]+").order("day_count_view desc")
+
   end
 
   def access_log_index

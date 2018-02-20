@@ -362,7 +362,7 @@ p.article_list_lead {
       text-decoration: none;
     }
 
-    .relation_list {
+    #relation_list {
      clear: both;
       .article_list .article_list_content .article_list_text .article_list_title{ 
        a:link,a:visited {
@@ -881,10 +881,26 @@ a.dropdown-toggle:hover {
   border: 1px solid #d0d5d8;
   border-radius: 5px;
 }
+#wrapper-paginate{
+ text-align: center;
+}
 .pagination {
    padding-bottom: 30px;
    margin-top: 20px;
    text-align: center;
+   .first{
+     display: none;
+   }
+   .prev{
+     display: none;
+   }
+   .next{
+     display: none;
+   }
+   .last{
+     display: none;
+   }
+   
 }
 
 

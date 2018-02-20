@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     TEMP_EMAIL_REGEX = /\Achange@me/
     
     #is_impressionable
-    paginates_per 20 
+    paginates_per 10 
 
     enum writer_status: {"ホワイト":10,"ブルー":20,"レッド":30}
     def to_param

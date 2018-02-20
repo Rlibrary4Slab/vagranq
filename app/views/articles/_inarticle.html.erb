@@ -29,7 +29,9 @@
       <!--Eheadline is-border-->
        <%= render @articles %>
       <br>
+    <div id="wrapper-paginate">
     <%= paginate @articles ,:action => :index %>
+    </div>
     </div>
     <!-- Econtent -->
   </div><!-- /#column_content -->

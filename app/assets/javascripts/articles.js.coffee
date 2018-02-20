@@ -1,7 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-
   
 aaaa=0
 linkman=0
@@ -12,7 +11,37 @@ regz=new RegExp('^cke_article_contents_attributes_([0-9+]+)_description$')
 regst=new RegExp('^article_contents_attributes_([0-9+]+)_title$')
 regz2=new RegExp('^article_contents_attributes_([0-9+]+)_description$')
 reglink=new RegExp('^http:\/\/192.168.33.10:3000\/articles\/([0-9+]+)$')
+gauge=""
+$ ->
+ opts = {
+  angle: 0,
+  lineWidth: 0.1,
+  radiusScale: 1,
+  pointer: {
+    length: 0.6,
+    strokeWidth: 0.035,
+    color: '#000000'
+  },
+  limitMax: 5,
+  limitMin: 0,
+  colorStart: '#CCCCCC',
+  colorStop: '#CCCCCC',
+  strokeColor: '#FFFFFF',
+  generateGradient: true,
+  highDpiSupport: true,
 
+  };
+ targetCount = document.getElementById('contentsGauge');
+ targetCountMax = document.getElementById('contentsMax');
+ gauge = new Donut(targetCount).setOptions(opts);
+ gauge.setMinValue(0)
+ gauge.maxValue = 5;
+ gauge.animationSpeed = 32
+ gauge.set(2)
+ gaugeM = new Donut(targetCountMax).setOptions(opts);
+ gaugeM.maxValue = 5;
+ gaugeM.animationSpeed = 32
+ gaugeM.set(5)
 $(document).on(
   "mouseenter" : -> 
    document.getElementById("tansubmit").click()
@@ -148,11 +177,12 @@ $(document).on 'ready page:load', ->
   
 $(document).on "click", '#spsubmit',->
   $(".psubmit").click()
-  $(".pdsubmit").click()
+  #$(".pdsubmit").click()
   
 
 $(document).on 'click', '.remove_fields', (event) ->
   $(this).parents("fieldset").find('._destroy').val('1')
+  $(this).parents("fieldset").find('.afsubmits').removeAttr("id")
   $(this).closest('li').hide()
   $(".add_fields").css("display","");
   document.getElementById("tansubmit").click()
@@ -251,18 +281,18 @@ $(document).on "click","a[href^=#].toplinkmove", ->
     false
 
 $(document).on "click",".esubmit",->
+  
   $(this).parents("fieldset").find(".ckeditors").find(".form-control").last().val("")
   $(this).parents(".description_field").find(".field").find(".form-control").val()
-
   $(this).parents(".description_field").find(".pdsubmit").css("display","")
   $(this).parents("fieldset").find(".ckeditors").css("display","")
   $(this).parents("fieldset").find(".afsubmits").css("display","none")
-  #$(this).parents("fieldset").find(".psubmit").css("display","")
   $(this).parents("fieldset").find(".esubmit").css("display","none")
+  $(this).parents("fieldset").find(".ckeditors").find(".psubmit").css("display","none")
   $(this).parents(".description_field").find(".field").css("display","")
   $(this).parents(".description_field").find(".afsubmits").css("display","none")
   $(this).parents(".description_field").find(".psubmit").css("display","none")
-  $(this).parents(".description_field").find(".field").find(".hiddenButtons").css("display","none")
+  #$(this).parents(".description_field").find(".field").find(".hiddenButtons").css("display","none")
   $(this).parents(".description_field").find(".esubmit").css("display","none")
 
   $(this).parents("fieldset").find(".toplinkmove").click()
@@ -273,19 +303,6 @@ tsubmit=0
 #  input[class=cke_dialog_ui_input_text]'                                                     画像処理
 ############################################################################################################################
 
-#$(document).on "click","#form_template", ->  
-#   if $("#dragSrc").val() == ""
-#    $(".ckeditors").each ->
-#     ckthis = $(this)
-#     if $(this).css('display') != "none"
-#      sall = ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last().val()
-#      ckthis.hide()
-#      ckthis.parents("fieldset").find(".afsubmits").css("display","")
-#      ckthis.parents("fieldset").find(".psubmit").css("display","none")
-#      ckthis.parents("fieldset").find(".esubmit").css("display","")
-#      cabt=ckthis.parents("fieldset").find(".ckeditors").find(".form-control").first().val()
-#
-#      cabd=ckthis.parents("fieldset").find(".ckeditors").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
 
 
  #     iii=cabt
@@ -298,52 +315,57 @@ tsubmit=0
  #      ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
  #   $("#dragSrc").val("dadada")
 $ -> 
- $(document).on "mouseover", ".afsubmits" ,-> 
-  if $(".ckeditors").length != -1
-   drin=0
-   #$("#article_form_list").html("")
-   $(".ckeditors").each ->
-    #$("#article_form_list").append('<a href="#submit_article_contents_attributes_'+drin+'">'+$('#article_contents_attributes_'+drin+'_title').val()+'</a><br>')
-    drin++
  
-    ckthis = $(this)
-    if ckthis.css('display') != "none"
-     divs = ckthis.parents("fieldset").find(".ckeditors")
-     if ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last()[0].childNodes[0]
-      sall = ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last()[0].childNodes[0].data
-     else
-      sall = ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last().val()
-     #sall = ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last().childNodes["0"].data
-     divs.css("display","none")
-     ckthis.parents("fieldset").find(".afsubmits").css("display","")
-     #console.log(ckthis.parents("fieldset").find(".afsubmits").find(".afd").html())
-     #console.log(sall)
-     #console.log(ckthis.parents("fieldset").find(".afsubmits").find(".afd").html() =="<p><br></p>")
-     ckthis.parents("fieldset").find(".psubmit").css("display","none")
-     ckthis.parents("fieldset").find(".esubmit").css("display","")
+ $(document).on "mouseover", "#contentsMax" ,-> 
+  $("#toggle-sidebar").click()
+ $(document).on "mouseup","input.form-control",->
+  return false
+ $(document).on "mouseup",".edit_article", -> 
+ #$(document).on "mouseover", ".afsubmits" ,-> 
+  drin=0
+  if $(".ckeditors").length != -1
+   $("#sidebar-wrapper ul").html("")
+   $(".ckeditors").each ->
+    if $(this).parents("li").css("display") != "none"
+	    if $('#article_contents_attributes_'+drin+'_title').val() != undefined && $('#article_contents_attributes_'+drin+'_title').val() != "" 
+	     $("#sidebar-wrapper ul").append('<li><a class="close-sidebar" href="#submit_article_contents_attributes_'+drin+'"><div><h3>'+$('#article_contents_attributes_'+drin+'_title').val()+'</h3>'+$('#article_contents_attributes_'+drin+'_description.afd').html()+'</div></a></li>')
+	    else 
+	     $("#sidebar-wrapper ul").append('<li><a class="close-sidebar" href="#submit_article_contents_attributes_'+drin+'"><div><h3>'+(drin+1)+"番目の見出し"+'</h3></div></a></li>')
+	    drin++
+	    ckthis = $(this)
+	    if ckthis.css('display') != "none"
+	     divs = ckthis.parents("fieldset").find(".ckeditors")
+	     if ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last
+	      sall = ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last().val()
+	     else
+	      sall = ckthis.parents("fieldset").find(".ckeditors").find(".form-control").last().val()
+	     divs.css("display","none")
+	     ckthis.parents("fieldset").find(".afsubmits").css("display","")
+	     ckthis.parents("fieldset").find(".psubmit").css("display","none")
+	     ckthis.parents("fieldset").find(".esubmit").css("display","")
 
-     cabt=ckthis.parents("fieldset").find(".ckeditors").find(".form-control").first().val()
+	     cabt=ckthis.parents("fieldset").find(".ckeditors").find(".form-control").first().val()
 
-     cabd=ckthis.parents("fieldset").find(".ckeditors").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
+	     cabd=ckthis.parents("fieldset").find(".ckeditors").find(".cke_ltr").first().find(".cke_inner").find(".cke_contents").find(".cke_wysiwyg_frame").contents().find("html body")
 
 
-     jjj=cabd.html()
-     ckthis.parents("fieldset").find(".afsubmits").find(".aft").html('<span class="ranking-icon"></span>'+cabt)
-     ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
-     if sall != ""
-      #console.log(sall)
-      #console.log(jjj)
-      ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
-     else 
-      if cabd.html() !="<p><br></p>"
-       cabd.html(ckthis.parents("fieldset").find(".afsubmits").find(".afd").html())
-      #console.log(sall)
-      #console.log(jjj)
-      ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
-  if $("#csubmit").length ==1 
-   document.getElementById("csubmit").click()  
-   $(".pdsubmit").click()  
-
+	     jjj=cabd.html()
+	     ckthis.parents("fieldset").find(".afsubmits").find(".aft").html('<span class="ranking-icon"></span>'+cabt)
+	     ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
+	     if sall != ""
+	      ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
+	     else 
+	      if cabd.html() !="<p><br></p>"
+	       cabd.html(ckthis.parents("fieldset").find(".afsubmits").find(".afd").html())
+	      ckthis.parents("fieldset").find(".afsubmits").find(".afd").html(jjj)
+	  if drin>4 
+	   $("#disitem").css({"display": "none"})
+	  else
+	   $("#disitem").css({"display": "initial"})
+	  if $("#csubmit").length ==1 
+	   document.getElementById("csubmit").click()  
+	   #$(".pdsubmit").click()  
+  gauge.set(drin) 
 $(document).on 'click' ,-> #clicked
   drin=0
   $(".ckeditors").each ->
@@ -766,15 +788,21 @@ $(document).on "click", "#dsubmit", ->
   
   
 $ ->
-
+ 
+  $( "#sidebar" ).simplerSidebar( {
+            selectors: {
+                trigger: "#toggle-sidebar",
+                quitter: ".close-sidebar"
+            }
+        } );
   #$("#shops .page").infinitescroll
-  #    loading: {
-  #      img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
-  #      msgText: "ロード中..."
-  #    }
-  #    navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
-  #    nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
-  #    itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
+      #loading: {
+      #  img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
+      #  msgText: "ロード中..."
+      #}
+      #navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
+      #nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
+      #itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
   
   replace_tag_inner = (tag,str) ->
     result = tag

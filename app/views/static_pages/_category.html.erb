@@ -4,6 +4,8 @@
 <h3 class="categorymenu-caption">カテゴリ一覧</h3>
 <ul class="categorymenu-container">
     <li class="categorymenu-item is-all is-not-current">
+      <% puts request.fullpath%>
+      <% puts root_path%>
       <!--<a href="index.html">--><span class="iconCategory"></span><%= link_to "ホーム", root_path ,:ref => "nofollow", class: "categorymenu-item "+(root_path==request.fullpath ? "is-all is-current":"is-all is-not-current") %>
     </li>
     <li class="categorymenu-item is-not-current ">

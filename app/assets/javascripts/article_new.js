@@ -28,6 +28,8 @@
 //= require websocket_rails/main
 //= require articles.js.coffee 
 //= require ckeditor_conf.js 
+//= require simpler-sidebar.js
+//= require gauge.min.js 
 // require_tree .
 $("form").on("keypress", function (e) {
     if (e.keyCode == 13) {

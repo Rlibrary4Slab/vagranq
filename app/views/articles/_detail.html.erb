@@ -1,14 +1,14 @@
 <%= Gon::Base.render_data({}) %>
 <!-- コンテンツ -->
-<% cache "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
+<%# cache "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
 <div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">
  <div class="topcontent_in clearfix">
 
 
-   <p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-    <ul class="breadcrumbs_lists" ><%= render_breadcrumbs builder: CustomBreadcrumbsBuilder %></ul>
+<ul class="breadcrumbs_lists" ><%= render_breadcrumbs builder: CustomBreadcrumbsBuilder %></ul>
 
  </div><!-- /.eyecatch_in -->
 </section>
@@ -150,7 +150,7 @@
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 </div>
-<% end %>
+<%# end %>
 <%# puts request.user_agent %>
 <% unless request.user_agent !~ /arienaiarienai/ %>
 <%# unless request.user_agent !~ /iPhone/ %>

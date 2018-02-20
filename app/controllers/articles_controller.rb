@@ -187,13 +187,12 @@ class ArticlesController < AuthorizedController
      redis_category = "learn" if @article.category == "学び"
      add_breadcrumb @article.category, funny_path if @article.category == "おもしろ"
      redis_category = "funny" if @article.category == "おもしろ"
-     #@likes = Like.where(article_id: params[:id])
      add_breadcrumb @article.title
      ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
      @idsemptybool = ids.empty?
-     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})") 
+     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]).per(1) #if params[:page].blank? 
     end 
-    if  @article.draft? != true #&& User.find_by(id: @article.user_id).certificated != true 
+    if  !@article.draft?  && params[:page].blank? #&& User.find_by(id: @article.user_id).certificated != true  
       REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"
       REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}", 1, "#{@article.id}"
@@ -202,6 +201,15 @@ class ArticlesController < AuthorizedController
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
     end 
+    unless params[:page].blank?  
+      infini_like_this =  Article.find(ids[params[:page].to_i-2])
+      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}", 1, "#{infini_like_this.id}"
+      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}/#{Time.now.to_time.strftime("%H00").to_s}", 1, "#{infini_like_this.id}"
+      REDIS.zincrby "articles_ranking", 1, "#{infini_like_this.id}"
+      REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{infini_like_this.id}"
+      REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{infini_like_this.id}"
+      return render @more_like_this, layout: false 
+    end
     @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
 

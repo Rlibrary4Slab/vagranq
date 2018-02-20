@@ -27,16 +27,14 @@
     <div class="field selectpicker">
       <%= f.select :category ,Article.categories.keys.to_a,{} ,{class: "selectpicker"} %></div>
     <div class="field">
-      <%= f.text_field :title,:placeholder=>"記事タイトル"%>
+      <%= f.text_field :title,:placeholder=>"記事タイトルを入力する"%>
     </div>
     <div class="description_field">
-     <div class="field" style="display:none;">
-       <%#= f.label :description , "説明"%><br>
+     <div class="field" style="">
        <%= f.text_area :description, :class =>  "form-control ckeditor" %>
 
          <span class="hiddenButtons" value="隠す">
 
-      <%#= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
       <div style="display:none;">
        <input type="button" id="tsubmit" value="交換">
        <input type="button" id="dsubmit" value="交換">
@@ -47,16 +45,15 @@
       </div>
 
      <input type="button" id="csubmit" style="display:none;">
-     <input type="button" class="pdsubmit btn btn-default" id="psubmit" style="display:none;"value="追加する">
-     <input type="button" style="" class="btn btn-default esubmit" value="編集">
+     <input type="button" class="pdsubmit btn btn-default" id="psubmit" style=""value="追加する">
+     <input type="button" style="display:none;" class="btn btn-default esubmit" value="編集">
     </span>
 
        
      </div>
-       <div class="afsubmits" style="">
+       <div class="afsubmits" style="display:none;">
    <span class="hiddenButtons" value="隠す">
 
-     <%#= link_to "削除", '#', class: "remove_fields btn  btn-default"%>
      <div style="display:none;">
        <input type="button" id="tsubmit" value="交換">
        <input type="button" id="dsubmit" value="交換">
@@ -67,8 +64,8 @@
      </div>
 
      <input type="button" id="csubmit" style="display:none;">
-     <input type="button" class="pdsubmit btn btn-default" id="psubmit" value="追加する" style="display:none;">
-     <input type="button" style="" class="btn btn-default esubmit" value="編集">
+     <input type="button" class="pdsubmit btn btn-default" id="psubmit" value="追加する" style="">
+     <input type="button" style="display:none;" class="btn btn-default esubmit" value="編集">
     </span>
     <div class="afd"></div>
   </div>
@@ -95,7 +92,21 @@
   <input type="button" class="tdsubmit btn btn-lg btn-default" value="↑↓">
   <%= f.button @article.new_record? ? '下書きして保存' : '記事を更新する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
     <%= f.button '記事を更新して下書き', name: 'ope[cmd]', value: 'draft', class: 'btn  btn-lg btn-default' if @article.published?%>
-    <%= f.button '記事を更新して公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default' if @article.draft?%>
+    <%= f.button @article.new_record? ? '記事を新規公開する' :'記事を更新して公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default' if @article.draft?%>
 
   
 <% end %>
+<div id="sidebar">
+  <div style="height: 0px; right: 40px;position:  relative;top: 50%;" id="navbar">
+    <span id="disitem" class="button icon" ><canvas style="transform: rotate(-90deg);" width="70" height="70" id="contentsGauge"></canvas></span>
+    <span id="toggle-sidebar" class="button icon"><canvas style="transform: rotate(-90deg);" width="70" height="70" id="contentsMax"></canvas></span>
+  </div>
+  <div id="sidebar-wrapper" style="position: relative;
+  height: 100%;
+  overflow: auto;
+  background-color: white;
+  " class="sidebar-wrapper">
+    <ul> 
+    </ul>
+  </div>
+</div>
