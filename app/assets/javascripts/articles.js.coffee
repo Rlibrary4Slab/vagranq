@@ -320,7 +320,7 @@ $ ->
   $("#toggle-sidebar").click()
  $(document).on "mouseup","input.form-control",->
   return false
- $(document).on "mouseup",".edit_article", -> 
+ $(document).on "mouseup","form", -> 
  #$(document).on "mouseover", ".afsubmits" ,-> 
   drin=0
   if $(".ckeditors").length != -1
