@@ -146,12 +146,11 @@
   </div>
 <% end %>
 </div>
-<%= paginate @more_like_this,remote: true%>
+<%#= paginate root_path,:action => :index%>
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 </div>
 <% end %>
-<%# puts request.user_agent %>
 <% unless request.user_agent !~ /arienaiarienai/ %>
 <%# unless request.user_agent !~ /iPhone/ %>
   <div> 

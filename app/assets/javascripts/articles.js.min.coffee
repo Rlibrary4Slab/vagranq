@@ -155,6 +155,14 @@ $(document).on "click", "#showsubmit", ->
     $(this).find(".ranking-icon").text(aaaa)   
 
 $ ->
+  $(window).on 'scroll', ->
+      #more_posts_url = $('#paginate-infinite-scrolling .pagination .next_page a').attr('href');
+      #if more_posts_url && ($(window).scrollTop() > $(document).height() - $(window).height() - 60) 
+      console.log($(window).scrollTop())
+      console.log($(document).height() - $(window).height() - 60) 
+        #$('#paginate-infinite-scrolling .pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />')
+        #$.getScript(more_posts_url);
+   
 
   $("#relation_list .pop_list").infinitescroll
       loading: {

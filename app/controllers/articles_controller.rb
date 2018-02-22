@@ -190,7 +190,7 @@ class ArticlesController < AuthorizedController
      add_breadcrumb @article.title
      ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
      @idsemptybool = ids.empty?
-     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]).per(1) #if params[:page].blank? 
+     @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) #if params[:page].blank? 
     end 
     if  !@article.draft?  && params[:page].blank? #&& User.find_by(id: @article.user_id).certificated != true  
       REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
@@ -208,7 +208,7 @@ class ArticlesController < AuthorizedController
       REDIS.zincrby "articles_ranking", 1, "#{infini_like_this.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{infini_like_this.id}"
       REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{infini_like_this.id}"
-      return render @more_like_this, layout: false 
+      #return render @more_like_this, layout: false 
     end
     @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
     @page_views = @page_views_get_all.to_i 
@@ -231,9 +231,10 @@ class ArticlesController < AuthorizedController
     end
     notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb)) if sum_of_imp % 1000 == 0 
     respond_to do |format|
-      format.html
-      format.json {render :json => @article}
-      format.xml  {render :xml => @article}
+       format.html
+       format.js
+       format.json {render :json => @article}
+       format.xml  {render :xml => @article}
     end
     
   end
