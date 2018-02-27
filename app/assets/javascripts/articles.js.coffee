@@ -318,6 +318,8 @@ $ ->
  
  $(document).on "mouseover", "#contentsMax" ,-> 
   $("#toggle-sidebar").click()
+ $(document).on "mouseup",".ckeditors",->
+  return false
  $(document).on "mouseup","input.form-control",->
   return false
  $(document).on "mouseup","form", -> 

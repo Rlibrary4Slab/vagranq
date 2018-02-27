@@ -1,6 +1,5 @@
 class ItemLike < ActiveRecord::Base
-    belongs_to :item
-    belongs_to :article
+    belongs_to :item 
 
     #counter_culture :item, column_name: 'item_likes_count'
     #counter_culture :user, column_name: 'total_item_likes'

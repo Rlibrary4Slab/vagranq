@@ -1,0 +1,6 @@
+$("#new_article_picks").append("<%= escape_javascript(render partial: "api/articles/header") %>")
+$("#new_article_picks").append("<%= escape_javascript(render @articles) %>")
+$("#new_article_picks").show()
+$('#upCheck').prop("checked",true)
+$('html,body').animate({scrollTop: $("#new_article_picks").offset().top}, 300, 'swing')
+$("#picksTop").val($("#new_article_picks").offset().top)

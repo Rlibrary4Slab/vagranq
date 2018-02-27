@@ -1,21 +1,26 @@
-class ArticlesController < AuthorizedController
-  include Notifications
+class Api::ArticlesController < ApplicationController
+  #include Notifications
   #before_action :load_paper,  only: [:index]
-  before_action :set_article, only: [ :show ,:liking_users,:article_inquiry,:edit, :update,:destroy,:publish, :draft]
-  before_action :authenticate_user!, only: [:new,:edit]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :correct_draft,   only: [:show]
-  before_action :certificate_user
-  before_action :set_like_items_to_gon , only: [:show]
-  before_action :siderank, except: [:show]
-  before_action :allshow, only: [:show]
+  #before_action :set_article, only: [ :show ,:liking_users,:article_inquiry,:edit, :update,:destroy,:publish, :draft]
+  #before_action :authenticate_user!, only: [:new,:edit]
+  #before_action :correct_user,   only: [:edit, :update]
+  #before_action :correct_draft,   only: [:show]
+  #before_action :certificate_user
+  #before_action :set_like_items_to_gon , only: [:show]
+  #before_action :siderank, except: [:show]
+  #before_action :allshow, only: [:show]
     def siderank 
-      add_breadcrumb "RanQ", root_path
-       
-       @rank=  Article.published.limit(10).order(view_count: :desc).includes(:user) unless read_fragment "articles/page#{params[:page]}"
-       #@corporecom ||= Rails.cache.fetch("corp1", expires_in: 10.seconds) do
-         @corporecom =Article.where(:corporecom => [100..300]).published.limit(10).includes(:user)  unless read_fragment "articles/page#{params[:page]}"
-       #end 
+      @articles =unless params[:pande].blank?
+         Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user) 
+      else 
+         Article.find(params[:id])
+      end
+      unless params[:pande].blank?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+      end
        
     end
     def allshow
@@ -45,7 +50,7 @@ class ArticlesController < AuthorizedController
   def corporecom
     add_breadcrumb "おすすめ一覧", :allranking_path
     #@rank = Article.find(Like.group(:article_id).order('count(article_id) desc').limit(20).pluck(:article_id))
-    @articles = Article.order("corporecom").order('updated_at >=? desc').published.includes(:user).page(params[:page]) unless read_fragment "pusher"
+    @articles = Article.order("corporecom").order('updated_at >=? desc').published.page(params[:page]) unless read_fragment "pusher"
   end
 
   def allranking
@@ -164,13 +169,7 @@ class ArticlesController < AuthorizedController
   # GET /articles/1
   # GET /articles/1.json
   def show
-      @articles =unless params[:pande].blank?
-
-         Article.per_page_kaminari(params[:page]).published.order("updated_at desc").includes(:user) 
-      else 
-        @article 
-      end
-      respond_to {|format|  format.html  format.js } unless params[:pande].blank?
+      #return render @articles, layout: false unless params[:pande].blank?
    
     unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" 
      add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
@@ -197,6 +196,8 @@ class ArticlesController < AuthorizedController
      ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
      @idsemptybool = ids.empty?
      @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) #if params[:page].blank? 
+     @article.update_column(:view_count, @page_views)
+    end 
     if  !@article.draft?  && params[:page].blank? #&& User.find_by(id: @article.user_id).certificated != true  
       REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"
@@ -214,13 +215,15 @@ class ArticlesController < AuthorizedController
     #  REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{infini_like_this.id}"
     #  REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{infini_like_this.id}"
     #end
+    unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" 
 	    @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
 	    @page_views = @page_views_get_all.to_i 
 	    @article.update_column(:view_count, @page_views)
 	    sum_of_imp=0
 	    all_users_view =REDIS.zrevrange "user/#{@article.user_id}/articles", 0, -1, withscores: true
-	    all_users_view.each { |view|   sum_of_imp+=view.last.to_i }
-	    
+	    all_users_view.each do |view|
+	      sum_of_imp+=view.last.to_i
+	    end
     #sum_of_imp = Article.where(user_id: @article.user_id).sum(:view_count)
     #記事を書いたユーザーの総投稿の総View数取得 もっと早くできる
     
@@ -233,13 +236,13 @@ class ArticlesController < AuthorizedController
 	      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 2000 == 0 && @page_views !=0
 	    end
 	    notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb)) if sum_of_imp % 1000 == 0 
-    end	    
-	    respond_to { |format|
+	    respond_to do |format|
 	       format.html
 	       format.js
 	       format.json {render :json => @article}
 	       format.xml  {render :xml => @article}
-            }
+	    end
+    end	    
   end
 
   # GET /articles/new
@@ -417,10 +420,10 @@ class ArticlesController < AuthorizedController
     end
     
     def correct_user
-      #unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
+      unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
        article = current_user.articles.find_by(id: params[:id])
        redirect_to root_url if current_user.admin != true && article.nil?
-      #end
+      end
     end
     def certificate_user
       if logged_in?
@@ -429,14 +432,14 @@ class ArticlesController < AuthorizedController
     end
     
     def correct_draft
-      #unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
+      unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}"
       if logged_in?
        redirect_to root_url if @article.draft? && current_user.name != @article.user.name 
       else 
        redirect_to root_url if @article.draft? 
        
       end 
-      #end 
+      end 
     end
    
     def twitter_share

@@ -108,7 +108,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'pry-rails'
 gem 'grape'
-gem 'grape-entity'
+gem 'grape-entity', '~> 0.7'
 gem "gmaps4rails"
 gem "geocoder"
 gem 'acts-as-taggable-on', '~> 3.4'

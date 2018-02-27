@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
     has_many :item_likes
     has_many :notifications, foreign_key: "user_id", dependent: :destroy
     #has_many :likes, dependent: :destroy
-    has_many :like_articles, through: :likes, source: :article
+    has_many :like_articles, through: :likes, source: :article 
+ 
     has_many :like_items, through: :item_likes, source: :item
     has_many :week_views
     before_save {self.email =email.downcase}

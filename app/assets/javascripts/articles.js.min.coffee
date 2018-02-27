@@ -1,8 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
-  
 aaaa=0
 linkman=0
 arth=0
@@ -14,7 +9,6 @@ idNum = 0
 cccc=0
 ls=[]
 jam=[]
-  
 
 $(document).on 'ready page:load', ->
   $('img').on "error",->
@@ -53,35 +47,9 @@ $(document).on 'ready page:load', ->
    document.getElementById("showsubmit").click() 
   $("p img").css("height":"","width":"")
 
-  $('div p a[class="jihi"]').each ->
-    $(this).html("ork")
-    $(this).hide()
-    attrlink = $(this).attr("href")
-    $("#getattrlink").val(attrlink)
-
-  $(".s_article_thumbnail").css("display":"")
-  $('fieldset div').each ->
-    if z=$(this).prop('id').match(regz)
-      aaaa=z[1]
-  $('#spsubmit').click()
-
   
-$(document).on "click", '#spsubmit',->
-  $(".psubmit").click()
-  $(".pdsubmit").click()
-  
-
-
-  ###################
-    #テキストエディタ閉じ内容を移設
-  ####################
-
 
 tsubmit=0  
-
-############################################################################################################################
-#  input[class=cke_dialog_ui_input_text]'                                                     画像処理
-############################################################################################################################
 
   
     
@@ -91,9 +59,6 @@ $(document).on 'click' ,-> #clicked
   if $("#csubmit").length ==1 
    document.getElementById("csubmit").click()  
      
-      
-
-   
   $('div.ImagePreviewBox table tbody tr td a img').css({"height":"100%","width":"100%"})
    
   if $("#csubmit").length==1   
@@ -103,7 +68,6 @@ $(document).on 'click' ,-> #clicked
     $('p img').css({"height":"auto","width":"auto"})
     $('.cke_dialog_ui_button_ok').css("display":"")
 
-   
   else
     
     $("#eyecatch_img").val('l_e_others_500.png')
@@ -116,28 +80,8 @@ $(document).on 'click', '.cke_btn_reset' ,->
     
   
 
-$(document).on 'click','.cke_button__image',->
-  iurtmp =$(this).parents('div').children().eq(3).attr('id')
-  
-  $("#iurtmp").val(iurtmp.replace("_arialbl",""))
-  $('table tbody tr td div table tbody tr:first-child td div table tbody tr td table tbody tr td div div div input').val("")
-  $("body div.cke_reset_all").css("display":"")
-  
-  
-  
-  
 
-############################################################################################################################
-#                                                       //画像処理
-############################################################################################################################  
-$(document).on "click", ".tdsubmit", ->
-   if $("#checkAgree").prop("checked") == true
-    $("#checkAgree").prop("checked",false)  
-   else if $("#checkAgree").prop("checked") == false
-    $("#checkAgree").prop("checked",true)
-   
 $(document).on "click", "#showsubmit", ->
-
 
   idNum=0
   aaaa=1
@@ -153,34 +97,50 @@ $(document).on "click", "#showsubmit", ->
    if $("#checkAgree").text() == "true" 
     aaaa--
     $(this).find(".ranking-icon").text(aaaa)   
-
-$ ->
+$ -> 
+  lastScrollTop = 0;
   $(window).on 'scroll', ->
-      #more_posts_url = $('#paginate-infinite-scrolling .pagination .next_page a').attr('href');
-      #if more_posts_url && ($(window).scrollTop() > $(document).height() - $(window).height() - 60) 
-      console.log($(window).scrollTop())
-      console.log($(document).height() - $(window).height() - 60) 
-        #$('#paginate-infinite-scrolling .pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />')
-        #$.getScript(more_posts_url);
-   
+      st = $(this).scrollTop()
 
-  $("#relation_list .pop_list").infinitescroll
-      loading: {
-        img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
-        msgText: "ロード中..."
-      }
-      navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
-      nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
-      itemSelector: "#relation_list .article_list.pickup_list" # selector for all items you'll retrieve
+      if $('a#styling').length != 0
+       $("#initialTop").val($(document).height() - $(window).height() )
+      more_posts_url = $('a#styling').attr('href')
+      if more_posts_url && $(window).scrollTop() > ($(document).height() - $(window).height() - 60)
+        $('a#styling').remove()
+        $("#new_article_picks").empty()
+        $.getScript(more_posts_url)
+
+      if st > lastScrollTop
+       if $("#upCheck").prop("checked")&& st > ($(".pop_list .article_list_content").filter(":last").offset().top - 200)
+           $('html,body').animate({scrollTop: $("#new_article_picks .header .header-inner").offset().top}, 300, 'swing')
+           $('#upCheck').prop("checked",false)
+   
+           $('#downCheck').prop("checked",true)
+      else
+       if $("#downCheck").prop("checked")&& st < ($(".pop_list .article_list_content:nth-last-child(1)").offset().top + 300)
+           $('html,body').animate({scrollTop: $(".prof-card-link").offset().top}, 300, 'swing')
+           $('#downCheck').prop("checked",false)
+           $('#upCheck').prop("checked",true)
+
+      lastScrollTop = st
+
+  #$("#relation_list .pop_list").infinitescroll
+  #    loading: {
+  #      img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
+  #      msgText: "ロード中..."
+  #    }
+  #    navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
+  #    nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
+  #    itemSelector: "#relation_list .article_list.pickup_list" # selector for all items you'll retrieve
   
-  $("#shops .page").infinitescroll
-      loading: {
-        img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
-        msgText: "ロード中..."
-      }
-      navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
-      nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
-      itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
+  #$("#shops .page").infinitescroll
+  #    loading: {
+  #      img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif"
+  #      msgText: "ロード中..."
+  #    }
+  #    navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
+  #    nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
+  #    itemSelector: "#shops tr.shop" # selector for all items you'll retrieve
   
   replace_tag_inner = (tag,str) ->
     result = tag

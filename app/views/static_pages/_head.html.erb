@@ -7,39 +7,22 @@
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
   <meta property="fb:app_id" content="274024569635379">
-
   <meta property="og:locale" content="ja_JP">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RanQ [ランク]">
   <% if !@article.nil? && !@article.updated_at.nil?%>
+     <meta property="og:title" content="<%= @article.title %> | RanQ [ランク]">
+     <meta property="og:image" content="<%= @article.eyecatch_img %>">
+    <meta property="og:url" content="http://ranq-media.com/articles/<%= @article.id%>">
+    <meta name="twitter:url" content="http://ranq-media.com/articles/<%= @article.id%>" />
+    <meta name="twitter:title" content="<%= @article.title %> | RanQ [ランク]" />
+    <meta name="twitter:image" content="<%= @article.eyecatch_img %>" />
      <% content_for :title do %>
-
-      <%= @article.title.html_safe %> | RanQ [ランク]
+      <%= @article.title %> | RanQ [ランク]
      <%end%>
     <!- コンテンツ ->
-    <% if @article.aasm_state == "draft" %>
-     <meta name="robots" content="noindex,nofollow,noarchive" />
-    <%end%>
-    <meta property="og:title" content="<%= @article.title.html_safe %> | RanQ [ランク]">
-    <meta property="og:image" content="<%= @article.eyecatch_img %>">
-    <meta property="og:url" content="http://ranq-media.com/articles/<%= @article.id%>">
-    <% if @article.description != "" %>
-     <meta property="og:description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>">
-     <meta name="description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>">
-     <meta name="twitter:url" content="http://ranq-media.com/articles/<%= @article.id%>" />
-     <meta name="twitter:title" content="<%= @article.title.html_safe %> | RanQ [ランク]" />
-     <meta name="twitter:description" content="<%= strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '') %>" />
-     <meta name="twitter:image" content="<%= @article.eyecatch_img %>" />
-    
-    <% else  %>
-     <meta property="og:description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>">
-     <meta name="description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>">
-     <meta name="twitter:url" content="http://ranq-media.com/articles/<%= @article.id%>" />
-     <meta name="twitter:title" content="<%= @article.title.html_safe %> | RanQ [ランク]" />
-     <meta name="twitter:description" content="<%= strip_tags(@article.description.to_s).truncate(124, omission: '') %>" />
-     <meta name="twitter:image" content="<%= @article.eyecatch_img %>" />
-
-    <% end %>
+    <meta name="robots" content="<%= @article.aasm_state == "draft" ? ("noindex,nofollow,noarchive") : ("")%>" />
+     <meta property="og:description" content="<%= @article.description != "" ? (strip_tags(@article.description.to_s).strip!.gsub(/[\r\n]/,"").truncate(124, omission: '')):("") %>">
   <% else %>
      <meta property="og:title" content="RanQ [ランク] | 最適な人に届けるためのパーソナルメディアプラットフォーム">
      <meta property="og:url" content="http://ranq-media.com/">

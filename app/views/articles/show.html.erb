@@ -1,6 +1,6 @@
 <%= Gon::Base.render_data({}) %>
 <!-- コンテンツ -->
-<% cache "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" ,:expires_in => 30.seconds , skip_digest: true ,compress: true do%>
+<% cache "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" ,:expires_in => 10.minutes , skip_digest: true ,compress: true do%>
 <div id="header_content">
 <section id="topcontent" style="background-color: #ffffff;">
  <div class="topcontent_in clearfix">
@@ -40,18 +40,12 @@
          </div>
 	</li>
         <li class="like">
-         <% if logged_in? %>
-          <%= render 'likes/like_links', article: @article %>
-         <% elsif %>
-           <%= link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}),new_user_registration_path %>
-         <% end %>
+          <%= logged_in? ? (render 'likes/like_links', article: @article) : (link_to image_tag('heart_0.png', { :size => "30",:border => '0', :alt => ''}),new_user_registration_path) %>
          </li>
         
         <li id="like-count">
-          <%#= @article.likes.count id: "like-count" %>
           <%= @article.likes_count  %>
         </li>
-        
 
         <li style="margin-left: 20px;">
           <span><%= @page_views %></span>View
@@ -68,9 +62,7 @@
 <div class="article_content"> 
 
   <%= @article.description.html_safe %>
-  <% if @article.contents.count >= 5%>
-  
-  
+  <% if @article.contents.count > 4%>
    <div class="mokuji">
      <ul>
       <li style="margin-bottom: 1em;">目次</li>
@@ -81,18 +73,13 @@
     </div>
    <% end %>
   <% @article.contents.each_with_index do |article,index| %>
-    
       <h2 id="id<%= index+1%>" class="rankingh2">
       <span class="ranking-icon"><%= index+1%></span>
          <!--タイトル-->
         <%= article.title.html_safe%>
       </h2>
-       
          <!--説明-->
         <%= article.description.html_safe%>
-      
-      
-       
   <% end %>
 
  <div class="head_social" style="float:right;">
@@ -143,23 +130,21 @@
    </div>
   </div>
  <% end %>
+  <div style="display:none;"> 
+	  <input type="text" id="initialTop"/>
+	  <input type="text" id="setTop"/>
+	  <input type="text" id="picksTop"/>
+	  <input type="checkbox" id="downCheck" />
+	  <input type="checkbox" id="upCheck" />
   </div>
-<% end %>
 </div>
-<%#= paginate root_path,:action => :index%>
+<% end %>
 </div><!-- /article_content -->
 </div><!-- /#column_content -->
 </div>
+<div style="display:none;" id="new_article_picks">
+ <%= render @articles %>
+</div>
+<a id="styling" href='/api/articles_siderank?pande=1'></a>
+</div>
 <% end %>
-<% unless request.user_agent !~ /arienaiarienai/ %>
-<%# unless request.user_agent !~ /iPhone/ %>
-  <div> 
-   <p>iPhoneです</p>
-  </div>
-<% end%>
-<% unless request.user_agent !~ /arienaiarienai/ %>
-<%# unless request.user_agent !~ /Android/ %>
-  <div> 
-   <p>Androidです</p>
-  </div>
-<% end%>

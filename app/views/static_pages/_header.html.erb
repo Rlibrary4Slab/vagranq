@@ -6,11 +6,9 @@
       <li class="header-navi-menu"><%= link_to "記事を投稿する", "/articles/new" ,:ref => "nofollow"%></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          
            <div class="profimg">
             <%= image_tag current_user.user_image_url(:thumb)%>
            </div>
-          
         </a>
         <ul class="dropdown-menu">
           <li>マイページ</li>
@@ -18,7 +16,6 @@
           <div id="users_use" >
            <li><%= link_to "ユーザー情報変更", "/profile/edit" ,:rel => "nofollow"%></li>
            <li><%= link_to "記事を編集する", "/@#{current_user.name}/edit_articles" ,:rel => "nofollow" %></li>
-
            <li><%= link_to "アイテムを作る", "/items/new" ,:rel => "nofollow"%></li>           
            <li class="divider"></li>
            <li>

@@ -34,7 +34,6 @@
 	        $("#loadingajax").append('<img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif" style="position: fixed; bottom: 0; top: 0; left: 0; right: 0; margin: auto; z-index: 10000;"></div>');
                 var ajaxend  = function(){
                       if(title == undefined){
-		       console.log("koreha");
 	               title = "ページを取得できませんでした";
 		      }
                       if(urlReg.test(href)){ 
@@ -42,7 +41,6 @@
 			console.log("true")
                         console.log(href)
                         console.log(oimage)
-                        console.log(loglog)
 		        element.setHtml('</br><div class="article_list_content clearfix link_card"><a href="'+href+'"><img class="s_eyecatch_img s_article_thumbnail" id="s_article_thumbnail article_list_thumb" src='+oimage+' alt="'+oimage+'" /></a><div class="article_list_text"><p class="article_list_title"><a style="" href="'+href+'">'+ loglog +'</a></p></div></div></br>');
 		      }else{   
 			console.log("none")
@@ -84,17 +82,12 @@
 		      xmls = dom_parser.parseFromString(ten , "text/html");
                       r = $(xmls.documentElement);
 		      title = r.find("title").html();
- 	              console.log("<div>"+title+"</div>");
                       oimage = r.find("meta[property="+'"og:image"'+"]").attr("content");
                       outimage = r.find('img').attr("src");
  	              ajaxend(); 
 		      console.log("通信");
 		     },
                      error: function(jqXHR, textStatus, errorThrown){
-		      console.log("ひどい")
-		      console.log(jqXHR)
-		      console.log(textStatus)
-		      console.log("ひどい")
 		      $("#loadingajax").remove()
 		       
  	             }
@@ -106,17 +99,13 @@
                      cache: false,
                      dataType: "json",
                      success: function(res){
-		      console.log(res)
                       title = res.title
                       oimage = res.eyecatch_img 
                       ajaxend();
-                      console.log("通信");
                      },
                      error: function(jqXHR, textStatus, errorThrown){
-                      console.log("ひどい")
                       console.log(jqXHR)
                       console.log(textStatus)
-                      console.log("ひどい")
                       $("#loadingajax").remove()
 
                      }

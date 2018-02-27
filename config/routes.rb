@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     delete "twitter_auth_out" => "users#twitter_auth_out"
     delete "facebook_auth_out" => "users#facebook_auth_out"
     resources :users, param: :access_token
+    get "articles_siderank" => "articles#siderank"
     resources :items,only:[:create,:update]
     resources :password_resets, only: [:new, :create, :edit, :update]
   end  
