@@ -27,7 +27,7 @@
     </tr>
     <% end %>
     <tr>
-      <th>名前</th>
+      <th>お名前</th>
       <td>
         <%= f.hidden_field :name %>
         <%= @inquiry.name %>
@@ -48,6 +48,6 @@
       </td>
     </tr>
   </table>
-  <%= f.submit '送信', :class => 'btn btn-primary' %>
+  <%= f.submit '上記の内容で送信する', :class => 'btn btn-primary' %>
 <% end %>
 

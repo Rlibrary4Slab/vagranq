@@ -1,7 +1,7 @@
 class NewsTagsController < AuthorizedController 
   require 'rss'
   before_action :set_news_tag, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:new,:edit]
+  before_action :correct_user, only: [:index,:new,:edit]
    
 
   # GET /news_tags
@@ -63,6 +63,7 @@ class NewsTagsController < AuthorizedController
             if @news_tag.save
 
               Article.find(@news_tag.link).to_news!
+              
               twitter_share.update("#{article.title}\nranq-media.com/articles/#{article.id}") if Rails.env.production?
 
               format.html { redirect_to article_path(@news_tag.link), notice: 'News tag was successfully created.' }
@@ -120,7 +121,8 @@ class NewsTagsController < AuthorizedController
     end
 
     def correct_user
-       redirect_to root_url if current_user.admin != true 
+       puts logged_in? && current_user.certificated
+       redirect_to root_url unless logged_in? && current_user.certificated
     end
    
     def twitter_share

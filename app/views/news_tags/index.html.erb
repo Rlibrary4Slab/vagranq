@@ -44,7 +44,11 @@
   <tbody>
     <% @crawlingnews.each do |news| %>
       <tr>
+        <% if !news.article_id%>
         <td><%= link_to news.title, new_article_path(neid: news.id) %></td>
+        <% else%>
+        <td style="background-color: yellow;"><%= link_to news.title, new_article_path(neid: news.id) %></td>
+        <% end %>
         <td><%= news.news_link %></td>
         <td><%= news.created_at.strftime("%Y-%m-%d %H%M") %></td>
       </tr>

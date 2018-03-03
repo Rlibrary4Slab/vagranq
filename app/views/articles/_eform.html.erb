@@ -93,6 +93,7 @@
   <%= f.button @article.new_record? ? '下書きして保存' : '記事を更新する', name: 'ope[cmd]', value: 'save', class: 'btn btn-lg btn-default' %>
     <%= f.button '記事を更新して下書きにする', name: 'ope[cmd]', value: 'draft', class: 'btn  btn-lg btn-default' if @article.published?%>
     <%= f.button @article.new_record? ? '記事を新規公開する' :'記事を更新して公開', name: 'ope[cmd]', value: 'publish', class: 'btn btn-lg btn-default' if @article.draft?%>
+    <%= f.hidden_field :neid %>
 
   
 <% end %>

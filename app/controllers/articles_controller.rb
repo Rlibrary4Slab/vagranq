@@ -5,7 +5,7 @@ class ArticlesController < AuthorizedController
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :correct_user,   only: [:edit, :update]
   before_action :correct_draft,   only: [:show]
-  before_action :certificate_user
+  before_action :exclusion_user
   before_action :set_like_items_to_gon , only: [:show]
   before_action :siderank, except: [:show]
   before_action :allshow, only: [:show]
@@ -305,7 +305,8 @@ class ArticlesController < AuthorizedController
         raise
       end
       #redirect_to [:home, @article]
-      if @article.neid
+      if @article.neid 
+       NewsCrawler.find(@article.neid).update_column(:article_id, @article.id)
        redirect_to new_news_tag_path(title: @article.title,link: @article.id)
       else
        redirect_to @article
@@ -422,10 +423,8 @@ class ArticlesController < AuthorizedController
        redirect_to root_url if current_user.admin != true && article.nil?
       #end
     end
-    def certificate_user
-      if logged_in?
-      redirect_to root_url if current_user.certificated != false 
-      end
+    def exclusion_user
+        redirect_to root_url unless logged_in? && !current_user.exclusion 
     end
     
     def correct_draft
