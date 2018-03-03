@@ -424,7 +424,7 @@ class ArticlesController < AuthorizedController
       #end
     end
     def exclusion_user
-        redirect_to root_url unless logged_in? && !current_user.exclusion 
+        redirect_to root_url if logged_in? && current_user.exclusion 
     end
     
     def correct_draft
