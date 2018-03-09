@@ -4,7 +4,7 @@ class Batch
 #---------------------------------------------------------------------------------------------------------------------#
   def self.newsToPublish
     Article.where.not(aasm_state: "published").where(id: NewsTag.where("created_at < ?",24.hours.ago).map(&:link)).each {|article| 
-       article.publish!
+       article.update_column(:aasm_state, "published")
     }
     NewsCrawler.where("created_at<?", 24.hours.ago ).each{|news| news.destroy! }
   end

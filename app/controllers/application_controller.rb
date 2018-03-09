@@ -34,11 +34,14 @@ class ApplicationController < ActionController::Base
     end
 
     def render_404
-     render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
+     #redirect_to root_path
+    # render template: 'errors/error_404', status: 404, layout: false, content_type: 'text/html'
+    render file: Rails.root.join('public/404.html'), status: 404, layout: false, content_type: 'text/html'
     end
 
     def render_500
-     render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
+     #redirect_to root_path
+    render file: Rails.root.join('public/500.html'), status: 404, layout: false, content_type: 'text/html'
     end
 
     protected

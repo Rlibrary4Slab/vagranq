@@ -28,6 +28,21 @@ class NewsTagsController < AuthorizedController
     @crawlingnews = NewsCrawler.all
     
   end
+ 
+  def postfromgas
+   for item in params["items"]
+    puts item[0] #title
+    puts item[1] #pageurl
+    puts item[2] #body
+    puts item[3] #image
+    #puts item[4] #maketime
+    #puts item[5] #picktime
+    #puts item[6] #rssurl
+     newsCrawler = NewsCrawler.new(title: item[0],news_link: item[1],news_body: item[2],news_image: item[3])
+     newsCrawler.save
+   end
+   render json: "success"
+  end
 
   # GET /news_tags/1
   # GET /news_tags/1.json

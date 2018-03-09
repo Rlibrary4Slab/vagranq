@@ -67,9 +67,6 @@ class ItemImageUploader < CarrierWave::Uploader::Base
   # 保存形式をJPGにする
   process :convert => 'jpg'
   
-  version :large do
-   resize_to_limit(600,600)
-  end
    #サムネイルを生成する設定
   version :thumb do
    resize_to_fill(40,40)

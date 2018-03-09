@@ -6,14 +6,11 @@
 
 # Ignore bundler config.
 /.bundle
-/public/*
-public*
-public/
-/public
-/public/assets/
-public/assets/cke*
-public/assets
 /vendor/b*
+public
+public/
+uploads
+tmp
 wheneverlog.log
 .sw*
 # Ignore the default SQLite database.

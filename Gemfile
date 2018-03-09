@@ -15,10 +15,6 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'mysql2', '~> 0.3.20'
 gem 'twitter-bootstrap-rails'
 group :development, :test do
-  #gem 'sqlite3',     '1.3.9'
-  #gem 'byebug',      '3.4.0'
-  #gem 'web-console', '2.0.0.beta3'
-  #gem 'spring',      '1.1.3'
   gem 'capistrano' , "3.7.0"
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
@@ -27,7 +23,6 @@ group :development, :test do
   gem 'capistrano-faster-assets'
   gem 'rack-mini-profiler'
   gem 'capistrano-multiconfig', require: false
-  #gem 'capistrano-multiconfig'
 
 end
 
@@ -51,8 +46,6 @@ group :production,:staging do
 end
   gem 'transpose'
   gem 'breadcrumbs_on_rails'
-  gem 'gretel'
-  gem 'google-api-client', '0.7'
   gem 'retriable'
    gem 'google-analytics-rails'
   gem 'signet'
@@ -65,7 +58,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'kaminari'
 gem 'chartkick'
-gem 'impressionist' , '1.5.1'
 gem 'jquery-turbolinks'
 gem 'aasm' , '3.3.1'
 gem 'ckeditor'
@@ -104,7 +96,6 @@ gem "redis","3.2.0"
 gem "redis-rails"
 gem "faye-websocket" ,"0.10.0"
 gem "whenever", :require => false
-gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'pry-rails'
 gem 'grape'
@@ -113,5 +104,4 @@ gem "gmaps4rails"
 gem "geocoder"
 gem 'acts-as-taggable-on', '~> 3.4'
 gem "gon"
-gem 'font-awesome-rails'
 gem "mechanize"

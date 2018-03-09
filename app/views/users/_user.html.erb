@@ -12,7 +12,7 @@
    </div>
 
   </td>
-  <td><%= link_to user.user_name, user_path(user.name) %></td>
+  <td><%= link_to user.user_name, "/@#{user.name}" %></td>
   <% if Rails.env.development?%>
   <% day_count_view = user.day_count_view %> 
   <td><%= day_count_view%></td> 

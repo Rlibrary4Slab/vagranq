@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery.min
 //= require jquery-selection
 //= require jquery.turbolinks
 //= require jquery_ujs
@@ -23,8 +23,8 @@
 //= require ckeditor/init
 //= require twitter/bootstrap
 //= require bootstrap
-//= require moment
-//= require bootstrap-datetimepicker
+// require moment
+// require bootstrap-datetimepicker
 //= require websocket_rails/main
 //= require articles.js.coffee 
 //= require ckeditor_conf.js 

@@ -305,7 +305,7 @@ class ArticlesController < AuthorizedController
         raise
       end
       #redirect_to [:home, @article]
-      if @article.neid 
+      if !@article.neid.empty? 
        NewsCrawler.find(@article.neid).update_column(:article_id, @article.id)
        redirect_to new_news_tag_path(title: @article.title,link: @article.id)
       else

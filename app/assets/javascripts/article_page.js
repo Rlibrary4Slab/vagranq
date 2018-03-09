@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery.min
 // require jquery-selection
 // require jquery.turbolinks
 // require jquery_ujs

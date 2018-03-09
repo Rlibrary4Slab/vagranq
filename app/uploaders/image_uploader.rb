@@ -67,9 +67,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # 保存形式をJPGにする
   process :convert => 'jpg'
   
-  version :large do
-   resize_to_limit(600,600)
-  end
    #サムネイルを生成する設定
   version :thumb do
    process :crop
@@ -88,8 +85,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   
   # jpg,jpeg,gif,pngしか受け付けない
   def extension_white_list
-    #%w(jpg jpeg gif png)
-    %w(jpg jpeg png)
+    %w(jpg jpeg gif png)
+    #%w(jpg jpeg png)
   end
 
  # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更

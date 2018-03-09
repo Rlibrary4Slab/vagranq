@@ -39,7 +39,6 @@
 
 				fileToElement: function() {
 					var img = new CKEDITOR.dom.element( 'img' );
-					console.log(loadingImage);
 					img.setAttribute( 'src', loadingImage );
 					return img;
 				},

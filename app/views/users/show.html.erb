@@ -3,7 +3,7 @@
 
 <%= @user.user_name %> | RanQ [ランク]
 <%end%>
-<% if @user.provider.empty?  %>
+<% if !@user.exclusion  %>
 <div class="row" >
   <div class="" style="">
     <section class="user_info">

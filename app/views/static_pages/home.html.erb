@@ -29,7 +29,7 @@
   </div><!-- /#column_sidebar -->
 </div>
 <% if logged_in?%>
-<% if !current_user.provider.empty? %>
+<% if current_user.exclusion %>
 <div style="position: fixed; z-index: 999999; height:100%; width:100%; background-color:white; top:0px; opacity: 0.9;">
  <p style="opacity: 1;
     filter: none;

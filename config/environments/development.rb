@@ -5,7 +5,9 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-  #config.consider_all_requests_local       = true  
+  #config.consider_all_requests_local       = true 
+  #config.serve_static_assets =false
+  #config.serve_static_files = false
 
 
   # Do not eager load code on boot.
@@ -44,11 +46,15 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true 
-  #config.assets.debug = false 
+  #config.assets.debug = true 
+  config.assets.debug = false 
   #config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/ 
+  config.assets.compress = true 
+  #config.assets.css_compressor = :sass
+  #config.assets.js_compressor = :uglifier
 
-  config.assets.compile = true
+
+  #config.assets.compile = true
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = false 
