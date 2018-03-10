@@ -8,33 +8,16 @@ class NewsTagsController < AuthorizedController
   # GET /news_tags.json
   def index
     @news_tags = NewsTag.where("created_at > ?",24.hours.ago).order("created_at desc").limit(7)
-    #agent = Mechanize.new
-    #yahoorss =  RSS::Parser.parse("https://news.yahoo.co.jp/pickup/rss.xml")
-    #yahoopage=""
-    #NewsCrawler.all.each {|new|  new.destroy!  }
-    #newsCrawler=""
-    #yahoorss.items.each{|item|
-    # yahoopage=agent.get(item.link)
-    # yahooHeadTxt = yahoopage.search(".headlineTxt")
-    # yahooHeadImg = yahoopage.search(".headlinePic a span img")
-    # nimage = if !yahooHeadImg.empty? 
-    #        yahooHeadImg.at("img")["data-src"]
-    #        else
-    #         ""
-    #        end
-    # newsCrawler = NewsCrawler.new(title: item.title,news_link: item.link,news_body: yahooHeadTxt,news_image: '<img src="'+nimage+'"/>')
-    # newsCrawler.save
-    #}
-    @crawlingnews = NewsCrawler.all
+    @crawlingnews = NewsCrawler.order("created_at desc").all
     
   end
  
   def postfromgas
    for item in params["items"]
-    puts item[0] #title
-    puts item[1] #pageurl
-    puts item[2] #body
-    puts item[3] #image
+    #puts item[0] #title
+    #puts item[1] #pageurl
+    #puts item[2] #body
+    #puts item[3] #image
     #puts item[4] #maketime
     #puts item[5] #picktime
     #puts item[6] #rssurl

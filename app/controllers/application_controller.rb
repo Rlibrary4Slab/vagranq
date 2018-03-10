@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # トークンによる認証
     before_action      :authenticate_user_from_token!, if: -> {params[:email].present?}
     before_action :notification
-    #protect_from_forgery with: :null_session
+    protect_from_forgery with: :null_session
     include SessionsHelper
     # before_action :pvranking
     class Forbidden < ActionController::ActionControllerError; end

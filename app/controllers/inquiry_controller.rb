@@ -1,13 +1,13 @@
 class InquiryController < ApplicationController
   def index
     # 入力画面を表示
-     
     @inquiry = Inquiry.new
     render :action => 'index'
   end
  
   def confirm
     # 入力値のチェック
+    #puts params.require(:inquiry).merge(ipAddress: request.remote_ip)
     @inquiry = Inquiry.new(params[:inquiry])
     if @inquiry.valid?
       # OK。確認画面を表示
@@ -24,7 +24,8 @@ class InquiryController < ApplicationController
  
   def thanks
     # メール送信
-    @inquiry = Inquiry.new(params[:inquiry])
+    inqParams = params.require(:inquiry).permit(:name,:email,:message,:ipAddress).merge(ipAddress: request.remote_ip)
+    @inquiry = Inquiry.new(inqParams)
     if @inquiry.article_title.nil?
      InquiryMailer.received_email(@inquiry).deliver
     else 
