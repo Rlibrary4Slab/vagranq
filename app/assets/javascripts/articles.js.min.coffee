@@ -116,11 +116,11 @@ $ ->
            $('#upCheck').prop("checked",false)
    
            $('#downCheck').prop("checked",true)
-      else
-       if $("#downCheck").prop("checked")&& st < ($(".pop_list .article_list_content:nth-last-child(1)").offset().top + 300)
-           $('html,body').animate({scrollTop: $(".prof-card-link").offset().top}, 300, 'swing')
-           $('#downCheck').prop("checked",false)
-           $('#upCheck').prop("checked",true)
+      #else
+       #if $("#downCheck").prop("checked")&& st < ($(".pop_list .article_list_content:nth-last-child(1)").offset().top + 300)
+       #    $('html,body').animate({scrollTop: $(".prof-card-link").offset().top}, 300, 'swing')
+       #    $('#downCheck').prop("checked",false)
+       #    $('#upCheck').prop("checked",true)
 
       lastScrollTop = st
 

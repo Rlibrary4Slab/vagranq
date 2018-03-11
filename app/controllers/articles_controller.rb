@@ -1,9 +1,9 @@
 class ArticlesController < AuthorizedController
   include Notifications
   #before_action :load_paper,  only: [:index]
-  before_action :set_article, only: [ :show ,:liking_users,:article_inquiry,:edit, :update,:destroy,:publish, :draft]
-  before_action :authenticate_user!, only: [:new,:edit]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :set_article, only: [ :show ,:liking_users,:article_inquiry,:set_top_article,:unset_top_article,:edit, :update,:destroy,:publish, :draft]
+  before_action :authenticate_user!, only: [:new,:edit,:set_top_article,:unset_top_article]
+  before_action :correct_user,   only: [:set_top_article,:unset_top_article,:edit, :update]
   before_action :correct_draft,   only: [:show]
   before_action :exclusion_user
   before_action :set_like_items_to_gon , only: [:show]
@@ -171,6 +171,15 @@ class ArticlesController < AuthorizedController
         @article 
       end
       respond_to {|format|  format.html  format.js } unless params[:pande].blank?
+    if  !@article.draft? # && params[:page].blank? #&& User.find_by(id: @article.user_id).certificated != true  
+      #REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+      #REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"
+      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}/#{Time.now.to_time.strftime("%H00").to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "articles_ranking", 1, "#{@article.id}"
+      REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
+      REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
+    end 
    
     unless read_fragment "#{@user_discrime}/articles/#{@article.updated_at.strftime('%Y%m%d%H%M%S')}" 
      add_breadcrumb @article.category, fashion_path if @article.category == "ファッション"
@@ -197,16 +206,6 @@ class ArticlesController < AuthorizedController
      ids = REDIS.lrange "articles/#{@article.id}/morelikethis",0,-1
      @idsemptybool = ids.empty?
      @more_like_this = Article.published.where(:id => ids).order("field(id, #{ids.join(',')})").per_page_kaminari(params[:page]) #if params[:page].blank? 
-    end
-    if  !@article.draft?  && params[:page].blank? #&& User.find_by(id: @article.user_id).certificated != true  
-      REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
-      REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"
-      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}", 1, "#{@article.id}"
-      REDIS.zincrby "articles_ranking/daily/#{Date.today.to_s}/#{Time.now.to_time.strftime("%H00").to_s}", 1, "#{@article.id}"
-      REDIS.zincrby "articles_ranking", 1, "#{@article.id}"
-      REDIS.zincrby "user/#{@article.user_id}/articles/daily/#{Date.today.to_s}", 1, "#{@article.id}"
-      REDIS.zincrby "user/#{@article.user_id}/articles", 1, "#{@article.id}"
-    end 
 	    @page_views_get_all = REDIS.zscore "user/#{@article.user_id}/articles","#{@article.id}"
 	    @page_views = @page_views_get_all.to_i 
 	    @article.update_column(:view_count, @page_views)
@@ -226,6 +225,7 @@ class ArticlesController < AuthorizedController
 	      notification_savesend(@article, @page_views, 4, @article.eyecatch_img) if @page_views % 2000 == 0 && @page_views !=0
 	    end
 	    notification_savesend(@article, sum_of_imp, 5, current_user.user_image_url(:thumb)) if sum_of_imp % 1000 == 0 
+    end
 	    respond_to { |format|
 	       format.html
 	       format.js
@@ -245,6 +245,19 @@ class ArticlesController < AuthorizedController
     2.times {@article.contents.build}
     render layout: 'article_new'
   end
+
+  def set_top_article
+    current_user.update_column(:provider,params[:id])
+    flash[:success] = "ユーザーページのメイン記事を設定しました"
+    redirect_to :back
+    
+  end
+
+  def unset_top_article
+    current_user.update_column(:provider,"")
+    flash[:success] = "ユーザーページのメイン記事を解除しました"
+    redirect_to :back
+  end    
 
   # GET /articles/1/edit
   def edit
