@@ -34,6 +34,7 @@
           <% if logged_in? %>
            <% if article.user.name == current_user.name %>
             <div id="user_article_editable">
+            <%= article.user.provider.to_i != article.id.to_i ? (link_to "メイン投稿にする", set_top_article_article_path(article), :method => :post,data: {confirm: "ユーザーページのトップに固定しますか？"}):(link_to "メイン投稿を解除する", unset_top_article_article_path(article), :method => :post,data: {confirm: "トップ固定を解除しますか？"})  %>|
             <%= link_to "編集する", edit_article_path(article) %>|
             <%= link_to "削除する", article_path(article) , :method =>  :delete, data: {confirm: "この記事を削除してよろしいですか？"} %>
           </div>

@@ -1,7 +1,7 @@
 <%# provide(:title, @user.name) %>
 <% content_for :title do %>
 
-<%= @user.name %>の記事一覧
+<%= @user.user_name %>の記事一覧
 <%end%>
 <div class="row" >
   <div class="" style="width: 1200px; margin: 0 auto;">
@@ -44,7 +44,6 @@
              <div class="div-twi">
             <%= link_to embedded_svg("twitter.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "twitter").map(&:url).first%>
             </div>
-             <%#= link_to current_user.twitter_s == true ? 'シェアしない' : '記事公開時にTwitterでシェアする', current_user.twitter_s == true ? inshare_twitter_user_path : share_twitter_user_path , class: 'btn btn-lg btn-default btn_share_sns' %> 
  
           <%end%>
             </br>
@@ -57,7 +56,6 @@
              <div class="div-face">
             <%= link_to embedded_svg("facebook.svg" ,:class => "sns-logo") , @user.social_profiles.where(provider: "facebook").map(&:url).first%>
              </div>
-             <%#= link_to current_user.facebook_s == true ? 'シェアしない' : '記事公開時にFacebookでシェアする', current_user.facebook_s == true ? inshare_facebook_user_path : share_facebook_user_path , class: 'btn btn-lg btn-default btn_share_sns' %> 
           <%end%>
             </br>
 
@@ -79,6 +77,14 @@
          <span style="letter-spacing:0px">Total Likes</span>：<span id="total_like_id<%=@user.id%>"><%= sum_of_likes %></span></br>
          <span style="letter-spacing:0px">Total article</span>：<%= @user.count_articles %></br>
          <span style="letter-spacing:0px">昨日あなたが獲得したView数</span>：<%= @weeks_views[0] %></br>
+         <p>現在のメイン投稿</p>
+         <% if !@user.provider.empty? && !@user.articles.find_by(id: @user.provider).nil?%>
+           <% nomo =  @user.articles.find(@user.provider) %>
+           <%= image_tag nomo.eyecatch_img ,:class=> "" ,:alt =>""%>
+           <p><%= link_to nomo.title, "/articles/#{nomo.id}"%></p>
+         <% else%>
+           <p>現在メイン投稿は設定されてません</p>
+         <% end%>
          </div>
          <%= line_chart @charts,stacked: true, curve: false,label: "View",height:"200px",width: "500px",max: @maxfloen,min: @minfloen%>
          <div style="margin-bottom:30px;"></div>
@@ -122,25 +128,7 @@ dispatcher.bind("real_time_like",function(data){
 
 
 
- <script>
-/*
-$(document).ready(function() {
-//setTimeout(function(){
-var i = 99;
-var countup = function(){
-$('.odometer').html(i++); //数字は最後の数値
-}
 
-setInterval(countup,2000)
-
-//}, 1000);
-});
-*/
-<script>
-
-<!--
-<div class="odometer" style="font-size:14px;">99</div>
--->
 
 
 

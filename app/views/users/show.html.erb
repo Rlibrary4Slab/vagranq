@@ -35,6 +35,11 @@
          
 
        </div>
+         <% if !@user.provider.empty? && !@user.articles.find_by(id: @user.provider).nil?%>
+           <% nomo =  @user.articles.find(@user.provider) %>
+           <%= image_tag nomo.eyecatch_img ,:class=> "" ,:alt =>""%> 
+           <p><%= link_to nomo.title, "/articles/#{nomo.id}"%></p>
+         <% end%>
        <div class="user_prof_bottom">
        <p>
        <% if @user.user_description !=nil%>
