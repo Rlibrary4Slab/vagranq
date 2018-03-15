@@ -171,6 +171,13 @@ class ArticlesController < AuthorizedController
         @article 
       end
       respond_to {|format|  format.html  format.js } unless params[:pande].blank?
+    #　リンク機能途中
+    #puts " @article.contents.map(&:description)" 
+    #@article.contents.map.with_index {|val,index|
+    # puts index 
+    # puts val.description.scan(/ranq-media.com\/articles/)
+    #} 
+    #.map(&:id)
     if  !@article.draft? # && params[:page].blank? #&& User.find_by(id: @article.user_id).certificated != true  
       #REDIS.zincrby "articles/category/#{redis_category}/daily/#{Date.today.to_s}", 1, "#{@article.id}"
       #REDIS.zincrby "articles/category/#{redis_category}", 1, "#{@article.id}"

@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   get "funny" => "articles#funny" 
   resources :articles do
     member do
+      post :set_top_article
+      post :unset_top_article
       get :article_inquiry
       get :liking_users
       post :publish

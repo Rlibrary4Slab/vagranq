@@ -1,4 +1,4 @@
-class NewsTagsController < AuthorizedController 
+class NewsTagsController < ApplicationController 
   require 'rss'
   before_action :set_news_tag, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:index,:new,:edit]

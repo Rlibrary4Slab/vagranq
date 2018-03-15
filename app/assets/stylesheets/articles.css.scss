@@ -30,7 +30,13 @@ div.cke_dialog_ui_html{
 div.cke_resizer.cke_resizer_ltr{
     display: none;
 }
-
+table {
+	max-width: 100%;
+	table-layout: fixed;
+}
+table img {
+	max-width: 100%;
+}
 /*img{
     max-height: 100%;
     max-width: 100%;
@@ -240,6 +246,9 @@ code {
    }
 }
 
+.button1 a, .button2 a {
+	max-width: 100%
+}
 .button1 {
 	margin: 30px 5px;
 }
